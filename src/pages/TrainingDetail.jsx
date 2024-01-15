@@ -17,7 +17,7 @@ const [dataTraining, setDataTraining] = useState(
 )
   const  {trainingId}  = useParams();
 
-  console.log("trainingID: ",trainingId);
+  console.log("Foto: ",dataTraining.photo);
 
 
 
@@ -59,6 +59,8 @@ const [dataTraining, setDataTraining] = useState(
       <p>Description: {dataTraining.description}</p>
       <button>Typology: {dataTraining.typology}</button>
       <button>Muscle group: {dataTraining.muscle_group}</button>
+      <p>Likes: {dataTraining.allLikes}</p>
+      
     
     </>
   );
