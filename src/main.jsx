@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element: <FavListPage />,
   },
   {
-    path: "/entreno/:id",
+    path: "/entreno/:trainingId",
     element: <TrainingDetail />,
   },
 ]);
