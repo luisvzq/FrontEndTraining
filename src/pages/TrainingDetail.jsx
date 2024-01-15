@@ -4,22 +4,8 @@ import { Link, useParams } from "react-router-dom";
 
 const TrainingDetail = () => {
   
-const [dataTraining, setDataTraining] = useState( 
-  {
-  "name": "Sentadillas",
-  "description": "5 series de 12 repeticiones",
-  "photo": "defaultAvatar.jpg",
-  "typology": "Fuerza",
-  "muscle_group": "Pierna",
-  "created_at": "2024-01-14T16:04:31.000Z"
-}
-
-)
+const [dataTraining, setDataTraining] = useState({})
   const  {trainingId}  = useParams();
-
-  console.log("Foto: ",dataTraining.photo);
-
-
 
     useEffect(() => {
     async function fetchData() {
@@ -41,6 +27,7 @@ const [dataTraining, setDataTraining] = useState(
     fetchData();
   }, [trainingId]);
 
+
   return (
     <>
       <Menu />
@@ -51,15 +38,26 @@ const [dataTraining, setDataTraining] = useState(
             justifyContent: 'center',
             alignItems: 'center',
             display: 'flex'}}>
-          <Link to={`/entreno/${Number(trainingId) - 1}`}>Anterior</Link>
+            {trainingId>1 && <Link to={`/entreno/${Number(trainingId) - 1}`}>Anterior</Link>}
+          
             {" | "}
-          <Link to={`/entreno/${Number(trainingId) + 1}`}>Siguiente</Link>
+            {trainingId < 10 && <Link to={`/entreno/${Number(trainingId) + 1}`}>Siguiente</Link>} 
+        
       </div>
       <img src={`http://localhost:3001/${dataTraining.photo}`} alt="Foto de entreno" />
       <p>Description: {dataTraining.description}</p>
       <button>Typology: {dataTraining.typology}</button>
       <button>Muscle group: {dataTraining.muscle_group}</button>
       <p>Likes: {dataTraining.allLikes}</p>
+
+      <div className="logo" style={{ maxWidth: 30,  maxHeight: 30}}>
+        {/* {dataTraining.LikeTrue ? 
+              <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
+            : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
+
+        {dataTraining.LikeTrue ? <button>Like rojo</button> : <button>Like blanca</button> } 
+        {dataTraining.FavTrue ? <button>Fav rojo</button> : <button>Fav blanca</button> }
+       </div>
       
     
     </>
