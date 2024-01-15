@@ -1,5 +1,5 @@
 import Menu from "../components/Menu";
-
+// creacion rama register
 const RegisterPage = () => {
   return (
     <>
