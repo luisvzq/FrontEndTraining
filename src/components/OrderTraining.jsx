@@ -1,16 +1,33 @@
 import { useState } from "react";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
-  const getTrainingFetch = async (name) => {
+  const [name, setName] = useState("");
+  const [typology, setTypology] = useState("");
+  const [muscleGroup, setMuscleGroup] = useState("");
+  const tokenHardcoded =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sIjoibm9ybWFsIiwiaWF0IjoxNzA1NDI3MTMzLCJleHAiOjE3MDgwMTkxMzN9.0v2wqt3G2sanwdrr4z0wBuwWr9yB7IL606j4X1YlO5Y";
+
+  let nameOk;
+  let typologyOk;
+  if (name) {
+    nameOk = `name=${name}`;
+  } 
+  if (typology) {
+    typologyOk = `typology=${typology}`;
+  }
+  const getTrainingFetch = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/training?name=${name}`
-        // `http://localhost:8000/training?name=${nombre}`
+        `http://localhost:8000/training?${nameOk}&${typologyOk}`,
+        {
+          headers: {
+            Authorization: tokenHardcoded,
+          },
+        }
       );
       if (!res.ok) {
         throw new Error("Network response was not ok " + res.statusText);
       }
-      console.log(`http://localhost:8000/training?name=${name}`);
 
       const body = await res.json();
       console.log(body.data);
@@ -20,27 +37,33 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
       console.error("Error:", error.menssage);
     }
   };
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const name = e.target.elements.name.value;
-        console.log(name);
-        getTrainingFetch(name);
+        getTrainingFetch();
       }}
     >
       <div>
-        <label htmlFor="name">Nombre</label>
-        <input type="text" id="name" name="name" />
-      </div>
-      {/* <div>
-        <label htmlFor="typology">Tipología</label>
+        <label htmlFor="typology">Tipologia</label>
         <input
           type="text"
           id="typology"
           value={typology}
           onChange={(e) => {
             setTypology(e.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <label htmlFor="name">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
           }}
         />
       </div>
@@ -52,10 +75,9 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           value={muscleGroup}
           onChange={(e) => {
             setMuscleGroup(e.target.value);
-            console.log(muscleGroup);
           }}
         />
-      </div> */}
+      </div>
       <button>Buscar</button>
       <select
         value=""
