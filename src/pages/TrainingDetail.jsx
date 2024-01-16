@@ -3,14 +3,21 @@ import Menu from "../components/Menu";
 import { Link, useParams } from "react-router-dom";
 
 const TrainingDetail = () => {
-  
-const [dataTraining, setDataTraining] = useState({})
+// Harcodeado despues se recojera del useContex------------------------------------------------------
+  const token ='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiYWRtaW4iLCJpYXQiOjE3MDUzMjA5MDEsImV4cCI6MTcwNzkxMjkwMX0.t2k1Q48DTpCtrZteDJ9lx_q8SRsnVGifFwg4FJig3XE';
+
+const [dataTraining, setDataTraining] = useState([])
   const  {trainingId}  = useParams();
 
     useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:3001/training/${trainingId}`);
+        const response = await fetch(`http://localhost:3001/training/${trainingId}`,{
+          method:'GET',
+          headers: {
+            Authorization:token
+          },
+        });
         
         if (response.ok) {
           const body = await response.json();
@@ -25,7 +32,7 @@ const [dataTraining, setDataTraining] = useState({})
       }
     }
     fetchData();
-  }, [trainingId]);
+  }, [trainingId, token]);
 
 
   return (
@@ -41,6 +48,7 @@ const [dataTraining, setDataTraining] = useState({})
             {trainingId>1 && <Link to={`/entreno/${Number(trainingId) - 1}`}>Anterior</Link>}
           
             {" | "}
+            {/* Harcodeado hasta saber cual es el ultimo entreno--------------------------------------------------------- */}
             {trainingId < 10 && <Link to={`/entreno/${Number(trainingId) + 1}`}>Siguiente</Link>} 
         
       </div>
@@ -50,13 +58,13 @@ const [dataTraining, setDataTraining] = useState({})
       <button>Muscle group: {dataTraining.muscle_group}</button>
       <p>Likes: {dataTraining.allLikes}</p>
 
-      <div className="logo" style={{ maxWidth: 30,  maxHeight: 30}}>
+      <div>
         {/* {dataTraining.LikeTrue ? 
               <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
             : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
 
-        {dataTraining.LikeTrue ? <button>Like rojo</button> : <button>Like blanca</button> } 
-        {dataTraining.FavTrue ? <button>Fav rojo</button> : <button>Fav blanca</button> }
+        {dataTraining.likeTrue ? <button>Like rojo</button> : <button>Like blanca</button> } 
+        {dataTraining.favTrue ? <button>Fav rojo</button> : <button>Fav blanca</button> }
        </div>
       
     
