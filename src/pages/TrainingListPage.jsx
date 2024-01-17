@@ -38,6 +38,7 @@ const TrainingListPage = () => {
       <Menu />
       <OrderAndSearchInputTraining
         setAllTraining={setAllTraining}
+        allTraining={allTraining}
       ></OrderAndSearchInputTraining>
       <h2>Todos los entrenamientos</h2>
       <Training data={allTraining} />
