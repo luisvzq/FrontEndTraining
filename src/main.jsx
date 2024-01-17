@@ -7,7 +7,7 @@ import {
   HomePage,
   LoginPage,
   RegisterPage,
-  TrainingDetail,
+  TrainingDetailPage,
   TrainingListPage,
 } from "./pages";
 
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/entreno/:trainingId",
-    element: <TrainingDetail />,
+    element: <TrainingDetailPage />,
   },
 ]);
 
