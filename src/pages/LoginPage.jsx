@@ -4,7 +4,7 @@ import Menu from "../components/Menu";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
-  const [, setToken] = useContext(authContext);
+  const [, setContext] = useContext(authContext);
 
   const authUser = async (e) => {
     e.preventDefault();
@@ -23,8 +23,8 @@ const LoginPage = () => {
 
       if (res.ok) {
         const body = await res.json();
-        setStatusMessage(body.data.token);
-        setToken(body.data.token);
+        setStatusMessage(body.token);
+        setContext({ token: body.token, role: body.rol });
       } else {
         const body = await res.json();
         console.log("Error de datos", body);

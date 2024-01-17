@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useLocalStorageToken } from "../hooks/useLocalStorageToken";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const authContext = React.createContext();
 export const AuthProvider = ({ children }) => {
-  const [tokenState, setTokenState] = useLocalStorageToken("token");
+  const [context, setContext] = useLocalStorage();
   return (
-    <authContext.Provider value={[tokenState, setTokenState]}>
+    <authContext.Provider value={[context, setContext]}>
       {children}
     </authContext.Provider>
   );

@@ -4,6 +4,8 @@ import RegisterPage from "./RegisterPage";
 import TrainingListPage from "./TrainingListPage";
 import FavListPage from "./FavListPage";
 import TrainingDetail from "./TrainingDetail";
+import AdminTrainingListPage from "./AdminTrainingListPage";
+import AdminTrainingDetail from "./AdminTrainingDetail";
 
 export {
   HomePage,
@@ -12,4 +14,6 @@ export {
   TrainingListPage,
   FavListPage,
   TrainingDetail,
+  AdminTrainingListPage,
+  AdminTrainingDetail,
 };

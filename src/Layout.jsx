@@ -1,5 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
+  AdminTrainingDetail,
+  AdminTrainingListPage,
   FavListPage,
   HomePage,
   LoginPage,
@@ -11,11 +13,29 @@ import { authContext } from "./context/AuthContext";
 import { useContext } from "react";
 
 const Layout = () => {
+  const [context, setContext] = useContext(authContext);
+  const getRole = async () => {
+    try {
+      const req = await fetch("http://localhost:3001/verify", {
+        headers: { Authorization: `Bearer ${context?.token}` },
+      });
+      const body = await req.json();
+      const role = await body.rol;
+
+      setContext({ role });
+    } catch (error) {
+      console.error("Token no válido");
+    }
+  };
+
+  getRole();
+
   const routes = [...routesWithoutAuth];
 
-  const [token] = useContext(authContext);
-  if (token) {
+  if (context?.token && context?.role !== "admin") {
     routes.push(...routesWithAuth);
+  } else if (context?.role === "admin") {
+    routes.push(...routesAdmin);
   } else {
     routes.push(...loginRoutes);
   }
@@ -28,6 +48,17 @@ const Layout = () => {
     </>
   );
 };
+
+const routesAdmin = [
+  {
+    path: "/admin/entrenos",
+    element: <AdminTrainingListPage />,
+  },
+  {
+    path: "/admin/entreno/:idtraining",
+    element: <AdminTrainingDetail />,
+  },
+];
 
 const routesWithAuth = [
   {
