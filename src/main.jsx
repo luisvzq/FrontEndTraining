@@ -10,6 +10,7 @@ import {
   TrainingDetail,
   TrainingListPage,
 } from "./pages";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
     path: "/entreno/:id",
     element: <TrainingDetail />,
   },
+  { path: "/loginReset/:temp", element: <ResetPasswordPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

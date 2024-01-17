@@ -1,17 +1,17 @@
 import { useState } from "react";
 
-const OrderAndSearchInputTraining = ({ allTraining, setAllTraining }) => {
+const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [name, setName] = useState("");
   const [typology, setTypology] = useState("");
   const [muscleGroup, setMuscleGroup] = useState("");
-  const [orderBy, setOrderBy] = useState("");
+  const [order, setOrder] = useState("name");
+
   const tokenHardcoded =
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sIjoibm9ybWFsIiwiaWF0IjoxNzA1NDI3MTMzLCJleHAiOjE3MDgwMTkxMzN9.0v2wqt3G2sanwdrr4z0wBuwWr9yB7IL606j4X1YlO5Y";
 
   let nameOk;
   let typologyOk;
   let muscleGroupOk;
-  let orderByOk;
 
   if (name) {
     nameOk = `name=${name}`;
@@ -22,13 +22,11 @@ const OrderAndSearchInputTraining = ({ allTraining, setAllTraining }) => {
   if (muscleGroup) {
     muscleGroupOk = `muscle_group=${muscleGroup}`;
   }
-  if (orderBy) {
-    orderByOk = `order_by=${orderBy}`;
-  }
+
   const getTrainingFetch = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/training?${nameOk}&${typologyOk}&${muscleGroupOk}&${orderByOk}`,
+        `http://localhost:8000/training?${nameOk}&${typologyOk}&${muscleGroupOk}&order_by=${order}`,
         {
           headers: {
             Authorization: tokenHardcoded,
@@ -93,21 +91,21 @@ const OrderAndSearchInputTraining = ({ allTraining, setAllTraining }) => {
       </div>
       <button>Buscar</button>
       <select
-        value={orderBy}
+        value=""
         name="order"
         id="order"
         onChange={(e) => {
           e.preventDefault();
-          setOrderBy(e.target.value);
-          console.log(orderBy);
 
-          getTrainingFetch();
+          setOrder(e.target.value);
+
+          getTrainingFetch(tokenHardcoded, setAllTraining);
         }}
       >
         <option value="">Ordenar por</option>
-        <option value={orderBy}>Nombre</option>
-        <option value={orderBy}>Fecha</option>
-        <option value={orderBy}>Likes</option>
+        <option value="name">Nombre</option>
+        <option value="date">Fecha</option>
+        <option value="likes">Likes</option>
       </select>
     </form>
   );
