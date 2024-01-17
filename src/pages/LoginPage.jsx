@@ -1,10 +1,24 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { authContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
-  const [, setContext] = useContext(authContext);
+  const [context, setContext] = useContext(authContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleLogin = async () => {
+      if (context?.token) {
+        console.log("Usuario autenticado:", context);
+        alert(`Loggeado correctamente, bienvenid@ ${context?.name}!`);
+        navigate("/");
+      }
+    };
+
+    handleLogin();
+  }, [context, navigate]);
 
   const authUser = async (e) => {
     e.preventDefault();
@@ -12,6 +26,7 @@ const LoginPage = () => {
       email: e.target.elements.email.value,
       password: e.target.elements.password.value,
     };
+
     try {
       const res = await fetch("http://localhost:3001/login", {
         body: JSON.stringify(loginBody),
@@ -23,20 +38,27 @@ const LoginPage = () => {
 
       if (res.ok) {
         const body = await res.json();
-        setStatusMessage(body.token);
-        setContext({ token: body.token, role: body.rol });
+        const updatedContext = {
+          name: body.name,
+          token: body.token,
+          role: body.rol,
+        };
+        setContext(updatedContext);
+
+        if (updatedContext.token) {
+          alert(`Loggeado correctamente, bienvenid@ ${updatedContext.name}!`);
+          navigate("/");
+        }
       } else {
         const body = await res.json();
-        console.log("Error de datos", body);
-        setStatusMessage(body.message);
+        setStatusMessage(body.error);
       }
     } catch (error) {
-      console.error("Error al acceder");
       console.error(error);
     }
   };
 
-  const userFetchResponse = `La respuesta del servidor es: ${statusMessage}`;
+  const userFetchResponse = statusMessage;
 
   return (
     <>
@@ -53,7 +75,7 @@ const LoginPage = () => {
           <input type="email" name="email" id="email" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <input type="submit"></input>
+          <input type="submit" />
         </form>
       </section>
     </>

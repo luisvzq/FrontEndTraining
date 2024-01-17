@@ -27,8 +27,9 @@ const Layout = () => {
       console.error("Token no válido");
     }
   };
-
-  getRole();
+  if (context.token) {
+    getRole();
+  }
 
   const routes = [...routesWithoutAuth];
 
@@ -57,6 +58,10 @@ const routesAdmin = [
   {
     path: "/admin/entreno/:idtraining",
     element: <AdminTrainingDetail />,
+  },
+  {
+    path: "/favoritos",
+    element: <FavListPage />,
   },
 ];
 

@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { authContext } from "../context/AuthContext";
+import Logout from "./Logout";
 
 export const Menu = () => {
+  const [context] = useContext(authContext);
   return (
     <>
       <header>
@@ -10,9 +14,18 @@ export const Menu = () => {
         {" | "}
         <NavLink to="/registro">Registro</NavLink>
         {" | "}
-        <NavLink to="/entrenos">Entrenos</NavLink>
+        {context?.role === "admin" ? (
+          <>
+            <NavLink to="/admin/entrenos">Admin Entrenos</NavLink>
+            {" | "}
+          </>
+        ) : (
+          <NavLink to="/entrenos">Entrenos</NavLink>
+        )}
         {" | "}
         <NavLink to="/favoritos">Favoritos</NavLink>
+
+        {context.token && <Logout />}
       </header>
     </>
   );
