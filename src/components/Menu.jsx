@@ -5,6 +5,7 @@ import Logout from "./Logout";
 
 export const Menu = () => {
   const [context] = useContext(authContext);
+
   return (
     <>
       <header>
@@ -45,8 +46,3 @@ export const Menu = () => {
   );
 };
 export default Menu;
-/*
-       <NavLink to="/entrenos">Entrenos</NavLink>
-             {" | "}
-        <NavLink to="/favoritos">Favoritos</NavLink>
-*/

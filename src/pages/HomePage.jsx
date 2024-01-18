@@ -1,10 +1,12 @@
-import Menu from "../components/Menu";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const HomePage = () => {
   return (
     <>
-      <Menu />
+      <Header />
       <div>Pagina Home</div>
+      <Footer />
     </>
   );
 };

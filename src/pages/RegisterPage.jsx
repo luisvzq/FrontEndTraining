@@ -1,10 +1,12 @@
-import Menu from "../components/Menu";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const RegisterPage = () => {
   return (
     <>
-      <Menu />
+      <Header />
       <div>Pagina Register</div>
+      <Footer />
     </>
   );
 };

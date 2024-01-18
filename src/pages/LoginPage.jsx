@@ -1,7 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import { authContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Menu from "../components/Menu";
+
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -62,7 +64,8 @@ const LoginPage = () => {
 
   return (
     <>
-      <Menu />
+      <Header />
+
       <section>
         <h1>Login</h1>
         {statusMessage ? (
@@ -78,6 +81,7 @@ const LoginPage = () => {
           <input type="submit" />
         </form>
       </section>
+      <Footer />
     </>
   );
 };

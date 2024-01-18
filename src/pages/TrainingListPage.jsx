@@ -1,10 +1,12 @@
-import Menu from "../components/Menu";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const TrainingListPage = () => {
   return (
     <>
-      <Menu />
+      <Header />
       <div>Pagina Training List Page</div>
+      <Footer />
     </>
   );
 };
