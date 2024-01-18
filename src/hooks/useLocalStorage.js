@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 export const useLocalStorage = () => {
   const localStorageValue = localStorage.getItem("userData");
   const [contextState, setContextState] = useState(
-    localStorageValue ? JSON.parse(localStorageValue) : null
+    localStorageValue
+      ? JSON.parse(localStorageValue)
+      : { name: "", token: "", role: "" }
   );
   const changeState = (newData) => {
     const newContext = { ...contextState };
