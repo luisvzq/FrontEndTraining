@@ -10,7 +10,7 @@ const Training = ({ data }) => {
               <p>{training.name}</p>
 
               <img
-                src={`http://localhost:8000/${training.photo}`}
+                src={`http://localhost:3001/${training.photo}`}
                 alt="Imagen del entreno seleccionado"
               />
             </Link>

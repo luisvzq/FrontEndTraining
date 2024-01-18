@@ -1,7 +1,7 @@
 const useFetchHooks = () => {
   const getTrainingFetch = async (token, setAllTraining) => {
     try {
-      const res = await fetch("http://localhost:8000/training", {
+      const res = await fetch("http://localhost:3001/training", {
         headers: {
           Authorization: token,
         },
@@ -13,6 +13,7 @@ const useFetchHooks = () => {
       const body = await res.json();
 
       setAllTraining(body.data);
+      console.log("Total de entrenos: ", body.data.length);
     } catch (error) {
       console.error("Error:", error.message);
     }

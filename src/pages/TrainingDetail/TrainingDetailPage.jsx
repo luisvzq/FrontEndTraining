@@ -1,49 +1,25 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Menu from "../../components/Menu";
 import { Link, useParams } from "react-router-dom";
-import useFetchHooks from "../../hooks/useFetchHokoos.js";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import { authContext } from "../../context/AuthContext";
+
 
 
 const TrainingDetailPage = () => {
   // Harcodeado despues se recojera del useContex------------------------------------------------------
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiYWRtaW4iLCJpYXQiOjE3MDUzMjA5MDEsImV4cCI6MTcwNzkxMjkwMX0.t2k1Q48DTpCtrZteDJ9lx_q8SRsnVGifFwg4FJig3XE";
+  // const token =
+  //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiYWRtaW4iLCJpYXQiOjE3MDUzMjA5MDEsImV4cCI6MTcwNzkxMjkwMX0.t2k1Q48DTpCtrZteDJ9lx_q8SRsnVGifFwg4FJig3XE";
 
+  const [context] = useContext(authContext);
     const {getTrainingFetch} = useFetchHooks()
   const [dataTraining, setDataTraining] = useState([]);
-  const { trainingId } = useParams();
+  const  {trainingId}  = useParams();
   const [allTrainig, setAllTraining] = useState([]);
   const [render, setRender] = useState(false);
 
-  // useEffect(() => {
-  //   async function fetchAllTrainig() {
-  //     try {
-  //       const response = await fetch(`http://localhost:3001/training`, {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: token,
-  //         },
-  //       });
-
-  //       if (response.ok) {
-  //         const bodyAllTraining = await response.json();
-  //         setAllTraining(bodyAllTraining.data);
-  //         console.log("Total de entrenos: ", bodyAllTraining.data.length);
-  //       } else {
-  //         const bodyAllTraining = await response.json();
-  //         console.error("ERROR", bodyAllTraining.message);
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchAllTrainig();
-
-  // }, []);
-
-  
   useEffect(() => {
-    getTrainingFetch(token, setAllTraining);
+    getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
   
   }, []);
 
@@ -57,7 +33,7 @@ const TrainingDetailPage = () => {
           {
             method: "GET",
             headers: {
-              Authorization: token,
+              Authorization: `Bearer ${context.token}`,
             },
           }
         );
@@ -75,7 +51,7 @@ const TrainingDetailPage = () => {
       }
     }
     fetchData();
-  }, [trainingId, token, render]);
+  }, [trainingId,context.token, render]);
 
   const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
@@ -86,7 +62,7 @@ const TrainingDetailPage = () => {
           {
             method: method,
             headers: {
-              Authorization: token,
+              Authorization: `Bearer ${context.token}`,
             },
           }
         );

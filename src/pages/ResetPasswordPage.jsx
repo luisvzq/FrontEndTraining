@@ -11,7 +11,7 @@ const ResetPasswordPage = () => {
 
   const fetchResetPassword = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/loginReset/${temp}`, {
+      const response = await fetch(`http://localhost:3001/loginReset/${temp}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -7,7 +7,7 @@ import {
   HomePage,
   LoginPage,
   RegisterPage,
-  TrainingDetail,
+  TrainingDetailPage,
   TrainingListPage,
 } from "./pages";
 import { authContext } from "./context/AuthContext";
@@ -76,8 +76,8 @@ const routesWithAuth = [
     element: <FavListPage />,
   },
   {
-    path: "/entreno/:idtraining",
-    element: <TrainingDetail />,
+    path: "/entreno/:trainingId",
+    element: <TrainingDetailPage />,
   },
 ];
 

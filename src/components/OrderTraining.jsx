@@ -29,7 +29,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const getTrainingFetch = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8000/training?${nameOk}&${typologyOk}&${muscleGroupOk}&order_by=${order}`,
+        `http://localhost:3001/training?${nameOk}&${typologyOk}&${muscleGroupOk}&order_by=${order}`,
         {
           headers: {
             Authorization: tokenHardcoded,
