@@ -1,6 +1,7 @@
-import Menu from "../components/Menu";
 import { useState } from "react";
-import './RegisterPage.css'
+import "./RegisterPage.css";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -60,16 +61,16 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Menu />
-
-     
+      <Header />
       <div className="signupFrm">
         <div className="wrapper">
           <form onSubmit={registerUser} className="form">
-          <h1 className="title">Sign up</h1>
-          {messageForUser}
+            <h1 className="title">Sign up</h1>
+            {messageForUser}
             <div className="inputContainer">
-              <label htmlFor="name" className="label">Nombre</label>
+              <label htmlFor="name" className="label">
+                Nombre
+              </label>
               <input
                 type="text"
                 name="name"
@@ -81,7 +82,9 @@ const RegisterPage = () => {
               />
             </div>
             <div className="inputContainer">
-              <label htmlFor="email" className="label">Email</label>
+              <label htmlFor="email" className="label">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -93,7 +96,9 @@ const RegisterPage = () => {
               />
             </div>
             <div className="inputContainer">
-              <label htmlFor="password" className="label">Password</label>
+              <label htmlFor="password" className="label">
+                Password
+              </label>
               <input
                 type="password"
                 name="password"
@@ -105,7 +110,9 @@ const RegisterPage = () => {
               />
             </div>
             <div className="inputContainer">
-              <label htmlFor="passwordRepeat" className="label">Repetir Password</label>
+              <label htmlFor="passwordRepeat" className="label">
+                Repetir Password
+              </label>
               <input
                 type="password"
                 name="passwordRepeat"
@@ -117,11 +124,12 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-              <input type="submit" className="submitBtn"/>
+              <input type="submit" className="submitBtn" />
             </div>
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

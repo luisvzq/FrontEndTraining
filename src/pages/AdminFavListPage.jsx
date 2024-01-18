@@ -1,14 +1,14 @@
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 
-const TrainingListPage = () => {
+const AdminFavListPage = () => {
   return (
     <>
       <Header />
-      <div>Pagina Training List Page</div>
+      <div>Pagina Fav List Page ADMIN</div>
       <Footer />
     </>
   );
 };
 
-export default TrainingListPage;
+export default AdminFavListPage;

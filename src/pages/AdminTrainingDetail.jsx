@@ -1,14 +1,14 @@
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 
-const TrainingListPage = () => {
+const AdminTrainingDetail = () => {
   return (
     <>
       <Header />
-      <div>Pagina Training List Page</div>
+      <div>Pagina Training Detail ADMIN</div>
       <Footer />
     </>
   );
 };
 
-export default TrainingListPage;
+export default AdminTrainingDetail;
