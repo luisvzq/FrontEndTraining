@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
+  AdminFavListPage,
   AdminTrainingDetail,
   AdminTrainingListPage,
   FavListPage,
@@ -60,8 +61,8 @@ const routesAdmin = [
     element: <AdminTrainingDetail />,
   },
   {
-    path: "/favoritos",
-    element: <FavListPage />,
+    path: "/admin/favoritos",
+    element: <AdminFavListPage />,
   },
 ];
 
