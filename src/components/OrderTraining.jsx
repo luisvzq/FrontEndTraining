@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [name, setName] = useState("");
   const [typology, setTypology] = useState("");
   const [muscleGroup, setMuscleGroup] = useState("");
@@ -45,26 +48,50 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
       console.error("Error:", error.menssage);
     }
   };
+  const handleChange = (field, value) => {
+    switch (field) {
+      case "name":
+        setName(value);
+        break;
+      case "typology":
+        setTypology(value);
+        break;
+      case "muscleGroup":
+        setMuscleGroup(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getTrainingFetch();
+  };
+
+  useEffect(() => {
+    // Actualiza la URL con las consultas de búsqueda
+    const queryParams = new URLSearchParams();
+    if (name) queryParams.set("name", name);
+    if (typology) queryParams.set("typology", typology);
+    if (muscleGroup) queryParams.set("muscle_group", muscleGroup);
+
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${queryParams.toString()}`
+    );
+  }, [name, typology, muscleGroup]);
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        getTrainingFetch();
-        setName("");
-        setTypology("");
-        setMuscleGroup("");
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="typology">Tipologia</label>
         <input
           type="text"
           id="typology"
           value={typology}
-          onChange={(e) => {
-            setTypology(e.target.value);
-          }}
+          onChange={(e) => handleChange("typology", e.target.value)}
         />
       </div>
       <div>
@@ -73,9 +100,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           type="text"
           id="name"
           value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          onChange={(e) => handleChange("name", e.target.value)}
         />
       </div>
       <div>
@@ -84,9 +109,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           type="text"
           id="muscleGroup"
           value={muscleGroup}
-          onChange={(e) => {
-            setMuscleGroup(e.target.value);
-          }}
+          onChange={(e) => handleChange("muscleGroup", e.target.value)}
         />
       </div>
       <button>Buscar</button>

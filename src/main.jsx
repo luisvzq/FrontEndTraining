@@ -4,13 +4,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
   FavListPage,
+  ForgotPasswordPage,
   HomePage,
   LoginPage,
   RegisterPage,
+  ResetPasswordPage,
   TrainingDetail,
   TrainingListPage,
 } from "./pages";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,8 @@ const router = createBrowserRouter([
     path: "/entreno/:id",
     element: <TrainingDetail />,
   },
-  { path: "/loginReset/:temp", element: <ResetPasswordPage /> },
+  { path: "/resetPassword/:temp", element: <ResetPasswordPage /> },
+  { path: "/forgotPassword/", element: <ForgotPasswordPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

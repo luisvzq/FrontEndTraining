@@ -4,10 +4,12 @@ import { useState } from "react";
 
 const ResetPasswordPage = () => {
   const { temp } = useParams();
+  const [statusMessage, setStatusMessage] = useState("");
   const [pass, setPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-  console.log(temp);
-  const fetchPatch = async () => {
+  
+
+  const fetchResetPassword = async () => {
     try {
       const response = await fetch(`http://localhost:8000/loginReset/${temp}`, {
         method: "PATCH",
@@ -23,10 +25,9 @@ const ResetPasswordPage = () => {
         throw new Error("Network response was not ok " + response.statusText);
       }
 
-      const data = await response.json();
+      const body = await response.json();
 
-      //   setStatusMesage("ok");
-      //   setToken(data.data.token);
+      setStatusMessage(body.message);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -36,10 +37,19 @@ const ResetPasswordPage = () => {
     <>
       <Menu />
       <div>Pagina Reset Password</div>
+      {statusMessage ? (
+        <p>{statusMessage}</p>
+      ) : (
+        <p>Introduce la nueva contrasseña</p>
+      )}
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          fetchPatch();
+          {
+            pass === repeatPass
+              ? fetchResetPassword()
+              : alert("No coinciden las contraseñas");
+          }
         }}
       >
         <div>
