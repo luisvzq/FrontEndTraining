@@ -25,7 +25,9 @@ const RegisterPage = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3001/register", {
+      const res = await fetch( `${import.meta.env.VITE_HOST_BACK}:${
+        import.meta.env.VITE_PORT_BACK
+      }/register`, {
         body: JSON.stringify(postBody),
         method: "POST",
         headers: {

@@ -10,7 +10,9 @@ const Training = ({ data }) => {
               <p>{training.name}</p>
 
               <img
-                src={`http://localhost:3001/${training.photo}`}
+                src={`${import.meta.env.VITE_HOST_BACK}:${
+                  import.meta.env.VITE_PORT_BACK
+                }/${training.photo}`}
                 alt="Imagen del entreno seleccionado"
               />
             </Link>

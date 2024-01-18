@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { authContext } from "../context/AuthContext";
 import Menu from "../components/Menu";
+import { authContext } from "../context/AuthContext";
 // import "./Header.scss";
 
 const Header = () => {

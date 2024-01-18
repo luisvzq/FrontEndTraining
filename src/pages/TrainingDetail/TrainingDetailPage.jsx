@@ -1,37 +1,32 @@
 import { useContext, useEffect, useState } from "react";
-import Menu from "../../components/Menu";
 import { Link, useParams } from "react-router-dom";
 import useFetchHooks from "../../hooks/useFetchHooks";
+
+import Header from "../../layout/Header";
+import Footer from "../../layout/Footer";
 import { authContext } from "../../context/AuthContext";
-
-
 
 const TrainingDetailPage = () => {
   // Harcodeado despues se recojera del useContex------------------------------------------------------
   // const token =
   //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiYWRtaW4iLCJpYXQiOjE3MDUzMjA5MDEsImV4cCI6MTcwNzkxMjkwMX0.t2k1Q48DTpCtrZteDJ9lx_q8SRsnVGifFwg4FJig3XE";
-
+  const { trainingId } = useParams();
   const [context] = useContext(authContext);
-    const {getTrainingFetch} = useFetchHooks()
+  const { getTrainingFetch } = useFetchHooks();
   const [dataTraining, setDataTraining] = useState([]);
-  const  {trainingId}  = useParams();
+
   const [allTrainig, setAllTraining] = useState([]);
   const [render, setRender] = useState(false);
-
-  useEffect(() => {
-    getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
-  
-  }, []);
-
-
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `http://localhost:3001/training/${trainingId}`,
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/training/${trainingId}`,
           {
-            method: "GET",
+            // method: "GET",
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
@@ -40,10 +35,10 @@ const TrainingDetailPage = () => {
 
         if (response.ok) {
           const body = await response.json();
-          console.log("response body", body);
+
           setDataTraining(body.data);
           setRender(false);
-        } else {      
+        } else {
           throw new Error("Error al hacer fetch al entreno ");
         }
       } catch (error) {
@@ -51,14 +46,20 @@ const TrainingDetailPage = () => {
       }
     }
     fetchData();
-  }, [trainingId,context.token, render]);
+  }, [trainingId, render]);
+
+  // useEffect(() => {
+  //   getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
+  // }, []);
 
   const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
     async function fetchButton() {
       try {
         const response = await fetch(
-          `http://localhost:3001/${table}/${trainingId}`,
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/${table}/${trainingId}`,
           {
             method: method,
             headers: {
@@ -84,7 +85,7 @@ const TrainingDetailPage = () => {
 
   return (
     <>
-      <Menu />
+      <Header />
 
       <div>Pagina Training Detail</div>
       <h1>{dataTraining.name}</h1>
@@ -99,14 +100,16 @@ const TrainingDetailPage = () => {
           <Link to={`/entreno/${Number(trainingId) - 1}`}>Anterior</Link>
         )}
         {" | "}
-    
+
         {trainingId < allTrainig.length && (
           <Link to={`/entreno/${Number(trainingId) + 1}`}>Siguiente</Link>
         )}
       </div>
 
       <img
-        src={`http://localhost:3001/${dataTraining.photo}`}
+        src={`${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/${dataTraining.photo}`}
         alt="Foto de entreno"
       />
       <p>Description: {dataTraining.description}</p>
@@ -118,15 +121,42 @@ const TrainingDetailPage = () => {
         {/* {dataTraining.LikeTrue ? 
               <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
             : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
-        {dataTraining.likeTrue ? 
-            <button onClick={() => {handleButton("like", "DELETE")}}>Like rojo</button>
-          : <button onClick={() => {handleButton("like", "POST")}}>Like blanca</button>
-        }
-        {dataTraining.favTrue ? 
-            <button onClick={() => {handleButton("fav", "DELETE")}}>Fav rojo</button>
-         : <button onClick={() => {handleButton("fav", "POST")}}>Fav blanca</button>
-        }
+        {dataTraining.likeTrue ? (
+          <button
+            onClick={() => {
+              handleButton("like", "DELETE");
+            }}
+          >
+            Like rojo
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              handleButton("like", "POST");
+            }}
+          >
+            Like blanca
+          </button>
+        )}
+        {dataTraining.favTrue ? (
+          <button
+            onClick={() => {
+              handleButton("fav", "DELETE");
+            }}
+          >
+            Fav rojo
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              handleButton("fav", "POST");
+            }}
+          >
+            Fav blanca
+          </button>
+        )}
       </div>
+      <Footer />
     </>
   );
 };

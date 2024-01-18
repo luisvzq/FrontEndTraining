@@ -1,21 +1,27 @@
+import { useState, useContext, useEffect } from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import { useEffect, useState } from "react";
 import Training from "../components/Training";
 
 import OrderAndSearchInputTraining from "../components/OrderTraining";
+import { authContext } from "../context/AuthContext";
 
 const TrainingListPage = () => {
   const [allFavs, setAllFavs] = useState([]);
+  const [context] = useContext(authContext);
 
   const getTrainingFavFetch = async () => {
     try {
-      const res = await fetch("http://localhost:3001/fav", {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sIjoibm9ybWFsIiwiaWF0IjoxNzA1MzYzMDYzLCJleHAiOjE3MDc5NTUwNjN9.bU1rDps_pwTdYDrIA2ZIPWSJx6HD_I_-qn29TSDtyT0",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/fav`,
+        {
+          headers: {
+            Authorization: `Bearer ${context.token}`,
+          },
+        }
+      );
       if (!res.ok) {
         throw new Error("Network response was not ok " + res.statusText);
       }

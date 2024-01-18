@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { authContext } from "../context/AuthContext";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [context] = useContext(authContext);
 
   const [name, setName] = useState("");
   const [typology, setTypology] = useState("");
   const [muscleGroup, setMuscleGroup] = useState("");
   const [order, setOrder] = useState("name");
-
-  const tokenHardcoded =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sIjoibm9ybWFsIiwiaWF0IjoxNzA1NDI3MTMzLCJleHAiOjE3MDgwMTkxMzN9.0v2wqt3G2sanwdrr4z0wBuwWr9yB7IL606j4X1YlO5Y";
 
   let nameOk;
   let typologyOk;
@@ -32,7 +29,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         `http://localhost:3001/training?${nameOk}&${typologyOk}&${muscleGroupOk}&order_by=${order}`,
         {
           headers: {
-            Authorization: tokenHardcoded,
+            Authorization: `Bearer ${context.token}`,
           },
         }
       );
@@ -122,7 +119,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
 
           setOrder(e.target.value);
 
-          getTrainingFetch(tokenHardcoded, setAllTraining);
+          getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
         }}
       >
         <option value="">Ordenar por</option>

@@ -4,14 +4,17 @@ import {
   AdminTrainingDetail,
   AdminTrainingListPage,
   FavListPage,
+  ForgotPasswordPage,
   HomePage,
   LoginPage,
   RegisterPage,
+  ResetPasswordPage,
   TrainingDetailPage,
   TrainingListPage,
 } from "./pages";
-import { authContext } from "./context/AuthContext";
+
 import { useContext } from "react";
+import { authContext } from "./context/AuthContext";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -100,6 +103,14 @@ const loginRoutes = [
   {
     path: "/registro",
     element: <RegisterPage />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/reset-password/:temp",
+    element: <ResetPasswordPage />,
   },
 ];
 

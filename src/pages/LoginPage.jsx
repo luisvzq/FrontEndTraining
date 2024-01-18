@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from "react";
-import { authContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
+import { authContext } from "../context/AuthContext";
+
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -30,7 +31,9 @@ const LoginPage = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3001/login", {
+      const res = await fetch( `${import.meta.env.VITE_HOST_BACK}:${
+        import.meta.env.VITE_PORT_BACK
+      }/login`, {
         body: JSON.stringify(loginBody),
         method: "POST",
         headers: {
@@ -80,6 +83,7 @@ const LoginPage = () => {
           <input type="password" name="password" id="password" />
           <input type="submit" />
         </form>
+        <Link to="/forgot-password">Olvide la contraseña</Link>
       </section>
       <Footer />
     </>

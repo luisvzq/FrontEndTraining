@@ -1,20 +1,27 @@
 import { useState } from "react";
-import Menu from "../components/Menu";
+
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const ForgotPasswordPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
-  const [mail, setMail] = useState();
+  const [mail, setMail] = useState("");
   const fetchForgotPassword = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/loginForgot`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: mail,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/loginForgot`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: mail,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
@@ -29,7 +36,7 @@ const ForgotPasswordPage = () => {
   };
   return (
     <>
-      <Menu />
+      <Header />
       <div>Pagina Reset Clave</div>
       {statusMessage ? <p>{statusMessage}</p> : <p>Introduce tu Email</p>}
       <form
@@ -50,6 +57,7 @@ const ForgotPasswordPage = () => {
         />
         <input type="submit" />
       </form>
+      <Footer/>
     </>
   );
 };

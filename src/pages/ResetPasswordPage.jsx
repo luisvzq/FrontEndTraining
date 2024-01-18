@@ -1,25 +1,30 @@
 import { useParams } from "react-router-dom";
-import Menu from "../components/Menu";
 import { useState } from "react";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const ResetPasswordPage = () => {
   const { temp } = useParams();
   const [statusMessage, setStatusMessage] = useState("");
   const [pass, setPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-  
 
   const fetchResetPassword = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/loginReset/${temp}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          password: pass,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/${temp}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password: pass,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
@@ -35,7 +40,7 @@ const ResetPasswordPage = () => {
 
   return (
     <>
-      <Menu />
+      <Header />
       <div>Pagina Reset Password</div>
       {statusMessage ? (
         <p>{statusMessage}</p>
@@ -72,6 +77,7 @@ const ResetPasswordPage = () => {
         </div>
         <input type="submit" />
       </form>
+      <Footer />
     </>
   );
 };
