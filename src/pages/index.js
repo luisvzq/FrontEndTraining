@@ -7,6 +7,8 @@ import TrainingDetail from "./TrainingDetail";
 import AdminTrainingListPage from "./AdminTrainingListPage";
 import AdminTrainingDetail from "./AdminTrainingDetail";
 import AdminFavListPage from "./AdminFavListPage";
+import ForgotPasswordPage from "./ForgotPasswordPage";
+import ResetPasswordPage from "./ResetPasswordPage";
 
 export {
   HomePage,
@@ -18,4 +20,6 @@ export {
   AdminTrainingListPage,
   AdminTrainingDetail,
   AdminFavListPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
 };
