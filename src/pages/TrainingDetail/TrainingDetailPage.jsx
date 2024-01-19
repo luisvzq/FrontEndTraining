@@ -1,21 +1,22 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import useFetchHooks from "../../hooks/useFetchHooks";
+import { useParams } from "react-router-dom";
+
 
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import { authContext } from "../../context/AuthContext";
+import BackNext from "../../components/BackNext";
 
 const TrainingDetailPage = () => {
   // Harcodeado despues se recojera del useContex------------------------------------------------------
   // const token =
   //   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiYWRtaW4iLCJpYXQiOjE3MDUzMjA5MDEsImV4cCI6MTcwNzkxMjkwMX0.t2k1Q48DTpCtrZteDJ9lx_q8SRsnVGifFwg4FJig3XE";
-  const { trainingId } = useParams();
+  const { trainingId } = useParams('1');
   const [context] = useContext(authContext);
-  const { getTrainingFetch } = useFetchHooks();
+  const [details, setDetails] = useState([])
   const [dataTraining, setDataTraining] = useState([]);
 
-  const [allTrainig, setAllTraining] = useState([]);
+
   const [render, setRender] = useState(false);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const TrainingDetailPage = () => {
         const response = await fetch(
           `${import.meta.env.VITE_HOST_BACK}:${
             import.meta.env.VITE_PORT_BACK
-          }/training/${trainingId}`,
+          }/trainingDetails`,
           {
             // method: "GET",
             headers: {
@@ -35,9 +36,13 @@ const TrainingDetailPage = () => {
 
         if (response.ok) {
           const body = await response.json();
-
+          // console.log("respuesta entreno:", body.data);
           setDataTraining(body.data);
           setRender(false);
+          const result = body.data.filter((item)=> item.id===Number(trainingId));
+          console.log("filtrado", result);
+          setDetails(body.data[trainingId-1])
+          // console.log("respuesta detail:", body.data[trainingId-1]);
         } else {
           throw new Error("Error al hacer fetch al entreno ");
         }
@@ -48,9 +53,7 @@ const TrainingDetailPage = () => {
     fetchData();
   }, [trainingId, render]);
 
-  // useEffect(() => {
-  //   getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
-  // }, []);
+
 
   const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
@@ -83,45 +86,34 @@ const TrainingDetailPage = () => {
     fetchButton();
   }; //final del manejador
 
+
+
+
+
   return (
     <>
-      <Header />
+      <Header />  
 
       <div>Pagina Training Detail</div>
-      <h1>{dataTraining.name}</h1>
-      <div
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-        }}
-      >
-        {trainingId > 1 && (
-          <Link to={`/entreno/${Number(trainingId) - 1}`}>Anterior</Link>
-        )}
-        {" | "}
+      <BackNext dataTraining={dataTraining} trainingId={trainingId}/>    
 
-        {trainingId < allTrainig.length && (
-          <Link to={`/entreno/${Number(trainingId) + 1}`}>Siguiente</Link>
-        )}
-      </div>
-
+      <h1>{details.name}</h1>
       <img
         src={`${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
-        }/${dataTraining.photo}`}
+        }/${details.photo}`}
         alt="Foto de entreno"
       />
-      <p>Description: {dataTraining.description}</p>
-      <button>Typology: {dataTraining.typology}</button>
-      <button>Muscle group: {dataTraining.muscle_group}</button>
-      <p>Likes: {dataTraining.allLikes}</p>
+      <p>Description: {details.description}</p>
+      <button>Typology: {details.typology}</button>
+      <button>Muscle group: {details.muscle_group}</button>
+      <p>Likes: {details.allLikes}</p>
 
       <div>
         {/* {dataTraining.LikeTrue ? 
               <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
             : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
-        {dataTraining.likeTrue ? (
+        {details.likeTrue ? (
           <button
             onClick={() => {
               handleButton("like", "DELETE");
@@ -138,7 +130,7 @@ const TrainingDetailPage = () => {
             Like blanca
           </button>
         )}
-        {dataTraining.favTrue ? (
+        {details.favTrue ? (
           <button
             onClick={() => {
               handleButton("fav", "DELETE");
