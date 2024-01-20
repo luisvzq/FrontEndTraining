@@ -85,7 +85,6 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-
       <section className="login-page">
         <h1>Login</h1>
         {statusMessage ? (

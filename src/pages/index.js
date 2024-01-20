@@ -1,4 +1,4 @@
-import HomePage from "./HomePage";
+import HomePage from "../pages/Home/HomePage";
 import RegisterPage from "./RegisterPage";
 import TrainingListPage from "./TrainingListPage";
 import FavListPage from "./FavListPage";
