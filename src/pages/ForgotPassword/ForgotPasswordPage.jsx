@@ -1,7 +1,8 @@
 import { useState } from "react";
+import "./ForgotPasswordPage.scss";
 
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
+import Header from "../../layout/Header";
+import Footer from "../../layout/Footer";
 
 const ForgotPasswordPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -37,27 +38,29 @@ const ForgotPasswordPage = () => {
   return (
     <>
       <Header />
-      <div>Pagina Reset Clave</div>
-      {statusMessage ? <p>{statusMessage}</p> : <p>Introduce tu Email</p>}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          fetchForgotPassword();
-          setMail("");
-        }}
-      >
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={mail}
-          onChange={(e) => {
-            setMail(e.target.value);
+      <h2>Pagina Reset Clave</h2>
+      <section className="forgot-password-container">
+        {statusMessage ? <p>{statusMessage}</p> : <p>Introduce tu Email</p>}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            fetchForgotPassword();
+            setMail("");
           }}
-        />
-        <input type="submit" />
-      </form>
-      <Footer/>
+        >
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={mail}
+            onChange={(e) => {
+              setMail(e.target.value);
+            }}
+          />
+          <input type="submit" />
+        </form>
+      </section>
+      <Footer />
     </>
   );
 };
