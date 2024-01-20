@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
-import { authContext } from "../context/AuthContext";
+import { authContext } from "../../context/AuthContext";
+import "./OrderTraining.scss";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [context] = useContext(authContext);
@@ -80,9 +81,60 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     );
   }, [name, typology, muscleGroup]);
 
+  //   return (
+  //     <form className="order-training-form" onSubmit={handleSubmit}>
+  //       <div className="search-group">
+  //         <label htmlFor="typology">Tipologia</label>
+  //         <input
+  //           type="text"
+  //           id="typology"
+  //           value={typology}
+  //           onChange={(e) => handleChange("typology", e.target.value)}
+  //         />
+  //       </div>
+  //       <div className="search-group">
+  //         <label htmlFor="name">Nombre</label>
+  //         <input
+  //           type="text"
+  //           id="name"
+  //           value={name}
+  //           onChange={(e) => handleChange("name", e.target.value)}
+  //         />
+  //       </div>
+  //       <div className="search-group">
+  //         <label htmlFor="muscleGroup">Grupo Muscular</label>
+  //         <input
+  //           type="text"
+  //           id="muscleGroup"
+  //           value={muscleGroup}
+  //           onChange={(e) => handleChange("muscleGroup", e.target.value)}
+  //         />
+  //       </div>
+  //       <button>Buscar</button>
+  //       <select className="right-group"
+  //         value=""
+  //         name="order"
+  //         id="order"
+  //         onChange={(e) => {
+  //           e.preventDefault();
+
+  //           setOrder(e.target.value);
+
+  //           getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
+  //         }}
+  //       >
+  //         <option value="">Ordenar por</option>
+  //         <option value="name">Nombre</option>
+  //         <option value="date">Fecha</option>
+  //         <option value="likes">Likes</option>
+  //       </select>
+  //     </form>
+  //   );
+  // };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="order-training-form" onSubmit={handleSubmit}>
+      <div className="search-group">
         <label htmlFor="typology">Tipologia</label>
         <input
           type="text"
@@ -91,7 +143,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("typology", e.target.value)}
         />
       </div>
-      <div>
+      <div className="search-group">
         <label htmlFor="name">Nombre</label>
         <input
           type="text"
@@ -100,7 +152,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("name", e.target.value)}
         />
       </div>
-      <div>
+      <div className="search-group">
         <label htmlFor="muscleGroup">Grupo Muscular</label>
         <input
           type="text"
@@ -109,26 +161,26 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("muscleGroup", e.target.value)}
         />
       </div>
-      <button>Buscar</button>
-      <select
-        value=""
-        name="order"
-        id="order"
-        onChange={(e) => {
-          e.preventDefault();
-
-          setOrder(e.target.value);
-
-          getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
-        }}
-      >
-        <option value="">Ordenar por</option>
-        <option value="name">Nombre</option>
-        <option value="date">Fecha</option>
-        <option value="likes">Likes</option>
-      </select>
+      <div className="order-group">
+        <label htmlFor="order">Ordenar por</label>
+        <select
+          value=""
+          name="order"
+          id="order"
+          onChange={(e) => {
+            e.preventDefault();
+            setOrder(e.target.value);
+            getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
+          }}
+        >
+          {/* <option value="">Ordenar por</option> */}
+          <option value="name">Nombre</option>
+          <option value="date">Fecha</option>
+          <option value="likes">Likes</option>
+        </select>
+      </div>
+      <button type="submit">Buscar</button>
     </form>
   );
 };
-
 export default OrderAndSearchInputTraining;
