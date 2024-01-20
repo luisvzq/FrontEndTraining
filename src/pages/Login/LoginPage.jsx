@@ -1,14 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
-import { authContext } from "../context/AuthContext";
-
+import { authContext } from "../../context/AuthContext";
+import Header from "../../layout/Header";
+import Footer from "../../layout/Footer";
+import "./LoginPage.scss";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [context, setContext] = useContext(authContext);
+  const [shakeAnimation, setShakeAnimation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,15 +31,18 @@ const LoginPage = () => {
     };
 
     try {
-      const res = await fetch( `${import.meta.env.VITE_HOST_BACK}:${
-        import.meta.env.VITE_PORT_BACK
-      }/login`, {
-        body: JSON.stringify(loginBody),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/login`,
+        {
+          body: JSON.stringify(loginBody),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (res.ok) {
         const body = await res.json();
@@ -57,6 +60,10 @@ const LoginPage = () => {
       } else {
         const body = await res.json();
         setStatusMessage(body.error);
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+        }, 500);
       }
     } catch (error) {
       console.error(error);
@@ -69,21 +76,25 @@ const LoginPage = () => {
     <>
       <Header />
 
-      <section>
+      <section className="login-page">
         <h1>Login</h1>
         {statusMessage ? (
-          <p>{userFetchResponse}</p>
+          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
+            {userFetchResponse}
+          </p>
         ) : (
-          <p>Introduce los datos</p>
+          <p className="intro-text">Introduce los datos</p>
         )}
-        <form onSubmit={authUser}>
+        <form className="login-container" onSubmit={authUser}>
           <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <input type="submit" />
+          <input type="submit" className="submit-btn" />
         </form>
-        <Link to="/forgot-password">Olvide la contraseña</Link>
+        <Link to="/forgot-password" className="forgot-password">
+          Olvide la contraseña
+        </Link>
       </section>
       <Footer />
     </>

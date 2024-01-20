@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Menu from "../components/Menu";
 import { authContext } from "../context/AuthContext";
-// import "./Header.scss";
+import "./Header.scss";
 
 const Header = () => {
   const [context] = useContext(authContext);
@@ -9,7 +9,7 @@ const Header = () => {
     <div className="header">
       <Menu />
       <div className="welcome">
-        {context?.token && <p>Hola {context?.name}!</p>}
+        {context?.token && <p>Hola {context?.name}! 💪</p>}
       </div>
     </div>
   );
