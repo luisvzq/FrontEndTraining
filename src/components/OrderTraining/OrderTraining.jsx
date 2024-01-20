@@ -67,20 +67,29 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     e.preventDefault();
     getTrainingFetch();
   };
-
+  let search = "";
   useEffect(() => {
     // Actualiza la URL con las consultas de búsqueda
+
     const queryParams = new URLSearchParams();
     if (name) queryParams.set("name", name);
     if (typology) queryParams.set("typology", typology);
     if (muscleGroup) queryParams.set("muscle_group", muscleGroup);
-
+    if (typology) {
+      search = "?";
+    }
+    if (name) {
+      search = "?";
+    }
+    if (muscleGroup) {
+      search = "?";
+    }
     window.history.replaceState(
       {},
       "",
-      `${window.location.pathname}?${queryParams.toString()}`
+      `${window.location.pathname}${search}${queryParams.toString()}`
     );
-  }, [name, typology, muscleGroup]);
+  }, [name, typology, muscleGroup, search]);
 
   return (
     <form className="order-training-form" onSubmit={handleSubmit}>
@@ -112,7 +121,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         />
       </div>
       <div className="order-group">
-        <label htmlFor="order">Ordenar por</label>
+        <label htmlFor="order"></label>
         <select
           value=""
           name="order"
@@ -123,7 +132,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
             getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
           }}
         >
-          {/* <option value="">Ordenar por</option> */}
+          <option value="">Ordenar por</option>
           <option value="name">Nombre</option>
           <option value="date">Fecha</option>
           <option value="likes">Likes</option>
