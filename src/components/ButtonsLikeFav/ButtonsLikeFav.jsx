@@ -42,14 +42,14 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
               <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
             : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
 
-        <p>{details.allLikes}</p>
+        <p className="number-likes">{details.allLikes}</p>
         {details.likeTrue ? (
           <button className="buttons-clf red"
             onClick={() => {
               handleButton("like", "DELETE");
             }}
           >
-            Like rojo
+            Like
           </button >
         ) : (
           <button className="buttons-clf white"
@@ -57,7 +57,7 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
               handleButton("like", "POST");
             }}
           >
-            Like blanca
+            Like
           </button>
         )}
         {details.favTrue ? (
@@ -66,7 +66,7 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
               handleButton("fav", "DELETE");
             }}
           >
-            Fav rojo
+            Fav
           </button>
         ) : (
           <button className="buttons-clf white"
@@ -74,7 +74,7 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
               handleButton("fav", "POST");
             }}
           >
-            Fav blanca
+            Fav
           </button>
         )}
       </div>

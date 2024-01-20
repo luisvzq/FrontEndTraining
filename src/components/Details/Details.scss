@@ -1,25 +1,71 @@
 .details {
     display:flex;
-    justify-content: center;
-    align-content: center;
-    border:dotted;
+    flex-direction: column;
+
+
     width:90vw;
-    background-color: beige;
+    background-color: rgb(165, 165, 115);
     
-
-}
-
-.photo {
-    max-width: 80vw;
-    max-height: 50vh;
-}
-
-.description {
-    min-width: 30vw;
-    min-height: 30vh;
 
 }
 .title {
     display:flex;
     justify-content: center;
+}
+
+.photo {
+    max-width: 50vw;
+    max-height: 50vh;
+
+}
+
+
+
+.description {
+    max-width: 50vw;
+    max-height: 20vh;
+
+
+
+}
+
+
+@media (min-width: 600px) {
+    .details {
+        display:flex;
+        justify-content: center;
+        align-content: center;
+    
+        width:90vw;
+        background-color: beige;
+        
+    
+    }
+    
+    .photo {
+        max-width: 80vw;
+        max-height: 50vh;
+    
+    }
+    .information {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .description {
+        display: flex;
+        min-width: 30vw;
+        min-height: 45vh;
+        max-width: 60vw;
+        max-height: 45vh;
+        align-items: center;
+        justify-content: center;
+    
+    }
+    .title {
+        display:flex;
+        justify-content: center;
+    
+    
+  }
 }

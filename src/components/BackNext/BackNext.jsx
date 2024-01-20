@@ -21,7 +21,7 @@ import "./BackNext.scss"
 }
 
 BackNext.propTypes = {
-  dataTraining: PropTypes.object,
+  dataTraining: PropTypes.array,
   trainingId: PropTypes.string
 
 };

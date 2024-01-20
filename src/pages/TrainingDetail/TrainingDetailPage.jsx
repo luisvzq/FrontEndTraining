@@ -15,7 +15,7 @@ const TrainingDetailPage = () => {
 
   const { trainingId } = useParams('1');
   const [context] = useContext(authContext);
-  const [details, setDetails] = useState([])
+  const [details, setDetails] = useState({})
   const [dataTraining, setDataTraining] = useState([]);
   const [render, setRender] = useState(false);
 
@@ -39,6 +39,7 @@ const TrainingDetailPage = () => {
           setDataTraining(body.data);
           setRender(false);
           const [result] = body.data.filter((item)=> item.id===Number(trainingId));  
+      
           setDetails(result)
       
         } else {
@@ -75,7 +76,7 @@ const TrainingDetailPage = () => {
 
 TrainingDetailPage.propTypes = {
   details: PropTypes.object,
-  dataTraining: PropTypes.object,
+  dataTraining: PropTypes.array,
   trainingId: PropTypes.string,
   token: PropTypes.string,
   setRender: PropTypes.func
