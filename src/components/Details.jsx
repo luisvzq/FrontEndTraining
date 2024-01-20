@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 const Details = ({details}) => {
     return(
 <div>
-    <h1>{details.name}</h1>
+      <h1>{details.name}</h1>
       <img
         src={`${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK

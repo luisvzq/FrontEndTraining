@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
 
-      const handleButton = (table, method) => {
+    const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
     async function fetchButton() {
       try {

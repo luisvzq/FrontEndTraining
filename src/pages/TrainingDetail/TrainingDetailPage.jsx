@@ -93,64 +93,16 @@ const TrainingDetailPage = () => {
   return (
     <>
       <Header />  
-
-    
+          
       <BackNext dataTraining={dataTraining} trainingId={trainingId} setRender={setRender}/>    
 
-      {/* <h1>{details.name}</h1>
-      <img
-        src={`${import.meta.env.VITE_HOST_BACK}:${
-          import.meta.env.VITE_PORT_BACK
-        }/${details.photo}`}
-        alt="Foto de entreno"
-      />
-      <p>Description: {details.description}</p>
-      <button>Typology: {details.typology}</button>
-      <button>Muscle group: {details.muscle_group}</button>
-      <p>Likes: {details.allLikes}</p> */}
       <Details details={details}/>
 
-      <ButtonsLikeFav details={details} trainingId={trainingId} token={context.token}/>
+      <ButtonsLikeFav details={details} trainingId={trainingId} token={context.token} setRender={setRender}/>
 
 
       <Footer />
-      {/* <div>
-      
-        {details.likeTrue ? (
-          <button
-            onClick={() => {
-              handleButton("like", "DELETE");
-            }}
-          >
-            Like rojo
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              handleButton("like", "POST");
-            }}
-          >
-            Like blanca
-          </button>
-        )}
-        {details.favTrue ? (
-          <button
-            onClick={() => {
-              handleButton("fav", "DELETE");
-            }}
-          >
-            Fav rojo
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              handleButton("fav", "POST");
-            }}
-          >
-            Fav blanca
-          </button>
-        )}
-      </div> */}
+  
   
     </>
   );
