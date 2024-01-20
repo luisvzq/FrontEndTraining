@@ -24,7 +24,7 @@ const Training = ({ data }) => {
 };
 
 Training.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
 };
 
 export default Training;

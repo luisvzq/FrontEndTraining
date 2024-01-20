@@ -1,4 +1,7 @@
+
 import PropTypes from "prop-types";
+import "./ButtonsLikeFav.scss"
+
 
 const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
 
@@ -34,20 +37,22 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
   }; //final del manejador
 
     return (
-        <div>
+        <div className="buttonsLikeFav">
         {/* {dataTraining.LikeTrue ? 
               <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
             : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
+
+        <p>{details.allLikes}</p>
         {details.likeTrue ? (
-          <button
+          <button className="buttons-clf red"
             onClick={() => {
               handleButton("like", "DELETE");
             }}
           >
             Like rojo
-          </button>
+          </button >
         ) : (
-          <button
+          <button className="buttons-clf white"
             onClick={() => {
               handleButton("like", "POST");
             }}
@@ -56,7 +61,7 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
           </button>
         )}
         {details.favTrue ? (
-          <button
+          <button className="buttons-clf red"
             onClick={() => {
               handleButton("fav", "DELETE");
             }}
@@ -64,7 +69,7 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
             Fav rojo
           </button>
         ) : (
-          <button
+          <button className="buttons-clf white"
             onClick={() => {
               handleButton("fav", "POST");
             }}
@@ -78,7 +83,7 @@ const ButtonsLikeFav = ({details, trainingId, token, setRender}) => {
 }
 
 ButtonsLikeFav.propTypes = {
-    details: PropTypes.array,
+    details: PropTypes.object,
     trainingId: PropTypes.string,
     token: PropTypes.string,
     setRender: PropTypes.func

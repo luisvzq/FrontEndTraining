@@ -1,0 +1,25 @@
+.details {
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    border:dotted;
+    width:90vw;
+    background-color: beige;
+    
+
+}
+
+.photo {
+    max-width: 80vw;
+    max-height: 50vh;
+}
+
+.description {
+    min-width: 30vw;
+    min-height: 30vh;
+
+}
+.title {
+    display:flex;
+    justify-content: center;
+}
