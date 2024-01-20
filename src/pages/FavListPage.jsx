@@ -42,10 +42,10 @@ const TrainingListPage = () => {
   return (
     <>
       <Header />
+      <h2>Todos los entrenamientos</h2>
       <OrderAndSearchInputTraining
         setAllTraining={setAllFavs}
-      ></OrderAndSearchInputTraining>
-      <h2>Todos los entrenamientos</h2>
+      ></OrderAndSearchInputTraining> 
       <Training data={allFavs} />
       <Footer />
     </>
