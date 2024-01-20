@@ -6,6 +6,8 @@ import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import { authContext } from "../../context/AuthContext";
 import BackNext from "../../components/BackNext";
+import Details from "../../components/Details";
+import ButtonsLikeFav from "../../components/ButtonsLikeFav";
 
 const TrainingDetailPage = () => {
   // Harcodeado despues se recojera del useContex------------------------------------------------------
@@ -15,8 +17,6 @@ const TrainingDetailPage = () => {
   const [context] = useContext(authContext);
   const [details, setDetails] = useState([])
   const [dataTraining, setDataTraining] = useState([]);
-
-
   const [render, setRender] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const TrainingDetailPage = () => {
             import.meta.env.VITE_PORT_BACK
           }/trainingDetails`,
           {
-            // method: "GET",
+            method: "GET",
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
@@ -51,40 +51,40 @@ const TrainingDetailPage = () => {
       }
     }
     fetchData();
-  }, [trainingId, render]);
+  }, [trainingId, context.token, render]);
 
 
 
-  const handleButton = (table, method) => {
-    console.log(`Metodo: ${method} para la tabla: ${table}`);
-    async function fetchButton() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/${table}/${trainingId}`,
-          {
-            method: method,
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // const handleButton = (table, method) => {
+  //   console.log(`Metodo: ${method} para la tabla: ${table}`);
+  //   async function fetchButton() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/${table}/${trainingId}`,
+  //         {
+  //           method: method,
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const bodyButton = await response.json();
-          console.log("response bodyButton", bodyButton);
-          setRender(true);
-        } else {
-          const body = await response.json();
-          console.error("ERROR fetchButton", body.message);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchButton();
-  }; //final del manejador
+  //       if (response.ok) {
+  //         const bodyButton = await response.json();
+  //         console.log("response bodyButton", bodyButton);
+  //         setRender(true);
+  //       } else {
+  //         const body = await response.json();
+  //         console.error("ERROR fetchButton", body.message);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchButton();
+  // }; //final del manejador
 
 
 
@@ -94,10 +94,10 @@ const TrainingDetailPage = () => {
     <>
       <Header />  
 
-      <div>Pagina Training Detail</div>
-      <BackNext dataTraining={dataTraining} trainingId={trainingId}/>    
+    
+      <BackNext dataTraining={dataTraining} trainingId={trainingId} setRender={setRender}/>    
 
-      <h1>{details.name}</h1>
+      {/* <h1>{details.name}</h1>
       <img
         src={`${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
@@ -107,12 +107,15 @@ const TrainingDetailPage = () => {
       <p>Description: {details.description}</p>
       <button>Typology: {details.typology}</button>
       <button>Muscle group: {details.muscle_group}</button>
-      <p>Likes: {details.allLikes}</p>
+      <p>Likes: {details.allLikes}</p> */}
+      <Details details={details}/>
 
-      <div>
-        {/* {dataTraining.LikeTrue ? 
-              <img src="http://localhost:3001/logos/like_rojo.webp" alt="rojo" />
-            : <img src="http://localhost:3001/logos/like_blanco.webp" alt="blanco" /> } */}
+      <ButtonsLikeFav details={details} trainingId={trainingId} token={context.token}/>
+
+
+      <Footer />
+      {/* <div>
+      
         {details.likeTrue ? (
           <button
             onClick={() => {
@@ -147,8 +150,8 @@ const TrainingDetailPage = () => {
             Fav blanca
           </button>
         )}
-      </div>
-      <Footer />
+      </div> */}
+  
     </>
   );
 };
