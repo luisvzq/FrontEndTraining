@@ -6,7 +6,9 @@ const HomePage = () => {
   return (
     <div className="home">
       <Header />
-      <div>Pagina Home</div>
+      <section className="title-section">
+        <h1 className="main-title">WORKOUT APP</h1>
+      </section>
       <Footer />
     </div>
   );
