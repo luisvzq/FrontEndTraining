@@ -1,14 +1,14 @@
 import HomePage from "./HomePage";
+import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
-import TrainingListPage from "./TrainingList/TrainingListPage";
+import TrainingListPage from "./TrainingListPage";
 import FavListPage from "./FavListPage";
 import AdminTrainingListPage from "./AdminTrainingListPage";
 import AdminTrainingDetail from "./AdminTrainingDetail";
 import AdminFavListPage from "./AdminFavListPage";
-import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
+import ForgotPasswordPage from "./ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
-import LoginPage from "./Login/LoginPage";
 
 export {
   HomePage,

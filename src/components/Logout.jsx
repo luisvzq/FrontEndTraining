@@ -11,11 +11,7 @@ const Logout = () => {
     navigate("/login");
   };
 
-  return (
-    <button onClick={handleLogout} className="logout">
-      Cerrar sesión
-    </button>
-  );
+  return <button onClick={handleLogout}>Cerrar sesión</button>;
 };
 
 export default Logout;

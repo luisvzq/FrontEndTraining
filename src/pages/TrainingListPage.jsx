@@ -1,13 +1,11 @@
 import { useState, useContext, useEffect } from "react";
-import Header from "../../layout/Header.jsx";
-import Footer from "../../layout/Footer.jsx";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
+import Training from "../components/Training";
 
-import "./TrainingListPage.scss";
-
-import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
-import { authContext } from "../../context/AuthContext.jsx";
-import Training from "../../components/Training/Training.jsx";
+import OrderAndSearchInputTraining from "../components/OrderTraining";
+import useFetchHooks from "../hooks/useFetchHooks.js";
+import { authContext } from "../context/AuthContext.jsx";
 
 const TrainingListPage = () => {
   const [context] = useContext(authContext);
@@ -19,16 +17,16 @@ const TrainingListPage = () => {
   }, []);
 
   return (
-    <div className="">
+    <>
       <Header />
-      <h2>Todos los entrenamientos</h2>
       <OrderAndSearchInputTraining
         setAllTraining={setAllTraining}
         allTraining={allTraining}
       ></OrderAndSearchInputTraining>
+      <h2>Todos los entrenamientos</h2>
       <Training data={allTraining} />
       <Footer />
-    </div>
+    </>
   );
 };
 

@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import Training from "../components/Training/Training";
+import Training from "../components/Training";
 
-import OrderAndSearchInputTraining from "../components/OrderTraining/OrderTraining";
+import OrderAndSearchInputTraining from "../components/OrderTraining";
 import { authContext } from "../context/AuthContext";
 
 const TrainingListPage = () => {
@@ -42,10 +42,10 @@ const TrainingListPage = () => {
   return (
     <>
       <Header />
-      <h2>Todos los entrenamientos</h2>
       <OrderAndSearchInputTraining
         setAllTraining={setAllFavs}
-      ></OrderAndSearchInputTraining> 
+      ></OrderAndSearchInputTraining>
+      <h2>Todos los entrenamientos</h2>
       <Training data={allFavs} />
       <Footer />
     </>
