@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import "./Training.scss";
 const Training = ({ data }) => {
   return (
-    <ul>
+    <ul className="listTraining">
       {data.map((training) => {
         return (
           <li key={training.id}>
             <Link to={`/entreno/${training.id}`}>
-              <p>{training.name}</p>
+              <h2>{training.name}</h2>
 
               <img
                 src={`${import.meta.env.VITE_HOST_BACK}:${
