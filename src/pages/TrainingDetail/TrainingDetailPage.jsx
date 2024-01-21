@@ -13,7 +13,7 @@ import ButtonsLikeFav from "../../components/ButtonsLikeFav/ButtonsLikeFav";
 
 const TrainingDetailPage = () => {
 
-  const { trainingId } = useParams('1');
+  const { trainingId } = useParams();
   const [context] = useContext(authContext);
   const [details, setDetails] = useState({})
   const [dataTraining, setDataTraining] = useState([]);
