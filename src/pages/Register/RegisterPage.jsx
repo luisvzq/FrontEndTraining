@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./RegisterPage.css";
+import "./RegisterPage.scss";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import { useNavigate } from "react-router-dom";
@@ -27,19 +27,22 @@ const RegisterPage = () => {
     };
 
     try {
-      const res = await fetch( `${import.meta.env.VITE_HOST_BACK}:${
-        import.meta.env.VITE_PORT_BACK
-      }/register`, {
-        body: JSON.stringify(postBody),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/register`,
+        {
+          body: JSON.stringify(postBody),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (res.ok) {
         setStatusMessage("El registro ha sido completado con exito ✌️");
-        navigate("/login")
+        navigate("/login");
         setName("");
         setEmail("");
         setPassword("");
@@ -61,79 +64,61 @@ const RegisterPage = () => {
       {statusMessage}
     </div>
   ) : (
-    <div></div>
+    <div>Introduzca sus datos</div>
   );
 
   return (
     <>
       <Header />
-      <div className="signupFrm">
-        <div className="wrapper">
-          <form onSubmit={registerUser} className="form">
-            <h1 className="title">Sign up</h1>
-            {messageForUser}
-            <div className="inputContainer">
-              <label htmlFor="name" className="label">
-                Nombre
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={name}
-                className="input"
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Escriba su nombre"
-              />
-            </div>
-            <div className="inputContainer">
-              <label htmlFor="email" className="label">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={email}
-                className="input"
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Escriba su correo electrónico"
-              />
-            </div>
-            <div className="inputContainer">
-              <label htmlFor="password" className="label">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={password}
-                className="input"
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Escriba su contraseña"
-              />
-            </div>
-            <div className="inputContainer">
-              <label htmlFor="passwordRepeat" className="label">
-                Repetir Password
-              </label>
-              <input
-                type="password"
-                name="passwordRepeat"
-                id="passwordRepeat"
-                value={passwordRepeat}
-                className="input"
-                onChange={(e) => setPasswordRepeat(e.target.value)}
-                placeholder="Repita su contraseña"
-              />
-            </div>
-            <div>
-              <input type="submit" className="submitBtn" />
-            </div>
-          </form>
-        </div>
-      </div>
+      <section className="register-page">
+        <h1>Registro</h1>
+        <div className="status-message">{messageForUser}</div>
+
+        <form onSubmit={registerUser} className="register-container">
+          <label htmlFor="name">Nombre</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Escriba su nombre"
+          />
+
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Escriba su correo electrónico"
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Escriba su contraseña"
+          />
+
+          <label htmlFor="passwordRepeat">Repetir Password</label>
+          <input
+            type="password"
+            name="passwordRepeat"
+            id="passwordRepeat"
+            value={passwordRepeat}
+            onChange={(e) => setPasswordRepeat(e.target.value)}
+            placeholder="Repita su contraseña"
+          />
+
+          <input type="submit" className="submit-btn" />
+        </form>
+      </section>
+
       <Footer />
     </>
   );
