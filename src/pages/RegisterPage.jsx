@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./RegisterPage.css";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState(""); // la opcion tipica de escribir 2 veces la contraseña
   const [statusMessage, setStatusMessage] = useState(""); // mensaje para el cliente sin necesidad de ver la consola
+  const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -37,6 +39,7 @@ const RegisterPage = () => {
 
       if (res.ok) {
         setStatusMessage("El registro ha sido completado con exito ✌️");
+        navigate("/login")
         setName("");
         setEmail("");
         setPassword("");
