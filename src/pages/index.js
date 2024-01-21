@@ -8,7 +8,7 @@ import AdminFavListPage from "./AdminFavListPage";
 import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
-import LoginPage from "./Login/LoginPage";
+import LoginPage from "./Login/LoginPage"
 
 export {
   HomePage,
