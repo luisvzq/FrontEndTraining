@@ -8,7 +8,8 @@ const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordRepeat, setPasswordRepeat] = useState(""); // la opcion tipica de escribir 2 veces la contraseña
+  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [shakeAnimation, setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState(""); // mensaje para el cliente sin necesidad de ver la consola
   const navigate = useNavigate();
 
@@ -17,13 +18,17 @@ const RegisterPage = () => {
 
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
+      setShakeAnimation(true);
+      setTimeout(() => {
+        setShakeAnimation(false);
+      }, 500);
       return;
     }
 
     const postBody = {
       name,
       email,
-      password: passwordRepeat, // Solo guardo passwordRepeat
+      password: passwordRepeat, 
     };
 
     try {
@@ -41,38 +46,48 @@ const RegisterPage = () => {
       );
 
       if (res.ok) {
-        setStatusMessage("El registro ha sido completado con exito ✌️");
+       // setStatusMessage("El registro ha sido completado con exito ✌️");
+       alert("El registro ha sido completado con exito ✌️");
         navigate("/login");
         setName("");
         setEmail("");
         setPassword("");
         setPasswordRepeat("");
       } else {
-        const body = await res.json();
-        console.log("Error de datos: ", body.error); // se puede borrar es para pruebas
-        setStatusMessage(body.error); // para que muestre al usuario cual es el error p.e ya existe usuario con ese email
+        const body = await res.json();     
+        setStatusMessage(body.error); 
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+        }, 500);
+
       }
     } catch (error) {
-      setStatusMessage("Error al conectar con la Db"); // se le comunicaria esta info al cliente, si el problema es en el fetch??
+      setStatusMessage("Error al conectar con la Db");
+      setShakeAnimation(true);
+      setTimeout(() => {
+        setShakeAnimation(false);
+      }, 500);
       console.error(error);
     }
   };
 
-  const messageForUser = statusMessage ? (
-    //borrar luego este estilo es solo para pruebas en registro y q salga rojo o verde
-    <div style={{ color: statusMessage.includes("exito") ? "green" : "red" }}>
-      {statusMessage}
-    </div>
-  ) : (
-    <div>Introduzca sus datos</div>
-  );
+  const userFetchResponse = statusMessage;
+
+
 
   return (
     <>
       <Header />
       <section className="register-page">
         <h1>Registro</h1>
-        <div className="status-message">{messageForUser}</div>
+        {statusMessage ? (
+          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
+            {userFetchResponse}
+          </p>
+        ) : (
+          <p className="intro-text">Introduce los datos</p>
+        )}
 
         <form onSubmit={registerUser} className="register-container">
           <label htmlFor="name">Nombre</label>
