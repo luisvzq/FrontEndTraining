@@ -4,6 +4,9 @@ import { authContext } from "../../context/AuthContext";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import "./LoginPage.scss";
+import "sweetalert2/dist/sweetalert2.min.css";
+
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -14,8 +17,6 @@ const LoginPage = () => {
   useEffect(() => {
     const handleLogin = async () => {
       if (context?.token) {
-        console.log("Usuario autenticado:", context);
-        alert(`Loggeado correctamente, bienvenid@ ${context?.name}!`);
         navigate("/");
       }
     };
@@ -54,7 +55,16 @@ const LoginPage = () => {
         setContext(updatedContext);
 
         if (updatedContext.token) {
-          alert(`Loggeado correctamente, bienvenid@ ${updatedContext.name}!`);
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `Bienvenid@ ${updatedContext.name}!`,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+              popup: "rounded-popup",
+            },
+          });
           navigate("/");
         }
       } else {
@@ -75,7 +85,6 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-
       <section className="login-page">
         <h1>Login</h1>
         {statusMessage ? (
@@ -85,6 +94,7 @@ const LoginPage = () => {
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
+
         <form className="login-container" onSubmit={authUser}>
           <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email" />
