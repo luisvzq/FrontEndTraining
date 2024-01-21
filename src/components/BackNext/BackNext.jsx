@@ -22,7 +22,8 @@ import "./BackNext.scss"
 
 BackNext.propTypes = {
   dataTraining: PropTypes.array,
-  trainingId: PropTypes.string
+  trainingId: PropTypes.string,
+
 
 };
 

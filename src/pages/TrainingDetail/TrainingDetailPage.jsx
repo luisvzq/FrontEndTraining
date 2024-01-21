@@ -38,8 +38,7 @@ const TrainingDetailPage = () => {
           const body = await response.json();      
           setDataTraining(body.data);
           setRender(false);
-          const [result] = body.data.filter((item)=> item.id===Number(trainingId));  
-      
+          const [result] = body.data.filter((item)=> item.id===Number(trainingId));        
           setDetails(result)
       
         } else {
@@ -56,20 +55,14 @@ const TrainingDetailPage = () => {
     <>
       <Header />  
           
-      <BackNext dataTraining={dataTraining} trainingId={trainingId} setRender={setRender}/>    
+      <BackNext dataTraining={dataTraining} trainingId={trainingId} setRender={setRender} />    
 
       {/* {
           console.log("Detalles a mostrar", typeof details,  typeof dataTraining, typeof trainingId)  
       } */}
       <Details details={details}/>
-      <ButtonsLikeFav details={details} trainingId={trainingId} token={context.token} setRender={setRender}/>
-
-    
-
-
+      <ButtonsLikeFav details={details} trainingId={trainingId} token={context.token} setRender={setRender}/>     
       <Footer />
-  
-  
     </>
   );
 };
