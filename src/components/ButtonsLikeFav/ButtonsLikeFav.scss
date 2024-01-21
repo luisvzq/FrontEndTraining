@@ -1,0 +1,31 @@
+.buttonsLikeFav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+
+
+    .buttons-clf {
+        border-radius: 50%;
+    min-width: 8vw;
+    min-height: 8vh;
+
+
+    }
+}
+.red{
+    background-color: red;
+    color:beige
+}
+.white{
+    background-color:white;
+    color: black;
+}
+.number-likes {
+    size: 20px;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+
+    min-width: 10vw;
+}

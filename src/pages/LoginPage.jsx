@@ -11,7 +11,6 @@ import Swal from "sweetalert2";
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [context, setContext] = useContext(authContext);
-  const [shakeAnimation, setShakeAnimation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,18 +31,15 @@ const LoginPage = () => {
     };
 
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_HOST_BACK}:${
-          import.meta.env.VITE_PORT_BACK
-        }/login`,
-        {
-          body: JSON.stringify(loginBody),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch( `${import.meta.env.VITE_HOST_BACK}:${
+        import.meta.env.VITE_PORT_BACK
+      }/login`, {
+        body: JSON.stringify(loginBody),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (res.ok) {
         const body = await res.json();
@@ -70,10 +66,6 @@ const LoginPage = () => {
       } else {
         const body = await res.json();
         setStatusMessage(body.error);
-        setShakeAnimation(true);
-        setTimeout(() => {
-          setShakeAnimation(false);
-        }, 500);
       }
     } catch (error) {
       console.error(error);
@@ -88,11 +80,9 @@ const LoginPage = () => {
       <section className="login-page">
         <h1>Login</h1>
         {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {userFetchResponse}
-          </p>
+          <p>{userFetchResponse}</p>
         ) : (
-          <p className="intro-text">Introduce los datos</p>
+          <p>Introduce los datos</p>
         )}
 
         <form className="login-container" onSubmit={authUser}>
@@ -100,11 +90,9 @@ const LoginPage = () => {
           <input type="email" name="email" id="email" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <input type="submit" className="submit-btn" />
+          <input type="submit" />
         </form>
-        <Link to="/forgot-password" className="forgot-password">
-          Olvide la contraseña
-        </Link>
+        <Link to="/forgot-password">Olvide la contraseña</Link>
       </section>
       <Footer />
     </>

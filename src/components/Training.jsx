@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "./Training.scss";
 const Training = ({ data }) => {
   return (
-    <ul className="listTraining">
+    <ul>
       {data.map((training) => {
         return (
           <li key={training.id}>
             <Link to={`/entreno/${training.id}`}>
-              <h2>{training.name}</h2>
+              <p>{training.name}</p>
 
               <img
                 src={`${import.meta.env.VITE_HOST_BACK}:${
@@ -25,7 +24,7 @@ const Training = ({ data }) => {
 };
 
 Training.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
 };
 
 export default Training;
