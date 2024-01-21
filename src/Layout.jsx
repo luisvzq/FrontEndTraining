@@ -60,7 +60,7 @@ const routesAdmin = [
     element: <AdminTrainingListPage />,
   },
   {
-    path: "admin/entreno/:trainingId",
+    path: "/admin/entreno/:idtraining",
     element: <AdminTrainingDetail />,
   },
   {

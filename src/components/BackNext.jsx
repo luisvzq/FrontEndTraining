@@ -1,12 +1,17 @@
+/*eslint-disable react/prop-types*/
 
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "./BackNext.scss"
 
   const BackNext = ({dataTraining, trainingId}) => {
     const indice = dataTraining.findIndex ((item)=>item.id===Number(trainingId)); 
     return (
-      <div className="backNext"    >
+      <div
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        display: "flex",
+      }}
+    >
       {indice > 0 && (
         // Si hay un elemento anterior, muestra el enlace
         <Link to={`/entreno/${dataTraining[indice - 1].id}`}>Anterior</Link>
@@ -19,12 +24,5 @@ import "./BackNext.scss"
     </div>
     )
 }
-
-BackNext.propTypes = {
-  dataTraining: PropTypes.array,
-  trainingId: PropTypes.string,
-
-
-};
 
 export default BackNext;

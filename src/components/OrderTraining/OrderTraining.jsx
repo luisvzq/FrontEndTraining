@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
 import { useState, useContext, useEffect } from "react";
-import { authContext } from "../context/AuthContext";
+import { authContext } from "../../context/AuthContext";
+import "./OrderTraining.scss";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [context] = useContext(authContext);
@@ -65,24 +67,33 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     e.preventDefault();
     getTrainingFetch();
   };
-
+  let search = "";
   useEffect(() => {
     // Actualiza la URL con las consultas de búsqueda
+
     const queryParams = new URLSearchParams();
     if (name) queryParams.set("name", name);
     if (typology) queryParams.set("typology", typology);
     if (muscleGroup) queryParams.set("muscle_group", muscleGroup);
-
+    if (typology) {
+      search = "?";
+    }
+    if (name) {
+      search = "?";
+    }
+    if (muscleGroup) {
+      search = "?";
+    }
     window.history.replaceState(
       {},
       "",
-      `${window.location.pathname}?${queryParams.toString()}`
+      `${window.location.pathname}${search}${queryParams.toString()}`
     );
-  }, [name, typology, muscleGroup]);
+  }, [name, typology, muscleGroup, search]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className="order-training-form" onSubmit={handleSubmit}>
+      <div className="search-group">
         <label htmlFor="typology">Tipologia</label>
         <input
           type="text"
@@ -91,7 +102,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("typology", e.target.value)}
         />
       </div>
-      <div>
+      <div className="search-group">
         <label htmlFor="name">Nombre</label>
         <input
           type="text"
@@ -100,7 +111,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("name", e.target.value)}
         />
       </div>
-      <div>
+      <div className="search-group">
         <label htmlFor="muscleGroup">Grupo Muscular</label>
         <input
           type="text"
@@ -109,26 +120,29 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("muscleGroup", e.target.value)}
         />
       </div>
-      <button>Buscar</button>
-      <select
-        value=""
-        name="order"
-        id="order"
-        onChange={(e) => {
-          e.preventDefault();
-
-          setOrder(e.target.value);
-
-          getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
-        }}
-      >
-        <option value="">Ordenar por</option>
-        <option value="name">Nombre</option>
-        <option value="date">Fecha</option>
-        <option value="likes">Likes</option>
-      </select>
+      <div className="order-group">
+        <label htmlFor="order"></label>
+        <select
+          value=""
+          name="order"
+          id="order"
+          onChange={(e) => {
+            e.preventDefault();
+            setOrder(e.target.value);
+            getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
+          }}
+        >
+          <option value="">Ordenar por</option>
+          <option value="name">Nombre</option>
+          <option value="date">Fecha</option>
+          <option value="likes">Likes</option>
+        </select>
+      </div>
+      <button type="submit">Buscar</button>
     </form>
   );
 };
-
+OrderAndSearchInputTraining.propTypes = {
+  setAllTraining: PropTypes.object,
+};
 export default OrderAndSearchInputTraining;

@@ -7,42 +7,57 @@ export const Menu = () => {
   const [context] = useContext(authContext);
 
   return (
-    <>
-      <header>
+    <div className="menu">
+      <header className="menu-items">
         {!context?.token && (
           <>
-            <NavLink to="/">Home</NavLink>
-            {" | "}
-            <NavLink to="/login">Login</NavLink>
-            {" | "}
-            <NavLink to="/registro">Registro</NavLink>
-            {" | "}
+            <NavLink to="/" className="nav-link">
+              HOME
+            </NavLink>
+
+            <NavLink to="/login" className="nav-link">
+              LOGIN
+            </NavLink>
+
+            <NavLink to="/registro" className="nav-link">
+              REGISTRO
+            </NavLink>
           </>
         )}
         {context?.role === "admin" && (
           <>
-            <NavLink to="/">Home</NavLink>
-            {" | "}
-            <NavLink to="/admin/entrenos">Admin Entrenos</NavLink>
-            {" | "}
-            <NavLink to="/admin/favoritos">Admin Favoritos</NavLink>
-            {" | "}
+            <NavLink to="/" className="nav-link">
+              HOME
+            </NavLink>
+
+            <NavLink to="/admin/entrenos" className="nav-link">
+              ADMIN ENTRENOS
+            </NavLink>
+
+            <NavLink to="/admin/favoritos" className="nav-link">
+              ADMIN FAVORITOS
+            </NavLink>
           </>
         )}
         {context?.role === "normal" && (
           <>
-            <NavLink to="/">Home</NavLink>
-            {" | "}
-            <NavLink to="/entrenos">Entrenos</NavLink>
-            {" | "}
-            <NavLink to="/favoritos">Favoritos</NavLink>
-            {" | "}
+            <NavLink to="/" className="nav-link">
+              HOME
+            </NavLink>
+
+            <NavLink to="/entrenos" className="nav-link">
+              ENTRENOS
+            </NavLink>
+
+            <NavLink to="/favoritos" className="nav-link">
+              FAVORITOS
+            </NavLink>
           </>
         )}
 
         {context?.token && <Logout />}
       </header>
-    </>
+    </div>
   );
 };
 export default Menu;
