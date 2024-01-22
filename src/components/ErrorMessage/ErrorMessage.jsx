@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import './ErrorMessage.scss';  // Asegúrate de importar tu archivo CSS
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./ErrorMessage.scss";
 
 const ErrorMessage = ({ message }) => {
   const [shake, setShake] = useState(false);
@@ -9,22 +9,15 @@ const ErrorMessage = ({ message }) => {
     if (message) {
       setShake(true);
 
-      // Desactivar la clase de temblor después de 3 segundos
       const timeoutId = setTimeout(() => {
         setShake(false);
-      }, 3000);
+      }, 500);
 
-      // Limpiar el timeout al desmontar el componente
       return () => clearTimeout(timeoutId);
     }
   }, [message]);
 
-  return (
-    <div className={`error-container ${shake ? 'shake' : ''}`} key={message}>
-      {/* <h1>Error Message Component</h1> */}
-      {message && <p>{message}</p>}
-    </div>
-  );
+  return <p className={`status-message ${shake ? "shake" : ""}`}>{message}</p>;
 };
 
 ErrorMessage.propTypes = {

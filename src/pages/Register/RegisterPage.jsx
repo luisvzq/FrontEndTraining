@@ -1,5 +1,5 @@
 // RegisterPage.jsx
-import  { useState } from "react";
+import { useState } from "react";
 import "./RegisterPage.scss";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
@@ -13,6 +13,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
+  const [, setShakeAnimation] = useState(false);
+
   const navigate = useNavigate();
 
   const registerUser = async (e) => {
@@ -32,7 +34,9 @@ const RegisterPage = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_HOST_BACK}:${import.meta.env.VITE_PORT_BACK}/register`,
+        `${import.meta.env.VITE_HOST_BACK}:${
+          import.meta.env.VITE_PORT_BACK
+        }/register`,
         {
           body: JSON.stringify(postBody),
           method: "POST",
@@ -60,33 +64,30 @@ const RegisterPage = () => {
         setPasswordRepeat("");
       } else {
         const body = await res.json();
-
-        // Mostrar mensaje de error al usuario
-        if (body.error) {
-          setStatusMessage(body.error);
-          
-        } else {
-          setStatusMessage("Se ha producido un error desconocido");
-        }
+        setStatusMessage(body.error);
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+          setStatusMessage("");
+        }, 500);
       }
     } catch (error) {
       setStatusMessage("Error al conectar con la base de datos");
       console.error("Error al conectar con la base de datos:", error);
-    } 
+    }
   };
+
+  // const userFetchResponse = statusMessage;
 
   return (
     <>
       <Header />
       <section className="register-page">
         <h1>Registro</h1>
-        {statusMessage ? (
-        <ErrorMessage message={statusMessage} />
-      ) : (
-        <p>Introduce tus datos</p>
-      )}
 
-        <form onSubmit={registerUser}  className="register-container">
+        <ErrorMessage key={statusMessage} message={statusMessage} />
+
+        <form onSubmit={registerUser} className="register-container">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
