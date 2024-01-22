@@ -18,22 +18,26 @@ import { authContext } from "./context/AuthContext";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
-  const getRole = async () => {
-    try {
-      const req = await fetch("http://localhost:3001/verify", {
-        headers: { Authorization: `Bearer ${context?.token}` },
-      });
-      const body = await req.json();
-      const role = await body.rol;
 
-      setContext({ role });
-    } catch (error) {
-      console.error("Token no válido");
+    const getRole = async () => {
+      try {
+        const req = await fetch("http://localhost:3001/verify", {
+          headers: { Authorization: `Bearer ${context?.token}` },
+        });
+        const body = await req.json();
+        const role = await body.rol;
+  
+        setContext({ role });
+      } catch (error) {
+        console.error("Token no válido");
+      }
+    };
+    if (context.token) {
+      getRole();
     }
-  };
-  if (context.token) {
-    getRole();
-  }
+
+
+  
 
   const routes = [...routesWithoutAuth];
 

@@ -4,10 +4,13 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
 
 
-const LikeChecked = ({trainingId}) => {
+
+const CountLikeChecked = ({trainingId}) => {
 
     const [context] = useContext(authContext);
-    const [like, setLike] = useState('');
+    const [like, setLike] = useState();
+    const [countLikes, setCountLikes] = useState('');
+
 
     useEffect(() => {
         async function fetchData() {
@@ -27,17 +30,39 @@ const LikeChecked = ({trainingId}) => {
             if (response.ok) {
               const body = await response.json();
                console.log("respuesta like marcado:", body.data.likeCheck);
-                setLike(body.data.likeCheck)
-          
+                setLike(body.data.likeCheck)          
             } else {
               throw new Error("Error al hacer fetch al like del entreno ");
             }
+
+
+          //----------------------------------------------------------------------------------------------------------------------
+            const responseCount = await fetch(
+              `${import.meta.env.VITE_HOST_BACK}:${
+                import.meta.env.VITE_PORT_BACK
+              }/allLikes/${trainingId}`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${context.token}`,
+                },
+              }
+            );
+    
+            if (responseCount.ok) {
+              const bodyCount = await responseCount.json();      
+                console.log("Cuenta de likes", bodyCount.data);
+              setCountLikes(bodyCount.data)
+            } else {
+                throw new Error("Error al hacer fetch al recuento de likes del entreno");
+            }
+
           } catch (error) {
             console.error(error);
           }
         }
         fetchData();
-      }, [trainingId, context]);
+      }, [trainingId, context, like]);
 
 
 
@@ -63,6 +88,7 @@ const LikeChecked = ({trainingId}) => {
             if (response.ok) {
               const bodyButton = await response.json();
               console.log("response Button Like", bodyButton);
+              setLike(!like)
             
             } else {
               const body = await response.json();
@@ -77,6 +103,7 @@ const LikeChecked = ({trainingId}) => {
 
     return(
         <div>
+          <p>Likes: {countLikes}</p>
             {like ?
                 <button onClick={() => { handleButton("like", "DELETE")}}>Like rojo</button>
         
@@ -87,7 +114,7 @@ const LikeChecked = ({trainingId}) => {
 
     )
 }
-LikeChecked.propTypes = {
+CountLikeChecked.propTypes = {
 
     trainingId: PropTypes.string,
     token: PropTypes.string,
@@ -97,4 +124,4 @@ LikeChecked.propTypes = {
 
 
 
-export default LikeChecked;
+export default CountLikeChecked;

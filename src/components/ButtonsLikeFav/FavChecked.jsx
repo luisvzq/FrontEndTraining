@@ -7,7 +7,7 @@ import { authContext } from "../../context/AuthContext";
 const FavChecked = ({trainingId}) => {
 
     const [context] = useContext(authContext);
-    const [fav, setFav] = useState(false);
+    const [fav, setFav] = useState();
 
     useEffect(() => {
         async function fetchData() {
@@ -26,18 +26,20 @@ const FavChecked = ({trainingId}) => {
     
             if (response.ok) {
               const body = await response.json();
-               console.log("respuesta like marcado:", body.data.favCheck);
-                setFav(body.data.favCheck)
+               console.log("respuesta favorito marcado:", body.data.FavCheck);
+                setFav(body.data.FavCheck)
+
+        
           
             } else {
-              throw new Error("Error al hacer fetch al entreno favorito ");
+                throw new Error("Error al hacer fetch al entreno favorito ");
             }
           } catch (error) {
             console.error(error);
           }
         }
         fetchData();
-      }, [trainingId, context]);
+      }, [trainingId, context, fav]);
 
 
 
@@ -61,8 +63,9 @@ const FavChecked = ({trainingId}) => {
             );
     
             if (response.ok) {
-              const bodyButton = await response.json();
-              console.log("response Button Like", bodyButton);
+              const bodyButtonFav = await response.json();
+              console.log("Respuesta a Button Favorite", bodyButtonFav);
+              setFav(!fav)
             
             } else {
               const body = await response.json();
@@ -78,9 +81,9 @@ const FavChecked = ({trainingId}) => {
     return(
         <div>
             {fav ?
-                <button onClick={() => { handleButton("favorites", "DELETE")}}>Fav rojo</button>
+                <button onClick={() => { handleButton("fav", "DELETE")}}>Fav rojo</button>
         
-            :   <button onClick={() => { handleButton("favorites", "POST")}}>Fav Blanco</button>
+            :   <button onClick={() => { handleButton("fav", "POST")}}>Fav Blanco</button>
             }
         </div>
     
