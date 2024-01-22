@@ -3,6 +3,7 @@ import { authContext } from "./AuthContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 export const AuthProvider = ({ children }) => {
   const [context, setContext] = useLocalStorage();
+  console.log("conttexto:      ",context);
   return (
     <authContext.Provider value={[context, setContext]}>
       {children}
