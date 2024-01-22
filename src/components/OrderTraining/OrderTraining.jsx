@@ -143,6 +143,6 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   );
 };
 OrderAndSearchInputTraining.propTypes = {
-  setAllTraining: PropTypes.object,
+  setAllTraining: PropTypes.func,
 };
 export default OrderAndSearchInputTraining;
