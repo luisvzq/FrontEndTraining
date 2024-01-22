@@ -1,8 +1,9 @@
+// ErrorMessage.jsx
 import  { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./ErrorMessage.scss";
 
-const ErrorMessage = ({ message, resetError }) => {
+const ErrorMessage = ({ message }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -11,17 +12,16 @@ const ErrorMessage = ({ message, resetError }) => {
 
       const timeout = setTimeout(() => {
         setIsVisible(false);
-        resetError(); // Llamar a la función para reiniciar el estado de error
       }, 3000);
 
       return () => {
         clearTimeout(timeout);
       };
     }
-  }, [message, resetError]);
+  }, [message]);
 
   return isVisible ? (
-    <div className={`error-container visible`}>
+    <div className="error-container visible">
       <p className="error-message">{message}</p>
     </div>
   ) : null;
@@ -29,7 +29,6 @@ const ErrorMessage = ({ message, resetError }) => {
 
 ErrorMessage.propTypes = {
   message: PropTypes.string.isRequired,
-  resetError: PropTypes.func.isRequired,
 };
 
 export default ErrorMessage;

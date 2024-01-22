@@ -13,15 +13,13 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
-  const [, setResetError] = useState(false);
   const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
 
     if (password !== passwordRepeat) {
-      setStatusMessage("Las contraseñas no coinciden");      
-      setResetError(true);
+      setStatusMessage("Las contraseñas no coinciden");
       return;
     }
 
@@ -47,7 +45,7 @@ const RegisterPage = () => {
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: `Registro completado con exito!`,
+          title: `Registro completado con éxito!`,
           showConfirmButton: false,
           timer: 2500,
           customClass: {
@@ -65,16 +63,13 @@ const RegisterPage = () => {
         // Mostrar mensaje de error al usuario
         if (body.error) {
           setStatusMessage(body.error);
-          setResetError(true);
         } else {
           setStatusMessage("Se ha producido un error desconocido");
-          setResetError(true);
         }
       }
     } catch (error) {
       setStatusMessage("Error al conectar con la base de datos");
       console.error("Error al conectar con la base de datos:", error);
-      setResetError(true);
     }
   };
 
@@ -83,11 +78,7 @@ const RegisterPage = () => {
       <Header />
       <section className="register-page">
         <h1>Registro</h1>
-        {statusMessage ? (
-          <ErrorMessage message={statusMessage} resetError={() => setResetError(false)}/>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )}
+        <ErrorMessage message={statusMessage} />
 
         <form onSubmit={registerUser} className="register-container">
           <label htmlFor="name">Nombre</label>
