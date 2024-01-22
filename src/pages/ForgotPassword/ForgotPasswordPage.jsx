@@ -27,6 +27,7 @@ const ForgotPasswordPage = () => {
 
       if (response.ok) {
         const body = await response.json();
+        setStatusMessage(body.message);
       } else {
         const body = await response.json();
         setStatusMessage(body.error);
