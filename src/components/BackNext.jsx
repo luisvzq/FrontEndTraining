@@ -1,9 +1,10 @@
-/*eslint-disable react/prop-types*/
+
 
 import { Link } from "react-router-dom";
 
-  const BackNext = ({dataTraining, trainingId}) => {
-    const indice = dataTraining.findIndex ((item)=>item.id===Number(trainingId)); 
+  const BackNext = ({trainingId}) => {
+    const indice = 
+    
     return (
       <div
       style={{

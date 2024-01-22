@@ -9,7 +9,7 @@ const CountLikeChecked = ({trainingId}) => {
 
     const [context] = useContext(authContext);
     const [like, setLike] = useState();
-    const [countLikes, setCountLikes] = useState('');
+    const [countLikes, setCountLikes] = useState();
 
 
     useEffect(() => {

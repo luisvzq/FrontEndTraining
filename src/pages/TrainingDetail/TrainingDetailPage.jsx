@@ -12,10 +12,11 @@ const TrainingDetailPage = () => {
 let  {trainingId}= useParams();
 
 
+
   return (
     <>
       <Header />  
-
+  
       <Details trainingId={trainingId}/>  
       <CountLikeChecked trainingId={trainingId}/>
       <FavChecked trainingId={trainingId}/>
