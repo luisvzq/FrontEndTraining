@@ -108,7 +108,7 @@ const CountLikeChecked = ({trainingId}) => {
             {like ?
                 <button className="buttons-lf red" onClick={() => { handleButton("like", "DELETE")}}>Like</button>
         
-            :   <button className="buttons-lf"onClick={() => { handleButton("like", "POST")}}>Like Blanco</button>
+            :   <button className="buttons-lf"onClick={() => { handleButton("like", "POST")}}>Like</button>
             }
         </div>
         </div>
