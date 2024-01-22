@@ -3,6 +3,7 @@ import "./RegisterPage.scss";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -45,9 +46,17 @@ const RegisterPage = () => {
         }
       );
 
-      if (res.ok) {
-       // setStatusMessage("El registro ha sido completado con exito ✌️");
-       alert("El registro ha sido completado con exito ✌️");
+      if (res.ok) {     
+       Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: `Registro completado con exito!`,
+        showConfirmButton: false,
+        timer: 2500,
+        customClass: {
+          popup: "rounded-popup",
+        },
+      });
         navigate("/login");
         setName("");
         setEmail("");
