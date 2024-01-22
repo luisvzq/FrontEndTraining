@@ -20,6 +20,7 @@ const RegisterPage = () => {
 
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
+      console.log(setStatusMessage.value);
       return;
     }
 
@@ -63,6 +64,7 @@ const RegisterPage = () => {
         // Mostrar mensaje de error al usuario
         if (body.error) {
           setStatusMessage(body.error);
+          
         } else {
           setStatusMessage("Se ha producido un error desconocido");
         }
@@ -70,7 +72,7 @@ const RegisterPage = () => {
     } catch (error) {
       setStatusMessage("Error al conectar con la base de datos");
       console.error("Error al conectar con la base de datos:", error);
-    }
+    } 
   };
 
   return (
@@ -78,9 +80,13 @@ const RegisterPage = () => {
       <Header />
       <section className="register-page">
         <h1>Registro</h1>
+        {statusMessage ? (
         <ErrorMessage message={statusMessage} />
+      ) : (
+        <p>Introduce tus datos</p>
+      )}
 
-        <form onSubmit={registerUser} className="register-container">
+        <form onSubmit={registerUser}  className="register-container">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"

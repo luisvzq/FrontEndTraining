@@ -1,34 +1,34 @@
-// ErrorMessage.jsx
-import  { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import "./ErrorMessage.scss";
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import './ErrorMessage.scss';  // Asegúrate de importar tu archivo CSS
 
 const ErrorMessage = ({ message }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [shake, setShake] = useState(false);
 
   useEffect(() => {
     if (message) {
-      setIsVisible(true);
+      setShake(true);
 
-      const timeout = setTimeout(() => {
-        setIsVisible(false);
+      // Desactivar la clase de temblor después de 3 segundos
+      const timeoutId = setTimeout(() => {
+        setShake(false);
       }, 3000);
 
-      return () => {
-        clearTimeout(timeout);
-      };
+      // Limpiar el timeout al desmontar el componente
+      return () => clearTimeout(timeoutId);
     }
   }, [message]);
 
-  return isVisible ? (
-    <div className="error-container visible">
-      <p className="error-message">{message}</p>
+  return (
+    <div className={`error-container ${shake ? 'shake' : ''}`} key={message}>
+      {/* <h1>Error Message Component</h1> */}
+      {message && <p>{message}</p>}
     </div>
-  ) : null;
+  );
 };
 
 ErrorMessage.propTypes = {
-  message: PropTypes.string.isRequired,
+  message: PropTypes.string,
 };
 
 export default ErrorMessage;
