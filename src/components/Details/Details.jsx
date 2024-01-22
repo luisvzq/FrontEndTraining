@@ -38,23 +38,26 @@ const Details = ({ trainingId }) => {
 
   return (
     <>
-      
-    {details.name &&  <div className="details">
-        <h1 className="title">{details.name}</h1>
-        <img
-          className="photo"
-          src={`${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/${details.photo}`}
-          alt="Foto de entreno"
-        />
-        <div className="information">
-          <p className="description">Description: {details.description}</p>
-          <p>Creado: {details.created_at}</p>
-          <button>Typology: {details.typology}</button>
-          <button>Muscle group: {details.muscle_group}</button>
-        </div>
-      </div>}
+      {details.name && (
+        <>
+          <h1 className="title">{details.name}</h1>
+          <div className="details">
+            <img
+              className="photo"
+              src={`${import.meta.env.VITE_HOST_BACK}:${
+                import.meta.env.VITE_PORT_BACK
+              }/${details.photo}`}
+              alt="Foto de entreno"
+            />
+            <div className="information">
+              <p className="description">Description: {details.description}</p>
+              <p>Creado: {details.created_at}</p>
+              <button>Typology: {details.typology}</button>
+              <button>Muscle group: {details.muscle_group}</button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
