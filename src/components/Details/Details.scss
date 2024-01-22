@@ -3,8 +3,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;        
-    width:90vw;
-    background-color: rgb(190, 146, 133);
+    
+    color: #3d3d3d;
+    border: 1px solid #ccc;
+    margin-bottom: 5vh;
     
 
 }
@@ -12,13 +14,12 @@
     display:flex;
     justify-content: center;
     padding-top: 3vh;
+    font-family: "Oswald";
 }
 
 .photo {
-
     max-width: 50vw;
     max-height: 50vh;
-
 }
 .information {
     display: flex;
@@ -27,19 +28,26 @@
 }
 
 .description {
-    max-width: 50vw;
-    max-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30vw;
+    min-height: 15vh;
+    max-width: 60vw;
+    max-height: 35vh;
 }
 
 
-@media (min-width: 600px) {
+@media (min-width: 650px) {
     .details {
         display:flex;
         flex-direction: row;
         justify-content: center;
         align-content: center;        
-        width:90vw;
-        background-color: rgb(153, 140, 185);
+    
+        color: #3d3d3d;       
+        
+        border: 1px solid #ccc;
     
     .title {
         display:flex;
@@ -61,14 +69,13 @@
     }   
     
     .description {
-        display: flex;
-    
-        align-items: center;
+        display: flex;    
+        align-items:center;
         justify-content: center;
         min-width: 30vw;
-        min-height: 45vh;
+        min-height: 35vh;
         max-width: 60vw;
-        max-height: 45vh;
+        max-height: 35vh;
     
     
     }

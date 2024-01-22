@@ -1,26 +1,37 @@
-.buttonsLikeFav {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5px;
+.count-content{
+    display: inline;
+flex-direction: row;
+padding: 10vw;
+}
+
+.content-lf{
+    display: inline;
+    flex-direction: column;
+    padding-right: 5vw;
+
+}
+
+.count-likes{
+    display: inline;
+    flex-direction: column;
+    min-width: 10vw;
+    min-height: 10vh;
+    color: blue;
+    padding-right: 10vw;
+}
 
 
-    .buttons-clf {
-        border-radius: 50%;
+.buttons-lf {
+    border-radius: 50%;
     min-width: 8vw;
     min-height: 8vh;
-
-
-    }
 }
+
 .red{
     background-color: red;
     color:beige
 }
-.white{
-    background-color:white;
-    color: black;
-}
+
 .number-likes {
     size: 20px;
     display: flex;    
