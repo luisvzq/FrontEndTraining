@@ -4,6 +4,7 @@ import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -22,14 +23,14 @@ const RegisterPage = () => {
       setShakeAnimation(true);
       setTimeout(() => {
         setShakeAnimation(false);
-      }, 500);
+      }, 1000);
       return;
     }
 
     const postBody = {
       name,
       email,
-      password: passwordRepeat, 
+      password: passwordRepeat,
     };
 
     try {
@@ -46,54 +47,54 @@ const RegisterPage = () => {
         }
       );
 
-      if (res.ok) {     
-       Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: `Registro completado con exito!`,
-        showConfirmButton: false,
-        timer: 2500,
-        customClass: {
-          popup: "rounded-popup",
-        },
-      });
+      if (res.ok) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `Registro completado con exito!`,
+          showConfirmButton: false,
+          timer: 2500,
+          customClass: {
+            popup: "rounded-popup",
+          },
+        });
         navigate("/login");
         setName("");
         setEmail("");
         setPassword("");
         setPasswordRepeat("");
       } else {
-        const body = await res.json();     
-        setStatusMessage(body.error); 
-        setShakeAnimation(true);
-        setTimeout(() => {
-          setShakeAnimation(false);
-        }, 500);
+        const body = await res.json();
 
+        setShakeAnimation(true);
+
+        if (body.error) {
+          setStatusMessage(body.error);
+          setTimeout(() => {
+            setShakeAnimation(false);
+          }, 1000);
+        } else {
+          setStatusMessage("Se ha producido un error desconocido");
+        }
       }
     } catch (error) {
-      setStatusMessage("Error al conectar con la Db");
       setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-      }, 500);
-      console.error(error);
+      setStatusMessage("Error al conectar con la base de datos");
+      console.error("Error al conectar con la base de datos:", error);
     }
   };
-
-  const userFetchResponse = statusMessage;
-
-
+  //const userFetchResponse = statusMessage;
 
   return (
     <>
       <Header />
       <section className="register-page">
         <h1>Registro</h1>
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {userFetchResponse}
-          </p>
+        {shakeAnimation ? (
+          <ErrorMessage
+            message={statusMessage}
+            shakeAnimation={shakeAnimation}
+          />
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
