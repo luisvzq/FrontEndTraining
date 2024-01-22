@@ -1,0 +1,21 @@
+.error-container {
+    position: relative;
+  
+    .error-message {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out; /* Agregamos transición para la opacidad */
+    }
+  
+    &.visible {
+      .error-message {
+        opacity: 1;
+      }
+    }
+  }
+  

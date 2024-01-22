@@ -1,29 +1,27 @@
-import { useState } from "react";
+// RegisterPage.jsx
+import  { useState } from "react";
 import "./RegisterPage.scss";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import ErrorMessage from "../../components/ErrorMessage";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  const [shakeAnimation, setShakeAnimation] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(""); // mensaje para el cliente sin necesidad de ver la consola
+  const [statusMessage, setStatusMessage] = useState("");
+  const [, setResetError] = useState(false);
   const navigate = useNavigate();
 
   const registerUser = async (e) => {
     e.preventDefault();
 
     if (password !== passwordRepeat) {
-      setStatusMessage("Las contraseñas no coinciden");
-      setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-      }, 1000);
+      setStatusMessage("Las contraseñas no coinciden");      
+      setResetError(true);
       return;
     }
 
@@ -35,9 +33,7 @@ const RegisterPage = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_HOST_BACK}:${
-          import.meta.env.VITE_PORT_BACK
-        }/register`,
+        `${import.meta.env.VITE_HOST_BACK}:${import.meta.env.VITE_PORT_BACK}/register`,
         {
           body: JSON.stringify(postBody),
           method: "POST",
@@ -66,35 +62,29 @@ const RegisterPage = () => {
       } else {
         const body = await res.json();
 
-        setShakeAnimation(true);
-
+        // Mostrar mensaje de error al usuario
         if (body.error) {
           setStatusMessage(body.error);
-          setTimeout(() => {
-            setShakeAnimation(false);
-          }, 1000);
+          setResetError(true);
         } else {
           setStatusMessage("Se ha producido un error desconocido");
+          setResetError(true);
         }
       }
     } catch (error) {
-      setShakeAnimation(true);
       setStatusMessage("Error al conectar con la base de datos");
       console.error("Error al conectar con la base de datos:", error);
+      setResetError(true);
     }
   };
-  //const userFetchResponse = statusMessage;
 
   return (
     <>
       <Header />
       <section className="register-page">
         <h1>Registro</h1>
-        {shakeAnimation ? (
-          <ErrorMessage
-            message={statusMessage}
-            shakeAnimation={shakeAnimation}
-          />
+        {statusMessage ? (
+          <ErrorMessage message={statusMessage} resetError={() => setResetError(false)}/>
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
