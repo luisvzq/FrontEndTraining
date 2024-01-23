@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 
   p {
     margin: 1rem;
@@ -26,6 +26,7 @@
   flex-direction: column;
   gap: 1vh;
   width: 30vw;
+  min-width: 290px;
   background-color: #fff;
   padding: 2rem;
   border-radius: 4%;

@@ -39,11 +39,13 @@ const TrainingListPage = () => {
 
   return (
     <>
-      <h2>Todos los entrenamientos</h2>
-      <OrderAndSearchInputTraining
-        setAllTraining={setAllFavs}
-      ></OrderAndSearchInputTraining>
-      <Training data={allFavs} />
+      <div className="training-list">
+        <h2>Todos los entrenamientos</h2>
+        <OrderAndSearchInputTraining
+          setAllTraining={setAllFavs}
+        ></OrderAndSearchInputTraining>
+        <Training data={allFavs} />
+      </div>
     </>
   );
 };

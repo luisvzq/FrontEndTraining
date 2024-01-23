@@ -13,3 +13,11 @@ body {
   overflow-x: hidden;
   position: relative;
 }
+
+main {
+  justify-content: center;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5vh;
+}

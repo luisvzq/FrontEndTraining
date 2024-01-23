@@ -9,9 +9,11 @@ const TrainingDetailPage = () => {
 
   return (
     <>
-      <Details trainingId={trainingId} />
-      <CountLikeChecked trainingId={trainingId} />
-      <FavChecked trainingId={trainingId} />
+      <div>
+        <Details trainingId={trainingId} />
+        <CountLikeChecked trainingId={trainingId} />
+        <FavChecked trainingId={trainingId} />
+      </div>
     </>
   );
 };
