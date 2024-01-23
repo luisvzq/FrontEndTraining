@@ -1,7 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { useQuery, QueryCache } from "react-query";
-import Header from "../../layout/Header.jsx";
-import Footer from "../../layout/Footer.jsx";
 
 import "./TrainingListPage.scss";
 
@@ -22,7 +20,6 @@ const TrainingListPage = () => {
 
   return (
     <div className="training-list">
-      <Header />
       <h1>Todos los entrenamientos</h1>
       <OrderAndSearchInputTraining
         setAllTraining={setAllTraining}
@@ -30,8 +27,6 @@ const TrainingListPage = () => {
       ></OrderAndSearchInputTraining>
 
       {isLoading ? <p>Loading.....</p> : <Training data={allTraining} />}
-
-      <Footer />
     </div>
   );
 };

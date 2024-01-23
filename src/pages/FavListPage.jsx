@@ -1,6 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
 import Training from "../components/Training/Training";
 
 import OrderAndSearchInputTraining from "../components/OrderTraining/OrderTraining";
@@ -41,13 +39,11 @@ const TrainingListPage = () => {
 
   return (
     <>
-      <Header />
       <h2>Todos los entrenamientos</h2>
       <OrderAndSearchInputTraining
         setAllTraining={setAllFavs}
-      ></OrderAndSearchInputTraining> 
+      ></OrderAndSearchInputTraining>
       <Training data={allFavs} />
-      <Footer />
     </>
   );
 };

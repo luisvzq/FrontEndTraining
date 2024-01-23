@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import Header from "../../layout/Header";
-import Footer from "../../layout/Footer";
 import "./ResetPasswordPage.scss";
 
 const ResetPasswordPage = () => {
@@ -41,7 +39,6 @@ const ResetPasswordPage = () => {
 
   return (
     <>
-      <Header />
       <div className="reset-password-page">
         <h1 className="reset-password-heading">Reset Password</h1>
         {statusMessage ? (
@@ -85,7 +82,6 @@ const ResetPasswordPage = () => {
           <input type="submit" className="reset-password-submit-btn" />
         </form>
       </div>
-      <Footer />
     </>
   );
 };

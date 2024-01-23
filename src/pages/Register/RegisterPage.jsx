@@ -1,8 +1,6 @@
 // RegisterPage.jsx
 import { useState } from "react";
 import "./RegisterPage.scss";
-import Header from "../../layout/Header";
-import Footer from "../../layout/Footer";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -86,7 +84,6 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Header />
       <section className="register-page">
         <h1>Registro</h1>
 
@@ -136,8 +133,6 @@ const RegisterPage = () => {
           <input type="submit" className="submit-btn" />
         </form>
       </section>
-
-      <Footer />
     </>
   );
 };

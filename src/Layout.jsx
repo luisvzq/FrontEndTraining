@@ -1,4 +1,3 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   AdminFavListPage,
   AdminTrainingDetail,
@@ -13,15 +12,15 @@ import {
   TrainingListPage,
 } from "./pages";
 
-import { useContext, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useContext } from "react";
 import { authContext } from "./context/AuthContext";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
-
-
-
-useEffect(()=>{
   const getRole = async () => {
     try {
       const req = await fetch("http://localhost:3001/verify", {
@@ -30,19 +29,14 @@ useEffect(()=>{
       const body = await req.json();
       const role = await body.rol;
 
-      setContext({ ...context, role });
+      setContext({ role });
     } catch (error) {
       console.error("Token no válido");
     }
   };
-
-  if (context.token && !context.role) {
+  if (context.token) {
     getRole();
   }
-},[context, setContext])
-
-
-
 
   const routes = [...routesWithoutAuth];
 
@@ -54,11 +48,15 @@ useEffect(()=>{
     routes.push(...loginRoutes);
   }
 
-  const browserRoutes = createBrowserRouter(routes);
-
   return (
     <>
-      <RouterProvider router={browserRoutes} />
+      <Header />
+      <Routes>
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
+      </Routes>
+      <Footer />
     </>
   );
 };
@@ -96,7 +94,7 @@ const routesWithAuth = [
 const routesWithoutAuth = [
   {
     path: "*",
-    element: <HomePage />,
+    element: <NotFoundPage />,
   },
   {
     path: "/",

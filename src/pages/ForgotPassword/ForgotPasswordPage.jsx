@@ -1,9 +1,6 @@
 import { useState } from "react";
 import "./ForgotPasswordPage.scss";
 
-import Header from "../../layout/Header";
-import Footer from "../../layout/Footer";
-
 const ForgotPasswordPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
@@ -43,7 +40,6 @@ const ForgotPasswordPage = () => {
   };
   return (
     <>
-      <Header />
       <section
         className="forgot-password-page
       "
@@ -78,7 +74,6 @@ const ForgotPasswordPage = () => {
           <input type="submit" className="submit-btn" />
         </form>
       </section>
-      <Footer />
     </>
   );
 };

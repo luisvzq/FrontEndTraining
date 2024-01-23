@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
-import Header from "../../layout/Header";
-import Footer from "../../layout/Footer";
+
 import "./LoginPage.scss";
 import "sweetalert2/dist/sweetalert2.min.css";
 
@@ -84,7 +83,6 @@ const LoginPage = () => {
 
   return (
     <>
-      <Header />
       <section className="login-page">
         <h1>Login</h1>
         {statusMessage ? (
@@ -106,7 +104,6 @@ const LoginPage = () => {
           Olvide la contraseña
         </Link>
       </section>
-      <Footer />
     </>
   );
 };
