@@ -9,6 +9,7 @@ import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPassword/ResetPasswordPage";
 import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
 import LoginPage from "./Login/LoginPage";
+import AdminTrainingModify from "./AdminTrainingModify/AdminTrainingModify"
 
 export {
   HomePage,
@@ -22,4 +23,5 @@ export {
   ForgotPasswordPage,
   ResetPasswordPage,
   TrainingDetailPage,
+  AdminTrainingModify
 };

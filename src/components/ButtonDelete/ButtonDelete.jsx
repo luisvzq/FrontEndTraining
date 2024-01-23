@@ -28,7 +28,7 @@ const ButtonDelete = ()=> {
             if (response.ok) {
               const bodyButtonDel = await response.json();
               console.log("Respuesta a Button Delete", bodyButtonDel);
-                navigate('/entrenos');
+                navigate('admin/entrenos');
             
             } else {
               const body = await response.json();

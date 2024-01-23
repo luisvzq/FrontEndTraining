@@ -3,6 +3,7 @@ import {
   AdminFavListPage,
   AdminTrainingDetail,
   AdminTrainingListPage,
+  AdminTrainingModify,
   FavListPage,
   ForgotPasswordPage,
   HomePage,
@@ -15,6 +16,8 @@ import {
 
 import { useContext, useEffect } from "react";
 import { authContext } from "./context/AuthContext";
+
+
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -76,6 +79,12 @@ const routesAdmin = [
     path: "/admin/favoritos",
     element: <AdminFavListPage />,
   },
+  {
+    path: "/admin/modify/:trainingId",
+    element: <AdminTrainingModify />,
+  },
+ 
+
 ];
 
 const routesWithAuth = [
