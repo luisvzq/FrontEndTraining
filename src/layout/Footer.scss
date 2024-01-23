@@ -1,9 +1,20 @@
 .footer {
+  display: flex;
   background-color: #3d3d3d;
   color: white;
   text-align: center;
+  justify-content: center;
   padding: 10px;
   position: fixed;
   bottom: 0;
   width: 100%;
+  p a {
+    color: whitesmoke;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    margin: 0.3vw;
+  }
+  p a:hover {
+    color: chocolate;
+  }
 }

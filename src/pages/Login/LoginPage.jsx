@@ -100,7 +100,7 @@ const LoginPage = () => {
           <input type="email" name="email" id="email" />
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" />
-          <input type="submit" className="submit-btn" />
+          <input type="submit" className="submit-btn" value="Acceder" />
         </form>
         <Link to="/forgot-password" className="forgot-password">
           Olvide la contraseña
