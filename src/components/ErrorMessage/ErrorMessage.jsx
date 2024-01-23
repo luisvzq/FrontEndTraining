@@ -11,7 +11,7 @@ const ErrorMessage = ({ message }) => {
 
       const timeoutId = setTimeout(() => {
         setShake(false);
-      }, 500);
+      }, 5000);
 
       return () => clearTimeout(timeoutId);
     }

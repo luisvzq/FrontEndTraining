@@ -23,6 +23,11 @@ const RegisterPage = () => {
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
       console.log(setStatusMessage.value);
+      setShakeAnimation(true);
+      setTimeout(() => {
+        setShakeAnimation(false);
+        setStatusMessage("");
+      }, 5000);
       return;
     }
 
@@ -69,7 +74,7 @@ const RegisterPage = () => {
         setTimeout(() => {
           setShakeAnimation(false);
           setStatusMessage("");
-        }, 500);
+        }, 5000);
       }
     } catch (error) {
       setStatusMessage("Error al conectar con la base de datos");
