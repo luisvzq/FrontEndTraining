@@ -58,15 +58,22 @@ const AdminTrainingModify = () => {
   const modifyTraining = async (e) => {
         e.preventDefault();
     try {
-    const postBody = {
-      name,
-      description,
-      typology,
-      muscle_group: muscular, 
-      // image:file
-    };
-    console.log("Datos a enviar: ", postBody);
-    
+      const formData = new FormData();
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('typology', typology);
+        formData.append('muscle_group', muscular);
+        formData.append('image', file);    
+      
+    //   const postBody = {
+    //   name,
+    //   description,
+    //   typology,
+    //   muscle_group: muscular, 
+    //   // image:file
+    // };
+    console.log("Datos a enviar: ", formData);
+  
     
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
@@ -75,12 +82,12 @@ const AdminTrainingModify = () => {
         {
           method: "PUT",          
           headers: {
-            // "Content-Type": "multipart/form-data",
-            "Content-Type":"application/json",
+            "Content-Type": "multipart/form-data",
+            // "Content-Type":"application/json",
             Authorization: `Bearer ${context.token}`,
           }, 
         
-          body: JSON.stringify(postBody)   
+          body: JSON.stringify(formData)  
         
         }
       );
@@ -88,7 +95,7 @@ const AdminTrainingModify = () => {
       if (res.ok) {
        
        alert("La modificacion ha sido completada con exito ✌️");
-        navigate("/entrenos");
+        navigate("/admin/entrenos");
         setName("");
         setDescription("");
         setTypology("");
