@@ -5,11 +5,12 @@ import { authContext } from "../../context/AuthContext";
 import './ButtonsLikeFav.scss'
 
 
+
 const CountLikeChecked = ({trainingId}) => {
 
     const [context] = useContext(authContext);
     const [like, setLike] = useState();
-    const [countLikes, setCountLikes] = useState();
+    const [, setCountLikes] = useState();
 
 
     useEffect(() => {
@@ -103,13 +104,16 @@ const CountLikeChecked = ({trainingId}) => {
 
     return(
         <div className="count-content">
-          <p className="count-likes">{countLikes} Me gusta</p>
-          <div className="content-lf">
+          {/* <div className="CUENTA-MEGUSTA">{countLikes} Me gusta</div> */}
+          
+          <div className="CONTENEDOR-LIKE">
             {like ?
-                <button className="LIKE red" onClick={() => { handleButton("like", "DELETE")}}>Like</button>
+                <button className="LIKE red" onClick={() => { handleButton("like", "DELETE")}}></button>
         
-            :   <button className="LIKE"onClick={() => { handleButton("like", "POST")}}>Like</button>
+            :   <button className="LIKE"onClick={() => { handleButton("like", "POST")}}></button>
             }
+            
+            
         </div>
         </div>
         

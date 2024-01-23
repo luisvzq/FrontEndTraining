@@ -1,24 +1,29 @@
 .details {
-  align-items: center;
- // color: #3d3d3d;
+  display: flex;
+  align-items: stretch;
   margin-bottom: 5vh;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 .title {
- // display: flex;
- // justify-content: center;
- // padding-top: 3vh;
- // font-family: "Oswald";
+ display: flex;
+ justify-content: center;
+ padding-top: 3vh;
+ 
 }
 
 .photo {
-  max-width: 50vw;
-  max-height: 50vh;
+  max-width: 90%;
+  max-height: 90%;
   border-radius: 2%;
+  margin-left: 5%; /* Margen negativo del 5% */
+  margin-right: 5%; /* Margen negativo del 5% */
 }
 
 .information {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .description {
@@ -31,54 +36,55 @@
   max-height: 25vh;
 }
 
-.button-tm {
+.tag {
+  text-align: center;
   margin-bottom: 1vh;
   min-width: 20vh;
 }
 
-@media (min-width: 650px) {
-  .details {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    color: #3d3d3d;
-    //  border: 1px solid #ccc;
-    border-radius: 2%;
-  }
+// @media (min-width: 650px) {
+//   .details {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-content: center;
+//     color: #3d3d3d;
+//     //  border: 1px solid #ccc;
+//     border-radius: 2%;
+//   }
 
-  .title {
-    display: flex;
-    justify-content: center;
-    padding-top: 3vh;
-  }
+//   .title {
+//     display: flex;
+//     justify-content: center;
+//     padding-top: 3vh;
+//   }
 
-  .button-tm {
-    margin-bottom: 1vh;
-    min-width: 20vh;
-  }
+//   .button-tm {
+//     margin-bottom: 1vh;
+//     min-width: 20vh;
+//   }
 
-  .photo {
-    max-width: 80vw;
-    max-height: 50vh;
-    border-radius: 2%;
-  }
+//   .photo {
+//     max-width: 80vw;
+//     max-height: 50vh;
+//     border-radius: 2%;
+//   }
 
-  .information {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+//   .information {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//   }
 
-  .description {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 30vw;
-    min-height: 35vh;
-    max-width: 60vw;
-    max-height: 35vh;
-    padding: 1rem;
-  }
-}
+//   .description {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     min-width: 30vw;
+//     min-height: 35vh;
+//     max-width: 60vw;
+//     max-height: 35vh;
+//     padding: 1rem;
+//   }
+// }

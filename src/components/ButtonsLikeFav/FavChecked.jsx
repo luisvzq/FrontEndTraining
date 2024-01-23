@@ -79,11 +79,11 @@ const FavChecked = ({trainingId}) => {
       }; //final del manejador
 
     return(
-        <div className="content-lf">
+        <div className="CONTENEDOR-FAV">
             {fav ?
-                <button className="buttons-lf red" onClick={() => { handleButton("fav", "DELETE")}}>Fav</button>
+                <button className="FAV red" onClick={() => { handleButton("fav", "DELETE")}}></button>
         
-            :   <button className="buttons-lf" onClick={() => { handleButton("fav", "POST")}}>Fav</button>
+            :   <button className="FAV" onClick={() => { handleButton("fav", "POST")}}></button>
             }
         </div>
     

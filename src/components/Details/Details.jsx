@@ -2,6 +2,8 @@ import "./Details.scss";
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
 import PropTypes from "prop-types";
+import FavChecked from "../ButtonsLikeFav/FavChecked";
+import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 
 const Details = ({ trainingId }) => {
   const [context] = useContext(authContext);
@@ -42,6 +44,9 @@ const Details = ({ trainingId }) => {
         <>
           <h1 className="title">{details.name}</h1>
           <div className="details">
+            <FavChecked trainingId={trainingId}/>
+            <p className="tag">Tipologia: {details.typology}</p>
+              <p className="tag">Grupo muscular: {details.muscle_group}</p>
             <img
               className="photo"
               src={`${import.meta.env.VITE_HOST_BACK}:${
@@ -49,11 +54,13 @@ const Details = ({ trainingId }) => {
               }/${details.photo}`}
               alt="Foto de entreno"
             />
+             <CountLikeChecked trainingId={trainingId} />
+             {/* <FavChecked trainingId={trainingId}/> */}
             <div className="information">
               <p className="description">Descripción: {details.description}</p>
             
-              <button className="button-tm">Tipologia: {details.typology}</button>
-              <button className="button-tm">Grupo muscular: {details.muscle_group}</button>
+            
+             
             </div>
           </div>
         </>
