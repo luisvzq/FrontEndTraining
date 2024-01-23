@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   AdminFavListPage,
+  AdminTrainingCreate,
   AdminTrainingDetail,
   AdminTrainingListPage,
   AdminTrainingModify,
@@ -80,8 +81,12 @@ const routesAdmin = [
     element: <AdminFavListPage />,
   },
   {
-    path: "/admin/modify/:trainingId",
+    path: "/admin/modificar/:trainingId",
     element: <AdminTrainingModify />,
+  },
+  {
+    path: "/admin/añadir/:trainingId",
+    element: <AdminTrainingCreate />,
   },
  
 

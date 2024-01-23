@@ -14,8 +14,12 @@ const AdminTrainingDetail = () => {
     <>
       <Header />  
       <ButtonDelete />
-      <Link to={`/admin/modify/${trainingId}`}>
+      <Link to={`/admin/modificar/${trainingId}`}>
           <button>Modificar entreno</button>
+      </Link>
+
+      <Link to={`/admin/añadir/${trainingId}`}>
+          <button>Añadir entreno</button>
       </Link>
       <Details />  
       <CountLikeChecked />

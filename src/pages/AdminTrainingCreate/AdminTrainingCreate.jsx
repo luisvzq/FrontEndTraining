@@ -1,11 +1,11 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Footer from "../../layout/Footer";
 import Header from "../../layout/Header";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 
-const AdminTrainingModify = () => {
+const AdminTrainingCreate = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [typology, setTypology] = useState("");
@@ -13,49 +13,11 @@ const AdminTrainingModify = () => {
   const [file, setFile] = useState("")
 
   const [context] = useContext(authContext);
-  const  {trainingId}= useParams();
+
   const navigate = useNavigate();
 
 
-
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/training/${trainingId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
-
-        if (response.ok) {
-          const body = await response.json();
-          console.log("respuesta entreno:", body.data);
-
-           setName(body.data.name);
-          setDescription(body.data.description);
-          setTypology(body.data.typology);
-          setMuscular(body.data.muscle_group);
-          // setFile(body.data.photo);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, [trainingId, context]);
-
-
-
-  const modifyTraining = async (e) => {
+  const createTraining = async (e) => {
         e.preventDefault();
     try {
     const postBody = {
@@ -71,9 +33,9 @@ const AdminTrainingModify = () => {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
-        }/training/${trainingId}`,      
+        }/training`,      
         {
-          method: "PUT",          
+          method: "POST",          
           headers: {
             // "Content-Type": "multipart/form-data",
             "Content-Type":"application/json",
@@ -112,13 +74,13 @@ const AdminTrainingModify = () => {
       <Header />
     
       <section className="register-page">
-        <h1>Modificar entreno</h1>
+        <h1>Añadir entreno</h1>
         
          
         <p className="intro-text">Introduce los datos</p>
         
 
-        <form onSubmit={modifyTraining} className="register-container">
+        <form onSubmit={createTraining} className="register-container">
           <label htmlFor="name">Nombre entreno</label>
           <input
             type="text"
@@ -183,4 +145,4 @@ const AdminTrainingModify = () => {
 
 
 
-export default AdminTrainingModify;
+export default AdminTrainingCreate;
