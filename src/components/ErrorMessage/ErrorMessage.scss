@@ -1,21 +1,12 @@
 .status-message {
   margin: 1rem;
   color: #3d3d3d;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  background-color: rgb(195, 183, 183);
+  border-radius: 5px; 
 
   &.shake {
-    animation: shake 0.5s ease-in-out;
+    animation: shake 1s ease-in-out;
   }
 }
 
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-5px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(5px);
-  }
-}

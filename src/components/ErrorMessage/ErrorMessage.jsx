@@ -17,7 +17,11 @@ const ErrorMessage = ({ message }) => {
     }
   }, [message]);
 
-  return <p className={`status-message ${shake ? "shake" : ""}`}>{message}</p>;
+  return (
+    <p className={`status-message ${shake ? "shake" : ""}`}>
+      {message && "⚠️ "}{message}{message && " ⚠️"}
+    </p>
+  );
 };
 
 ErrorMessage.propTypes = {
