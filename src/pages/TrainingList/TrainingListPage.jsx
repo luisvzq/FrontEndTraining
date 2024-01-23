@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useQuery } from "react-query";
+import { useQuery, QueryCache } from "react-query";
 import Header from "../../layout/Header.jsx";
 import Footer from "../../layout/Footer.jsx";
 
@@ -15,9 +15,10 @@ const TrainingListPage = () => {
   const { getTrainingFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
 
-  useEffect(() => {
-    getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
-  }, []);
+  const { isLoading, error, data } = useQuery(
+    ["trainingList", `Bearer ${context.token}`, setAllTraining],
+    () => getTrainingFetch(`Bearer ${context.token}`, setAllTraining)
+  );
 
   return (
     <div className="training-list">
@@ -25,9 +26,11 @@ const TrainingListPage = () => {
       <h1>Todos los entrenamientos</h1>
       <OrderAndSearchInputTraining
         setAllTraining={setAllTraining}
-        allTraining={allTraining}
+        allTraining={data}
       ></OrderAndSearchInputTraining>
-      <Training data={allTraining} />
+
+      {isLoading ? <p>Loading.....</p> : <Training data={allTraining} />}
+
       <Footer />
     </div>
   );

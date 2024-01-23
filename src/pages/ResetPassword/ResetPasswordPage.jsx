@@ -43,7 +43,7 @@ const ResetPasswordPage = () => {
     <>
       <Header />
       <div className="reset-password-page">
-        <div className="reset-password-heading">Pagina Reset Password</div>
+        <h1 className="reset-password-heading">Reset Password</h1>
         {statusMessage ? (
           <p className="reset-password-text">{statusMessage}</p>
         ) : (

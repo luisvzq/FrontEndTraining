@@ -66,6 +66,9 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getTrainingFetch();
+    setName("");
+    setTypology("");
+    setMuscleGroup("")
   };
   let search = "";
   useEffect(() => {

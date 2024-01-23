@@ -48,7 +48,7 @@ const ForgotPasswordPage = () => {
         className="forgot-password-page
       "
       >
-        <h1>Pagina Reset Clave</h1>
+        <h1>Recuperar Contraseña</h1>
 
         {statusMessage ? (
           <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
