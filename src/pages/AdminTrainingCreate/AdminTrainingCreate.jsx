@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import Footer from "../../layout/Footer";
 import Header from "../../layout/Header";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 
 const AdminTrainingCreate = () => {
@@ -13,46 +13,32 @@ const AdminTrainingCreate = () => {
   const [file, setFile] = useState("")
 
   const [context] = useContext(authContext);
-  const  {trainingId}= useParams();
+
 
   const navigate = useNavigate();
 
 
   const createTraining = async (e) => {
-        e.preventDefault();
-    
+        e.preventDefault();    
       const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
         formData.append('typology', typology);
         formData.append('muscle_group', muscular);
-        formData.append('image', file);   
-      try {
+        formData.append('image', file);     
 
-    // const postBody = {
-    //   name,
-    //   description,
-    //   typology,
-    //   muscle_group: muscular, 
-    //   // image:file
-    // };
-    console.log("Datos a enviar: ", formData);
-    console.log(`${import.meta.env.VITE_HOST_BACK}:${
-      import.meta.env.VITE_PORT_BACK
-    }/training/${trainingId}`);
-    
+    console.log(formData);
+
+    try {
     const res = await fetch(`${import.meta.env.VITE_HOST_BACK}:${
         import.meta.env.VITE_PORT_BACK
-      }/training/${trainingId}`,        
+      }/training`,        
         {
           method: "POST",          
-          headers: {
-            "Content-Type": "multipart/form-data",
-            // "Content-Type":"application/json",
+          headers: { 
             Authorization: `Bearer ${context.token}`,
-          }, 
-        
-          body: JSON.stringify(formData)  
+          },         
+          body:formData 
         
         }
       );
@@ -67,7 +53,7 @@ const AdminTrainingCreate = () => {
         setMuscular("");
       } else {
         const body = await res.json();    
-       console.log(body.error);
+            console.log(body);
 
       }
     } catch (error) {
@@ -80,9 +66,8 @@ const AdminTrainingCreate = () => {
 
 
     return(
-      <>
-      <Header />
-    
+      <>    
+      <Header/>
       <section className="register-page">
         <h1>Añadir entreno</h1>
         

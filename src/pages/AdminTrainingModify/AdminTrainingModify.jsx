@@ -63,31 +63,22 @@ const AdminTrainingModify = () => {
         formData.append('description', description);
         formData.append('typology', typology);
         formData.append('muscle_group', muscular);
-        formData.append('image', file);    
-      
-    //   const postBody = {
-    //   name,
-    //   description,
-    //   typology,
-    //   muscle_group: muscular, 
-    //   // image:file
-    // };
+        formData.append('image', file);  
+  
     console.log("Datos a enviar: ", formData);
   
-    
+  
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
         }/training/${trainingId}`,      
         {
           method: "PUT",          
-          headers: {
-            "Content-Type": "multipart/form-data",
-            // "Content-Type":"application/json",
+          headers: {          
             Authorization: `Bearer ${context.token}`,
           }, 
         
-          body: JSON.stringify(formData)  
+          body:formData
         
         }
       );
@@ -116,14 +107,12 @@ const AdminTrainingModify = () => {
 
     return(
       <>
-      <Header />
+      <Header/>
     
       <section className="register-page">
-        <h1>Modificar entreno</h1>
-        
+        <h1>Modificar entreno</h1>       
          
-        <p className="intro-text">Introduce los datos</p>
-        
+        <p className="intro-text">Introduce los datos</p>       
 
         <form onSubmit={modifyTraining} className="register-container">
           <label htmlFor="name">Nombre entreno</label>
@@ -174,9 +163,7 @@ const AdminTrainingModify = () => {
             value={file}
             onChange={(e) => setFile(e.target.value)}
         
-          />
-
-        
+          />        
 
           <input type="submit" className="submit-btn" />
         </form>

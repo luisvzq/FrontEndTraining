@@ -85,7 +85,7 @@ const routesAdmin = [
     element: <AdminTrainingModify />,
   },
   {
-    path: "/admin/añadir/:trainingId",
+    path: "/admin/añadir",
     element: <AdminTrainingCreate />,
   },
  

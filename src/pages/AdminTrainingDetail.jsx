@@ -18,7 +18,7 @@ const AdminTrainingDetail = () => {
           <button>Modificar entreno</button>
       </Link>
 
-      <Link to={`/admin/añadir/${trainingId}`}>
+      <Link to={`/admin/añadir`}>
           <button>Añadir entreno</button>
       </Link>
       <Details />  

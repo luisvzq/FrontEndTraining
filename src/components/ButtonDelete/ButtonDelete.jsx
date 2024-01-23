@@ -9,16 +9,16 @@ const ButtonDelete = ()=> {
 
     const  {trainingId}= useParams();
 
-    const handleButton = (table, method) => {
-        console.log(`Metodo: ${method} para la tabla: ${table}`);
+    const handleButton = () => {
+      
         async function fetchButton() {
           try {
             const response = await fetch(
               `${import.meta.env.VITE_HOST_BACK}:${
                 import.meta.env.VITE_PORT_BACK
-              }/${table}/${trainingId}`,
+              }/training/${trainingId}`,
               {
-                method: method,
+                method: "DELETE",
                 headers: {
                   Authorization: `Bearer ${context.token}`,
                 },
@@ -28,7 +28,7 @@ const ButtonDelete = ()=> {
             if (response.ok) {
               const bodyButtonDel = await response.json();
               console.log("Respuesta a Button Delete", bodyButtonDel);
-                navigate('admin/entrenos');
+                navigate('/admin/entrenos');
             
             } else {
               const body = await response.json();
@@ -43,7 +43,7 @@ const ButtonDelete = ()=> {
 
     
     return(
-<button className="buttons-delete" onClick={() => { handleButton("training", "DELETE")}}>Eliminar</button>
+          <button className="buttons-delete" onClick={handleButton}>Eliminar</button>
     )
 }
 
