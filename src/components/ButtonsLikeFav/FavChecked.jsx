@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
-
+import './ButtonsLikeFav.scss'
 
 const FavChecked = ({trainingId}) => {
 
@@ -79,11 +79,11 @@ const FavChecked = ({trainingId}) => {
       }; //final del manejador
 
     return(
-        <div>
+        <div className="content-lf">
             {fav ?
-                <button onClick={() => { handleButton("fav", "DELETE")}}>Fav rojo</button>
+                <button className="buttons-lf red" onClick={() => { handleButton("fav", "DELETE")}}>Fav</button>
         
-            :   <button onClick={() => { handleButton("fav", "POST")}}>Fav Blanco</button>
+            :   <button className="buttons-lf" onClick={() => { handleButton("fav", "POST")}}>Fav</button>
             }
         </div>
     

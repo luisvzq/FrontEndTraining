@@ -1,31 +1,52 @@
-.buttonsLikeFav {
-    display: flex;
-    flex-direction: row;
+.count-content{
+    display: inline;
+flex-direction: row;
+padding: 10vw;
+}
+
+.content-lf{
+    display: inline;
+    flex-direction: column;
+    padding-right: 5vw;
+
+}
+
+.count-likes{
+    display: inline;
     justify-content: center;
-    gap: 5px;
+    align-items: center;
+    flex-direction: column;
+    min-width: 10vw;
+    min-height: 10vh;
+    padding-left: 15vw;
+    padding-right: 5vw;
+    size: 20px;   
+
+}
 
 
-    .buttons-clf {
-        border-radius: 50%;
+.buttons-lf {
+    border-radius: 50%;
     min-width: 8vw;
     min-height: 8vh;
+    font-family: "Oswald";
 
-
-    }
 }
+
+button.buttons-lf:hover{
+    transform: scale(1.15);
+}
+
 .red{
     background-color: red;
     color:beige
 }
-.white{
-    background-color:white;
-    color: black;
-}
+
 .number-likes {
-    size: 20px;
+    size: 1,5rem;
     display: flex;    
     justify-content: center;
     align-items: center;
-
     min-width: 10vw;
+    font-family: "Oswald";
 }

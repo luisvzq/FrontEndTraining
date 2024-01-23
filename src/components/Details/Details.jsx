@@ -51,9 +51,9 @@ const Details = ({ trainingId }) => {
             />
             <div className="information">
               <p className="description">Description: {details.description}</p>
-              <p>Creado: {details.created_at}</p>
-              <button>Typology: {details.typology}</button>
-              <button>Muscle group: {details.muscle_group}</button>
+            
+              <button className="button-tm">Typology: {details.typology}</button>
+              <button className="button-tm">Muscle group: {details.muscle_group}</button>
             </div>
           </div>
         </>
