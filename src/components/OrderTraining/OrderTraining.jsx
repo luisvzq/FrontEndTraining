@@ -66,6 +66,9 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getTrainingFetch();
+    setName("");
+    setTypology("");
+    setMuscleGroup("")
   };
   let search = "";
   useEffect(() => {
@@ -143,6 +146,6 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   );
 };
 OrderAndSearchInputTraining.propTypes = {
-  setAllTraining: PropTypes.object,
+  setAllTraining: PropTypes.func,
 };
 export default OrderAndSearchInputTraining;

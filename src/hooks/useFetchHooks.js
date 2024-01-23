@@ -19,6 +19,7 @@ const useFetchHooks = () => {
 
       setAllTraining(body.data);
       console.log("Total de entrenos: ", body.data.length);
+      return body.data;
     } catch (error) {
       console.error("Error:", error.message);
     }
