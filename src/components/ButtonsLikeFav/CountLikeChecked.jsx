@@ -103,12 +103,12 @@ const CountLikeChecked = ({trainingId}) => {
 
     return(
         <div className="count-content">
-          <p className="count-likes">Likes: {countLikes}</p>
+          <p className="count-likes">{countLikes} Me gusta</p>
           <div className="content-lf">
             {like ?
-                <button className="buttons-lf red" onClick={() => { handleButton("like", "DELETE")}}>Like</button>
+                <button className="LIKE red" onClick={() => { handleButton("like", "DELETE")}}>Like</button>
         
-            :   <button className="buttons-lf"onClick={() => { handleButton("like", "POST")}}>Like</button>
+            :   <button className="LIKE"onClick={() => { handleButton("like", "POST")}}>Like</button>
             }
         </div>
         </div>

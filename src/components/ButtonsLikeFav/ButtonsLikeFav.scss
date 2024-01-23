@@ -1,7 +1,7 @@
 .count-content{
     display: inline;
 flex-direction: row;
-padding: 10vw;
+//padding: 10vw;
 }
 
 .content-lf{
@@ -24,23 +24,33 @@ padding: 10vw;
 
 }
 
-
-.buttons-lf {
-    border-radius: 50%;
-    min-width: 8vw;
-    min-height: 8vh;
-    font-family: "Oswald";
-
+.LIKE {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent; /* Fondo inicialmente transparente */
 }
 
-button.buttons-lf:hover{
-    transform: scale(1.15);
+.LIKE::before {
+    content: '\2764'; /* Código Unicode para el símbolo de corazón */
+    font-size: 80px;
+    color: blue; 
+   /* Color de relleno inicialmente azul */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.red{
-    background-color: red;
-    color:beige
+.LIKE.red::before {
+    color: red; /* Cambia el color del corazón a rojo al agregar la clase "red" */
 }
+
+
 
 .number-likes {
     size: 1,5rem;

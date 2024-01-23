@@ -50,10 +50,10 @@ const Details = ({ trainingId }) => {
               alt="Foto de entreno"
             />
             <div className="information">
-              <p className="description">Description: {details.description}</p>
+              <p className="description">Descripción: {details.description}</p>
             
-              <button className="button-tm">Typology: {details.typology}</button>
-              <button className="button-tm">Muscle group: {details.muscle_group}</button>
+              <button className="button-tm">Tipologia: {details.typology}</button>
+              <button className="button-tm">Grupo muscular: {details.muscle_group}</button>
             </div>
           </div>
         </>

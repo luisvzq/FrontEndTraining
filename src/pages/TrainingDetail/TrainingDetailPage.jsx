@@ -9,7 +9,7 @@ const TrainingDetailPage = () => {
 
   return (
     <>
-      <div>
+      <div className="HOLA">
         <Details trainingId={trainingId} />
         <CountLikeChecked trainingId={trainingId} />
         <FavChecked trainingId={trainingId} />
