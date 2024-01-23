@@ -3,8 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;        
-    width:90vw;
-    background-color: rgb(190, 146, 133);
+    
+    color: #3d3d3d;
+    border: 1px solid #ccc;
+    margin-bottom: 5vh;
+    border-radius: 2%;
     
 
 }
@@ -12,14 +15,15 @@
     display:flex;
     justify-content: center;
     padding-top: 3vh;
+    font-family: "Oswald";
 }
 
 .photo {
-
     max-width: 50vw;
     max-height: 50vh;
-
+    border-radius: 2%;
 }
+
 .information {
     display: flex;
     flex-direction: column;
@@ -27,48 +31,66 @@
 }
 
 .description {
-    max-width: 50vw;
-    max-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30vw;
+    min-height: 10vh;
+    max-width: 60vw;
+    max-height: 25vh;
+
 }
 
+.button-tm {
+        margin-bottom: 1vh;  
+        min-width: 20vh;   
+    }   
 
-@media (min-width: 600px) {
+
+@media (min-width: 650px) {
     .details {
         display:flex;
         flex-direction: row;
         justify-content: center;
-        align-content: center;        
-        width:90vw;
-        background-color: rgb(153, 140, 185);
-    
+        align-content: center; 
+        color: #3d3d3d;    
+        border: 1px solid #ccc;
+        border-radius: 2%;
+    }
+
     .title {
         display:flex;
         justify-content: center;
         padding-top: 3vh;  
     }
-        
-    
-    }
-    
+
+    .button-tm {
+        margin-bottom: 1vh;  
+        min-width: 20vh; 
+    }   
+
     .photo {
         max-width: 80vw;
-        max-height: 50vh;    
+        max-height: 50vh;
+        border-radius: 2%;    
     }
 
     .information {
         display: flex;
         flex-direction: column;    
+        justify-content: center;
+        align-items: center; 
     }   
     
     .description {
-        display: flex;
-    
-        align-items: center;
+        display: flex;    
+        align-items:center;
         justify-content: center;
         min-width: 30vw;
-        min-height: 45vh;
+        min-height: 35vh;
         max-width: 60vw;
-        max-height: 45vh;
+        max-height: 35vh;
+        padding: 1rem;
     
     
     }

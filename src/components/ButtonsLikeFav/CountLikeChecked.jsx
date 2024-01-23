@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
-
+import './ButtonsLikeFav.scss'
 
 
 const CountLikeChecked = ({trainingId}) => {
@@ -102,14 +102,17 @@ const CountLikeChecked = ({trainingId}) => {
       }; //final del manejador
 
     return(
-        <div>
-          <p>Likes: {countLikes}</p>
+        <div className="count-content">
+          <p className="count-likes">Likes: {countLikes}</p>
+          <div className="content-lf">
             {like ?
-                <button onClick={() => { handleButton("like", "DELETE")}}>Like rojo</button>
+                <button className="buttons-lf red" onClick={() => { handleButton("like", "DELETE")}}>Like</button>
         
-            :   <button onClick={() => { handleButton("like", "POST")}}>Like Blanco</button>
+            :   <button className="buttons-lf"onClick={() => { handleButton("like", "POST")}}>Like</button>
             }
         </div>
+        </div>
+        
     
 
     )
