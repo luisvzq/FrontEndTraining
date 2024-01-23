@@ -6,7 +6,7 @@ import AdminTrainingListPage from "./AdminTrainingListPage";
 import AdminTrainingDetail from "./AdminTrainingDetail";
 import AdminFavListPage from "./AdminFavListPage";
 import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
-import ResetPasswordPage from "./ResetPasswordPage";
+import ResetPasswordPage from "./ResetPassword/ResetPasswordPage";
 import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
 import LoginPage from "./Login/LoginPage";
 

@@ -30,7 +30,7 @@ const LoginPage = () => {
       email: e.target.elements.email.value,
       password: e.target.elements.password.value,
     };
-
+    console.log(import.meta.env.VITE_HOST_BACK, import.meta.env.VITE_PORT_BACK);
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${

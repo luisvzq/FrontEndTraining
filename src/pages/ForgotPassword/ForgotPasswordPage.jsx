@@ -7,6 +7,7 @@ import Footer from "../../layout/Footer";
 const ForgotPasswordPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
+  const [shakeAnimation, setShakeAnimation] = useState(false);
   const fetchForgotPassword = async () => {
     try {
       const response = await fetch(
@@ -24,13 +25,18 @@ const ForgotPasswordPage = () => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
+      if (response.ok) {
+        const body = await response.json();
+        setStatusMessage(body.message);
+      } else {
+        const body = await response.json();
+        setStatusMessage(body.error);
+        console.log(body.error);
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+        }, 500);
       }
-
-      const body = await response.json();
-
-      setStatusMessage(body.message);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -38,14 +44,26 @@ const ForgotPasswordPage = () => {
   return (
     <>
       <Header />
-      <h2>Pagina Reset Clave</h2>
-      <section className="forgot-password-container">
-        {statusMessage ? <p>{statusMessage}</p> : <p>Introduce tu Email</p>}
+      <section
+        className="forgot-password-page
+      "
+      >
+        <h1>Recuperar Contraseña</h1>
+
+        {statusMessage ? (
+          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
+            {statusMessage}
+          </p>
+        ) : (
+          <p className="intro-text">Introduce tu Email</p>
+        )}
         <form
+          className="forgot-password-container"
           onSubmit={(e) => {
             e.preventDefault();
             fetchForgotPassword();
             setMail("");
+            setShakeAnimation(true);
           }}
         >
           <label htmlFor="email">Email</label>
@@ -57,7 +75,7 @@ const ForgotPasswordPage = () => {
               setMail(e.target.value);
             }}
           />
-          <input type="submit" />
+          <input type="submit" className="submit-btn" />
         </form>
       </section>
       <Footer />
