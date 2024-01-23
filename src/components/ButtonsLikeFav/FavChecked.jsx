@@ -1,13 +1,15 @@
 
-import PropTypes from "prop-types";
+
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
 import './ButtonsLikeFav.scss'
+import { useParams } from "react-router-dom";
 
-const FavChecked = ({trainingId}) => {
+const FavChecked = () => {
 
     const [context] = useContext(authContext);
     const [fav, setFav] = useState();
+    const  {trainingId}= useParams();
 
     useEffect(() => {
         async function fetchData() {
@@ -90,14 +92,6 @@ const FavChecked = ({trainingId}) => {
 
     )
 }
-FavChecked.propTypes = {
-
-    trainingId: PropTypes.string,
-    token: PropTypes.string,
-    setRender: PropTypes.func
-  };
-
-
 
 
 export default FavChecked;

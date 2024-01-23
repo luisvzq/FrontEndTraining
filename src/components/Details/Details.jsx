@@ -1,11 +1,13 @@
 import "./Details.scss";
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
-import PropTypes from "prop-types";
 
-const Details = ({ trainingId }) => {
+import { useParams } from "react-router-dom";
+
+const Details = () => {
   const [context] = useContext(authContext);
   const [details, setDetails] = useState({});
+  const  {trainingId}= useParams();
 
   useEffect(() => {
     async function fetchData() {
@@ -62,8 +64,6 @@ const Details = ({ trainingId }) => {
   );
 };
 
-Details.propTypes = {
-  trainingId: PropTypes.string,
-};
+
 
 export default Details;

@@ -1,15 +1,17 @@
 
-import PropTypes from "prop-types";
+
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
 import './ButtonsLikeFav.scss'
+import { useParams } from "react-router-dom";
 
 
-const CountLikeChecked = ({trainingId}) => {
+const CountLikeChecked = () => {
 
     const [context] = useContext(authContext);
     const [like, setLike] = useState();
     const [countLikes, setCountLikes] = useState();
+    const  {trainingId}= useParams();
 
 
     useEffect(() => {
@@ -117,12 +119,6 @@ const CountLikeChecked = ({trainingId}) => {
 
     )
 }
-CountLikeChecked.propTypes = {
-
-    trainingId: PropTypes.string,
-    token: PropTypes.string,
-    setRender: PropTypes.func
-  };
 
 
 
