@@ -4,12 +4,16 @@ import Footer from "../../layout/Footer";
 import Header from "../../layout/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
+import "./AdminTrainingModify.scss"
+
+
 
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
+  const [dataDb, setDataDb] = useState ({});
 
 
   const [context] = useContext(authContext);
@@ -38,7 +42,8 @@ const AdminTrainingModify = () => {
           const body = await response.json();
           console.log("respuesta entreno:", body.data);
 
-           setName(body.data.name);
+          setDataDb(body.data)
+          setName(body.data.name);
           setDescription(body.data.description);
           setTypology(body.data.typology);
           setMuscular(body.data.muscle_group);
@@ -53,12 +58,22 @@ const AdminTrainingModify = () => {
     fetchData();
   }, [trainingId, context]);
 
-
+      console.log("Datos de la DB", dataDb);
 
   const modifyTraining = async (e) => {
         e.preventDefault();
+        if(
+          dataDb.name ===name &&
+          dataDb.description=== description &&
+          dataDb.muscle_group===muscular &&
+          dataDb.typology===typology
+        ){
+          alert("Debes cambiar algún dato ✌️");
+        }else{
 
-        console.log((e.target.elements.photo.files[0]));
+        
+
+      
     try {
       const formData = new FormData();
         formData.append('name', name);
@@ -102,6 +117,7 @@ const AdminTrainingModify = () => {
   
       console.error(error);
     }
+  }
   };
 
 
@@ -110,14 +126,14 @@ const AdminTrainingModify = () => {
       <>
       <Header/>
     
-      <section className="register-page">
+      <section className="modify-page">
         <h1>Modificar entreno</h1>       
          
         <p className="intro-text">Introduce los datos</p>       
 
-        <form onSubmit={modifyTraining} className="register-container">
-          <label htmlFor="name">Nombre entreno</label>
-          <input
+        <form onSubmit={modifyTraining} className="modify-container">
+          <label  htmlFor="name">Nombre entreno</label>
+          <input        
             type="text"
             name="name"
             id="name"
@@ -163,7 +179,8 @@ const AdminTrainingModify = () => {
             id="photo"   
           />        
 
-          <input type="submit" className="submit-btn" />
+          <button type="submit" className="submit-btn">Enviar
+            </button>  
         </form>
       </section>
 

@@ -1,0 +1,39 @@
+.modify-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    .intro-text{
+      margin: 1rem;
+      color: #3d3d3d;
+      font-size: 1rem;
+    }
+    .status-message {
+      margin: 1rem;
+      color: #3d3d3d;
+      font-size: 1rem;
+  
+      &.shake {
+        animation: shake 0.5s ease-in-out;
+      }
+    }
+  }
+  
+  .modify-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    width: 30vw;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 4%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  
+  
+ 
+  

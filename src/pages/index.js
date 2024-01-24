@@ -3,7 +3,7 @@ import TrainingListPage from "./TrainingList/TrainingListPage";
 import HomePage from "../pages/Home/HomePage";
 import FavListPage from "./FavListPage";
 import AdminTrainingListPage from "./AdminTrainingListPage";
-import AdminTrainingDetail from "./AdminTrainingDetail";
+import AdminTrainingDetail from "./AdminTrainingDetail/AdminTrainingDetail"
 import AdminFavListPage from "./AdminFavListPage";
 import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPassword/ResetPasswordPage";
