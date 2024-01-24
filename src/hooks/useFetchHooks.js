@@ -1,27 +1,26 @@
 const useFetchHooks = () => {
-  const getTrainingFetch = async (token, setAllTraining) => {
+  const getTrainingFetch = async (endpoint, token) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
-        }/training`,
+        }/${endpoint}`,
         {
           headers: {
             Authorization: token,
           },
         }
       );
-      if (!res.ok) {
-        throw new Error("Network response was not ok " + res.statusText);
-      }
-
       const body = await res.json();
-
-      setAllTraining(body.data);
-      console.log("Total de entrenos: ", body.data.length);
-      return body.data;
+      if (!res.ok) {
+        throw new Error(body.error);
+      } else {
+        console.log(body.data);
+        return body.data;
+      }
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error("Error al conectar con la base de datos:", error);
+      throw error.message;
     }
   };
 

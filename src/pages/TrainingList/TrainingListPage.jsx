@@ -13,9 +13,14 @@ const TrainingListPage = () => {
   const { getTrainingFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
 
-  const { isLoading, data } = useQuery(
-    ["trainingList", `Bearer ${context.token}`, setAllTraining],
-    () => getTrainingFetch(`Bearer ${context.token}`, setAllTraining)
+  const { isLoading, data, isError, isSuccess, error } = useQuery(
+    ["trainingList", "training", `Bearer ${context.token}`],
+    () => getTrainingFetch("training", `Bearer ${context.token}`),
+    {
+      onSuccess: (data) => {
+        setAllTraining(data);
+      },
+    }
   );
 
   return (
@@ -26,7 +31,9 @@ const TrainingListPage = () => {
         allTraining={data}
       ></OrderAndSearchInputTraining>
 
-      {isLoading ? <p>Loading.....</p> : <Training data={allTraining} />}
+      {isLoading ? <p>Loading.....</p> : null}
+      {isError ? <p>{error}</p> : null}
+      {isSuccess ? <Training data={allTraining} /> : null}
     </div>
   );
 };
