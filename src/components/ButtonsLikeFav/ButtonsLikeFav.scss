@@ -1,89 +1,65 @@
-.count-content {
-    display: flex;   
-    justify-content: flex-start;
-    padding-top: 10px;
-}
 
-.CONTENEDOR-LIKE {
-    display: flex;
-    flex-direction: column;
-    padding-right: 5vw;
-}
-
-// .CUENTA-MEGUSTA {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-direction: column;
-   
-//     font-size: 16px; /* Ajustado el tamaño de la fuente */
-// }
 
 .LIKE {
-    width: 100%; /* Ajustado el tamaño del botón */
+    width: auto; 
+    display: inline-block;
     height: 100%;
     position: relative;
-    margin: 10px; /* Ajustado el margen */
+    margin: 20px; 
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: transparent; /* Fondo inicialmente transparente */
+    background-color: transparent; 
 }
 
 .LIKE::before {
-    content: '\2764'; /* Código Unicode para el símbolo de corazón */
-    font-size: 30px; /* Ajustado el tamaño del corazón */
+    content: '\2764'; 
+    font-size: 30px; 
     color: rgb(81, 76, 76);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;   
+     transform: translate(-50%, -50%);
 }
 
 .LIKE.red::before {
-    color: red; /* Cambia el color del corazón a rojo al agregar la clase "red" */
+    color: red; 
 }
 
-.CONTENEDOR-FAV {
-    display: flex;
-    flex-direction: column;
-    padding-right: 5vw;
-}
+
 
 
 
 .FAV {
-    width: 40px; /* Ajustado el tamaño del botón */
-    height: 40px;
-    position: relative;
-    margin: 10px; /* Ajustado el margen */
+    width: auto; 
+    display: inline-block;
+    height: 100%;
+
+   position: relative;
+    margin: 20px; 
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: transparent; /* Fondo inicialmente transparente */
+    background-color: transparent; 
 }
 
 .FAV::before {
-    content: '\2605'; /* Código Unicode para el símbolo de corazón */
-    font-size: 40px; /* Ajustado el tamaño del corazón */
+    content: '\2606';
+    font-size: 40px;
     color: rgb(81, 76, 76);
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: absolute;    
     transform: translate(-50%, -50%);
 }
 
 .FAV.red::before {
-    color: gold; /* Cambia el color del corazón a rojo al agregar la clase "red" */
-    content: '\2605';
-    font-size: 50px;
+    color: gold; 
+    content: '\2606';
+    font-size: 40px;
 }
 
 .number-likes {
-    font-size: 1.2rem; /* Ajustado el tamaño de la fuente */
+    font-size: 1.2rem; 
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 8vw; /* Ajustado el ancho mínimo */
+    min-width: 8vw; 
     font-family: "Oswald";
 }

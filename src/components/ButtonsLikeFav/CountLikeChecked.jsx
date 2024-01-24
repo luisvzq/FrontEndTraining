@@ -10,7 +10,7 @@ const CountLikeChecked = ({trainingId}) => {
 
     const [context] = useContext(authContext);
     const [like, setLike] = useState();
-    const [, setCountLikes] = useState();
+    const [countLikes, setCountLikes] = useState();
 
 
     useEffect(() => {
@@ -103,20 +103,17 @@ const CountLikeChecked = ({trainingId}) => {
       }; //final del manejador
 
     return(
-        <div className="count-content">
-          {/* <div className="CUENTA-MEGUSTA">{countLikes} Me gusta</div> */}
-          
-          <div className="CONTENEDOR-LIKE">
+     
+            <>
+             <div className="CUENTA-MEGUSTA">{countLikes} Me gusta</div>
             {like ?
                 <button className="LIKE red" onClick={() => { handleButton("like", "DELETE")}}></button>
         
             :   <button className="LIKE"onClick={() => { handleButton("like", "POST")}}></button>
-            }
+            }</>
             
             
-        </div>
-        </div>
-        
+       
     
 
     )
@@ -128,7 +125,7 @@ CountLikeChecked.propTypes = {
     setRender: PropTypes.func
   };
 
-
+ {/* <div className="CUENTA-MEGUSTA">{countLikes} Me gusta</div> */}
 
 
 export default CountLikeChecked;

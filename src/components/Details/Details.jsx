@@ -39,33 +39,32 @@ const Details = ({ trainingId }) => {
   }, [trainingId, context]);
 
   return (
-    <>
+    <div className="CONTENEDOR">
       {details.name && (
         <>
           <h1 className="title">{details.name}</h1>
           <div className="details">
-            <FavChecked trainingId={trainingId}/>
             <p className="tag">Tipologia: {details.typology}</p>
-              <p className="tag">Grupo muscular: {details.muscle_group}</p>
+            <p className="tag">Grupo muscular: {details.muscle_group}</p>
+            <div className="photo-container">
             <img
               className="photo"
               src={`${import.meta.env.VITE_HOST_BACK}:${
                 import.meta.env.VITE_PORT_BACK
               }/${details.photo}`}
               alt="Foto de entreno"
-            />
-             <CountLikeChecked trainingId={trainingId} />
-             {/* <FavChecked trainingId={trainingId}/> */}
+            /></div>{" "}
+            <div className="LOGOS">
+              <CountLikeChecked trainingId={trainingId} />
+              <FavChecked trainingId={trainingId} />
+            </div>
             <div className="information">
               <p className="description">Descripción: {details.description}</p>
-            
-            
-             
             </div>
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
