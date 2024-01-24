@@ -1,13 +1,15 @@
-.CONTENEDOR {
+.container-detail {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.5s ease-in-out;
+  margin: 2vh;
+
+  h1 {
+    margin-top: 4vh;
+  }
 }
-
-
 
 .details {
   margin-bottom: 5vh;
@@ -15,45 +17,78 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 70vw;
 }
 .title {
   display: flex;
   justify-content: center;
-  padding-top: 3vh;
+}
+
+.photo-container {
+  width: 50vw;
+  height: 40vh;
+  margin: 4vh 0 0 0;
+  overflow: hidden;
 }
 
 .photo {
-  max-width: 80%;
-  max-height: 50%;
+  width: 50vw;
+  height: 40vh;
   border-radius: 2%;
-
-  margin: 10%;
+  object-fit: cover;
 }
 
-.LOGOS {
+.logos {
   display: flex;
+  justify-content: space-between;
 }
 
-.information {
-  display: flex;
-  flex-direction: column;
+.description-container {
   text-align: center;
+  width: 50vw;
+  margin-top: 2vh;
 }
 
 .description {
-  display: flex;
   align-items: center;
   justify-content: center;
   min-width: 30vw;
   min-height: 10vh;
   max-width: 60vw;
-  max-height: 25vh;
+}
+
+.interact-container {
+  display: flex;
+  justify-content: space-between;
+  width: 50vw;
+}
+
+.tags {
+  margin: 1vh 0;
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+  text-align: center;
 }
 
 .tag {
-  text-align: center;
-  margin-bottom: 1vh;
-  min-width: 20vh;
+  background-color: #3d3d3d;
+  color: whitesmoke;
+  cursor: pointer;
+
+  padding: 0.6vh;
+  border: none;
+  border-radius: 2%;
+  transition: background 0.3s ease-in-out;
+
+  &:hover {
+    background-color: chocolate;
+  }
 }
 
-
+@media only screen and (max-width: 575px) {
+  .tags {
+    flex-direction: column;
+    align-items: normal;
+  }
+}

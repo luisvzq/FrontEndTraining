@@ -9,7 +9,7 @@ const Header = () => {
     <div className="header">
       <Menu />
       <div className="welcome">
-        {context?.token && <p>Hola {context?.name}! 💪</p>}
+        {context?.token && <p>Hola {context?.name}!</p>}
       </div>
     </div>
   );

@@ -18,9 +18,17 @@ const ErrorMessage = ({ message }) => {
   }, [message]);
 
   return (
-    <p className={`status-message ${shake ? "shake" : ""}`}>
-      {message && "⚠️ "}{message}{message && " ⚠️"}
-    </p>
+    <>
+      {!message ? (
+        <p>Introduce los datos</p>
+      ) : (
+        <p className={`status-message ${shake ? "shake" : ""}`}>
+          {message && "⚠️ "}
+          {message}
+          {message && " ⚠️"}
+        </p>
+      )}
+    </>
   );
 };
 
