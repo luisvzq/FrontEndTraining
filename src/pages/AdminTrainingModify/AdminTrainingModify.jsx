@@ -10,7 +10,7 @@ const AdminTrainingModify = () => {
   const [description, setDescription] = useState("");
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
-  const [file, setFile] = useState("")
+
 
   const [context] = useContext(authContext);
   const  {trainingId}= useParams();
@@ -42,7 +42,7 @@ const AdminTrainingModify = () => {
           setDescription(body.data.description);
           setTypology(body.data.typology);
           setMuscular(body.data.muscle_group);
-          // setFile(body.data.photo);
+        
         } else {
           throw new Error("Error al hacer fetch al entreno ");
         }
@@ -57,13 +57,15 @@ const AdminTrainingModify = () => {
 
   const modifyTraining = async (e) => {
         e.preventDefault();
+
+        console.log((e.target.elements.photo.files[0]));
     try {
       const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
         formData.append('typology', typology);
         formData.append('muscle_group', muscular);
-        formData.append('image', file);  
+        formData.append('image', e.target.elements.photo.files[0]);  
   
     console.log("Datos a enviar: ", formData);
   
@@ -101,7 +103,6 @@ const AdminTrainingModify = () => {
       console.error(error);
     }
   };
-
 
 
 
@@ -151,18 +152,15 @@ const AdminTrainingModify = () => {
             name="description"
             id="description"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          
+            onChange={(e) => setDescription(e.target.value)  }
+
           />
 
           <label htmlFor="photo">Subir imagen</label>
           <input
             type="file"
             name="photo"
-            id="photo"
-            value={file}
-            onChange={(e) => setFile(e.target.value)}
-        
+            id="photo"   
           />        
 
           <input type="submit" className="submit-btn" />

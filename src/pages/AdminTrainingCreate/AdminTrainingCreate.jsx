@@ -10,11 +10,8 @@ const AdminTrainingCreate = () => {
   const [description, setDescription] = useState("");
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
-  const [file, setFile] = useState("")
 
   const [context] = useContext(authContext);
-
-
   const navigate = useNavigate();
 
 
@@ -25,7 +22,7 @@ const AdminTrainingCreate = () => {
         formData.append('description', description);
         formData.append('typology', typology);
         formData.append('muscle_group', muscular);
-        formData.append('image', file);     
+        formData.append('image', e.target.elements.photo.files[0]);    
 
     console.log(formData);
 
@@ -120,13 +117,8 @@ const AdminTrainingCreate = () => {
           <input
             type="file"
             name="photo"
-            id="photo"
-            value={file}
-            onChange={(e) => setFile(e.target.value)}
-        
-          />
-
-        
+            id="photo"    
+          />       
 
           <input type="submit" className="submit-btn" />
         </form>
