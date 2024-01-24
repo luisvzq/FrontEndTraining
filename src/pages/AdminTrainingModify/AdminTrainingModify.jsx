@@ -13,6 +13,9 @@ const AdminTrainingModify = () => {
   const [muscular, setMuscular] = useState("");
   const [dataDb, setDataDb] = useState({});
 
+  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+
   const [context] = useContext(authContext);
   const { trainingId } = useParams();
   const navigate = useNavigate();
@@ -61,10 +64,15 @@ const AdminTrainingModify = () => {
       dataDb.muscle_group === muscular &&
       dataDb.typology === typology
     ) {
-      alert("Debes cambiar algún dato ✌️");
+      // alert("Debes cambiar algún dato ✌️");
+      setStatusMessage("Debes cambiar algún dato ✌️")
+      setShakeAnimation(true);
+      setTimeout(() => {
+        setShakeAnimation(false);
+      }, 500);
     } else {
 
-      const validated=UseValidate(name, description, typology, muscular)
+      const validated=UseValidate(name, description, typology, muscular, setStatusMessage, setShakeAnimation)
 
       if(validated){
         try {
@@ -100,9 +108,18 @@ const AdminTrainingModify = () => {
           } else {
             const body = await res.json();
             console.log(body.error);
+            setStatusMessage(body.error); 
+            setShakeAnimation(true);
+            setTimeout(() => {
+              setShakeAnimation(false);
+            }, 500);
           }
         } catch (error) {
           console.error(error);
+          setShakeAnimation(true);
+          setTimeout(() => {
+            setShakeAnimation(false);
+          }, 500);
         }
 
       }
@@ -117,7 +134,13 @@ const AdminTrainingModify = () => {
       <section className="modify-page">
         <h1>Modificar entreno</h1>
 
-        <p className="intro-text">Introduce los datos</p>
+        {statusMessage ? (
+          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
+            {statusMessage}
+          </p>
+        ) : (
+          <p className="intro-text">Introduce los datos</p>
+        )}
 
         <form onSubmit={modifyTraining} className="modify-container">
           <label htmlFor="name">Nombre entreno</label>

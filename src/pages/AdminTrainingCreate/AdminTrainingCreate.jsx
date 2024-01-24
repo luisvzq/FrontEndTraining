@@ -13,13 +13,16 @@ const AdminTrainingCreate = () => {
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
 
+  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+
   const [context] = useContext(authContext);
   const navigate = useNavigate();
 
   const createTraining = async (e) => {
     e.preventDefault();
      
-     const validated = UseValidate(name, description, typology, muscular);
+     const validated = UseValidate(name, description, typology, muscular,setStatusMessage, setShakeAnimation);
     // const {error}= await UseValidateJoiTraining(name, description, typology,muscular)
     // console.log(error);
 
@@ -55,9 +58,18 @@ const AdminTrainingCreate = () => {
         } else {
           const body = await res.json();
           console.log(body);
+          setStatusMessage(body.error); 
+          setShakeAnimation(true);
+          setTimeout(() => {
+            setShakeAnimation(false);
+          }, 500);
         }
       } catch (error) {
-         console.error(error);
+         console.error(error);        
+         setShakeAnimation(true);
+         setTimeout(() => {
+           setShakeAnimation(false);
+         }, 500);
 
       
       }
@@ -70,7 +82,13 @@ const AdminTrainingCreate = () => {
       <section className="create-page">
         <h1>Añadir entreno</h1>
 
-        <p className="intro-text">Introduce los datos</p>
+        {statusMessage ? (
+          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
+            {statusMessage}
+          </p>
+        ) : (
+          <p className="intro-text">Introduce los datos</p>
+        )}
 
         <form onSubmit={createTraining} className="create-container">
           <label htmlFor="name">Nombre entreno</label>
