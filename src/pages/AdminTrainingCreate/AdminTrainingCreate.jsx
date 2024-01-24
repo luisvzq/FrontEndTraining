@@ -4,6 +4,8 @@ import Header from "../../layout/Header";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import "./AdminTrainingCreate.scss";
+import UseValidateJoiTraining from "../../hooks/UseValidateJoiTraining";
+import UseValidate from "../../hooks/UseValidate";
 
 const AdminTrainingCreate = () => {
   const [name, setName] = useState("");
@@ -16,42 +18,46 @@ const AdminTrainingCreate = () => {
 
   const createTraining = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("typology", typology);
-    formData.append("muscle_group", muscular);
-    formData.append("image", e.target.elements.photo.files[0]);
 
-    console.log(formData);
+    const validated = UseValidate(name, description, typology, muscular);
+    // UseValidateJoiTraining(name, description, typology,muscular)
 
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_HOST_BACK}:${
-          import.meta.env.VITE_PORT_BACK
-        }/training`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${context.token}`,
-          },
-          body: formData,
+    if (validated) {
+      try {
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("typology", typology);
+        formData.append("muscle_group", muscular);
+        formData.append("image", e.target.elements.photo.files[0]);
+
+        const res = await fetch(
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/training`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${context.token}`,
+            },
+            body: formData,
+          }
+        );
+
+        if (res.ok) {
+          alert("La modificacion ha sido completada con exito ✌️");
+          navigate("/admin/entrenos");
+          setName("");
+          setDescription("");
+          setTypology("");
+          setMuscular("");
+        } else {
+          const body = await res.json();
+          console.log(body);
         }
-      );
-
-      if (res.ok) {
-        alert("La modificacion ha sido completada con exito ✌️");
-        navigate("/admin/entrenos");
-        setName("");
-        setDescription("");
-        setTypology("");
-        setMuscular("");
-      } else {
-        const body = await res.json();
-        console.log(body);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 
