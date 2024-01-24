@@ -1,6 +1,4 @@
 import { useContext, useState } from "react";
-import Footer from "../../layout/Footer";
-import Header from "../../layout/Header";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import "./AdminTrainingCreate.scss";
@@ -79,8 +77,7 @@ const AdminTrainingCreate = () => {
   };
 
   return (
-    <>
-      <Header />
+    <>    
       <section className="create-page">
         <h1>Añadir entreno</h1>
 
@@ -136,9 +133,7 @@ const AdminTrainingCreate = () => {
             Enviar
           </button>
         </form>
-      </section>
-
-      <Footer />
+      </section>    
     </>
   );
 };

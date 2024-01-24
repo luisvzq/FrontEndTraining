@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import Footer from "../../layout/Footer";
-import Header from "../../layout/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import UseValidate from "../../hooks/UseValidate";
@@ -128,8 +126,6 @@ const AdminTrainingModify = () => {
 
   return (
     <>
-      <Header />
-
       <section className="modify-page">
         <h1>Modificar entreno</h1>
 
@@ -187,7 +183,6 @@ const AdminTrainingModify = () => {
         </form>
       </section>
 
-      <Footer />
     </>
   );
 };

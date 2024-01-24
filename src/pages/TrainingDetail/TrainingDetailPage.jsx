@@ -22,4 +22,4 @@ TrainingDetailPage.propTypes = {
   trainingId: PropTypes.string,
 };
 
-export default TrainingDetailPage;
+export  default TrainingDetailPage;
