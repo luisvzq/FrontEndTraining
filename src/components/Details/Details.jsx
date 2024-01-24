@@ -1,4 +1,4 @@
-import "./Details.scss";
+
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
 

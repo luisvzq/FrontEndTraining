@@ -3,9 +3,8 @@ import Footer from "../../layout/Footer";
 import Header from "../../layout/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
-import "./AdminTrainingModify.scss";
 import UseValidate from "../../hooks/UseValidate";
-
+import "./AdminTrainingModify.scss"
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -64,7 +63,7 @@ const AdminTrainingModify = () => {
       dataDb.muscle_group === muscular &&
       dataDb.typology === typology
     ) {
-      // alert("Debes cambiar algún dato ✌️");
+    
       setStatusMessage("Debes cambiar algún dato ✌️")
       setShakeAnimation(true);
       setTimeout(() => {

@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../context/AuthContext";
-import './ButtonsLikeFav.scss'
+
 import { useParams } from "react-router-dom";
 
 

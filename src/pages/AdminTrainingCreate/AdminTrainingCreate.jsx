@@ -4,7 +4,7 @@ import Header from "../../layout/Header";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import "./AdminTrainingCreate.scss";
-import UseValidateJoiTraining from "../../hooks/UseValidateJoiTraining";
+
 import UseValidate from "../../hooks/UseValidate";
 
 const AdminTrainingCreate = () => {
@@ -21,13 +21,17 @@ const AdminTrainingCreate = () => {
 
   const createTraining = async (e) => {
     e.preventDefault();
-     
-     const validated = UseValidate(name, description, typology, muscular,setStatusMessage, setShakeAnimation);
-    // const {error}= await UseValidateJoiTraining(name, description, typology,muscular)
-    // console.log(error);
+    const validated = UseValidate(
+      name,
+      description,
+      typology,
+      muscular,
+      setStatusMessage,
+      setShakeAnimation
+    );
 
     if (validated) {
-      try { 
+      try {
         const formData = new FormData();
         formData.append("name", name);
         formData.append("description", description);
@@ -58,20 +62,18 @@ const AdminTrainingCreate = () => {
         } else {
           const body = await res.json();
           console.log(body);
-          setStatusMessage(body.error); 
+          setStatusMessage(body.error);
           setShakeAnimation(true);
           setTimeout(() => {
             setShakeAnimation(false);
           }, 500);
         }
       } catch (error) {
-         console.error(error);        
-         setShakeAnimation(true);
-         setTimeout(() => {
-           setShakeAnimation(false);
-         }, 500);
-
-      
+        console.error(error);
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+        }, 500);
       }
     }
   };
