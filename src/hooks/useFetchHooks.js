@@ -44,6 +44,8 @@ const useFetchHooks = () => {
       if (!res.ok) {
         console.log(body);
         throw new Error(body.error);
+      } else {
+        return body;
       }
     } catch (error) {
       console.error("Error al conectar con la base de datos:", error);
