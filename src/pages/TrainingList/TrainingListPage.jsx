@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect } from "react";
-import { useQuery, QueryCache } from "react-query";
+import { useState, useContext } from "react";
+import { useQuery } from "react-query";
 
 import "./TrainingListPage.scss";
 
@@ -13,7 +13,7 @@ const TrainingListPage = () => {
   const { getTrainingFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
 
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, data } = useQuery(
     ["trainingList", `Bearer ${context.token}`, setAllTraining],
     () => getTrainingFetch(`Bearer ${context.token}`, setAllTraining)
   );
