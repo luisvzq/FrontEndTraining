@@ -3,13 +3,14 @@ import TrainingListPage from "./TrainingList/TrainingListPage";
 import HomePage from "../pages/Home/HomePage";
 import FavListPage from "./FavListPage";
 import AdminTrainingListPage from "./AdminTrainingListPage";
-import AdminTrainingDetail from "./AdminTrainingDetail";
+import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage"; 
 import AdminFavListPage from "./AdminFavListPage";
 import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPassword/ResetPasswordPage";
-import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
+import AdminTrainingDetail from "./AdminTrainingDetail/AdminTrainingDetail"
 import LoginPage from "./Login/LoginPage";
-
+import AdminTrainingModify from "./AdminTrainingModify/AdminTrainingModify";
+import AdminTrainingCreate from "./AdminTrainingCreate/AdminTrainingCreate";
 export {
   HomePage,
   LoginPage,
@@ -17,9 +18,11 @@ export {
   TrainingListPage,
   FavListPage,
   AdminTrainingListPage,
-  AdminTrainingDetail,
+  AdminTrainingModify,
+  AdminTrainingCreate,
   AdminFavListPage,
   ForgotPasswordPage,
   ResetPasswordPage,
-  TrainingDetailPage,
+  AdminTrainingDetail,
+  TrainingDetailPage
 };

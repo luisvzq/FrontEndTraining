@@ -1,7 +1,9 @@
 import {
   AdminFavListPage,
+  AdminTrainingCreate,
   AdminTrainingDetail,
   AdminTrainingListPage,
+  AdminTrainingModify,
   FavListPage,
   ForgotPasswordPage,
   HomePage,
@@ -66,19 +68,30 @@ const Layout = () => {
   );
 };
 
+
 const routesAdmin = [
   {
     path: "/admin/entrenos",
     element: <AdminTrainingListPage />,
   },
   {
-    path: "/admin/entreno/:idtraining",
+    path: "/admin/entreno/:trainingId",
     element: <AdminTrainingDetail />,
   },
   {
     path: "/admin/favoritos",
     element: <AdminFavListPage />,
   },
+  {
+    path: "/admin/modificar/:trainingId",
+    element: <AdminTrainingModify />,
+  },
+  {
+    path: "/admin/añadir",
+    element: <AdminTrainingCreate />,
+  },
+ 
+
 ];
 
 const routesWithAuth = [
