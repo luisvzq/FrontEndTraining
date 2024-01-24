@@ -40,22 +40,18 @@ const useFetchHooks = () => {
         }
       );
       const body = await res.json();
-     
+
       if (!res.ok) {
         console.log(body);
         throw new Error(body.error);
-      } else {
-        return await res.json();
       }
     } catch (error) {
       console.error("Error al conectar con la base de datos:", error);
       throw error.message;
     }
-  }
+  };
 
   return { getTrainingFetch, hookPostFetch };
 };
 
 export default useFetchHooks;
-
-

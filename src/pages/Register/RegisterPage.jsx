@@ -50,7 +50,7 @@ const RegisterPage = () => {
             setStatusMessage("");
           }, 5000);
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -62,7 +62,7 @@ const RegisterPage = () => {
             },
           });
           navigate("/login");
-          console.log(data);
+
           setName("");
           setEmail("");
           setPassword("");
