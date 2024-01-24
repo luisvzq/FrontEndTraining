@@ -24,7 +24,7 @@ const useFetchHooks = () => {
     }
   };
 
-  const hookPostFetch = async ({ endpoint, user }) => {
+  const hookPostFetch = async ({ endpoint,method, user }) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
@@ -32,7 +32,7 @@ const useFetchHooks = () => {
         }/${endpoint}`,
         {
           body: JSON.stringify(user),
-          method: "POST",
+          method: method,
           headers: {
             "Content-Type": "application/json",
           },

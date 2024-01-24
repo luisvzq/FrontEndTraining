@@ -9,7 +9,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [name, setName] = useState("");
   const [typology, setTypology] = useState("");
   const [muscleGroup, setMuscleGroup] = useState("");
-  const [order, setOrder] = useState("name");
+  const [order, setOrder] = useState("");
 
   let nameOk;
   let typologyOk;
@@ -68,7 +68,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     getTrainingFetch();
     setName("");
     setTypology("");
-    setMuscleGroup("")
+    setMuscleGroup("");
   };
   let search = "";
   useEffect(() => {
@@ -126,7 +126,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
       <div className="order-group">
         <label htmlFor="order"></label>
         <select
-          value=""
+          value={order}
           name="order"
           id="order"
           onChange={(e) => {

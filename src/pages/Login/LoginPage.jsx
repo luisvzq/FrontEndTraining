@@ -34,7 +34,7 @@ const LoginPage = () => {
     };
     e.preventDefault();
     mutation.mutate(
-      { endpoint: "login", user: loginBody },
+      { endpoint: "login", method: "POST", user: loginBody },
       {
         onError: (error) => {
           setStatusMessage(error);

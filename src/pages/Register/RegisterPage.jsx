@@ -39,7 +39,7 @@ const RegisterPage = () => {
     }
 
     mutation.mutate(
-      { endpoint: "register", user: postBody },
+      { endpoint: "register", method: "POST", user: postBody },
       {
         onError: (error) => {
           setStatusMessage(error);

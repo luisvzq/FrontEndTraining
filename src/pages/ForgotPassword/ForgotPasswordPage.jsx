@@ -1,43 +1,38 @@
 import { useState } from "react";
+import { useMutation } from "react-query";
+import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ForgotPasswordPage.scss";
 
 const ForgotPasswordPage = () => {
+  const { hookPostFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
   const [shakeAnimation, setShakeAnimation] = useState(false);
-  const fetchForgotPassword = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_HOST_BACK}:${
-          import.meta.env.VITE_PORT_BACK
-        }/loginForgot`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: mail,
-          }),
-        }
-      );
 
-      if (response.ok) {
-        const body = await response.json();
-        setStatusMessage(body.message);
-      } else {
-        const body = await response.json();
-        setStatusMessage(body.error);
-        console.log(body.error);
-        setShakeAnimation(true);
-        setTimeout(() => {
-          setShakeAnimation(false);
-        }, 500);
+  const postBody = { email: mail };
+  const mutation = useMutation(hookPostFetch);
+  const handleForgotButton = (e) => {
+    e.preventDefault();
+    mutation.mutate(
+      { endpoint: "loginForgot", method: "POST", user: postBody },
+      {
+        onError: (error) => {
+          setStatusMessage(error);
+
+          setShakeAnimation(true);
+          setTimeout(() => {
+            setShakeAnimation(false);
+            setStatusMessage("");
+          }, 5000);
+        },
+        onSuccess: (data) => {
+          setStatusMessage(data.message);
+          setMail("");
+        },
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    );
   };
+
   return (
     <>
       <section
@@ -55,12 +50,7 @@ const ForgotPasswordPage = () => {
         )}
         <form
           className="forgot-password-container"
-          onSubmit={(e) => {
-            e.preventDefault();
-            fetchForgotPassword();
-            setMail("");
-            setShakeAnimation(true);
-          }}
+          onSubmit={handleForgotButton}
         >
           <label htmlFor="email">Email</label>
           <input
