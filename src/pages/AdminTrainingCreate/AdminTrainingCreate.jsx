@@ -18,12 +18,13 @@ const AdminTrainingCreate = () => {
 
   const createTraining = async (e) => {
     e.preventDefault();
-
-    const validated = UseValidate(name, description, typology, muscular);
-    // UseValidateJoiTraining(name, description, typology,muscular)
+     
+     const validated = UseValidate(name, description, typology, muscular);
+    // const {error}= await UseValidateJoiTraining(name, description, typology,muscular)
+    // console.log(error);
 
     if (validated) {
-      try {
+      try { 
         const formData = new FormData();
         formData.append("name", name);
         formData.append("description", description);
@@ -56,7 +57,9 @@ const AdminTrainingCreate = () => {
           console.log(body);
         }
       } catch (error) {
-        console.error(error);
+         console.error(error);
+
+      
       }
     }
   };

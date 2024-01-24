@@ -11,8 +11,8 @@
     "compile-sass": "sass input.scss output.css"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "framer": "^2.4.1",
-    "joi": "^17.12.0",
     "motion": "^10.17.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
