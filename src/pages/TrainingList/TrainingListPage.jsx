@@ -10,12 +10,12 @@ import Training from "../../components/Training/Training.jsx";
 
 const TrainingListPage = () => {
   const [context] = useContext(authContext);
-  const { getTrainingFetch } = useFetchHooks();
+  const { hookGetFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
 
-  const { isLoading, data, isError, isSuccess, error } = useQuery(
+  const { isLoading,data, isError, isSuccess, error } = useQuery(
     ["trainingList", "training", `Bearer ${context.token}`],
-    () => getTrainingFetch("training", `Bearer ${context.token}`),
+    () => hookGetFetch("training", `Bearer ${context.token}`),
     {
       onSuccess: (data) => {
         setAllTraining(data);

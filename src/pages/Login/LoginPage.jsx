@@ -14,8 +14,8 @@ const LoginPage = () => {
   const [context, setContext] = useContext(authContext);
   const [shakeAnimation, setShakeAnimation] = useState(false);
   const navigate = useNavigate();
-  const { hookPostFetch } = useFetchHooks();
-  const mutation = useMutation(hookPostFetch);
+  const { hookPostPatchFetch } = useFetchHooks();
+  const mutation = useMutation(hookPostPatchFetch);
 
   useEffect(() => {
     const handleLogin = async () => {

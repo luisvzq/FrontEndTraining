@@ -4,13 +4,13 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ForgotPasswordPage.scss";
 
 const ForgotPasswordPage = () => {
-  const { hookPostFetch } = useFetchHooks();
+  const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
   const [shakeAnimation, setShakeAnimation] = useState(false);
 
   const postBody = { email: mail };
-  const mutation = useMutation(hookPostFetch);
+  const mutation = useMutation(hookPostPatchFetch);
   const handleForgotButton = (e) => {
     e.preventDefault();
     mutation.mutate(

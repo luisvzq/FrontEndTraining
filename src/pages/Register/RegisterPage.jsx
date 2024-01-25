@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const RegisterPage = () => {
-  const { hookPostFetch } = useFetchHooks();
+  const { hookPostPatchFetch } = useFetchHooks();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ const RegisterPage = () => {
     email,
     password: passwordRepeat,
   };
-  const mutation = useMutation(hookPostFetch);
+  const mutation = useMutation(hookPostPatchFetch);
 
   const handleRegisterButton = (e) => {
     e.preventDefault();

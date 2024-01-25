@@ -1,5 +1,5 @@
 const useFetchHooks = () => {
-  const getTrainingFetch = async (endpoint, token) => {
+  const hookGetFetch = async (endpoint, token) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
@@ -15,7 +15,7 @@ const useFetchHooks = () => {
       if (!res.ok) {
         throw new Error(body.error);
       } else {
-        console.log(body.data);
+        
         return body.data;
       }
     } catch (error) {
@@ -24,7 +24,7 @@ const useFetchHooks = () => {
     }
   };
 
-  const hookPostFetch = async ({ endpoint,method, user }) => {
+  const hookPostPatchFetch = async ({ endpoint,method, user }) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
@@ -41,7 +41,7 @@ const useFetchHooks = () => {
       const body = await res.json();
 
       if (!res.ok) {
-        console.log(body);
+        
         throw new Error(body.error);
       } else {
         return body;
@@ -52,7 +52,7 @@ const useFetchHooks = () => {
     }
   };
 
-  return { getTrainingFetch, hookPostFetch };
+  return { hookGetFetch, hookPostPatchFetch };
 };
 
 export default useFetchHooks;

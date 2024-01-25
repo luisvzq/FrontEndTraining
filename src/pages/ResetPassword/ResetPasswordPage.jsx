@@ -5,14 +5,14 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ResetPasswordPage.scss";
 
 const ResetPasswordPage = () => {
-  const { hookPostFetch } = useFetchHooks();
+  const { hookPostPatchFetch } = useFetchHooks();
   const { temp } = useParams();
   const [statusMessage, setStatusMessage] = useState("");
   const [pass, setPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
 
   const postBody = { password: pass };
-  const mutation = useMutation(hookPostFetch);
+  const mutation = useMutation(hookPostPatchFetch);
 
   const handleResetButton = (e) => {
     e.preventDefault();
