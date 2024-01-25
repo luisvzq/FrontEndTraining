@@ -35,7 +35,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           Authorization: `Bearer ${context.token}`,
         },
       });
-      console.log(`http://localhost:3001/training?${queryParams}`);
+     
       if (!res.ok) {
         throw new Error("Network response was not ok " + res.statusText);
       }

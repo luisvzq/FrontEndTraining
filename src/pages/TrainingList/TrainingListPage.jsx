@@ -1,21 +1,20 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 import "./TrainingListPage.scss";
 
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
-import { authContext } from "../../context/AuthContext.jsx";
+
 import Training from "../../components/Training/Training.jsx";
 
 const TrainingListPage = () => {
-  const [context] = useContext(authContext);
   const { hookGetFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
 
-  const { isLoading,data, isError, isSuccess, error } = useQuery(
-    ["trainingList", "training", `Bearer ${context.token}`],
-    () => hookGetFetch("training", `Bearer ${context.token}`),
+  const { isLoading, data, isError, isSuccess, error } = useQuery(
+    ["trainingList", "training"],
+    () => hookGetFetch("training"),
     {
       onSuccess: (data) => {
         setAllTraining(data);

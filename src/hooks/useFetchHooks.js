@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import { authContext } from "../context/AuthContext";
+
 const useFetchHooks = () => {
-  const hookGetFetch = async (endpoint, token) => {
+  const [context] = useContext(authContext);
+  const hookGetFetch = async (endpoint) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
@@ -7,7 +11,7 @@ const useFetchHooks = () => {
         }/${endpoint}`,
         {
           headers: {
-            Authorization: token,
+            Authorization: `Bearer ${context.token}`,
           },
         }
       );
@@ -15,7 +19,6 @@ const useFetchHooks = () => {
       if (!res.ok) {
         throw new Error(body.error);
       } else {
-        
         return body.data;
       }
     } catch (error) {
@@ -24,7 +27,7 @@ const useFetchHooks = () => {
     }
   };
 
-  const hookPostPatchFetch = async ({ endpoint,method, user }) => {
+  const hookPostPatchFetch = async ({ endpoint, method, user }) => {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_HOST_BACK}:${
@@ -41,7 +44,6 @@ const useFetchHooks = () => {
       const body = await res.json();
 
       if (!res.ok) {
-        
         throw new Error(body.error);
       } else {
         return body;
