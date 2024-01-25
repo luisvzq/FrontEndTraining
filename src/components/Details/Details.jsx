@@ -4,6 +4,7 @@ import { authContext } from "../../context/AuthContext";
 import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
+import { Link } from "react-router-dom";
 
 const Details = ({ trainingId }) => {
   const [context] = useContext(authContext);
@@ -55,7 +56,9 @@ const Details = ({ trainingId }) => {
             </div>{" "}
             <div className="interact-container">
               <div className="tags">
-                <p className="tag">Tipologia: {details.typology}</p>
+                  <p className="tag">Tipologia: {details.typology}</p>
+          
+              
                 <p className="tag">Grupo muscular: {details.muscle_group}</p>
               </div>
               <div className="logos">
