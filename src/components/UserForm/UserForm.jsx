@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
-
+import PropTypes from "prop-types";
+import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
 
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [rol, setRol] = useState("");
- 
+  const [id, setId] = useState();
+
   const [dataDb, setDataDb] = useState({});
 
   const [shakeAnimation, setShakeAnimation] = useState(false);
@@ -37,13 +39,14 @@ const UserForm = () => {
 
         if (response.ok) {
           const body = await response.json();
-          console.log("respuesta entreno:", body.data);
-          setDataDb(body.data);        
+          console.log("Peticion datos de usuario:", body.data);
+          setDataDb(body.data);
           setName(body.data.name);
           setEmail(body.data.email);
-          setRol(body.data.rol);         
+          setRol(body.data.rol);
+          setId(body.data.id);
         } else {
-          throw new Error("Error al hacer fetch al entreno ");
+          throw new Error("Error al hacer fetch a los datos de usuario ");
         }
       } catch (error) {
         console.error(error);
@@ -54,11 +57,7 @@ const UserForm = () => {
 
   const modifyUser = async (e) => {
     e.preventDefault();
-    if (
-      dataDb.name === name &&
-      dataDb.email === email &&     
-      dataDb.rol === rol
-    ) {
+    if (dataDb.name === name && dataDb.email === email && dataDb.rol === rol) {
       setStatusMessage("Debes cambiar algún dato ✌️");
       setShakeAnimation(true);
       setTimeout(() => {
@@ -78,11 +77,8 @@ const UserForm = () => {
           const formData = new FormData();
           formData.append("name", name);
           formData.append("email", email);
-          formData.append("rol", rol);
-          if(pass!==""){
-            formData.append("password", pass);
-          }
-        
+          formData.append("rol", rol);          
+          formData.append("password", pass);          
 
           console.log("Datos a enviar: ", formData);
 
@@ -111,7 +107,7 @@ const UserForm = () => {
               },
             });
 
-            navigate(`/admin/entrenos`);
+            navigate(`/`);
             setName("");
             setEmail("");
             setRol("");
@@ -138,7 +134,8 @@ const UserForm = () => {
   return (
     <>
       <section className="modify-page">
-        <h1>Modificar entreno</h1>
+        
+        <h1>Modificar usuario {id}</h1>
 
         {statusMessage ? (
           <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
@@ -149,7 +146,7 @@ const UserForm = () => {
         )}
 
         <form onSubmit={modifyUser} className="modify-container">
-          <label htmlFor="name">Nombre entreno</label>
+          <label htmlFor="name">Nombre</label>
           <input
             type="text"
             name="name"
@@ -165,7 +162,7 @@ const UserForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />          
+          />
 
           <label htmlFor="pass">Nueva password</label>
           <input
@@ -177,19 +174,28 @@ const UserForm = () => {
           />
 
           <label htmlFor="rol">Rol</label>
-          <select name="rol"value={rol} onChange={(e) => setRol(e.target.value)}>        
+          <select
+            name="rol"
+            value={rol}
+            onChange={(e) => setRol(e.target.value)}
+          >
             <option value="admin">Admin</option>
             <option value="normal">Normal</option>
-          </select>   
-  
-        
+          </select>
+
           <button type="submit" className="submit-btn">
             Enviar
           </button>
         </form>
       </section>
+
+      <ButtonDeleteUser id={id} />
     </>
   );
+};
+
+UserForm.propTypes = {
+  id: PropTypes.number,
 };
 
 export default UserForm;

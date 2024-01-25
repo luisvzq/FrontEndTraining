@@ -112,6 +112,10 @@ const routesWithAuth = [
     path: "/entreno/:trainingId",
     element: <TrainingDetailPage />,
   },
+  {
+    path: "/user/modify",
+    element: <UserForm />,
+  },
 ];
 
 const routesWithoutAuth = [
