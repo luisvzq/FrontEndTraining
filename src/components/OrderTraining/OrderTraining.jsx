@@ -35,7 +35,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           Authorization: `Bearer ${context.token}`,
         },
       });
-     
+
       if (!res.ok) {
         throw new Error("Network response was not ok " + res.statusText);
       }
@@ -51,6 +51,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     const queryParams = new URLSearchParams(searchParams).toString();
     const search = queryParams ? `?${queryParams}` : "";
     window.history.replaceState({}, "", `${window.location.pathname}${search}`);
+    getTrainingFetch();
   }, [searchParams]);
 
   return (
