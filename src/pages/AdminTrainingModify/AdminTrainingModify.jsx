@@ -111,7 +111,7 @@ const AdminTrainingModify = () => {
               },
             });
 
-            navigate("/admin/entrenos");
+            navigate(`/admin/entreno/${trainingId}`);
             setName("");
             setDescription("");
             setTypology("");
