@@ -32,7 +32,7 @@ const TrainingListPage = () => {
 
       {isLoading ? <p>Loading.....</p> : null}
       {isError ? <p>{error}</p> : null}
-      {isSuccess ? <Training data={allTraining} /> : null}
+      {isSuccess ? <Training data={data} /> : null}
     </div>
   );
 };

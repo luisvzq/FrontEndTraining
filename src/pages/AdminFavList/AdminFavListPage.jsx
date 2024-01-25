@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import Training from "../../components/Training/Training.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 
-const FavListPage = () => {
+const AdminFavListPage = () => {
   const { hookGetFetch } = useFetchHooks();
   const [allFavs, setAllFavs] = useState([]);
 
@@ -30,4 +30,4 @@ const FavListPage = () => {
   );
 };
 
-export default FavListPage;
+export default AdminFavListPage;

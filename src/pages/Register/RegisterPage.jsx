@@ -6,6 +6,7 @@ import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { Formik, Form, Field } from "formik";
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -79,7 +80,33 @@ const RegisterPage = () => {
 
         <ErrorMessage key={statusMessage} message={statusMessage} />
 
-        <form onSubmit={handleRegisterButton} className="register-container">
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            passwordRepeat: "",
+          }}
+          onSubmit={handleRegisterButton}
+        >
+          <Form className="register-container">
+            <label htmlFor="name">Nombre</label>
+            <Field name="name" type="text" className="lolo"></Field>
+            <label htmlFor="email">Email</label>
+            <Field name="email" type="email" className="lolo"></Field>
+            <label htmlFor="password">Password</label>
+            <Field name="password" type="password" className="lolo"></Field>
+            <label htmlFor="passwordRepeat">Repetir Password</label>
+            <Field
+              name="passwordRepeat"
+              type="password"
+              className="lolo"
+            ></Field>
+            <button className="submit-btn">Enviar</button>
+          </Form>
+        </Formik>
+
+        {/* <form onSubmit={handleRegisterButton} className="register-container">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
@@ -121,7 +148,7 @@ const RegisterPage = () => {
           />
 
           <input type="submit" className="submit-btn" />
-        </form>
+        </form> */}
       </section>
     </>
   );

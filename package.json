@@ -11,6 +11,7 @@
     "compile-sass": "sass input.scss output.css"
   },
   "dependencies": {
+    "formik": "^2.4.5",
     "framer": "^2.4.1",
     "motion": "^10.17.0",
     "prop-types": "^15.8.1",
