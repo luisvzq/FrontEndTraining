@@ -1,11 +1,14 @@
 // RegisterPage.jsx
 import { useState } from "react";
+import { useMutation } from "react-query";
+import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const RegisterPage = () => {
+  const { hookPostPatchFetch } = useFetchHooks();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,12 +18,18 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  const registerUser = async (e) => {
-    e.preventDefault();
+  const postBody = {
+    name,
+    email,
+    password: passwordRepeat,
+  };
+  const mutation = useMutation(hookPostPatchFetch);
 
+  const handleRegisterButton = (e) => {
+    e.preventDefault();
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
-      console.log(setStatusMessage.value);
+
       setShakeAnimation(true);
       setTimeout(() => {
         setShakeAnimation(false);
@@ -29,58 +38,39 @@ const RegisterPage = () => {
       return;
     }
 
-    const postBody = {
-      name,
-      email,
-      password: passwordRepeat,
-    };
+    mutation.mutate(
+      { endpoint: "register", method: "POST", user: postBody },
+      {
+        onError: (error) => {
+          setStatusMessage(error);
 
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_HOST_BACK}:${
-          import.meta.env.VITE_PORT_BACK
-        }/register`,
-        {
-          body: JSON.stringify(postBody),
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+          setShakeAnimation(true);
+          setTimeout(() => {
+            setShakeAnimation(false);
+            setStatusMessage("");
+          }, 5000);
+        },
+        onSuccess: () => {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `Registro completado con éxito!`,
+            showConfirmButton: false,
+            timer: 2500,
+            customClass: {
+              popup: "rounded-popup",
+            },
+          });
+          navigate("/login");
 
-      if (res.ok) {
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: `Registro completado con éxito!`,
-          showConfirmButton: false,
-          timer: 2500,
-          customClass: {
-            popup: "rounded-popup",
-          },
-        });
-        navigate("/login");
-        setName("");
-        setEmail("");
-        setPassword("");
-        setPasswordRepeat("");
-      } else {
-        const body = await res.json();
-        setStatusMessage(body.error);
-        setShakeAnimation(true);
-        setTimeout(() => {
-          setShakeAnimation(false);
-          setStatusMessage("");
-        }, 5000);
+          setName("");
+          setEmail("");
+          setPassword("");
+          setPasswordRepeat("");
+        },
       }
-    } catch (error) {
-      setStatusMessage("Error al conectar con la base de datos");
-      console.error("Error al conectar con la base de datos:", error);
-    }
+    );
   };
-
-  // const userFetchResponse = statusMessage;
 
   return (
     <>
@@ -89,7 +79,7 @@ const RegisterPage = () => {
 
         <ErrorMessage key={statusMessage} message={statusMessage} />
 
-        <form onSubmit={registerUser} className="register-container">
+        <form onSubmit={handleRegisterButton} className="register-container">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"

@@ -1,98 +1,57 @@
-import PropTypes from "prop-types";
 import { useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 import { authContext } from "../../context/AuthContext";
+
 import "./OrderTraining.scss";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [context] = useContext(authContext);
 
-  const [name, setName] = useState("");
-  const [typology, setTypology] = useState("");
-  const [muscleGroup, setMuscleGroup] = useState("");
-  const [order, setOrder] = useState("name");
+  const [searchParams, setSearchParams] = useState({
+    name: "",
+    typology: "",
+    muscle_group: "",
+    order_by: "",
+  });
 
-  let nameOk;
-  let typologyOk;
-  let muscleGroupOk;
-
-  if (name) {
-    nameOk = `name=${name}`;
-  }
-  if (typology) {
-    typologyOk = `typology=${typology}`;
-  }
-  if (muscleGroup) {
-    muscleGroupOk = `muscle_group=${muscleGroup}`;
-  }
-
-  const getTrainingFetch = async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:3001/training?${nameOk}&${typologyOk}&${muscleGroupOk}&order_by=${order}`,
-        {
-          headers: {
-            Authorization: `Bearer ${context.token}`,
-          },
-        }
-      );
-      if (!res.ok) {
-        throw new Error("Network response was not ok " + res.statusText);
-      }
-
-      const body = await res.json();
-      console.log(body.data);
-
-      setAllTraining(body.data);
-    } catch (error) {
-      console.error("Error:", error.menssage);
-    }
-  };
   const handleChange = (field, value) => {
-    switch (field) {
-      case "name":
-        setName(value);
-        break;
-      case "typology":
-        setTypology(value);
-        break;
-      case "muscleGroup":
-        setMuscleGroup(value);
-        break;
-      default:
-        break;
-    }
+    setSearchParams({
+      ...searchParams,
+      [field]: value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getTrainingFetch();
-    setName("");
-    setTypology("");
-    setMuscleGroup("")
   };
-  let search = "";
-  useEffect(() => {
-    // Actualiza la URL con las consultas de búsqueda
 
-    const queryParams = new URLSearchParams();
-    if (name) queryParams.set("name", name);
-    if (typology) queryParams.set("typology", typology);
-    if (muscleGroup) queryParams.set("muscle_group", muscleGroup);
-    if (typology) {
-      search = "?";
+  const getTrainingFetch = async () => {
+    try {
+      const queryParams = new URLSearchParams(searchParams).toString();
+      console.log(queryParams);
+      const res = await fetch(`http://localhost:3001/training?${queryParams}`, {
+        headers: {
+          Authorization: `Bearer ${context.token}`,
+        },
+      });
+     
+      if (!res.ok) {
+        throw new Error("Network response was not ok " + res.statusText);
+      }
+
+      const body = await res.json();
+      setAllTraining(body.data);
+    } catch (error) {
+      console.error("Error:", error.message);
     }
-    if (name) {
-      search = "?";
-    }
-    if (muscleGroup) {
-      search = "?";
-    }
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}${search}${queryParams.toString()}`
-    );
-  }, [name, typology, muscleGroup, search]);
+  };
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(searchParams).toString();
+    const search = queryParams ? `?${queryParams}` : "";
+    window.history.replaceState({}, "", `${window.location.pathname}${search}`);
+  }, [searchParams]);
 
   return (
     <form className="order-training-form" onSubmit={handleSubmit}>
@@ -101,7 +60,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="typology"
-          value={typology}
+          value={searchParams.typology}
           onChange={(e) => handleChange("typology", e.target.value)}
         />
       </div>
@@ -110,7 +69,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="name"
-          value={name}
+          value={searchParams.name}
           onChange={(e) => handleChange("name", e.target.value)}
         />
       </div>
@@ -119,20 +78,18 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="muscleGroup"
-          value={muscleGroup}
-          onChange={(e) => handleChange("muscleGroup", e.target.value)}
+          value={searchParams.muscleGroup}
+          onChange={(e) => handleChange("muscle_group", e.target.value)}
         />
       </div>
       <div className="order-group">
         <label htmlFor="order"></label>
         <select
-          value=""
+          value={searchParams.order}
           name="order"
           id="order"
           onChange={(e) => {
-            e.preventDefault();
-            setOrder(e.target.value);
-            getTrainingFetch(`Bearer ${context.token}`, setAllTraining);
+            handleChange("order_by", e.target.value);
           }}
         >
           <option value="">Ordenar por</option>
@@ -145,7 +102,9 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     </form>
   );
 };
+
 OrderAndSearchInputTraining.propTypes = {
   setAllTraining: PropTypes.func,
 };
+
 export default OrderAndSearchInputTraining;
