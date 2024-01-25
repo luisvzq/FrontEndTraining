@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 import "./AdminTrainingCreate.scss";
 
 import UseValidate from "../../hooks/UseValidate";
@@ -51,7 +52,17 @@ const AdminTrainingCreate = () => {
         );
 
         if (res.ok) {
-          alert("La modificacion ha sido completada con exito ✌️");
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `El entreno ha sido creado con exito!`,
+            showConfirmButton: false,
+            timer: 2500,
+            customClass: {
+              popup: "rounded-popup",
+            },
+          });
+    
           navigate("/admin/entrenos");
           setName("");
           setDescription("");

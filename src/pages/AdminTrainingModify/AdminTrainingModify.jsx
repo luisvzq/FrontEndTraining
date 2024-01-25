@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import UseValidate from "../../hooks/UseValidate";
-import "./AdminTrainingModify.scss"
+import Swal from "sweetalert2";
+import "./AdminTrainingModify.scss";
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -51,8 +52,6 @@ const AdminTrainingModify = () => {
     fetchData();
   }, [trainingId, context]);
 
-
-
   const modifyTraining = async (e) => {
     e.preventDefault();
     if (
@@ -61,17 +60,22 @@ const AdminTrainingModify = () => {
       dataDb.muscle_group === muscular &&
       dataDb.typology === typology
     ) {
-    
-      setStatusMessage("Debes cambiar algún dato ✌️")
+      setStatusMessage("Debes cambiar algún dato ✌️");
       setShakeAnimation(true);
       setTimeout(() => {
         setShakeAnimation(false);
       }, 500);
     } else {
+      const validated = UseValidate(
+        name,
+        description,
+        typology,
+        muscular,
+        setStatusMessage,
+        setShakeAnimation
+      );
 
-      const validated=UseValidate(name, description, typology, muscular, setStatusMessage, setShakeAnimation)
-
-      if(validated){
+      if (validated) {
         try {
           const formData = new FormData();
           formData.append("name", name);
@@ -79,9 +83,9 @@ const AdminTrainingModify = () => {
           formData.append("typology", typology);
           formData.append("muscle_group", muscular);
           formData.append("image", e.target.elements.photo.files[0]);
-  
+
           console.log("Datos a enviar: ", formData);
-  
+
           const res = await fetch(
             `${import.meta.env.VITE_HOST_BACK}:${
               import.meta.env.VITE_PORT_BACK
@@ -94,9 +98,19 @@ const AdminTrainingModify = () => {
               body: formData,
             }
           );
-  
+
           if (res.ok) {
-            alert("La modificacion ha sido completada con exito ✌️");
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: `La modificacion ha sido completada con exito!`,
+              showConfirmButton: false,
+              timer: 2500,
+              customClass: {
+                popup: "rounded-popup",
+              },
+            });
+
             navigate("/admin/entrenos");
             setName("");
             setDescription("");
@@ -105,7 +119,7 @@ const AdminTrainingModify = () => {
           } else {
             const body = await res.json();
             console.log(body.error);
-            setStatusMessage(body.error); 
+            setStatusMessage(body.error);
             setShakeAnimation(true);
             setTimeout(() => {
               setShakeAnimation(false);
@@ -118,9 +132,7 @@ const AdminTrainingModify = () => {
             setShakeAnimation(false);
           }, 500);
         }
-
       }
-      
     }
   };
 
@@ -182,7 +194,6 @@ const AdminTrainingModify = () => {
           </button>
         </form>
       </section>
-
     </>
   );
 };
