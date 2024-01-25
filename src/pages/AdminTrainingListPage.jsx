@@ -11,6 +11,9 @@ const AdminTrainingListPage = () => {
       <Link to={`/admin/entreno/5`}>
           <button>Ir al entreno 5</button>
       </Link>
+      <Link to={`/admin/user/modify`}>
+            <button>Modificar usuario</button>
+      </Link>
     </>
   );
 };
