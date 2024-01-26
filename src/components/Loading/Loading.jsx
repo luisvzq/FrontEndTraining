@@ -1,7 +1,7 @@
 
 import { BeatLoader } from "react-spinners";
 
-const Spinner = () => {
+const Loading = () => {
   return (
     <div
       style={{
@@ -17,4 +17,4 @@ const Spinner = () => {
   );
 };
 
-export default Spinner;
+export default Loading;
