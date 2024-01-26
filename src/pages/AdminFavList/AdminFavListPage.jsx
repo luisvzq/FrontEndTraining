@@ -5,7 +5,7 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 
 const AdminFavListPage = () => {
   const { hookGetFetch } = useFetchHooks();
-  const [setAllFavs] = useState([]);
+  const [allFavs, setAllFavs] = useState([]);
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
     ["favList", "fav"],
@@ -24,7 +24,7 @@ const AdminFavListPage = () => {
 
         {isLoading ? <p>Loading.....</p> : null}
         {isError ? <p>{error}</p> : null}
-        {isSuccess ? <Training data={data} /> : null}
+        {isSuccess ? <Training data={allFavs} /> : null}
       </div>
     </>
   );

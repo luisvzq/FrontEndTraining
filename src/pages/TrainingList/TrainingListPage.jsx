@@ -10,7 +10,7 @@ import Training from "../../components/Training/Training.jsx";
 
 const TrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
-  const [setAllTraining] = useState([]);
+  const [allTraining, setAllTraining] = useState([]);
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
     ["trainingList", "training"],
@@ -32,7 +32,7 @@ const TrainingListPage = () => {
 
       {isLoading ? <p>Loading.....</p> : null}
       {isError ? <p>{error}</p> : null}
-      {isSuccess ? <Training data={data} /> : null}
+      {isSuccess ? <Training data={allTraining} /> : null}
     </div>
   );
 };
