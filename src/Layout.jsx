@@ -22,6 +22,7 @@ import { authContext } from "./context/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import UserForm from "./components/UserForm/UserForm";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -90,6 +91,10 @@ const routesAdmin = [
   {
     path: "/admin/añadir",
     element: <AdminTrainingCreate />,
+  },        
+  {
+    path: "admin/user/modify",
+    element: <UserForm />,
   },
   {
     path: "/admin/ajustes",
@@ -112,7 +117,7 @@ const routesWithAuth = [
   },
   {
     path: "/ajustes",
-    element: <SettingsPage />,
+    element:  <SettingsPage />,  
   },
 ];
 
