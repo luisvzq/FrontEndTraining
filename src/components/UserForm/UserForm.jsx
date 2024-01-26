@@ -40,7 +40,7 @@ const UserForm = () => {
           console.log("Peticion datos de usuario:", body.data);
           setDataDb(body.data);
           setName(body.data.name);
-          setEmail(body.data.email); 
+          setEmail(body.data.email);
           setId(body.data.id);
         } else {
           throw new Error("Error al hacer fetch a los datos de usuario ");
@@ -63,7 +63,7 @@ const UserForm = () => {
     } else {
       const validated = UseValidateUser(
         name,
-        email,    
+        email,
         setStatusMessage,
         setShakeAnimation
       );
@@ -72,9 +72,8 @@ const UserForm = () => {
         try {
           const formData = new FormData();
           formData.append("name", name);
-          formData.append("email", email);         
-          formData.append("password", pass);    
-       
+          formData.append("email", email);
+          formData.append("password", pass);
 
           console.log("Datos a enviar: ", formData);
 
@@ -105,8 +104,8 @@ const UserForm = () => {
 
             navigate(`/`);
             setName("");
-            setEmail("");  
-            setPass("")        
+            setEmail("");
+            setPass("");
           } else {
             const body = await res.json();
             console.log(body.error);
@@ -130,7 +129,6 @@ const UserForm = () => {
   return (
     <>
       <section className="modify-page">
-        
         <h1>Modificar usuario</h1>
 
         {statusMessage ? (
@@ -159,7 +157,6 @@ const UserForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-  
 
           <label htmlFor="pass">Nueva password</label>
           <input
@@ -168,7 +165,7 @@ const UserForm = () => {
             id="pass"
             value={pass}
             onChange={(e) => setPass(e.target.value)}
-          />        
+          />
 
           <button type="submit" className="submit-btn">
             Modificar datos
@@ -176,8 +173,6 @@ const UserForm = () => {
         </form>
         <ButtonDeleteUser id={id} />
       </section>
-
-      
     </>
   );
 };
