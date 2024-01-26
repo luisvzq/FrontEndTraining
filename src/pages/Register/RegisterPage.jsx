@@ -6,7 +6,7 @@ import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import Spinner from "../../components/Spinner/Spinner.jsx";
+import Spinner from "../../components/Spinner/Spinner.jsx"; // importo spinner
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -16,7 +16,7 @@ const RegisterPage = () => {
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [, setShakeAnimation] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); //creo estado 
   const navigate = useNavigate();
 
   const postBody = {
@@ -28,7 +28,7 @@ const RegisterPage = () => {
 
   const handleRegisterButton = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoading(true); // carga a true
 
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
@@ -37,7 +37,7 @@ const RegisterPage = () => {
       setTimeout(() => {
         setShakeAnimation(false);
         setStatusMessage("");
-        setIsLoading(false);
+        setIsLoading(false); // carga a false
       }, 5000);
       return;
     }
@@ -52,8 +52,8 @@ const RegisterPage = () => {
           setTimeout(() => {
             setShakeAnimation(false);
             setStatusMessage("");
-            setIsLoading(false);
-          }, 5000);
+            setIsLoading(false); // carga a falso
+          }, 4000);
         },
         onSuccess: () => {
           Swal.fire({
@@ -72,7 +72,7 @@ const RegisterPage = () => {
           setEmail("");
           setPassword("");
           setPasswordRepeat("");
-          setIsLoading(false);
+          setIsLoading(false); // carga a falso
         },
       }
     );
@@ -81,7 +81,7 @@ const RegisterPage = () => {
   return (
     <>
       <section className="register-page">
-        {isLoading && <Spinner />}
+        {isLoading && <Spinner />} 
         <h1>Registro</h1>
 
         <ErrorMessage message={statusMessage} />
