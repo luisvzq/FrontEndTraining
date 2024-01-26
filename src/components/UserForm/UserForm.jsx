@@ -10,9 +10,7 @@ const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [rol, setRol] = useState("");
   const [id, setId] = useState();
-
   const [dataDb, setDataDb] = useState({});
 
   const [shakeAnimation, setShakeAnimation] = useState(false);
@@ -42,8 +40,7 @@ const UserForm = () => {
           console.log("Peticion datos de usuario:", body.data);
           setDataDb(body.data);
           setName(body.data.name);
-          setEmail(body.data.email);
-          setRol(body.data.rol);
+          setEmail(body.data.email); 
           setId(body.data.id);
         } else {
           throw new Error("Error al hacer fetch a los datos de usuario ");
@@ -66,8 +63,7 @@ const UserForm = () => {
     } else {
       const validated = UseValidateUser(
         name,
-        email,
-        rol,
+        email,    
         setStatusMessage,
         setShakeAnimation
       );
@@ -76,8 +72,9 @@ const UserForm = () => {
         try {
           const formData = new FormData();
           formData.append("name", name);
-          formData.append("email", email);            
-          formData.append("password", pass);          
+          formData.append("email", email);         
+          formData.append("password", pass);    
+       
 
           console.log("Datos a enviar: ", formData);
 
@@ -108,8 +105,8 @@ const UserForm = () => {
 
             navigate(`/`);
             setName("");
-            setEmail("");
-            setRol("");
+            setEmail("");  
+            setPass("")        
           } else {
             const body = await res.json();
             console.log(body.error);
@@ -134,7 +131,7 @@ const UserForm = () => {
     <>
       <section className="modify-page">
         
-        <h1>Modificar usuario {id}</h1>
+        <h1>Modificar usuario</h1>
 
         {statusMessage ? (
           <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
@@ -162,6 +159,7 @@ const UserForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+  
 
           <label htmlFor="pass">Nueva password</label>
           <input
@@ -173,12 +171,13 @@ const UserForm = () => {
           />        
 
           <button type="submit" className="submit-btn">
-            Enviar
+            Modificar datos
           </button>
         </form>
+        <ButtonDeleteUser id={id} />
       </section>
 
-      <ButtonDeleteUser id={id} />
+      
     </>
   );
 };
