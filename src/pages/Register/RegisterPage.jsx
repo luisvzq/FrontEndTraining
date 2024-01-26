@@ -77,7 +77,7 @@ const RegisterPage = () => {
       <section className="register-page">
         <h1>Registro</h1>
 
-        <ErrorMessage key={statusMessage} message={statusMessage} />
+        <ErrorMessage  message={statusMessage} />
 
         <form onSubmit={handleRegisterButton} className="register-container">
           <label htmlFor="name">Nombre</label>
