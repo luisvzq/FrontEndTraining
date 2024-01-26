@@ -57,7 +57,7 @@ const UserForm = () => {
 
   const modifyUser = async (e) => {
     e.preventDefault();
-    if (dataDb.name === name && dataDb.email === email && dataDb.rol === rol) {
+    if (dataDb.name === name && dataDb.email === email) {
       setStatusMessage("Debes cambiar algún dato ✌️");
       setShakeAnimation(true);
       setTimeout(() => {
@@ -76,8 +76,7 @@ const UserForm = () => {
         try {
           const formData = new FormData();
           formData.append("name", name);
-          formData.append("email", email);
-          formData.append("rol", rol);          
+          formData.append("email", email);            
           formData.append("password", pass);          
 
           console.log("Datos a enviar: ", formData);
@@ -171,17 +170,7 @@ const UserForm = () => {
             id="pass"
             value={pass}
             onChange={(e) => setPass(e.target.value)}
-          />
-
-          <label htmlFor="rol">Rol</label>
-          <select
-            name="rol"
-            value={rol}
-            onChange={(e) => setRol(e.target.value)}
-          >
-            <option value="admin">Admin</option>
-            <option value="normal">Normal</option>
-          </select>
+          />        
 
           <button type="submit" className="submit-btn">
             Enviar
