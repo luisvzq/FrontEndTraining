@@ -1,5 +1,6 @@
 import {
   AdminFavListPage,
+  AdminSettingsPage,
   AdminTrainingCreate,
   AdminTrainingDetail,
   AdminTrainingListPage,
@@ -10,6 +11,7 @@ import {
   LoginPage,
   RegisterPage,
   ResetPasswordPage,
+  SettingsPage,
   TrainingDetailPage,
   TrainingListPage,
 } from "./pages";
@@ -68,7 +70,6 @@ const Layout = () => {
   );
 };
 
-
 const routesAdmin = [
   {
     path: "/admin/entrenos",
@@ -90,8 +91,10 @@ const routesAdmin = [
     path: "/admin/añadir",
     element: <AdminTrainingCreate />,
   },
- 
-
+  {
+    path: "/admin/ajustes",
+    element: <AdminSettingsPage />,
+  },
 ];
 
 const routesWithAuth = [
@@ -106,6 +109,10 @@ const routesWithAuth = [
   {
     path: "/entreno/:trainingId",
     element: <TrainingDetailPage />,
+  },
+  {
+    path: "/ajustes",
+    element: <SettingsPage />,
   },
 ];
 
