@@ -6,6 +6,7 @@ import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import Spinner from "../../components/Spinner/Spinner.jsx";
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -15,7 +16,7 @@ const RegisterPage = () => {
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [, setShakeAnimation] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const postBody = {
@@ -27,6 +28,8 @@ const RegisterPage = () => {
 
   const handleRegisterButton = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
 
@@ -34,6 +37,7 @@ const RegisterPage = () => {
       setTimeout(() => {
         setShakeAnimation(false);
         setStatusMessage("");
+        setIsLoading(false);
       }, 5000);
       return;
     }
@@ -48,6 +52,7 @@ const RegisterPage = () => {
           setTimeout(() => {
             setShakeAnimation(false);
             setStatusMessage("");
+            setIsLoading(false);
           }, 5000);
         },
         onSuccess: () => {
@@ -67,6 +72,7 @@ const RegisterPage = () => {
           setEmail("");
           setPassword("");
           setPasswordRepeat("");
+          setIsLoading(false);
         },
       }
     );
@@ -75,9 +81,10 @@ const RegisterPage = () => {
   return (
     <>
       <section className="register-page">
+        {isLoading && <Spinner />}
         <h1>Registro</h1>
 
-        <ErrorMessage  message={statusMessage} />
+        <ErrorMessage message={statusMessage} />
 
         <form onSubmit={handleRegisterButton} className="register-container">
           <label htmlFor="name">Nombre</label>
