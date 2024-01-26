@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
-import PropTypes from "prop-types";
 import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
 
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [id, setId] = useState();
+
   const [dataDb, setDataDb] = useState({});
 
   const [shakeAnimation, setShakeAnimation] = useState(false);
@@ -41,7 +40,7 @@ const UserForm = () => {
           setDataDb(body.data);
           setName(body.data.name);
           setEmail(body.data.email);
-          setId(body.data.id);
+        
         } else {
           throw new Error("Error al hacer fetch a los datos de usuario ");
         }
@@ -171,14 +170,12 @@ const UserForm = () => {
             Modificar datos
           </button>
         </form>
-        <ButtonDeleteUser id={id} />
+        <ButtonDeleteUser />
       </section>
     </>
   );
 };
 
-UserForm.propTypes = {
-  id: PropTypes.number,
-};
+
 
 export default UserForm;

@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { authContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import PropTypes from "prop-types";
 
-const ButtonDeleteUser = ({id})=> {
+
+const ButtonDeleteUser = ()=> {
     const [context, setContext] = useContext(authContext);
     const navigate = useNavigate(); 
     
@@ -17,7 +17,7 @@ const ButtonDeleteUser = ({id})=> {
             const response = await fetch(
               `${import.meta.env.VITE_HOST_BACK}:${
                 import.meta.env.VITE_PORT_BACK
-              }/removeUser/${id}`,
+              }/removeUser`,
               {
                 method: "DELETE",
                 headers: {
@@ -60,8 +60,6 @@ const ButtonDeleteUser = ({id})=> {
           <button className="buttons-delete" onClick={handleButton}>Eliminar cuenta</button>
     )
 }
-ButtonDeleteUser.propTypes = {
-  id: PropTypes.number,
-};
+
 
 export default ButtonDeleteUser;
