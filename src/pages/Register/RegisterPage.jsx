@@ -6,7 +6,7 @@ import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { Formik, Form, Field } from "formik";
+// import { Formik, Form, Field } from "formik";
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
