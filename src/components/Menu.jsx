@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import Logout from "./Logout";
 import { authContext } from "../context/AuthContext";
 
 export const Menu = () => {
@@ -54,8 +53,6 @@ export const Menu = () => {
             </NavLink>
           </>
         )}
-
-        {context?.token && <Logout />}
       </header>
     </div>
   );

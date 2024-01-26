@@ -1,16 +1,15 @@
-import { useContext } from "react";
 import Menu from "../components/Menu";
-import { authContext } from "../context/AuthContext";
 import "./Header.scss";
+import DropDown from "../components/DropDown/DropDown";
+import { useContext } from "react";
+import { authContext } from "../context/AuthContext";
 
 const Header = () => {
   const [context] = useContext(authContext);
   return (
     <div className="header">
       <Menu />
-      <div className="welcome">
-        {context?.token && <p>Hola {context?.name}!</p>}
-      </div>
+      {context?.token && <DropDown />}
     </div>
   );
 };
