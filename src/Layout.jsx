@@ -4,6 +4,7 @@ import {
   AdminTrainingDetail,
   AdminTrainingListPage,
   AdminTrainingModify,
+  AdminUserSetting,
   FavListPage,
   ForgotPasswordPage,
   HomePage,
@@ -20,6 +21,7 @@ import { authContext } from "./context/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import ChangeRol from "./components/ChangeRol";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -68,7 +70,6 @@ const Layout = () => {
   );
 };
 
-
 const routesAdmin = [
   {
     path: "/admin/entrenos",
@@ -90,8 +91,14 @@ const routesAdmin = [
     path: "/admin/añadir",
     element: <AdminTrainingCreate />,
   },
- 
-
+  {
+    path: "/admin/ajustes",
+    element: <AdminUserSetting />,
+  },
+  {
+    path: "/admin/ajustes/rol",
+    element: <ChangeRol />,
+  },
 ];
 
 const routesWithAuth = [

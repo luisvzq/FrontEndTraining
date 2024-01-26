@@ -11,6 +11,7 @@ import AdminTrainingDetail from "./AdminTrainingDetail/AdminTrainingDetail";
 import LoginPage from "./Login/LoginPage";
 import AdminTrainingModify from "./AdminTrainingModify/AdminTrainingModify";
 import AdminTrainingCreate from "./AdminTrainingCreate/AdminTrainingCreate";
+import AdminUserSetting from "./AdminUserSetting/AdminUserSetting";
 
 export {
   HomePage,
@@ -26,4 +27,5 @@ export {
   ResetPasswordPage,
   AdminTrainingDetail,
   TrainingDetailPage,
+  AdminUserSetting
 };

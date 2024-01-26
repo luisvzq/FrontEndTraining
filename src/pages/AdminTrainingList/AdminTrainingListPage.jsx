@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const AdminTrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
-  const [allTraining, setAllTraining] = useState([]);
+  const [setAllTraining] = useState([]);
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
     ["trainingList", "training"],
@@ -44,4 +44,3 @@ const AdminTrainingListPage = () => {
 };
 
 export default AdminTrainingListPage;
-

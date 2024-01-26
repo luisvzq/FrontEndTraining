@@ -10,7 +10,7 @@ import Training from "../../components/Training/Training.jsx";
 
 const TrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
-  const [allTraining, setAllTraining] = useState([]);
+  const [setAllTraining] = useState([]);
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
     ["trainingList", "training"],

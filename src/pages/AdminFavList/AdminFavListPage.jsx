@@ -5,7 +5,7 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 
 const AdminFavListPage = () => {
   const { hookGetFetch } = useFetchHooks();
-  const [allFavs, setAllFavs] = useState([]);
+  const [setAllFavs] = useState([]);
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
     ["favList", "fav"],

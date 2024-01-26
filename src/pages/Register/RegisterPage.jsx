@@ -80,7 +80,7 @@ const RegisterPage = () => {
 
         <ErrorMessage key={statusMessage} message={statusMessage} />
 
-        <Formik
+        {/* <Formik
           initialValues={{
             name: "",
             email: "",
@@ -104,9 +104,9 @@ const RegisterPage = () => {
             ></Field>
             <button className="submit-btn">Enviar</button>
           </Form>
-        </Formik>
+        </Formik> */}
 
-        {/* <form onSubmit={handleRegisterButton} className="register-container">
+        <form onSubmit={handleRegisterButton} className="register-container">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
@@ -148,7 +148,7 @@ const RegisterPage = () => {
           />
 
           <input type="submit" className="submit-btn" />
-        </form> */}
+        </form>
       </section>
     </>
   );
