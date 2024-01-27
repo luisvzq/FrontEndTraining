@@ -1,7 +1,9 @@
+import UserForm from "../../components/UserForm/UserForm";
+
 const AdminSettingsPage = () => {
   return (
     <>
-      <div>Pagina de SETTINGS DE ADMIN</div>
+      <UserForm />
     </>
   );
 };

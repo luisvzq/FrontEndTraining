@@ -57,7 +57,7 @@ const ButtonDeleteUser = ()=> {
 
     
     return(
-          <button className="buttons-delete" onClick={handleButton}>Eliminar cuenta</button>
+          <button className="" onClick={handleButton}>Eliminar cuenta</button>
     )
 }
 

@@ -4,6 +4,7 @@ import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
 import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
+import "./UserForm.scss"
 
 const UserForm = () => {
   const [name, setName] = useState("");
@@ -126,8 +127,10 @@ const UserForm = () => {
   };
 
   return (
-    <>
-      <section className="modify-page">
+    <div className="container-modify-user">
+      <ButtonDeleteUser />
+      <section className="user-page">
+    
         <h1>Modificar usuario</h1>
 
         {statusMessage ? (
@@ -138,7 +141,7 @@ const UserForm = () => {
           <p className="intro-text">Introduce los datos</p>
         )}
 
-        <form onSubmit={modifyUser} className="modify-container">
+        <form onSubmit={modifyUser} className="user-form">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
@@ -170,9 +173,9 @@ const UserForm = () => {
             Modificar datos
           </button>
         </form>
-        <ButtonDeleteUser />
+      
       </section>
-    </>
+    </div>
   );
 };
 

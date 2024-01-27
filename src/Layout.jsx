@@ -93,10 +93,6 @@ const routesAdmin = [
     element: <AdminTrainingCreate />,
   },        
   {
-    path: "admin/user/modify",
-    element: <UserForm />,
-  },
-  {
     path: "/admin/ajustes",
     element: <AdminSettingsPage />,
   },

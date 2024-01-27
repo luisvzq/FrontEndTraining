@@ -1,4 +1,4 @@
-.modify-page {
+.user-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,18 +23,25 @@
     }
   }
   
-  .modify-container {
+  .user-form {
     display: flex;
     flex-direction: column;
     gap: 1vh;
     width: 30vw;
     background-color: #fff;
     padding: 2rem;
-
+    border-radius: 4%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     
   }
-  
-  
-  
- 
-  
+
+.container-modify-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:3rem;
+
+
+
+}
