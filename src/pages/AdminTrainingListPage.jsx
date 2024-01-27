@@ -5,7 +5,7 @@ const AdminTrainingListPage = () => {
     <>
       <div>Pagina Training List Page ADMIN</div>
       
-      <Link to={`/admin/añadir`}>
+      <Link to={'/admin/nuevo-entreno'}>
           <button>Añadir entreno</button>
       </Link>
       <Link to={`/admin/entreno/5`}>

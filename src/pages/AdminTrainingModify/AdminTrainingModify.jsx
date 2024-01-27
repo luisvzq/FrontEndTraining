@@ -4,6 +4,8 @@ import { authContext } from "../../context/AuthContext";
 import UseValidate from "../../hooks/UseValidate";
 import Swal from "sweetalert2";
 import "./AdminTrainingModify.scss";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import { useQuery } from "react-query";
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -18,39 +20,61 @@ const AdminTrainingModify = () => {
   const { trainingId } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/training/${trainingId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/training/${trainingId}`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const body = await response.json();
-          console.log("respuesta entreno:", body.data);
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         console.log("respuesta entreno:", body.data);
 
-          setDataDb(body.data);
-          setName(body.data.name);
-          setDescription(body.data.description);
-          setTypology(body.data.typology);
-          setMuscular(body.data.muscle_group);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  //         setDataDb(body.data);
+  //         setName(body.data.name);
+  //         setDescription(body.data.description);
+  //         setTypology(body.data.typology);
+  //         setMuscular(body.data.muscle_group);
+  //       } else {
+  //         throw new Error("Error al hacer fetch al entreno ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [trainingId, context]);
+
+
+  const { hookGetFetch } = useFetchHooks();
+
+  const { isLoading, data, isError, isSuccess, error } = useQuery(
+    ["admindetails", "training"],
+    () => hookGetFetch(`training/${trainingId}`),
+    {
+      onSuccess: (data) => {
+          setDataDb(data.data);
+          setName(data.data.name);
+          setDescription(data.data.description);
+          setTypology(data.data.typology);
+          setMuscular(data.data.muscle_group);
+  
+      },
     }
-    fetchData();
-  }, [trainingId, context]);
+  );
+
+
+
+
 
   const modifyTraining = async (e) => {
     e.preventDefault();
