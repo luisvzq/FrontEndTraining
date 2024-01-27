@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
+import "./ChangeRol.scss";
 
-import useFetchHooks from "../hooks/useFetchHooks";
+import useFetchHooks from "../../hooks/useFetchHooks";
 
 const ChangeRol = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -15,7 +16,7 @@ const ChangeRol = () => {
   return (
     <>
       <section
-        className="forgot-password-page
+        className="rol-page
       "
       >
         <h1>Cambio de Rol de Usario</h1>
@@ -29,7 +30,7 @@ const ChangeRol = () => {
             Introduce Email del usario que desea modificar
           </p>
         )}
-        <form className="forgot-password-container">
+        <form className="rol-container">
           <label htmlFor="email">Email</label>
           <input
             type="email"

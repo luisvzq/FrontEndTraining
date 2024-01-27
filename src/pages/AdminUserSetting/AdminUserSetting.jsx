@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 
-import RegisterPage from "../Register/RegisterPage";
-import ChangeRol from "../../components/ChangeRol";
+
 import FormRemoveUserByEmail from "../../components/FormRemoveUserByEmail";
+import UserForm from "../../components/UserForm/UserForm";
+import "./AdminUserSetting.scss";
+import ChangeRol from "../../components/ChangeRol/ChangeRol";
 
 const AdminUserSetting = () => {
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <RegisterPage />
+      <div className="main-conintainer">
+        <UserForm />
         {/* <Link to="/admin/ajustes/rol">Cambio de Rol</Link>
       <Link to="/admin/ajustes/borrar-usuario">Borrado de Usarios</Link> */}
-        <div style={{ display: "inline-flex" }}>
+        <div className="second-container">
           <ChangeRol />
-          <FormRemoveUserByEmail />
+          <FormRemoveUserByEmail  />
         </div>
       </div>
     </>
