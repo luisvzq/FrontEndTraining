@@ -1,47 +1,62 @@
 import "./Details.scss";
-import { useContext, useEffect, useState } from "react";
-import { authContext } from "../../context/AuthContext";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import Loading from "../Loading/Loading";
 
 const Details = ({ trainingId }) => {
-  const [context] = useContext(authContext);
+
   const [details, setDetails] = useState({});
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/training/${trainingId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // useEffect(() => {
 
-        if (response.ok) {
-          const body = await response.json();
-          console.log("respuesta entreno:", body.data);
-          setDetails(body.data);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/training/${trainingId}`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
+
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         console.log("respuesta entreno:", body.data);
+  //         setDetails(body.data);
+  //       } else {
+  //         throw new Error("Error al hacer fetch al entreno ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   }, [trainingId, context]);
+
+  const { hookGetFetch } = useFetchHooks();
+
+  const { isLoading, data, isError, isSuccess, error } = useQuery(
+    ["details", "training"],
+    () => hookGetFetch(`training/${trainingId}`),
+    {
+      onSuccess: (data) => {
+        setDetails(data);
+      },
     }
-    fetchData();
-  }, [trainingId, context]);
+  );
 
   return (
     <div className="container-detail">
-      {details.name && (
+      {isLoading ? <Loading /> :
+      details.name && (
         <>
           <h1 className="title">{details.name}</h1>
           <div className="details">
@@ -56,12 +71,16 @@ const Details = ({ trainingId }) => {
             </div>{" "}
             <div className="interact-container">
               <div className="tags">
-              <Link to={`http://localhost:5173/entrenos?name=&typology=${details.typology}&muscle_group=&order_by=`}>
+                <Link
+                  to={`/entrenos?name=&typology=${details.typology}&muscle_group=&order_by=`}
+                >
                   <p className="tag">Tipologia: {details.typology}</p>
-              </Link>
-              <Link to={`http://localhost:5173/entrenos?name=&typology=&muscle_group=${details.muscle_group}&order_by=`}>
+                </Link>
+                <Link
+                  to={`/entrenos?name=&typology=&muscle_group=${details.muscle_group}&order_by=`}
+                >
                   <p className="tag">Grupo muscular: {details.muscle_group}</p>
-              </Link>
+                </Link>
               </div>
               <div className="logos">
                 <FavChecked trainingId={trainingId} />

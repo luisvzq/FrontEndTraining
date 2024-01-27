@@ -3,6 +3,7 @@ import { authContext } from "../context/AuthContext";
 
 const useFetchHooks = () => {
   const [context] = useContext(authContext);
+
   const hookGetFetch = async (endpoint) => {
     try {
       const res = await fetch(
@@ -26,6 +27,7 @@ const useFetchHooks = () => {
       throw error.message;
     }
   };
+
 
   const hookPostPatchFetch = async ({ endpoint, method, user }) => {
     try {
