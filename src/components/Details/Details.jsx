@@ -47,7 +47,7 @@ const Details = ({ trainingId }) => {
 
   // const { isLoading, data, isError, isSuccess, error } = useQuery(
     const { isLoading } = useQuery(
-    ["details", "training"],
+    [`details${trainingId}`,`training/${trainingId}`],
     () => hookGetFetch(`training/${trainingId}`),
     {
       onSuccess: (data) => {
@@ -56,11 +56,12 @@ const Details = ({ trainingId }) => {
     }
   );
 console.log(context.role);
+
 let route="";
   if(context.role==="admin"){
-    route="admin/entrenos?";
+    route="/admin/entrenos?";
   }else{
-    route='/entrenos?';
+    route="/entrenos?";
   }
 
 //console.log(isLoading, isError,isSuccess,error );
@@ -85,7 +86,9 @@ let route="";
               </div>{" "}
               <div className="interact-container">
                 <div className="tags">
+                  {console.log(`me cago en todo     ${route}name=&typology=${details.typology}&muscle_group=&order_by=`)}
                   <Link
+                  
                     to={`${route}name=&typology=${details.typology}&muscle_group=&order_by=`}
                   >
                     <p className="tag">Tipologia: {details.typology}</p>

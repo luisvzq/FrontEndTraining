@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
-import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
-import "./UserForm.scss"
+import "./UserForm.scss";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
 import Loading from "../../components/Loading/Loading";
@@ -43,7 +42,7 @@ const UserForm = () => {
   //         setDataDb(body.data);
   //         setName(body.data.name);
   //         setEmail(body.data.email);
-        
+
   //       } else {
   //         throw new Error("Error al hacer fetch a los datos de usuario ");
   //       }
@@ -54,13 +53,10 @@ const UserForm = () => {
   //   fetchData();
   // }, [context]);
 
-
-
-
   const { hookGetFetch } = useFetchHooks();
 
   // const { isLoading, data, isError, isSuccess, error } = useQuery(
-    const { isLoading } = useQuery(
+  const { isLoading } = useQuery(
     ["users", "getUser"],
     () => hookGetFetch(`getUser`),
     {
@@ -68,12 +64,9 @@ const UserForm = () => {
         setDataDb(data);
         setName(data.name);
         setEmail(data.email);
-      
       },
     }
   );
-
-
 
   const modifyUser = async (e) => {
     e.preventDefault();
@@ -150,9 +143,8 @@ const UserForm = () => {
   };
 
   return (
-  <>
+    <>
       <section className="user-page">
-      
         <h1>Modificar usuario</h1>
 
         {statusMessage ? (
@@ -162,47 +154,46 @@ const UserForm = () => {
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
-      
-        {isLoading ? <Loading />
-        :<form onSubmit={modifyUser} className="user-form">
-          <label htmlFor="name">Nombre</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
 
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <form onSubmit={modifyUser} className="user-form">
+            <label htmlFor="name">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-          <label htmlFor="pass">Nueva password</label>
-          <input
-            type="password"
-            name="pass"
-            id="pass"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <button type="submit" className="submit-btn">
-            Modificar datos
-          </button>
-        </form>
-}
-      
+            <label htmlFor="pass">Nueva password</label>
+            <input
+              type="password"
+              name="pass"
+              id="pass"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+            />
+
+            <button type="submit" className="submit-btn">
+              Modificar datos
+            </button>
+          </form>
+        )}
       </section>
-      </>
+    </>
   );
 };
-
-
 
 export default UserForm;
