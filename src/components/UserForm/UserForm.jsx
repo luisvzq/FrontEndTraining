@@ -1,10 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
-import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
-
+import { useQuery } from "react-query";
+import Loading from "../../components/Loading/Loading";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import "./UserForm.scss";
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,37 +21,50 @@ const UserForm = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/getUser`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/getUser`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const body = await response.json();
-          console.log("Peticion datos de usuario:", body.data);
-          setDataDb(body.data);
-          setName(body.data.name);
-          setEmail(body.data.email);
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         console.log("Peticion datos de usuario:", body.data);
+  //         setDataDb(body.data);
+  //         setName(body.data.name);
+  //         setEmail(body.data.email);
         
-        } else {
-          throw new Error("Error al hacer fetch a los datos de usuario ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  //       } else {
+  //         throw new Error("Error al hacer fetch a los datos de usuario ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [context]);
+  const { hookGetFetch } = useFetchHooks();
+  const { isLoading } = useQuery(
+    ["usersGetUser", "getUser"],
+    () => hookGetFetch(`getUser`),
+    {
+      onSuccess: (data) => {
+        setDataDb(data);
+        setName(data.name);
+        setEmail(data.email);
+      },
     }
-    fetchData();
-  }, [context]);
+  );
+
 
   const modifyUser = async (e) => {
     e.preventDefault();
@@ -127,7 +142,7 @@ const UserForm = () => {
 
   return (
     <>
-      <section className="modify-page">
+      <section className="user-page">
         <h1>Modificar usuario</h1>
 
         {statusMessage ? (
@@ -137,8 +152,10 @@ const UserForm = () => {
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
-
-        <form onSubmit={modifyUser} className="modify-container">
+  {isLoading ? (
+          <Loading />
+        ) : (
+        <form onSubmit={modifyUser} className="user-form">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
@@ -170,7 +187,9 @@ const UserForm = () => {
             Modificar datos
           </button>
         </form>
-        <ButtonDeleteUser />
+        )}
+
+        
       </section>
     </>
   );

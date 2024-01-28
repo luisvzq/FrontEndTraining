@@ -1,43 +1,61 @@
 import "./Details.scss";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { authContext } from "../../context/AuthContext";
 import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 import { Link } from "react-router-dom";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import { useQuery } from "react-query";
+import Loading from "../Loading/Loading";
 
 const Details = ({ trainingId }) => {
   const [context] = useContext(authContext);
   const [details, setDetails] = useState({});
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/training/${trainingId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/training/${trainingId}`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const body = await response.json();
-          console.log("respuesta entreno:", body.data);
-          setDetails(body.data);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         console.log("respuesta entreno:", body.data);
+  //         setDetails(body.data);
+  //       } else {
+  //         throw new Error("Error al hacer fetch al entreno ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [trainingId, context]);
+
+  const { hookGetFetch } = useFetchHooks();
+
+  // const { isLoading, data, isError, isSuccess, error } = useQuery(
+    const { isLoading } = useQuery(
+    [`details${trainingId}`,`training/${trainingId}`],
+    () => hookGetFetch(`training/${trainingId}`),
+    {
+      onSuccess: (data) => {
+        setDetails(data);
+      },
     }
-    fetchData();
-  }, [trainingId, context]);
+  );
+
+
   let route = "";
   if (context.role === "admin") {
     route = "/admin/entrenos?";
@@ -47,7 +65,10 @@ const Details = ({ trainingId }) => {
 
   return (
     <div className="container-detail">
-      {details.name && (
+        {isLoading ? (
+        <Loading />
+      ) : (
+      details.name && (
         <>
           <h1 className="title">{details.name}</h1>
           <div className="details">
@@ -92,6 +113,7 @@ const Details = ({ trainingId }) => {
             </div>
           </div>
         </>
+      )
       )}
     </div>
   );
