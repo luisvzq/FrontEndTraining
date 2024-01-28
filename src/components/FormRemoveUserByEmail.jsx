@@ -2,15 +2,47 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 
 import useFetchHooks from "../hooks/useFetchHooks";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
 
 const FormRemoveUserByEmail = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
+  const handleAdminDeleteUserButton = (e) => {
+    e.preventDefault();
+    if (!mail) {
+      setStatusMessage("Debe de facilitar algun dato");
+      setTimeout(() => {
+        setStatusMessage("");
+      }, 5000);
+    }
+    if (mail) {
+      mutation.mutate(
+        {
+          endpoint: `removeUserByEmail`,
+          method: "DELETE",
+          user: postBody,
+        },
+        {
+          onError: (error) => {
+            setStatusMessage(error);
+
+            setTimeout(() => {
+              setStatusMessage("");
+            }, 5000);
+          },
+          onSuccess: (data) => {
+            setStatusMessage(data.message);
+            setMail("");
+          },
+        }
+      );
+    }
+  };
 
   return (
     <>
@@ -19,16 +51,8 @@ const FormRemoveUserByEmail = () => {
       "
       >
         <h1>Eliminacion de Usarios</h1>
+        <ErrorMessage message={statusMessage} />
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">
-            Introduce Email del usario que desea eliminar
-          </p>
-        )}
         <form className="forgot-password-container">
           <label htmlFor="email">Email</label>
           <input
@@ -42,31 +66,7 @@ const FormRemoveUserByEmail = () => {
           <button
             type="submit"
             className="submit-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              mutation.mutate(
-                {
-                  endpoint: `removeUserByEmail`,
-                  method: "DELETE",
-                  user: postBody,
-                },
-                {
-                  onError: (error) => {
-                    setStatusMessage(error);
-
-                    setShakeAnimation(true);
-                    setTimeout(() => {
-                      setShakeAnimation(false);
-                      setStatusMessage("");
-                    }, 5000);
-                  },
-                  onSuccess: (data) => {
-                    setStatusMessage(data.message);
-                    setMail("");
-                  },
-                }
-              );
-            }}
+            onClick={handleAdminDeleteUserButton}
           >
             Eliminar
           </button>

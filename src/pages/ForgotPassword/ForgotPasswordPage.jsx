@@ -2,35 +2,40 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ForgotPasswordPage.scss";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
 const ForgotPasswordPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-  const [shakeAnimation, setShakeAnimation] = useState(false);
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
   const handleForgotButton = (e) => {
     e.preventDefault();
-    mutation.mutate(
-      { endpoint: "loginForgot", method: "POST", user: postBody },
-      {
-        onError: (error) => {
-          setStatusMessage(error);
-
-          setShakeAnimation(true);
-          setTimeout(() => {
-            setShakeAnimation(false);
-            setStatusMessage("");
-          }, 5000);
-        },
-        onSuccess: (data) => {
-          setStatusMessage(data.message);
-          setMail("");
-        },
-      }
-    );
+    if (!mail) {
+      setStatusMessage("Debe de facilitar algun dato");
+      setTimeout(() => {
+        setStatusMessage("");
+      }, 5000);
+    }
+    if (mail) {
+      mutation.mutate(
+        { endpoint: "loginForgot", method: "POST", user: postBody },
+        {
+          onError: (error) => {
+            setStatusMessage(error);
+            setTimeout(() => {
+              setStatusMessage("");
+            }, 5000);
+          },
+          onSuccess: (data) => {
+            setStatusMessage(data.message);
+            setMail("");
+          },
+        }
+      );
+    }
   };
 
   return (
@@ -41,13 +46,8 @@ const ForgotPasswordPage = () => {
       >
         <h1>Recuperar Contraseña</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce tu Email</p>
-        )}
+        <ErrorMessage message={statusMessage} />
+
         <form
           className="forgot-password-container"
           onSubmit={handleForgotButton}

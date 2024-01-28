@@ -8,6 +8,7 @@ import "./LoginPage.scss";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import Swal from "sweetalert2";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -39,9 +40,9 @@ const LoginPage = () => {
         onError: (error) => {
           setStatusMessage(error);
 
-          setShakeAnimation(true);
+        
           setTimeout(() => {
-            setShakeAnimation(false);
+           
             setStatusMessage("");
           }, 5000);
         },
@@ -77,13 +78,15 @@ const LoginPage = () => {
     <>
       <section className="login-page">
         <h1>Login</h1>
-        {statusMessage ? (
+        <ErrorMessage message={statusMessage} />
+
+        {/* {statusMessage ? (
           <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
             {statusMessage}
           </p>
         ) : (
           <p className="intro-text">Introduce los datos</p>
-        )}
+        )} */}
 
         <form className="login-container" onSubmit={handleLoginButton}>
           <label htmlFor="email">Email</label>

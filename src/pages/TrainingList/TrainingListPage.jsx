@@ -25,6 +25,7 @@ const TrainingListPage = () => {
   return (
     <div className="training-list">
       <h1>Todos los entrenamientos</h1>
+
       <OrderAndSearchInputTraining
         setAllTraining={setAllTraining}
         allTraining={data}

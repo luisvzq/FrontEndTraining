@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
+import "./ChangeRol.scss";
 
-import useFetchHooks from "../hooks/useFetchHooks";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const ChangeRol = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [setShakeAnimation] = useState(false);
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
@@ -15,21 +17,14 @@ const ChangeRol = () => {
   return (
     <>
       <section
-        className="forgot-password-page
+        className="rol-page
       "
       >
         <h1>Cambio de Rol de Usario</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">
-            Introduce Email del usario que desea modificar
-          </p>
-        )}
-        <form className="forgot-password-container">
+        <ErrorMessage message={statusMessage} />
+
+        <form className="rol-container">
           <label htmlFor="email">Email</label>
           <input
             type="email"

@@ -32,7 +32,7 @@ const AdminTrainingListPage = () => {
           allTraining={data}
         ></OrderAndSearchInputTraining>
         <Link to="/admin/añadir">
-          <button className="add-training">Crear</button>
+          <button className="add-training">Añadir entreno</button>
         </Link>
 
         {isLoading ? <p>Loading.....</p> : null}
