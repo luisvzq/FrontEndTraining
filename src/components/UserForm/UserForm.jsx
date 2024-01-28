@@ -7,7 +7,7 @@ import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
 import "./UserForm.scss"
 import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
-
+import Loading from "../../components/Loading/Loading";
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -64,7 +64,6 @@ const UserForm = () => {
     () => hookGetFetch(`getUser`),
     {
       onSuccess: (data) => {
-        console.log(data);
         setDataDb(data);
         setName(data.name);
         setEmail(data.email);
@@ -153,7 +152,7 @@ const UserForm = () => {
     <div className="container-modify-user">
       <ButtonDeleteUser />
       <section className="user-page">
-    
+      
         <h1>Modificar usuario</h1>
 
         {statusMessage ? (
@@ -163,8 +162,9 @@ const UserForm = () => {
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
-
-        <form onSubmit={modifyUser} className="user-form">
+      
+        {isLoading ? <Loading />
+        :<form onSubmit={modifyUser} className="user-form">
           <label htmlFor="name">Nombre</label>
           <input
             type="text"
@@ -196,6 +196,7 @@ const UserForm = () => {
             Modificar datos
           </button>
         </form>
+}
       
       </section>
     </div>

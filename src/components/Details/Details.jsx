@@ -1,5 +1,5 @@
 import "./Details.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
@@ -7,9 +7,12 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import Loading from "../Loading/Loading";
+import { authContext } from "../../context/AuthContext";
+
 
 const Details = ({ trainingId }) => {
   const [details, setDetails] = useState({});
+  const [context] = useContext(authContext);
 
   // useEffect(() => {
 
@@ -51,9 +54,18 @@ const Details = ({ trainingId }) => {
       },
     }
   );
+console.log(context.role);
+let route="";
+  if(context.role==="admin"){
+    route="admin/entrenos?";
+  }else{
+    route='/entrenos?';
+  }
 
+//console.log(isLoading, isError,isSuccess,error );
   return (
     <div className="container-detail">
+      
       {isLoading ? (
         <Loading />
       ) : (
@@ -73,12 +85,12 @@ const Details = ({ trainingId }) => {
               <div className="interact-container">
                 <div className="tags">
                   <Link
-                    to={`/entrenos?name=&typology=${details.typology}&muscle_group=&order_by=`}
+                    to={`${route}name=&typology=${details.typology}&muscle_group=&order_by=`}
                   >
                     <p className="tag">Tipologia: {details.typology}</p>
                   </Link>
                   <Link
-                    to={`/entrenos?name=&typology=&muscle_group=${details.muscle_group}&order_by=`}
+                    to={`${route}name=&typology=&muscle_group=${details.muscle_group}&order_by=`}
                   >
                     <p className="tag">
                       Grupo muscular: {details.muscle_group}

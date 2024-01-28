@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import UseValidate from "../../hooks/UseValidate";
@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import "./AdminTrainingModify.scss";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
+import Loading from "../../components/Loading/Loading";
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -54,7 +55,6 @@ const AdminTrainingModify = () => {
   //   fetchData();
   // }, [trainingId, context]);
 
-
   const { hookGetFetch } = useFetchHooks();
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
@@ -62,19 +62,14 @@ const AdminTrainingModify = () => {
     () => hookGetFetch(`training/${trainingId}`),
     {
       onSuccess: (data) => {
-          setDataDb(data.data);
-          setName(data.data.name);
-          setDescription(data.data.description);
-          setTypology(data.data.typology);
-          setMuscular(data.data.muscle_group);
-  
+        setDataDb(data);
+        setName(data.name);
+        setDescription(data.description);
+        setTypology(data.typology);
+        setMuscular(data.muscle_group);
       },
     }
   );
-
-
-
-
 
   const modifyTraining = async (e) => {
     e.preventDefault();
@@ -173,50 +168,54 @@ const AdminTrainingModify = () => {
           <p className="intro-text">Introduce los datos</p>
         )}
 
-        <form onSubmit={modifyTraining} className="modify-container">
-          <label htmlFor="name">Nombre entreno</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <form onSubmit={modifyTraining} className="modify-container">
+            <label htmlFor="name">Nombre entreno</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-          <label htmlFor="typology">Tipología</label>
-          <input
-            type="text"
-            name="typology"
-            id="typology"
-            value={typology}
-            onChange={(e) => setTypology(e.target.value)}
-          />
+            <label htmlFor="typology">Tipología</label>
+            <input
+              type="text"
+              name="typology"
+              id="typology"
+              value={typology}
+              onChange={(e) => setTypology(e.target.value)}
+            />
 
-          <label htmlFor="group">Grupo muscular</label>
-          <input
-            type="text"
-            name="group"
-            id="group"
-            value={muscular}
-            onChange={(e) => setMuscular(e.target.value)}
-          />
+            <label htmlFor="group">Grupo muscular</label>
+            <input
+              type="text"
+              name="group"
+              id="group"
+              value={muscular}
+              onChange={(e) => setMuscular(e.target.value)}
+            />
 
-          <label htmlFor="description">Descripcion</label>
-          <textarea
-            type="text"
-            name="description"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+            <label htmlFor="description">Descripcion</label>
+            <textarea
+              type="text"
+              name="description"
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-          <label htmlFor="photo">Subir imagen</label>
-          <input type="file" name="photo" id="photo" />
+            <label htmlFor="photo">Subir imagen</label>
+            <input type="file" name="photo" id="photo" />
 
-          <button type="submit" className="submit-btn">
-            Enviar
-          </button>
-        </form>
+            <button type="submit" className="submit-btn">
+              Enviar
+            </button>
+          </form>
+        )}
       </section>
     </>
   );
