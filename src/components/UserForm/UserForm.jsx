@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
 import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
 import "./UserForm.scss"
+import useFetchHooks from "../../hooks/useFetchHooks";
+import { useQuery } from "react-query";
 
 const UserForm = () => {
   const [name, setName] = useState("");
@@ -20,37 +22,57 @@ const UserForm = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/getUser`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/getUser`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const body = await response.json();
-          console.log("Peticion datos de usuario:", body.data);
-          setDataDb(body.data);
-          setName(body.data.name);
-          setEmail(body.data.email);
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         console.log("Peticion datos de usuario:", body.data);
+  //         setDataDb(body.data);
+  //         setName(body.data.name);
+  //         setEmail(body.data.email);
         
-        } else {
-          throw new Error("Error al hacer fetch a los datos de usuario ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  //       } else {
+  //         throw new Error("Error al hacer fetch a los datos de usuario ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [context]);
+
+
+
+
+  const { hookGetFetch } = useFetchHooks();
+
+  const { isLoading, data, isError, isSuccess, error } = useQuery(
+    ["users", "training"],
+    () => hookGetFetch(`getUser`),
+    {
+      onSuccess: (data) => {
+        setDataDb(data.data);
+        setName(data.data.name);
+        setEmail(data.data.email);
+      
+      },
     }
-    fetchData();
-  }, [context]);
+  );
+
+
 
   const modifyUser = async (e) => {
     e.preventDefault();
