@@ -5,6 +5,7 @@ import {
   AdminTrainingDetail,
   AdminTrainingListPage,
   AdminTrainingModify,
+  AdminUserSetting,
   FavListPage,
   ForgotPasswordPage,
   HomePage,
@@ -22,6 +23,8 @@ import { authContext } from "./context/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import ChangeRol from "./components/ChangeRol";
+import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -93,7 +96,15 @@ const routesAdmin = [
   },
   {
     path: "/admin/ajustes",
-    element: <AdminSettingsPage />,
+    element: <AdminUserSetting />,
+  },
+  {
+    path: "/admin/ajustes/rol",
+    element: <ChangeRol />,
+  },
+  {
+    path: "/admin/ajustes/borrar-usuario",
+    element: <FormRemoveUserByEmail />,
   },
 ];
 
