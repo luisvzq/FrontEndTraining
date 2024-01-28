@@ -57,7 +57,8 @@ const AdminTrainingModify = () => {
 
   const { hookGetFetch } = useFetchHooks();
 
-  const { isLoading, data, isError, isSuccess, error } = useQuery(
+  // const { isLoading, data, isError, isSuccess, error } = useQuery(
+    const { isLoading } = useQuery(
     ["admindetails", "training"],
     () => hookGetFetch(`training/${trainingId}`),
     {

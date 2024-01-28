@@ -59,7 +59,8 @@ const UserForm = () => {
 
   const { hookGetFetch } = useFetchHooks();
 
-  const { isLoading, data, isError, isSuccess, error } = useQuery(
+  // const { isLoading, data, isError, isSuccess, error } = useQuery(
+    const { isLoading } = useQuery(
     ["users", "getUser"],
     () => hookGetFetch(`getUser`),
     {
@@ -149,8 +150,7 @@ const UserForm = () => {
   };
 
   return (
-    <div className="container-modify-user">
-      <ButtonDeleteUser />
+  <>
       <section className="user-page">
       
         <h1>Modificar usuario</h1>
@@ -199,7 +199,7 @@ const UserForm = () => {
 }
       
       </section>
-    </div>
+      </>
   );
 };
 

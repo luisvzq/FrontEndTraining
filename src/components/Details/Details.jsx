@@ -45,7 +45,8 @@ const Details = ({ trainingId }) => {
 
   const { hookGetFetch } = useFetchHooks();
 
-  const { isLoading, data, isError, isSuccess, error } = useQuery(
+  // const { isLoading, data, isError, isSuccess, error } = useQuery(
+    const { isLoading } = useQuery(
     ["details", "training"],
     () => hookGetFetch(`training/${trainingId}`),
     {
