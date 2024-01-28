@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
@@ -60,13 +60,14 @@ const UserForm = () => {
   const { hookGetFetch } = useFetchHooks();
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
-    ["users", "training"],
+    ["users", "getUser"],
     () => hookGetFetch(`getUser`),
     {
       onSuccess: (data) => {
-        setDataDb(data.data);
-        setName(data.data.name);
-        setEmail(data.data.email);
+        console.log(data);
+        setDataDb(data);
+        setName(data.name);
+        setEmail(data.email);
       
       },
     }
