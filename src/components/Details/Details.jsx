@@ -38,6 +38,12 @@ const Details = ({ trainingId }) => {
     }
     fetchData();
   }, [trainingId, context]);
+  let route = "";
+  if (context.role === "admin") {
+    route = "/admin/entrenos?";
+  } else {
+    route = "/entrenos?";
+  }
 
   return (
     <div className="container-detail">
@@ -56,12 +62,16 @@ const Details = ({ trainingId }) => {
             </div>{" "}
             <div className="interact-container">
               <div className="tags">
-              <Link to={`http://localhost:5173/entrenos?name=&typology=${details.typology}&muscle_group=&order_by=`}>
+                <Link
+                  to={`${route}name=&typology=${details.typology}&muscle_group=&order_by=`}
+                >
                   <p className="tag">Tipologia: {details.typology}</p>
-              </Link>
-              <Link to={`http://localhost:5173/entrenos?name=&typology=&muscle_group=${details.muscle_group}&order_by=`}>
+                </Link>
+                <Link
+                  to={`${route}name=&typology=&muscle_group=${details.muscle_group}&order_by=`}
+                >
                   <p className="tag">Grupo muscular: {details.muscle_group}</p>
-              </Link>
+                </Link>
               </div>
               <div className="logos">
                 <FavChecked trainingId={trainingId} />

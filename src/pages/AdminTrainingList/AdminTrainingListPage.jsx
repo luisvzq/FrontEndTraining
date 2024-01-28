@@ -31,7 +31,7 @@ const AdminTrainingListPage = () => {
           setAllTraining={setAllTraining}
           allTraining={data}
         ></OrderAndSearchInputTraining>
-        <Link to="/admin/añadir">
+        <Link to="/admin/crear">
           <button className="add-training">Añadir entreno</button>
         </Link>
 

@@ -1,6 +1,5 @@
 import {
   AdminFavListPage,
-  AdminSettingsPage,
   AdminTrainingCreate,
   AdminTrainingDetail,
   AdminTrainingListPage,
@@ -93,9 +92,9 @@ const routesAdmin = [
     element: <AdminTrainingModify />,
   },
   {
-    path: "/admin/añadir",
+    path: "/admin/crear",
     element: <AdminTrainingCreate />,
-  },        
+  },
   {
     path: "admin/user/modify",
     element: <UserForm />,
@@ -129,7 +128,7 @@ const routesWithAuth = [
   },
   {
     path: "/ajustes",
-    element:  <SettingsPage />,  
+    element: <SettingsPage />,
   },
 ];
 
