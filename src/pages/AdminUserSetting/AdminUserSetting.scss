@@ -1,0 +1,18 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  
+} .second-container{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  
+}
+
+  @media (min-width: 650px) {
+  
+  .second-container {
+  
+    flex-direction: row;
+  }
+}

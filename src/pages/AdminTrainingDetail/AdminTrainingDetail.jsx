@@ -3,7 +3,7 @@ import Details from "../../components/Details/Details";
 import ButtonDelete from "../../components/ButtonDelete/ButtonDelete";
 import { Link, useParams } from "react-router-dom";
 
-import "./AdminTrainingDetail.scss"
+import "./AdminTrainingDetail.scss";
 
 const AdminTrainingDetail = () => {
   const { trainingId } = useParams();
@@ -16,7 +16,7 @@ const AdminTrainingDetail = () => {
             <button>Modificar entreno</button>
           </Link>
 
-          <Link to={`/admin/añadir`}>
+          <Link to={`/admin/crear`}>
             <button>Añadir entreno</button>
           </Link>
         </div>

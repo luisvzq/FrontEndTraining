@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
-import "./ForgotPasswordPage.scss";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
-const ForgotPasswordPage = () => {
+import useFetchHooks from "../hooks/useFetchHooks";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
+
+const FormRemoveUserByEmail = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
 
+
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
-  const handleForgotButton = (e) => {
+  const handleAdminDeleteUserButton = (e) => {
     e.preventDefault();
     if (!mail) {
       setStatusMessage("Debe de facilitar algun dato");
@@ -21,10 +22,15 @@ const ForgotPasswordPage = () => {
     }
     if (mail) {
       mutation.mutate(
-        { endpoint: "loginForgot", method: "POST", user: postBody },
+        {
+          endpoint: `removeUserByEmail`,
+          method: "DELETE",
+          user: postBody,
+        },
         {
           onError: (error) => {
             setStatusMessage(error);
+
             setTimeout(() => {
               setStatusMessage("");
             }, 5000);
@@ -44,14 +50,10 @@ const ForgotPasswordPage = () => {
         className="forgot-password-page
       "
       >
-        <h1>Recuperar Contraseña</h1>
-
+        <h1>Eliminacion de Usarios</h1>
         <ErrorMessage message={statusMessage} />
 
-        <form
-          className="forgot-password-container"
-          onSubmit={handleForgotButton}
-        >
+        <form className="forgot-password-container">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -61,11 +63,17 @@ const ForgotPasswordPage = () => {
               setMail(e.target.value);
             }}
           />
-          <input type="submit" className="submit-btn" />
+          <button
+            type="submit"
+            className="submit-btn"
+            onClick={handleAdminDeleteUserButton}
+          >
+            Eliminar
+          </button>
         </form>
       </section>
     </>
   );
 };
 
-export default ForgotPasswordPage;
+export default FormRemoveUserByEmail;

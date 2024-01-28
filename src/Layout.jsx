@@ -1,10 +1,10 @@
 import {
   AdminFavListPage,
-  AdminSettingsPage,
   AdminTrainingCreate,
   AdminTrainingDetail,
   AdminTrainingListPage,
   AdminTrainingModify,
+  AdminUserSetting,
   FavListPage,
   ForgotPasswordPage,
   HomePage,
@@ -22,7 +22,10 @@ import { authContext } from "./context/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+
+import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail";
 import UserForm from "./components/UserForm/UserForm";
+import ChangeRol from "./components/ChangeRol/ChangeRol";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -89,16 +92,24 @@ const routesAdmin = [
     element: <AdminTrainingModify />,
   },
   {
-    path: "/admin/añadir",
+    path: "/admin/crear",
     element: <AdminTrainingCreate />,
-  },        
+  },
   {
     path: "admin/user/modify",
     element: <UserForm />,
   },
   {
     path: "/admin/ajustes",
-    element: <AdminSettingsPage />,
+    element: <AdminUserSetting />,
+  },
+  {
+    path: "/admin/ajustes/rol",
+    element: <ChangeRol />,
+  },
+  {
+    path: "/admin/ajustes/borrar-usuario",
+    element: <FormRemoveUserByEmail />,
   },
 ];
 
@@ -117,7 +128,7 @@ const routesWithAuth = [
   },
   {
     path: "/ajustes",
-    element:  <SettingsPage />,  
+    element: <SettingsPage />,
   },
 ];
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ResetPasswordPage.scss";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
 const ResetPasswordPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -24,6 +25,9 @@ const ResetPasswordPage = () => {
         {
           onError: (error) => {
             setStatusMessage(error);
+            setTimeout(() => {
+              setStatusMessage("");
+            }, 5000);
           },
           onSuccess: (data) => {
             setStatusMessage(data.message);
@@ -37,11 +41,8 @@ const ResetPasswordPage = () => {
     <>
       <div className="reset-password-page">
         <h1 className="reset-password-heading">Reset Password</h1>
-        {statusMessage ? (
-          <p className="reset-password-text">{statusMessage}</p>
-        ) : (
-          <p className="reset-password-text">Introduce la nueva contraseña</p>
-        )}
+        <ErrorMessage message={statusMessage} />
+
         <form onSubmit={handleResetButton} className="reset-password-container">
           <div>
             <label htmlFor="pass" className="reset-password-label">
