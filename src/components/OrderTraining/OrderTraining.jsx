@@ -20,11 +20,13 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
       [field]: value,
     });
   };
+  const [debouncedSearchParams, setDebouncedSearchParams] =
+    useState(searchParams);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    getTrainingFetch();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   getTrainingFetch();
+  // };
 
   const getTrainingFetch = async () => {
     try {
@@ -46,16 +48,25 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
       console.error("Error:", error.message);
     }
   };
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearchParams(searchParams);
+    }, 1500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchParams]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(searchParams).toString();
     const search = queryParams ? `?${queryParams}` : "";
     window.history.replaceState({}, "", `${window.location.pathname}${search}`);
     getTrainingFetch();
-  }, [searchParams]);
+  }, [debouncedSearchParams]);
 
   return (
-    <form className="order-training-form" onSubmit={handleSubmit}>
+    <form className="order-training-form">
       <div className="search-group">
         <label htmlFor="typology">Tipologia</label>
         <input

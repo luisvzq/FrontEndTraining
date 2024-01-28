@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import "./ChangeRol.scss";
 
 import useFetchHooks from "../../hooks/useFetchHooks";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const ChangeRol = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -21,15 +22,8 @@ const ChangeRol = () => {
       >
         <h1>Cambio de Rol de Usario</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">
-            Introduce Email del usario que desea modificar
-          </p>
-        )}
+        <ErrorMessage message={statusMessage} />
+
         <form className="rol-container">
           <label htmlFor="email">Email</label>
           <input

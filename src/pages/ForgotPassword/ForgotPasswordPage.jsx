@@ -9,26 +9,33 @@ const ForgotPasswordPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
 
-
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
   const handleForgotButton = (e) => {
     e.preventDefault();
-    mutation.mutate(
-      { endpoint: "loginForgot", method: "POST", user: postBody },
-      {
-        onError: (error) => {
-          setStatusMessage(error);
-          setTimeout(() => {
-            setStatusMessage("");
-          }, 5000);
-        },
-        onSuccess: (data) => {
-          setStatusMessage(data.message);
-          setMail("");
-        },
-      }
-    );
+    if (!mail) {
+      setStatusMessage("Debe de facilitar algun dato");
+      setTimeout(() => {
+        setStatusMessage("");
+      }, 5000);
+    }
+    if (mail) {
+      mutation.mutate(
+        { endpoint: "loginForgot", method: "POST", user: postBody },
+        {
+          onError: (error) => {
+            setStatusMessage(error);
+            setTimeout(() => {
+              setStatusMessage("");
+            }, 5000);
+          },
+          onSuccess: (data) => {
+            setStatusMessage(data.message);
+            setMail("");
+          },
+        }
+      );
+    }
   };
 
   return (
