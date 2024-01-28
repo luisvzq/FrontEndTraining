@@ -9,7 +9,7 @@ const ChangeRol = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [setShakeAnimation] = useState(false);
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);

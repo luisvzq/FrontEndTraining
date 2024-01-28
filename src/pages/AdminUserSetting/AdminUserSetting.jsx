@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-
-
 import FormRemoveUserByEmail from "../../components/FormRemoveUserByEmail";
 
 import "./AdminUserSetting.scss";
@@ -11,12 +8,12 @@ const AdminUserSetting = () => {
   return (
     <>
       <div className="main-conintainer">
-        <RegisterPage/>
+        <RegisterPage />
         {/* <Link to="/admin/ajustes/rol">Cambio de Rol</Link>
       <Link to="/admin/ajustes/borrar-usuario">Borrado de Usarios</Link> */}
         <div className="second-container">
           <ChangeRol />
-          <FormRemoveUserByEmail  />
+          <FormRemoveUserByEmail />
         </div>
       </div>
     </>
