@@ -53,7 +53,7 @@ const UserForm = () => {
   //   fetchData();
   // }, [context]);
   const { hookGetFetch } = useFetchHooks();
-  const { isLoading } = useQuery(
+  const { isLoading, isSuccess } = useQuery(
     ["usersGetUser", "getUser"],
     () => hookGetFetch(`getUser`),
     {
@@ -152,9 +152,9 @@ const UserForm = () => {
         ) : (
           <p className="intro-text">Introduce los datos</p>
         )}
-  {isLoading ? (
-          <Loading />
-        ) : (
+          {isLoading?  <Loading />:null}
+        {isSuccess ? (
+        
         <form onSubmit={modifyUser} className="user-form">
           <label htmlFor="name">Nombre</label>
           <input
@@ -187,7 +187,7 @@ const UserForm = () => {
             Modificar datos
           </button>
         </form>
-        )}
+        ):null}
 
         
       </section>

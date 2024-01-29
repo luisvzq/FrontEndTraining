@@ -59,7 +59,7 @@ const AdminTrainingModify = () => {
 
   const { hookGetFetch } = useFetchHooks();
 
-  const { isLoading } = useQuery(
+  const { isLoading, isSuccess } = useQuery(
     [`training/${trainingId}`, `training/${trainingId}`],
     () => hookGetFetch(`training/${trainingId}`),
     {
@@ -170,9 +170,8 @@ const AdminTrainingModify = () => {
           <p className="intro-text">Introduce los datos</p>
         )}
 
-        {isLoading ? (
-          <Loading />
-        ) : (
+{isLoading?  <Loading />:null}
+        {isSuccess ? (
           <form onSubmit={modifyTraining} className="modify-container">
             <label htmlFor="name">Nombre entreno</label>
             <input
@@ -217,7 +216,7 @@ const AdminTrainingModify = () => {
               Enviar
             </button>
           </form>
-        )}
+        ):null}
       </section>
     </>
   );

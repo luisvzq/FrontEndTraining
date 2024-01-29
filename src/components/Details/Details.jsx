@@ -43,9 +43,7 @@ const Details = ({ trainingId }) => {
   // }, [trainingId, context]);
 
   const { hookGetFetch } = useFetchHooks();
-
-  // const { isLoading, data, isError, isSuccess, error } = useQuery(
-    const { isLoading } = useQuery(
+    const { isLoading,isSuccess } = useQuery(
     [`details${trainingId}`,`training/${trainingId}`],
     () => hookGetFetch(`training/${trainingId}`),
     {
@@ -65,9 +63,8 @@ const Details = ({ trainingId }) => {
 
   return (
     <div className="container-detail">
-        {isLoading ? (
-        <Loading />
-      ) : (
+            {isLoading?  <Loading />:null}
+        {isSuccess ? (
       details.name && (
         <>
           <h1 className="title">{details.name}</h1>
@@ -114,7 +111,8 @@ const Details = ({ trainingId }) => {
           </div>
         </>
       )
-      )}
+      ):null}
+        
     </div>
   );
 };

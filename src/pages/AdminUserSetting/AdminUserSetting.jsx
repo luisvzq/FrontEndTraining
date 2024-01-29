@@ -10,12 +10,10 @@ const AdminUserSetting = () => {
   return (
     <>
       <div className="main-conintainer">
-      <div className="container-modify-user">
-      <ButtonDeleteUser />
-        <UserForm />
+        <div className="container-modify-user">
+          <ButtonDeleteUser />
+          <UserForm />
         </div>
-        {/* <Link to="/admin/ajustes/rol">Cambio de Rol</Link>
-      <Link to="/admin/ajustes/borrar-usuario">Borrado de Usarios</Link> */}
         <div className="second-container">
           <ChangeRol />
           <FormRemoveUserByEmail />

@@ -39,7 +39,7 @@ const FavChecked = ({ trainingId }) => {
   //   fetchData();
   // }, [trainingId, context, fav]);
   const { hookGetFetch } = useFetchHooks();
-  const { isLoading } = useQuery(
+  const { isLoading,isSuccess } = useQuery(
     [`favChecked/${trainingId}`,`favChecked/${trainingId}`],
     () => hookGetFetch(`favChecked/${trainingId}`),
     {
@@ -83,16 +83,18 @@ const FavChecked = ({ trainingId }) => {
 
   return (
     <div className="fav-container">
-      {isLoading ? (
-          <Loading />
-        ) : (
+      {isLoading?  <Loading />:null}
+      {isSuccess ? (
+        
+        
       <button
         className={`FAV ${fav && "red"}`}
         onClick={() => {
           handleButton("fav", fav ? "DELETE" : "POST");
         }}
       ></button>
-        )}
+      ):null
+        }
     </div>
   );
 };
