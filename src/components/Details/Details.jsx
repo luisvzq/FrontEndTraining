@@ -81,12 +81,12 @@ const Details = ({ trainingId }) => {
             <div className="interact-container">
               <div className="tags">
                 <Link
-                  to={`${route}name=&typology=${details.typology}&muscle_group=&order_by=`}
+                  to={`/typology/${details.typology}`}
                 >
                   <p className="tag">Tipologia: {details.typology}</p>
                 </Link>
                 <Link
-                  to={`${route}name=&typology=&muscle_group=${details.muscle_group}&order_by=`}
+                  to={`/muscle_group/${details.muscle_group}`}
                 >
                   <p className="tag">Grupo muscular: {details.muscle_group}</p>
                 </Link>

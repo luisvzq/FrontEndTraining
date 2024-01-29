@@ -22,11 +22,11 @@ import { authContext } from "./context/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-
-
-import UserForm from "./components/UserForm/UserForm";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
+import ShowTypology from "./components/ShowTypology/ShowTypology";
+import ShowMuscle_group from "./components/ShowMuscleGroup/ShowMuscle_group"
+
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -81,6 +81,15 @@ const routesAdmin = [
     element: <AdminTrainingListPage />,
   },
   {
+    path: "/typology/:typology",
+    element: <ShowTypology />,
+  },
+  {
+    path: "/muscle_group/:muscle_group",
+    element: <ShowMuscle_group />,
+  },
+
+  {
     path: "/admin/entreno/:trainingId",
     element: <AdminTrainingDetail />,
   },
@@ -95,10 +104,6 @@ const routesAdmin = [
   {
     path: "/admin/crear",
     element: <AdminTrainingCreate />,
-  },
-  {
-    path: "admin/user/modify",
-    element: <UserForm />,
   },
   {
     path: "/admin/ajustes",
