@@ -1,13 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import UseValidate from "../../hooks/UseValidate";
 import Swal from "sweetalert2";
 import "./AdminTrainingModify.scss";
 import Loading from "../../components/Loading/Loading";
-
-import useFetchHooks from "../../hooks/useFetchHooks";
-import { useQuery } from "react-query";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const AdminTrainingModify = () => {
@@ -16,29 +13,54 @@ const AdminTrainingModify = () => {
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
   const [dataDb, setDataDb] = useState({});
-
   const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-
+  const [isLoading, setIsLoading] =useState( true);
+  const [isSuccess, setIsSuccess] =useState(false)
   const [context] = useContext(authContext);
   const { trainingId } = useParams();
   const navigate = useNavigate();
 
-  const { hookGetFetch } = useFetchHooks();
 
-  const { isLoading, isSuccess } = useQuery(
-    [`training/${trainingId}`, `training/${trainingId}`],
-    () => hookGetFetch(`training/${trainingId}`),
-    {
-      onSuccess: (data) => {
-        setDataDb(data);
-        setName(data.name);
-        setDescription(data.description);
-        setTypology(data.typology);
-        setMuscular(data.muscle_group);
-      },
+
+    useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/training/${trainingId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${context.token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const body = await response.json();
+          console.log("respuesta entreno:", body.data);
+
+          setDataDb(body.data);
+          setName(body.data.name);
+          setDescription(body.data.description);
+          setTypology(body.data.typology);
+          setMuscular(body.data.muscle_group);
+          setIsLoading(false)
+          setIsSuccess(true)
+
+        } else {
+          throw new Error("Error al hacer fetch al entreno ");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
-  );
+    fetchData();
+  }, [trainingId, context]);
+
+  
 
   const modifyTraining = async (e) => {
     e.preventDefault();
@@ -49,18 +71,14 @@ const AdminTrainingModify = () => {
       dataDb.typology === typology
     ) {
       setStatusMessage("Debes cambiar algún dato ✌️");
-      setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-      }, 500);
+    
     } else {
       const validated = UseValidate(
         name,
         description,
         typology,
         muscular,
-        setStatusMessage,
-        setShakeAnimation
+        setStatusMessage      
       );
 
       if (validated) {
