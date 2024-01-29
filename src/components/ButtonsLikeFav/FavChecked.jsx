@@ -9,35 +9,6 @@ import { useQuery } from "react-query";
 const FavChecked = ({ trainingId }) => {
   const [context] = useContext(authContext);
   const [fav, setFav] = useState();
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await fetch(
-  //         `${import.meta.env.VITE_HOST_BACK}:${
-  //           import.meta.env.VITE_PORT_BACK
-  //         }/favChecked/${trainingId}`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${context.token}`,
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const body = await response.json();
-  //         console.log("respuesta favorito marcado:", body.data.FavCheck);
-  //         setFav(body.data.FavCheck);
-  //       } else {
-  //         throw new Error("Error al hacer fetch al entreno favorito ");
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [trainingId, context, fav]);
   const { hookGetFetch } = useFetchHooks();
   const { isLoading, isSuccess } = useQuery(
     [`favChecked/${trainingId}`, `favChecked/${trainingId}`],
@@ -78,7 +49,7 @@ const FavChecked = ({ trainingId }) => {
       }
     }
     fetchButton();
-  }; //final del manejador
+  };
 
   return (
     <div className="fav-container">
@@ -97,8 +68,6 @@ const FavChecked = ({ trainingId }) => {
 
 FavChecked.propTypes = {
   trainingId: PropTypes.string,
-  token: PropTypes.string,
-  setRender: PropTypes.func,
 };
 
 export default FavChecked;

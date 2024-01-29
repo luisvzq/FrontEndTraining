@@ -130,7 +130,6 @@ const AdminTrainingModify = () => {
         <h1>Modificar entreno</h1>
 
         <ErrorMessage message={statusMessage} />
-
         {isLoading ? <Loading /> : null}
         {isSuccess ? (
           <form onSubmit={modifyTraining} className="modify-container">

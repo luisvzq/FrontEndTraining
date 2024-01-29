@@ -89,7 +89,7 @@ const CountLikeChecked = ({ trainingId }) => {
       }
     }
     fetchButton();
-  }; //final del manejador
+  };
 
   return (
     <>

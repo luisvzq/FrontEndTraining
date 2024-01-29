@@ -26,8 +26,7 @@ const AdminTrainingCreate = () => {
       description,
       typology,
       muscular,
-      setStatusMessage,
-      setShakeAnimation
+      setStatusMessage
     );
 
     if (validated) {

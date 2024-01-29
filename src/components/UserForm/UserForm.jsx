@@ -44,12 +44,7 @@ const UserForm = () => {
         setShakeAnimation(false);
       }, 500);
     } else {
-      const validated = UseValidateUser(
-        name,
-        email,
-        setStatusMessage,
-        setShakeAnimation
-      );
+      const validated = UseValidateUser(name, email, setStatusMessage);
 
       if (validated) {
         try {
