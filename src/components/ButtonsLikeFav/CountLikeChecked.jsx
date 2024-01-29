@@ -107,12 +107,6 @@ const CountLikeChecked = ({ trainingId }) => {
 };
 CountLikeChecked.propTypes = {
   trainingId: PropTypes.string,
-  token: PropTypes.string,
-  setRender: PropTypes.func,
 };
-
-{
-  /* <div className="CUENTA-MEGUSTA">{countLikes} Me gusta</div> */
-}
 
 export default CountLikeChecked;

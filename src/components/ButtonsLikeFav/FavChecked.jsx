@@ -39,8 +39,8 @@ const FavChecked = ({ trainingId }) => {
   //   fetchData();
   // }, [trainingId, context, fav]);
   const { hookGetFetch } = useFetchHooks();
-  const { isLoading,isSuccess } = useQuery(
-    [`favChecked/${trainingId}`,`favChecked/${trainingId}`],
+  const { isLoading, isSuccess } = useQuery(
+    [`favChecked/${trainingId}`, `favChecked/${trainingId}`],
     () => hookGetFetch(`favChecked/${trainingId}`),
     {
       onSuccess: (data) => {
@@ -48,7 +48,6 @@ const FavChecked = ({ trainingId }) => {
       },
     }
   );
-
 
   const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
@@ -83,22 +82,18 @@ const FavChecked = ({ trainingId }) => {
 
   return (
     <div className="fav-container">
-      {isLoading?  <Loading />:null}
+      {isLoading ? <Loading /> : null}
       {isSuccess ? (
-        
-        
-      <button
-        className={`FAV ${fav && "red"}`}
-        onClick={() => {
-          handleButton("fav", fav ? "DELETE" : "POST");
-        }}
-      ></button>
-      ):null
-        }
+        <button
+          className={`FAV ${fav && "red"}`}
+          onClick={() => {
+            handleButton("fav", fav ? "DELETE" : "POST");
+          }}
+        ></button>
+      ) : null}
     </div>
   );
 };
-
 
 FavChecked.propTypes = {
   trainingId: PropTypes.string,

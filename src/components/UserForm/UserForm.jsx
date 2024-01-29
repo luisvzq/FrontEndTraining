@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import Loading from "../../components/Loading/Loading";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import "./UserForm.scss";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,44 +15,13 @@ const UserForm = () => {
 
   const [dataDb, setDataDb] = useState({});
 
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
   const [context] = useContext(authContext);
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await fetch(
-  //         `${import.meta.env.VITE_HOST_BACK}:${
-  //           import.meta.env.VITE_PORT_BACK
-  //         }/getUser`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${context.token}`,
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const body = await response.json();
-  //         console.log("Peticion datos de usuario:", body.data);
-  //         setDataDb(body.data);
-  //         setName(body.data.name);
-  //         setEmail(body.data.email);
-        
-  //       } else {
-  //         throw new Error("Error al hacer fetch a los datos de usuario ");
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [context]);
   const { hookGetFetch } = useFetchHooks();
   const { isLoading, isSuccess } = useQuery(
     ["usersGetUser", "getUser"],
@@ -64,7 +34,6 @@ const UserForm = () => {
       },
     }
   );
-
 
   const modifyUser = async (e) => {
     e.preventDefault();
@@ -145,56 +114,45 @@ const UserForm = () => {
       <section className="user-page">
         <h1>Modificar usuario</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )}
-          {isLoading?  <Loading />:null}
+        <ErrorMessage message={statusMessage} />
+        {isLoading ? <Loading /> : null}
         {isSuccess ? (
-        
-        <form onSubmit={modifyUser} className="user-form">
-          <label htmlFor="name">Nombre</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <form onSubmit={modifyUser} className="user-form">
+            <label htmlFor="name">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <label htmlFor="pass">Nueva password</label>
-          <input
-            type="password"
-            name="pass"
-            id="pass"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
+            <label htmlFor="pass">Nueva password</label>
+            <input
+              type="password"
+              name="pass"
+              id="pass"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+            />
 
-          <button type="submit" className="submit-btn">
-            Modificar datos
-          </button>
-        </form>
-        ):null}
-
-        
+            <button type="submit" className="submit-btn">
+              Modificar datos
+            </button>
+          </form>
+        ) : null}
       </section>
     </>
   );
 };
-
-
 
 export default UserForm;

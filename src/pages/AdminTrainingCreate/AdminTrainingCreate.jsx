@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import "./AdminTrainingCreate.scss";
 
 import UseValidate from "../../hooks/UseValidate";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const AdminTrainingCreate = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ const AdminTrainingCreate = () => {
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
 
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
   const [context] = useContext(authContext);
@@ -62,7 +63,7 @@ const AdminTrainingCreate = () => {
               popup: "rounded-popup",
             },
           });
-    
+
           navigate("/admin/entrenos");
           setName("");
           setDescription("");
@@ -88,17 +89,11 @@ const AdminTrainingCreate = () => {
   };
 
   return (
-    <>    
+    <>
       <section className="create-page">
         <h1>Añadir entreno</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )}
+        <ErrorMessage message={statusMessage} />
 
         <form onSubmit={createTraining} className="create-container">
           <label htmlFor="name">Nombre entreno</label>
@@ -144,7 +139,7 @@ const AdminTrainingCreate = () => {
             Enviar
           </button>
         </form>
-      </section>    
+      </section>
     </>
   );
 };

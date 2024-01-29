@@ -8,6 +8,7 @@ import Loading from "../../components/Loading/Loading";
 
 import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
@@ -16,46 +17,12 @@ const AdminTrainingModify = () => {
   const [muscular, setMuscular] = useState("");
   const [dataDb, setDataDb] = useState({});
 
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
   const [context] = useContext(authContext);
   const { trainingId } = useParams();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await fetch(
-  //         `${import.meta.env.VITE_HOST_BACK}:${
-  //           import.meta.env.VITE_PORT_BACK
-  //         }/training/${trainingId}`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${context.token}`,
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const body = await response.json();
-  //         console.log("respuesta entreno:", body.data);
-
-  //         setDataDb(body.data);
-  //         setName(body.data.name);
-  //         setDescription(body.data.description);
-  //         setTypology(body.data.typology);
-  //         setMuscular(body.data.muscle_group);
-  //       } else {
-  //         throw new Error("Error al hacer fetch al entreno ");
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [trainingId, context]);
 
   const { hookGetFetch } = useFetchHooks();
 
@@ -162,15 +129,9 @@ const AdminTrainingModify = () => {
       <section className="modify-page">
         <h1>Modificar entreno</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )}
+        <ErrorMessage message={statusMessage} />
 
-{isLoading?  <Loading />:null}
+        {isLoading ? <Loading /> : null}
         {isSuccess ? (
           <form onSubmit={modifyTraining} className="modify-container">
             <label htmlFor="name">Nombre entreno</label>
@@ -216,7 +177,7 @@ const AdminTrainingModify = () => {
               Enviar
             </button>
           </form>
-        ):null}
+        ) : null}
       </section>
     </>
   );
