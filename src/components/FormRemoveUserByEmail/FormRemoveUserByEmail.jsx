@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
 
-import useFetchHooks from "../hooks/useFetchHooks";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import "./FormRemoveUserByEmail.scss";
 
 const FormRemoveUserByEmail = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
@@ -47,13 +47,13 @@ const FormRemoveUserByEmail = () => {
   return (
     <>
       <section
-        className="forgot-password-page
+        className="remove-user-page
       "
       >
         <h1>Eliminacion de Usarios</h1>
         <ErrorMessage message={statusMessage} />
 
-        <form className="forgot-password-container">
+        <form className="remove-user-container">
           <label htmlFor="email">Email</label>
           <input
             type="email"

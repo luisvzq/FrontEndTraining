@@ -23,9 +23,10 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 
-import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail";
+
 import UserForm from "./components/UserForm/UserForm";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
+import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);

@@ -3,19 +3,49 @@ import { authContext } from "../context/AuthContext";
 
 const useFetchHooks = () => {
   const [context] = useContext(authContext);
-  const hookGetFetch = async (endpoint) => {
+  // const hookGetFetch = async (endpoint) => {
+  //   try {
+  //     const res = await fetch(
+  //       `${import.meta.env.VITE_HOST_BACK}:${
+  //         import.meta.env.VITE_PORT_BACK
+  //       }/${endpoint}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${context.token}`,
+  //         },
+  //       }
+  //     );
+  //     const body = await res.json();
+  //     if (!res.ok) {
+  //       throw new Error(body.error);
+  //     } else {
+  //       return body.data;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al conectar con la base de datos:", error);
+  //     throw error.message;
+  //   }
+  // };
+  const hookGetFetch = async (endpoint, options = {}) => {
     try {
-      const res = await fetch(
+      const { page, pageSize } = options;
+      const url = new URL(
         `${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
-        }/${endpoint}`,
-        {
-          headers: {
-            Authorization: `Bearer ${context.token}`,
-          },
-        }
+        }/${endpoint}`
       );
+
+      if (page) url.searchParams.append("page", page);
+      if (pageSize) url.searchParams.append("pageSize", pageSize);
+
+      const res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${context.token}`,
+        },
+      });
+
       const body = await res.json();
+
       if (!res.ok) {
         throw new Error(body.error);
       } else {
