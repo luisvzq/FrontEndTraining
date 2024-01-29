@@ -68,15 +68,6 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   return (
     <form className="order-training-form">
       <div className="search-group">
-        <label htmlFor="typology">Tipologia</label>
-        <input
-          type="text"
-          id="typology"
-          value={searchParams.typology}
-          onChange={(e) => handleChange("typology", e.target.value)}
-        />
-      </div>
-      <div className="search-group">
         <label htmlFor="name">Nombre</label>
         <input
           type="text"
@@ -85,6 +76,16 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           onChange={(e) => handleChange("name", e.target.value)}
         />
       </div>
+      <div className="search-group">
+        <label htmlFor="typology">Tipologia</label>
+        <input
+          type="text"
+          id="typology"
+          value={searchParams.typology}
+          onChange={(e) => handleChange("typology", e.target.value)}
+        />
+      </div>
+
       <div className="search-group">
         <label htmlFor="muscleGroup">Grupo Muscular</label>
         <input
@@ -110,7 +111,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           <option value="likes">Likes</option>
         </select>
       </div>
-      <button type="submit">Buscar</button>
+      {/* <button type="submit">Buscar</button> */}
     </form>
   );
 };

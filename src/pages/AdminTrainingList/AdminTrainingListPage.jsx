@@ -8,6 +8,7 @@ import Training from "../../components/Training/Training.jsx";
 import "./AdminTrainingListPage.scss";
 
 import { Link } from "react-router-dom";
+import Loading from "../../components/Loading/Loading.jsx";
 
 const AdminTrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
@@ -35,7 +36,7 @@ const AdminTrainingListPage = () => {
           <button className="add-training">Añadir entreno</button>
         </Link>
 
-        {isLoading ? <p>Loading.....</p> : null}
+        {isLoading ? <Loading /> : null}
         {isError ? <p>{error}</p> : null}
         {isSuccess ? <Training data={allTraining} /> : null}
       </div>

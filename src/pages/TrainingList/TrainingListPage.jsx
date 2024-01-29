@@ -7,6 +7,7 @@ import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTra
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 
 import Training from "../../components/Training/Training.jsx";
+import Loading from "../../components/Loading/Loading.jsx";
 
 const TrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
@@ -31,7 +32,7 @@ const TrainingListPage = () => {
         allTraining={data}
       ></OrderAndSearchInputTraining>
 
-      {isLoading ? <p>Loading.....</p> : null}
+      {isLoading ? <Loading /> : null}
       {isError ? <p>{error}</p> : null}
       {isSuccess ? <Training data={allTraining} /> : null}
     </div>

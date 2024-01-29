@@ -1,9 +1,10 @@
-.rol-page {
+.remove-user-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
+  
 
   h1 {
     margin-bottom: 1rem;
@@ -27,18 +28,18 @@
   }
 }
 
-.rol-container {
+.remove-user-container {
   display: flex;
   flex-direction: column;
   gap: 1vh;
   width: 30vw;
   min-width: 300px;
-  
 
   background-color: #fff;
   padding: 2rem;
   border-radius: 4%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
 
   label {
     font-size: 1rem;

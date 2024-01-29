@@ -1,9 +1,10 @@
-import FormRemoveUserByEmail from "../../components/FormRemoveUserByEmail";
+
 
 import "./AdminUserSetting.scss";
 import ChangeRol from "../../components/ChangeRol/ChangeRol";
 
 import UserForm from "../../components/UserForm/UserForm";
+import FormRemoveUserByEmail from "../../components/FormRemoveUserByEmail/FormRemoveUserByEmail";
 
 const AdminUserSetting = () => {
   return (
