@@ -1,40 +1,54 @@
 import PropTypes from "prop-types";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { authContext } from "../../context/AuthContext";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import Loading from "../../components/Loading/Loading";
 import "./ButtonsLikeFav.scss";
+import { useQuery } from "react-query";
 
 const FavChecked = ({ trainingId }) => {
   const [context] = useContext(authContext);
   const [fav, setFav] = useState();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/favChecked/${trainingId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/favChecked/${trainingId}`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const body = await response.json();
-          console.log("respuesta favorito marcado:", body.data.FavCheck);
-          setFav(body.data.FavCheck);
-        } else {
-          throw new Error("Error al hacer fetch al entreno favorito ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         console.log("respuesta favorito marcado:", body.data.FavCheck);
+  //         setFav(body.data.FavCheck);
+  //       } else {
+  //         throw new Error("Error al hacer fetch al entreno favorito ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [trainingId, context, fav]);
+  const { hookGetFetch } = useFetchHooks();
+  const { isLoading } = useQuery(
+    [`favChecked/${trainingId}`,`favChecked/${trainingId}`],
+    () => hookGetFetch(`favChecked/${trainingId}`),
+    {
+      onSuccess: (data) => {
+        setFav(data.FavCheck);
+      },
     }
-    fetchData();
-  }, [trainingId, context, fav]);
+  );
+
 
   const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
@@ -69,15 +83,21 @@ const FavChecked = ({ trainingId }) => {
 
   return (
     <div className="fav-container">
+      {isLoading ? (
+          <Loading />
+        ) : (
       <button
         className={`FAV ${fav && "red"}`}
         onClick={() => {
           handleButton("fav", fav ? "DELETE" : "POST");
         }}
       ></button>
+        )}
     </div>
   );
 };
+
+
 FavChecked.propTypes = {
   trainingId: PropTypes.string,
   token: PropTypes.string,

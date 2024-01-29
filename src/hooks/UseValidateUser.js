@@ -1,5 +1,5 @@
 
-const UseValidateUser = (name, email, rol, setStatusMessage, setShakeAnimation) => {
+const UseValidateUser = (name, email, setStatusMessage, setShakeAnimation) => {
     if (
          name==="" ||
         email ===""   
@@ -17,11 +17,11 @@ const UseValidateUser = (name, email, rol, setStatusMessage, setShakeAnimation) 
         }
         if(email.length>50){
             // alert ("El campo descriccion tiene un maximo de 200 caracteres")
-            setStatusMessage("El campo email tiene un maximo de 200 caracteres")
+            setStatusMessage("El campo email tiene un maximo de 50 caracteres")
             setShakeAnimation(true);
             return false
-        }      
-        
+        }     
+
         return true
       }
 
