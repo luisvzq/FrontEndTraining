@@ -134,7 +134,7 @@ const AdminTrainingCreate = () => {
           <label htmlFor="photo">Subir imagen</label>
           <input type="file" name="photo" id="photo" />
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="btn-crear-user">
             Enviar
           </button>
         </form>

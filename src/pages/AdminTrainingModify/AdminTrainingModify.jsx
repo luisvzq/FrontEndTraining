@@ -16,7 +16,7 @@ const AdminTrainingModify = () => {
   const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const [isLoading, setIsLoading] =useState( true);
-  const [isSuccess, setIsSuccess] =useState(false)
+  const [isSuccess, setIsSuccess] =useState(false);
   const [context] = useContext(authContext);
   const { trainingId } = useParams();
   const navigate = useNavigate();
@@ -190,7 +190,7 @@ const AdminTrainingModify = () => {
             <label htmlFor="photo">Subir imagen</label>
             <input type="file" name="photo" id="photo" />
 
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="btn-modificar-user">
               Enviar
             </button>
           </form>

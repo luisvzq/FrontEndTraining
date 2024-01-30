@@ -13,11 +13,11 @@ const AdminTrainingDetail = () => {
         <div className="container-EMA">
           <ButtonDelete />
           <Link to={`/admin/modificar/${trainingId}`}>
-            <button>Modificar entreno</button>
+            <button className="tag">Modificar entreno</button>
           </Link>
 
           <Link to={`/admin/crear`}>
-            <button>Añadir entreno</button>
+            <button className="tag">Añadir entreno</button>
           </Link>
         </div>
         <Details trainingId={trainingId} />

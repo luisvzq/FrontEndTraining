@@ -1,48 +1,63 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
-import { useQuery } from "react-query";
 import Loading from "../../components/Loading/Loading";
-import useFetchHooks from "../../hooks/useFetchHooks";
 import "./UserForm.scss";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-
+  const [newPass, setNewPass] = useState("");
   const [dataDb, setDataDb] = useState({});
-
-  const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-
-  const [context] = useContext(authContext);
-
+  const [isLoading, setIsLoading] =useState( true);
+  const [isSuccess, setIsSuccess] =useState(false);
+  const [context,setContext] = useContext(authContext);
   const navigate = useNavigate();
 
-  const { hookGetFetch } = useFetchHooks();
-  const { isLoading, isSuccess } = useQuery(
-    ["usersGetUser", "getUser"],
-    () => hookGetFetch(`getUser`),
-    {
-      onSuccess: (data) => {
-        setDataDb(data);
-        setName(data.name);
-        setEmail(data.email);
-      },
+
+    useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/getUser`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${context.token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const body = await response.json();
+          console.log("Peticion datos de usuario:", body.data);
+          setDataDb(body.data);
+          setName(body.data.name);
+          setEmail(body.data.email);
+          setNewPass("");
+          setIsLoading(false);
+          setIsSuccess(true)
+
+        } else {
+          throw new Error("Error al hacer fetch a los datos de usuario ");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
-  );
+    fetchData();
+  }, [context]);
 
   const modifyUser = async (e) => {
     e.preventDefault();
     if (dataDb.name === name && dataDb.email === email) {
       setStatusMessage("Debes cambiar algún dato ✌️");
-      setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-      }, 500);
     } else {
       const validated = UseValidateUser(name, email, setStatusMessage);
 
@@ -51,9 +66,8 @@ const UserForm = () => {
           const formData = new FormData();
           formData.append("name", name);
           formData.append("email", email);
-          formData.append("password", pass);
-
-          console.log("Datos a enviar: ", formData);
+          formData.append("password", newPass);
+          // console.log("Datos a enviar: ", formData);
 
           const res = await fetch(
             `${import.meta.env.VITE_HOST_BACK}:${
@@ -79,31 +93,24 @@ const UserForm = () => {
                 popup: "rounded-popup",
               },
             });
-
+            setContext({ name: "", token: "", role: "" });
             navigate(`/`);
             setName("");
             setEmail("");
-            setPass("");
+            setNewPass("");
           } else {
             const body = await res.json();
             console.log(body.error);
             setStatusMessage(body.error);
-            setShakeAnimation(true);
-            setTimeout(() => {
-              setShakeAnimation(false);
-            }, 500);
           }
         } catch (error) {
           console.error(error);
-          setShakeAnimation(true);
-          setTimeout(() => {
-            setShakeAnimation(false);
-          }, 500);
+          setStatusMessage("La modificacion ha fallado");
         }
       }
     }
   };
-
+  console.log("La password es:",newPass);
   return (
     <>
       <section className="user-page">
@@ -136,11 +143,11 @@ const UserForm = () => {
               type="password"
               name="pass"
               id="pass"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
+              value={newPass}
+              onChange={(e) => setNewPass(e.target.value)}
             />
 
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="btn-modify-user">
               Modificar datos
             </button>
           </form>

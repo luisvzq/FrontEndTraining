@@ -50,11 +50,11 @@ const ButtonDelete = ()=> {
           }
         }
         fetchButton();
-      }; //final del manejador
+      };
 
     
     return(
-          <button className="buttons-delete" onClick={handleButton}>Eliminar</button>
+          <button className="tag" onClick={handleButton}>Eliminar</button>
     )
 }
 
