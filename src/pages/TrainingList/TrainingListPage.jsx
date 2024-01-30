@@ -8,6 +8,7 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 
 import Training from "../../components/Training/Training.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
+import { useLocation } from "react-router-dom";
 
 const TrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
@@ -15,9 +16,29 @@ const TrainingListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  // Acceder a un parámetro específico
+  const tagTypology = searchParams.get("typology");
+  const tagMuscleGroup = searchParams.get("muscle_group");
+
+  // Imprimir todos los parámetros de consulta
+  let endpoint;
+  if (searchParams) {
+    endpoint = ``;
+  }
+
+  if (tagTypology) {
+    endpoint = `?typology=${tagTypology}`;
+  }
+  if (tagMuscleGroup) {
+    endpoint = `?muscle_group=${tagMuscleGroup}`;
+  }
+
   const { isLoading, data, isError, isSuccess, error } = useQuery(
-    ["trainingList", "training", currentPage],
-    () => hookGetFetch("training", { page: currentPage, pageSize }),
+    [`trainingList?${endpoint}`, "training", currentPage],
+    () => hookGetFetch(`training${endpoint}`, { page: currentPage, pageSize }),
     {
       onSuccess: (data) => {
         setAllTraining(data);

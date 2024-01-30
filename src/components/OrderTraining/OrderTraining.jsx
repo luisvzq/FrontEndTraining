@@ -6,31 +6,16 @@ import "./OrderTraining.scss";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [context] = useContext(authContext);
+  const [name, setName] = useState("");
+  const [typology, setTypology] = useState("");
+  const [muscleGroup, setMuscleGroup] = useState("");
+  const [order, setOrder] = useState("");
 
-  const [searchParams, setSearchParams] = useState({
-    name: "",
-    typology: "",
-    muscle_group: "",
-    order_by: "",
-  });
-
-  const handleChange = (field, value) => {
-    setSearchParams({
-      ...searchParams,
-      [field]: value,
-    });
-  };
-  const [debouncedSearchParams, setDebouncedSearchParams] =
-    useState(searchParams);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   getTrainingFetch();
-  // };
+  const [debouncedSearchParams, setDebouncedSearchParams] = useState({});
 
   const getTrainingFetch = async () => {
     try {
-      const queryParams = new URLSearchParams(searchParams).toString();
+      const queryParams = new URLSearchParams(debouncedSearchParams).toString();
       console.log(queryParams);
       const res = await fetch(`http://localhost:3001/training?${queryParams}`, {
         headers: {
@@ -50,16 +35,22 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   };
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setDebouncedSearchParams(searchParams);
+      const newSearchParams = {};
+      if (name !== "") newSearchParams.name = name;
+      if (typology !== "") newSearchParams.typology = typology;
+      if (muscleGroup !== "") newSearchParams.muscle_group = muscleGroup;
+      if (order !== "") newSearchParams.order_by = order;
+
+      setDebouncedSearchParams(newSearchParams);
     }, 1500);
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [searchParams]);
+  }, [name, typology, muscleGroup, order]);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(searchParams).toString();
+    const queryParams = new URLSearchParams(debouncedSearchParams).toString();
     const search = queryParams ? `?${queryParams}` : "";
     window.history.replaceState({}, "", `${window.location.pathname}${search}`);
     getTrainingFetch();
@@ -72,8 +63,8 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="name"
-          value={searchParams.name}
-          onChange={(e) => handleChange("name", e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="search-group">
@@ -81,8 +72,8 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="typology"
-          value={searchParams.typology}
-          onChange={(e) => handleChange("typology", e.target.value)}
+          value={typology}
+          onChange={(e) => setTypology(e.target.value)}
         />
       </div>
 
@@ -91,18 +82,18 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="muscleGroup"
-          value={searchParams.muscleGroup}
-          onChange={(e) => handleChange("muscle_group", e.target.value)}
+          value={muscleGroup}
+          onChange={(e) => setMuscleGroup(e.target.value)}
         />
       </div>
       <div className="order-group">
         <label htmlFor="order"></label>
         <select
-          value={searchParams.order}
+          value={order}
           name="order"
           id="order"
           onChange={(e) => {
-            handleChange("order_by", e.target.value);
+            setOrder(e.target.value);
           }}
         >
           <option value="">Ordenar por</option>

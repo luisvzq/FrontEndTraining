@@ -62,14 +62,10 @@ const Details = ({ trainingId }) => {
             </div>{" "}
             <div className="interact-container">
               <div className="tags">
-                <Link
-                  to={`${route}name=&typology=${details.typology}&muscle_group=&order_by=`}
-                >
+                <Link to={`${route}typology=${details.typology}`}>
                   <p className="tag">Tipologia: {details.typology}</p>
                 </Link>
-                <Link
-                  to={`${route}name=&typology=&muscle_group=${details.muscle_group}&order_by=`}
-                >
+                <Link to={`${route}muscle_group=${details.muscle_group}`}>
                   <p className="tag">Grupo muscular: {details.muscle_group}</p>
                 </Link>
               </div>
@@ -80,7 +76,14 @@ const Details = ({ trainingId }) => {
             </div>
             <div className="description-container">
               <p className="description">
-              {details.description}
+                Descripción: Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Corporis, blanditiis dolores eaque officiis cumque illo
+                sunt adipisci commodi et quos quisquam temporibus repellendus
+                rerum, iusto minus, error eveniet omnis quam. Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Illum, mollitia ut.
+                Accusamus ab repudiandae, tempore perferendis optio harum
+                provident reiciendis, quidem, ipsum cum facere consequuntur? Sed
+                aliquid exercitationem vitae magnam. {details.description}
               </p>
             </div>
           </div>
