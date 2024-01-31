@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Details = ({ trainingId }) => {
   const [context] = useContext(authContext);
@@ -38,6 +39,35 @@ const Details = ({ trainingId }) => {
     }
     fetchData();
   }, [trainingId, context]);
+
+  const handleAddToLocalStorage = () => {
+    const localStorageKey = "Rutina"; // Puedes cambiar esto según tus necesidades
+    const localStorageData =
+      JSON.parse(localStorage.getItem(localStorageKey)) || [];
+
+    // Verificar si el nombre del entrenamiento ya está en el localStorage
+    const isTrainingAlreadyAdded = localStorageData.includes(details.name);
+
+    if (!isTrainingAlreadyAdded) {
+      // Si no está presente, agregarlo al array y actualizar el localStorage
+      localStorageData.push(details.name);
+      localStorage.setItem(localStorageKey, JSON.stringify(localStorageData));
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: `Entreno de ${details.name} se ha añadido a rutinas!`,
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "rounded-popup",
+        },
+      });
+    } else {
+      // Si ya está presente, mostrar un mensaje o tomar alguna acción
+      Swal.fire(`${details.name} ya esta guardado en rutinas!`);
+    }
+  };
+
   let route = "";
   if (context.role === "admin") {
     route = "/admin/entrenos?";
@@ -50,6 +80,9 @@ const Details = ({ trainingId }) => {
       {details.name && (
         <>
           <h1 className="title">{details.name}</h1>
+          <button onClick={handleAddToLocalStorage}>
+            Añadir a ruitnas
+          </button>
           <div className="details">
             <div className="photo-container">
               <img

@@ -12,7 +12,7 @@ import LoginPage from "./Login/LoginPage";
 import AdminTrainingModify from "./AdminTrainingModify/AdminTrainingModify";
 import AdminTrainingCreate from "./AdminTrainingCreate/AdminTrainingCreate";
 import SettingsPage from "./SettingsPage/SettingsPage";
-
+import TrainingRutinePage from "./TrainingRutine/TrainingRutinePage";
 import AdminUserSetting from "./AdminUserSetting/AdminUserSetting";
 
 export {
@@ -31,4 +31,5 @@ export {
   TrainingDetailPage,
   SettingsPage,
   AdminUserSetting,
+  TrainingRutinePage
 };

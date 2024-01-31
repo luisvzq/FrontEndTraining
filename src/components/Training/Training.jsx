@@ -9,10 +9,10 @@ const Training = ({ data }) => {
   const [context] = useContext(authContext);
 
   return (
-    <ul className="listTraining">
+    <ul className="list-training">
       {data.map((training) => {
         return (
-          <li key={training.id}>
+          <li key={training.id} className="training-element">
             <Link
               to={
                 context.role === "admin"

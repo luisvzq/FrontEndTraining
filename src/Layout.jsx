@@ -14,6 +14,7 @@ import {
   SettingsPage,
   TrainingDetailPage,
   TrainingListPage,
+  TrainingRutinePage,
 } from "./pages";
 
 import { Routes, Route } from "react-router-dom";
@@ -125,6 +126,10 @@ const routesWithAuth = [
   {
     path: "/ajustes",
     element: <SettingsPage />,
+  },
+  {
+    path: "/rutina",
+    element: <TrainingRutinePage />,
   },
 ];
 
