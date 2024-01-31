@@ -23,7 +23,6 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 
-
 import UserForm from "./components/UserForm/UserForm";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
@@ -97,21 +96,17 @@ const routesAdmin = [
     element: <AdminTrainingCreate />,
   },
   {
-    path: "admin/user/modify",
-    element: <UserForm />,
-  },
-  {
     path: "/admin/ajustes",
     element: <AdminUserSetting />,
   },
   {
-    path: "/admin/ajustes/rol",
+    path: "/admin/rutine",
     element: <ChangeRol />,
   },
-  {
-    path: "/admin/ajustes/borrar-usuario",
-    element: <FormRemoveUserByEmail />,
-  },
+  // {
+  //   path: "/admin/ajustes/borrar-usuario",
+  //   element: <FormRemoveUserByEmail />,
+  // },
 ];
 
 const routesWithAuth = [
