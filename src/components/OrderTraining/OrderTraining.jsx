@@ -20,7 +20,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   //Convierte cuaquier tipo de objeto pro- valor en objeto normal
 // Object.fromEntries(searchParams);
 
-console.log(Object.fromEntries(searchParams));
+// console.log(Object.fromEntries(searchParams));
 
   const handleChange = (field, value) => {
     searchParams.set(field,value);
@@ -37,7 +37,7 @@ console.log(Object.fromEntries(searchParams));
   const getTrainingFetch = async () => {
     try {
       const queryParams = searchParams.toString();
-      console.log(queryParams);
+      // console.log(queryParams);
       const res = await fetch(`http://localhost:3001/training?${queryParams}`, {
         headers: {
           Authorization: `Bearer ${context.token}`,
