@@ -1,10 +1,11 @@
 const UseValidate = (
   name,
   typology,
+  description,
   muscular,
   setStatusMessage  
 ) => {
-  if (name === "" || muscular === "" || typology === "") {
+  if (name === "" || desciption==="" || muscular === "" || typology === "") {
     setStatusMessage("Debes cubir todos los campos ✌️");
 
     return false;
