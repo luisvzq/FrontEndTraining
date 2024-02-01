@@ -4,6 +4,8 @@ import { useMutation } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ResetPasswordPage.scss";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ResetPasswordPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -12,6 +14,8 @@ const ResetPasswordPage = () => {
   const [pass, setPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
 
+  const navigate = useNavigate();
+
   const postBody = { password: pass };
   const mutation = useMutation(hookPostPatchFetch);
 
@@ -19,6 +23,9 @@ const ResetPasswordPage = () => {
     e.preventDefault();
     if (pass !== repeatPass) {
       setStatusMessage("No coinciden las contraseñas");
+      setTimeout(() => {
+        setStatusMessage("");
+      }, 5000);
     } else {
       mutation.mutate(
         { endpoint: `loginReset/${temp}`, method: "PATCH", user: postBody },
@@ -30,7 +37,17 @@ const ResetPasswordPage = () => {
             }, 5000);
           },
           onSuccess: (data) => {
-            setStatusMessage(data.message);
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: data.message,
+              showConfirmButton: false,
+              timer: 2500,
+              customClass: {
+                popup: "rounded-popup",
+              },
+            });
+            navigate("/login");
           },
         }
       );

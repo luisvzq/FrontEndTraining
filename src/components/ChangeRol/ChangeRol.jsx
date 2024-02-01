@@ -4,12 +4,12 @@ import "./ChangeRol.scss";
 
 import useFetchHooks from "../../hooks/useFetchHooks";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Swal from "sweetalert2";
 
 const ChangeRol = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-  const [setShakeAnimation] = useState(false);
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
@@ -45,14 +45,21 @@ const ChangeRol = () => {
                   onError: (error) => {
                     setStatusMessage(error);
 
-                    setShakeAnimation(true);
                     setTimeout(() => {
-                      setShakeAnimation(false);
                       setStatusMessage("");
                     }, 5000);
                   },
                   onSuccess: (data) => {
-                    setStatusMessage(data.message);
+                    Swal.fire({
+                      position: "top-center",
+                      icon: "success",
+                      title: data.message,
+                      showConfirmButton: false,
+                      timer: 2500,
+                      customClass: {
+                        popup: "rounded-popup",
+                      },
+                    });
                     setMail("");
                   },
                 }
@@ -72,14 +79,21 @@ const ChangeRol = () => {
                   onError: (error) => {
                     setStatusMessage(error);
 
-                    setShakeAnimation(true);
                     setTimeout(() => {
-                      setShakeAnimation(false);
                       setStatusMessage("");
                     }, 5000);
                   },
                   onSuccess: (data) => {
-                    setStatusMessage(data.message);
+                    Swal.fire({
+                      position: "top-center",
+                      icon: "success",
+                      title: data.message,
+                      showConfirmButton: false,
+                      timer: 2500,
+                      customClass: {
+                        popup: "rounded-popup",
+                      },
+                    });
                     setMail("");
                   },
                 }

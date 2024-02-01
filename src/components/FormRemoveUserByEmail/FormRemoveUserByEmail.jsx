@@ -4,6 +4,7 @@ import { useMutation } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./FormRemoveUserByEmail.scss";
+import Swal from "sweetalert2";
 
 const FormRemoveUserByEmail = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -36,7 +37,16 @@ const FormRemoveUserByEmail = () => {
             }, 5000);
           },
           onSuccess: (data) => {
-            setStatusMessage(data.message);
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: data.message,
+              showConfirmButton: false,
+              timer: 2500,
+              customClass: {
+                popup: "rounded-popup",
+              },
+            });
             setMail("");
           },
         }

@@ -3,11 +3,14 @@ import { useMutation } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ForgotPasswordPage.scss";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ForgotPasswordPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
+  const navigate = useNavigate();
 
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
@@ -30,7 +33,17 @@ const ForgotPasswordPage = () => {
             }, 5000);
           },
           onSuccess: (data) => {
-            setStatusMessage(data.message);
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: data.message,
+              showConfirmButton: false,
+              timer: 2500,
+              customClass: {
+                popup: "rounded-popup",
+              },
+            });
+            navigate("/login");
             setMail("");
           },
         }
