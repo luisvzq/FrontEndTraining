@@ -8,6 +8,23 @@ const ButtonDeleteUser = () => {
   const [context, setContext] = useContext(authContext);
   const navigate = useNavigate();
 
+  const confirmation= ()=>{
+    Swal.fire({
+      title: 'Esta seguro?',
+      text: "El usuario se borrara!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo eliminar mi cuenta.'
+    
+    }).then((result) => {
+      if (result.value) {
+        handleButton();          
+      }
+    })}
+  
+
   const handleButton = () => {
     async function fetchButton() {
       try {
@@ -50,7 +67,7 @@ const ButtonDeleteUser = () => {
   };
 
   return (
-    <button className="btn-delete-user" onClick={handleButton}>
+    <button className="btn-delete-user" onClick={confirmation}>
       Eliminar cuenta
     </button>
   );
