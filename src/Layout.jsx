@@ -24,8 +24,6 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
-import ShowTypology from "./components/ShowTypology/ShowTypology";
-import ShowMuscle_group from "./components/ShowMuscleGroup/ShowMuscle_group"
 
 
 const Layout = () => {
@@ -80,15 +78,6 @@ const routesAdmin = [
     path: "/admin/entrenos",
     element: <AdminTrainingListPage />,
   },
-  {
-    path: "/typology/:typology",
-    element: <ShowTypology />,
-  },
-  {
-    path: "/muscle_group/:muscle_group",
-    element: <ShowMuscle_group />,
-  },
-
   {
     path: "/admin/entreno/:trainingId",
     element: <AdminTrainingDetail />,
