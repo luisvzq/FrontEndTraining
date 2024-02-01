@@ -26,7 +26,7 @@ const TrainingListPage = () => {
       },
     }
   );
-
+console.log(data);
   return (
     <div className="training-list">
       <h1>Todos los entrenamientos</h1>

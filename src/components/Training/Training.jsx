@@ -33,7 +33,7 @@ const Training = ({ data }) => {
           console.log("response Button", bodyButton);
           setLike(!like);
           setFav(!fav);
-          navigate(`/entrenos`);
+          navigate(`/admin/entrenos?name=&typology=&muscle_group=&order_by=`);
         } else {
           const body = await response.json();
           console.error("ERROR fetchButton", body.message);
@@ -52,15 +52,16 @@ const Training = ({ data }) => {
         return (
           <li key={training.id}>
             <button
+              className={`LIKE ${training.likeTrue && "red"}`}
               onClick={() => {
-                handleButton("like", like ? "DELETE" : "POST", training.id);
+                handleButton("like", training.likeTrue ? "DELETE" : "POST", training.id);
               }}
-            >
-              Like
+            >            
             </button>
-            <button              
+            <button    
+              className={`FAV ${training.favTrue && "red"}`}          
               onClick={() => {
-                handleButton("fav", fav ? "DELETE" : "POST", training.id);
+                handleButton("fav",training.favTrue ? "DELETE" : "POST", training.id);
               }}
             ></button>
         
