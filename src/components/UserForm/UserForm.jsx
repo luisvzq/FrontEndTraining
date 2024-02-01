@@ -13,13 +13,12 @@ const UserForm = () => {
   const [newPass, setNewPass] = useState("");
   const [dataDb, setDataDb] = useState({});
   const [statusMessage, setStatusMessage] = useState("");
-  const [isLoading, setIsLoading] =useState( true);
-  const [isSuccess, setIsSuccess] =useState(false);
-  const [context,setContext] = useContext(authContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [context] = useContext(authContext);
   const navigate = useNavigate();
 
-
-    useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
@@ -42,8 +41,7 @@ const UserForm = () => {
           setEmail(body.data.email);
           setNewPass("");
           setIsLoading(false);
-          setIsSuccess(true)
-
+          setIsSuccess(true);
         } else {
           throw new Error("Error al hacer fetch a los datos de usuario ");
         }
@@ -93,7 +91,6 @@ const UserForm = () => {
                 popup: "rounded-popup",
               },
             });
-            setContext({ name: "", token: "", role: "" });
             navigate(`/`);
             setName("");
             setEmail("");
@@ -110,7 +107,7 @@ const UserForm = () => {
       }
     }
   };
-  console.log("La password es:",newPass);
+
   return (
     <>
       <section className="user-page">
