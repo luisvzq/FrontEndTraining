@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Details from "../../components/Details/Details";
 //import ButtonDelete from "../../components/ButtonDelete/ButtonDelete";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 //import Add from "../../assets/Add.svg"
 //import Edit from "../../assets/Edit.svg"
 

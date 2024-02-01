@@ -17,11 +17,12 @@ const TrainingListPage = () => {
   const pageSize = 10;
 
   const { isLoading, data, isError, isSuccess, error } = useQuery(
-    ["trainingList", "training", currentPage],
-    () => hookGetFetch("training", { page: currentPage, pageSize }),
+    ["trainingInfo", "trainingInfo", currentPage],
+    () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
     {
       onSuccess: (data) => {
         setAllTraining(data);
+    
       },
     }
   );
