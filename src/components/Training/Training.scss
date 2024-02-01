@@ -35,6 +35,19 @@ li {
   }
 }
 
+.botones{
+  display: flex;
+  justify-content:end;
+
+}
+.count-likes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 
 /* Media query para hacerlo responsive */
 @media (max-width: 768px) {

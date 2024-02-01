@@ -1,16 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { authContext } from "../../context/AuthContext";
 
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Training.scss";
 
-
-const Training = ({ data }) => {
+const Training = ({ data, setRender }) => {
   const [context] = useContext(authContext);
-  const [like, setLike] = useState();
-  const [fav, setFav] = useState();
-  const navigate = useNavigate();
+  // const [like, setLike] = useState();
+  // const [fav, setFav] = useState();
 
   const handleButton = (table, method, entreno) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);
@@ -31,9 +29,13 @@ const Training = ({ data }) => {
         if (response.ok) {
           const bodyButton = await response.json();
           console.log("response Button", bodyButton);
-          setLike(!like);
-          setFav(!fav);
-          navigate(`/admin/entrenos?name=&typology=&muscle_group=&order_by=`);
+          setRender(true);
+          // if (table === "like") {
+          //   setLike(!like);
+          // }
+          // if (table === "fav") {
+          //   setFav(!fav);
+          // }
         } else {
           const body = await response.json();
           console.error("ERROR fetchButton", body.message);
@@ -45,26 +47,38 @@ const Training = ({ data }) => {
     fetchButton();
   }; //final del manejador
 
-
+  console.log("Ata aqui chega", data);
   return (
     <ul className="listTraining">
       {data.map((training) => {
         return (
           <li key={training.id}>
-            <button
-              className={`LIKE ${training.likeTrue && "red"}`}
-              onClick={() => {
-                handleButton("like", training.likeTrue ? "DELETE" : "POST", training.id);
-              }}
-            >            
-            </button>
-            <button    
-              className={`FAV ${training.favTrue && "red"}`}          
-              onClick={() => {
-                handleButton("fav",training.favTrue ? "DELETE" : "POST", training.id);
-              }}
-            ></button>
-        
+            <div className="botones">
+              <button
+                className={`FAV ${training.favTrue && "red"}`}
+                onClick={() => {
+                  handleButton(
+                    "fav",
+                    training.favTrue ? "DELETE" : "POST",
+                    training.id
+                  );
+                }}
+              ></button>
+              <div className="count-likes">
+                <button
+                  className={`LIKE ${training.likeTrue && "red"}`}
+                  onClick={() => {
+                    handleButton(
+                      "like",
+                      training.likeTrue ? "DELETE" : "POST",
+                      training.id
+                    );
+                  }}
+                ></button>
+                <p>{training.allLikes}</p>
+              </div>
+            </div>
+
             <Link
               to={
                 context.role === "admin"
@@ -73,7 +87,6 @@ const Training = ({ data }) => {
               }
             >
               <h2>{training.name}</h2>
-              <p>Likes:{training.allLikes}</p>
 
               <img
                 src={`${import.meta.env.VITE_HOST_BACK}:${
@@ -91,6 +104,7 @@ const Training = ({ data }) => {
 
 Training.propTypes = {
   data: PropTypes.array,
+  setRender: PropTypes.func,
 };
 
 export default Training;

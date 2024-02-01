@@ -1,48 +1,73 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useContext, useEffect, useState } from "react";
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
-
+import PropTypes from "prop-types";
 import Training from "../../components/Training/Training.jsx";
 
 import "./AdminTrainingListPage.scss";
-import Add from "../../assets/Add.svg"
+import Add from "../../assets/Add.svg";
 
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading/Loading.jsx";
+import { authContext } from "../../context/AuthContext.jsx";
 
 const AdminTrainingListPage = () => {
-  const { hookGetFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [context] = useContext(authContext);
+  const [render, setRender] =useState(false)
 
-  const { isLoading, data, isError, isSuccess, error } = useQuery(
-    ["trainingList", "training"],
-    () => hookGetFetch("training"),
-    {
-      onSuccess: (data) => {
-        setAllTraining(data);
-      },
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/trainingInfo`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${context.token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const body = await response.json();        
+          setAllTraining(body.data);
+          setIsLoading(false);
+          setRender(false)
+          console.log("Info array:", body.data);
+        } else {
+          throw new Error("Error al hacer fetch al entreno ");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
-  );
+    fetchData();
+  }, [context,render]);
+
+
 
   return (
     <>
       <div className="training-list">
         <h1>Todos los entrenamientos</h1>
-        <OrderAndSearchInputTraining
+        {/* <OrderAndSearchInputTraining
           setAllTraining={setAllTraining}
-          allTraining={data}
-        ></OrderAndSearchInputTraining>
+        ></OrderAndSearchInputTraining> */}
         <Link to="/admin/crear" className="linkList">
-        <button className="buttonAdd"><img src={Add} alt="Añadir"className="add"/></button>
+          <button className="buttonAdd">
+            <img src={Add} alt="Añadir" className="add" />
+          </button>
         </Link>
-
-        {isLoading ? <Loading /> : null}
-        {isError ? <p>{error}</p> : null}
-        {isSuccess ? <Training data={allTraining} /> : null}
+        {isLoading ? <Loading /> : <Training data={allTraining} setRender={setRender}/>}
       </div>
     </>
   );
 };
-
+AdminTrainingListPage.propTypes = {
+  data: PropTypes.array,
+  setRender:PropTypes.func
+};
 export default AdminTrainingListPage;
