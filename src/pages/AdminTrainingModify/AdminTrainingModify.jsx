@@ -74,9 +74,9 @@ const AdminTrainingModify = () => {
     
     } else {
       const validated = UseValidate(
-        name,
-        description,
+        name,        
         typology,
+        description,
         muscular,
         setStatusMessage      
       );

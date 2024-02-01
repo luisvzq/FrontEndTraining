@@ -26,7 +26,12 @@ const Details = ({ trainingId }) => {
       },
     }
   );
-
+  let route="";
+  if(context.role==="admin"){
+    route="/admin/entrenos?";
+  }else{
+    route="/entrenos?";
+  }
   return (
     <div className="container-detail">
       {context.role === "admin" &&<> 
@@ -55,12 +60,12 @@ const Details = ({ trainingId }) => {
                 </div>{" "}
                 <div className="interact-container">
                   <div className="tags">
-                    <Link to={`/admin/entrenos?typology=${details.typology}`}>
+                    <Link to={`${route}/admin/entrenos?typology=${details.typology}`}>
                       <button className="tag">
                         Tipologia: {details.typology}
                       </button>
                     </Link>
-                    <Link to={`/admin/entrenos?muscle_group=${details.muscle_group}`}>
+                    <Link to={`${route}/admin/entrenos?muscle_group=${details.muscle_group}`}>
                       <button className="tag">
                         Grupo muscular: {details.muscle_group}
                       </button>

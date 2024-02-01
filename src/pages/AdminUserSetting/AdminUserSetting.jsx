@@ -9,13 +9,14 @@ const AdminUserSetting = () => {
     <>
       <div className="main-conintainer">
         <div className="container-modify-user">
-          <ButtonDeleteUser />
           <UserForm />
         </div>
         <div className="second-container">
           <ChangeRol />
           <FormRemoveUserByEmail />
         </div>
+        <ButtonDeleteUser />
+
       </div>
     </>
   );
