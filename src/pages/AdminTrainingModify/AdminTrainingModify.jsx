@@ -4,21 +4,26 @@ import { authContext } from "../../context/AuthContext";
 import UseValidate from "../../hooks/UseValidate";
 import Swal from "sweetalert2";
 import "./AdminTrainingModify.scss";
+import Loading from "../../components/Loading/Loading";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
   const [dataDb, setDataDb] = useState({});
-
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-
+  const [isLoading, setIsLoading] =useState( true);
+  const [isSuccess, setIsSuccess] =useState(false);
   const [context] = useContext(authContext);
   const { trainingId } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
+
+
+    useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
@@ -42,6 +47,9 @@ const AdminTrainingModify = () => {
           setDescription(body.data.description);
           setTypology(body.data.typology);
           setMuscular(body.data.muscle_group);
+          setIsLoading(false)
+          setIsSuccess(true)
+
         } else {
           throw new Error("Error al hacer fetch al entreno ");
         }
@@ -52,6 +60,8 @@ const AdminTrainingModify = () => {
     fetchData();
   }, [trainingId, context]);
 
+  
+
   const modifyTraining = async (e) => {
     e.preventDefault();
     if (
@@ -61,18 +71,14 @@ const AdminTrainingModify = () => {
       dataDb.typology === typology
     ) {
       setStatusMessage("Debes cambiar algún dato ✌️");
-      setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-      }, 500);
+    
     } else {
       const validated = UseValidate(
-        name,
-        description,
+        name,        
         typology,
+        description,
         muscular,
-        setStatusMessage,
-        setShakeAnimation
+        setStatusMessage      
       );
 
       if (validated) {
@@ -141,58 +147,54 @@ const AdminTrainingModify = () => {
       <section className="modify-page">
         <h1>Modificar entreno</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )}
+        <ErrorMessage message={statusMessage} />
+        {isLoading ? <Loading /> : null}
+        {isSuccess ? (
+          <form onSubmit={modifyTraining} className="modify-container">
+            <label htmlFor="name">Nombre entreno</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-        <form onSubmit={modifyTraining} className="modify-container">
-          <label htmlFor="name">Nombre entreno</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+            <label htmlFor="typology">Tipología</label>
+            <input
+              type="text"
+              name="typology"
+              id="typology"
+              value={typology}
+              onChange={(e) => setTypology(e.target.value)}
+            />
 
-          <label htmlFor="typology">Tipología</label>
-          <input
-            type="text"
-            name="typology"
-            id="typology"
-            value={typology}
-            onChange={(e) => setTypology(e.target.value)}
-          />
+            <label htmlFor="group">Grupo muscular</label>
+            <input
+              type="text"
+              name="group"
+              id="group"
+              value={muscular}
+              onChange={(e) => setMuscular(e.target.value)}
+            />
 
-          <label htmlFor="group">Grupo muscular</label>
-          <input
-            type="text"
-            name="group"
-            id="group"
-            value={muscular}
-            onChange={(e) => setMuscular(e.target.value)}
-          />
+            <label htmlFor="description">Descripcion</label>
+            <textarea
+              type="text"
+              name="description"
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-          <label htmlFor="description">Descripcion</label>
-          <textarea
-            type="text"
-            name="description"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+            <label htmlFor="photo">Subir imagen</label>
+            <input type="file" name="photo" id="photo" />
 
-          <label htmlFor="photo">Subir imagen</label>
-          <input type="file" name="photo" id="photo" />
-
-          <button type="submit" className="submit-btn">
-            Enviar
-          </button>
-        </form>
+            <button type="submit" className="btn-modificar-user">
+              Enviar
+            </button>
+          </form>
+        ) : null}
       </section>
     </>
   );

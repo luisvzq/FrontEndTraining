@@ -20,6 +20,12 @@ const AdminTrainingDetail = () => {
 
           <Link to={`/admin/crear`} className="link">
             <button className="button"><img src={Add} alt="Eliminar"className="add"/></button>
+          <Link to={`/admin/modificar/${trainingId}`}>
+            <button className="tag">Modificar entreno</button>
+          </Link>
+
+          <Link to={`/admin/crear`}>
+            <button className="tag">Añadir entreno</button>
           </Link>
         </div> */}
         <Details trainingId={trainingId} />

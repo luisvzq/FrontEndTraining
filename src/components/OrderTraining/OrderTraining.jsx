@@ -1,36 +1,42 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { authContext } from "../../context/AuthContext";
 
 import "./OrderTraining.scss";
+import { useSearchParams } from "react-router-dom";
 
 const OrderAndSearchInputTraining = ({ setAllTraining }) => {
   const [context] = useContext(authContext);
 
-  const [searchParams, setSearchParams] = useState({
-    name: "",
-    typology: "",
-    muscle_group: "",
-    order_by: "",
-  });
+  const [searchParams, setSearchParams]=useSearchParams()
+
+  // const [searchParams, setSearchParams] = useState({
+  //   name: "",
+  //   typology: "",
+  //   muscle_group: "",
+  //   order_by: "",
+  // });
+
+  //Convierte cuaquier tipo de objeto pro- valor en objeto normal
+// Object.fromEntries(searchParams);
+
+console.log(Object.fromEntries(searchParams));
 
   const handleChange = (field, value) => {
-    setSearchParams({
-      ...searchParams,
-      [field]: value,
-    });
+    searchParams.set(field,value);
+    setSearchParams(new URLSearchParams(searchParams));
   };
-  const [debouncedSearchParams, setDebouncedSearchParams] =
-    useState(searchParams);
+  // const [debouncedSearchParams, setDebouncedSearchParams] =
+  //   useState(searchParams);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   getTrainingFetch();
   // };
-
+  useEffect(() => {
   const getTrainingFetch = async () => {
     try {
-      const queryParams = new URLSearchParams(searchParams).toString();
+      const queryParams = searchParams.toString();
       console.log(queryParams);
       const res = await fetch(`http://localhost:3001/training?${queryParams}`, {
         headers: {
@@ -48,22 +54,25 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
       console.error("Error:", error.message);
     }
   };
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setDebouncedSearchParams(searchParams);
-    }, 1500);
+  
+  
+    const timerId=setTimeout(  getTrainingFetch, 600);
+
+    // const timerId = setTimeout(() => {
+    //   setDebouncedSearchParams(searchParams);
+    // }, 1500);
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [searchParams]);
+  }, [searchParams, context.token, setAllTraining]);
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(searchParams).toString();
-    const search = queryParams ? `?${queryParams}` : "";
-    window.history.replaceState({}, "", `${window.location.pathname}${search}`);
-    getTrainingFetch();
-  }, [debouncedSearchParams]);
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(searchParams).toString();
+  //   const search = queryParams ? `?${queryParams}` : "";
+  //   window.history.replaceState({}, "", `${window.location.pathname}${search}`);
+  //   getTrainingFetch();
+  // }, [debouncedSearchParams]);
 
   return (
     <form className="order-training-form">
@@ -72,7 +81,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="name"
-          value={searchParams.name}
+          value={searchParams.get("name")||""}
           onChange={(e) => handleChange("name", e.target.value)}
         />
       </div>
@@ -81,7 +90,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="typology"
-          value={searchParams.typology}
+          value={searchParams.get("typology")||""}
           onChange={(e) => handleChange("typology", e.target.value)}
         />
       </div>
@@ -91,14 +100,14 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         <input
           type="text"
           id="muscleGroup"
-          value={searchParams.muscleGroup}
+          value={searchParams.get("muscle_group")||""}
           onChange={(e) => handleChange("muscle_group", e.target.value)}
         />
       </div>
       <div className="order-group">
         <label htmlFor="order"></label>
         <select
-          value={searchParams.order}
+          value={searchParams.get("order_by")||""}
           name="order"
           id="order"
           onChange={(e) => {

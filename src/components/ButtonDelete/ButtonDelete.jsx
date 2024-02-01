@@ -12,6 +12,25 @@ const ButtonDelete = ()=> {
 
     const  {trainingId}= useParams();
 
+    const confirmation= ()=>{
+      Swal.fire({
+        title: 'Esta seguro?',
+        text: "El entreno se borrara!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, deseo eliminarlo.'
+      
+      }).then((result) => {
+        if (result.value) {
+          handleButton();
+            
+        }
+      })}
+    
+    
+
     const handleButton = () => {
       
         async function fetchButton() {
@@ -52,12 +71,12 @@ const ButtonDelete = ()=> {
           }
         }
         fetchButton();
-      }; //final del manejador
+      };
 
     
     return(
       <>
-          <button className="buttons-delete" onClick={handleButton}> <img src={Delete} alt="Eliminar"className="delete"/></button></>
+          <button className="buttons-delete" onClick={confirmation}> <img src={Delete} alt="Eliminar"className="delete"/></button></>
     )
 }
 

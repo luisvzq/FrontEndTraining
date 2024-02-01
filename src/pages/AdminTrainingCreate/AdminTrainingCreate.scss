@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 85vh;
     
     .intro-text{
       margin: 1rem;
@@ -34,6 +34,19 @@
   }
   
   
+  .btn-crear-user {
+    background-color: #3d3d3d;
+    color: whitesmoke;
+    cursor: pointer;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 2%;
+    transition: background 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: chocolate;
+    }
+  }
   
  
   

@@ -3,20 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import UseValidateUser from "../../hooks/UseValidateUser";
-import ButtonDeleteUser from "../ButtonDeleteUser/ButtonDeleteUser";
+import Loading from "../../components/Loading/Loading";
+import "./UserForm.scss";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-
+  const [newPass, setNewPass] = useState("");
   const [dataDb, setDataDb] = useState({});
-
-  const [shakeAnimation, setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [context] = useContext(authContext);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +39,9 @@ const UserForm = () => {
           setDataDb(body.data);
           setName(body.data.name);
           setEmail(body.data.email);
-        
+          setNewPass("");
+          setIsLoading(false);
+          setIsSuccess(true);
         } else {
           throw new Error("Error al hacer fetch a los datos de usuario ");
         }
@@ -55,26 +56,16 @@ const UserForm = () => {
     e.preventDefault();
     if (dataDb.name === name && dataDb.email === email) {
       setStatusMessage("Debes cambiar algún dato ✌️");
-      setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-      }, 500);
     } else {
-      const validated = UseValidateUser(
-        name,
-        email,
-        setStatusMessage,
-        setShakeAnimation
-      );
+      const validated = UseValidateUser(name, email, setStatusMessage);
 
       if (validated) {
         try {
           const formData = new FormData();
           formData.append("name", name);
           formData.append("email", email);
-          formData.append("password", pass);
-
-          console.log("Datos a enviar: ", formData);
+          formData.append("password", newPass);
+          // console.log("Datos a enviar: ", formData);
 
           const res = await fetch(
             `${import.meta.env.VITE_HOST_BACK}:${
@@ -100,26 +91,18 @@ const UserForm = () => {
                 popup: "rounded-popup",
               },
             });
-
             navigate(`/`);
             setName("");
             setEmail("");
-            setPass("");
+            setNewPass("");
           } else {
             const body = await res.json();
             console.log(body.error);
             setStatusMessage(body.error);
-            setShakeAnimation(true);
-            setTimeout(() => {
-              setShakeAnimation(false);
-            }, 500);
           }
         } catch (error) {
           console.error(error);
-          setShakeAnimation(true);
-          setTimeout(() => {
-            setShakeAnimation(false);
-          }, 500);
+          setStatusMessage("La modificacion ha fallado");
         }
       }
     }
@@ -127,55 +110,48 @@ const UserForm = () => {
 
   return (
     <>
-      <section className="modify-page">
+      <section className="user-page">
         <h1>Modificar usuario</h1>
 
-        {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )}
+        <ErrorMessage message={statusMessage} />
+        {isLoading ? <Loading /> : null}
+        {isSuccess ? (
+          <form onSubmit={modifyUser} className="user-form">
+            <label htmlFor="name">Nombre</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-        <form onSubmit={modifyUser} className="modify-container">
-          <label htmlFor="name">Nombre</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <label htmlFor="pass">Nueva password</label>
+            <input
+              type="password"
+              name="pass"
+              id="pass"
+              value={newPass}
+              onChange={(e) => setNewPass(e.target.value)}
+            />
 
-          <label htmlFor="pass">Nueva password</label>
-          <input
-            type="password"
-            name="pass"
-            id="pass"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
-
-          <button type="submit" className="submit-btn">
-            Modificar datos
-          </button>
-        </form>
-        <ButtonDeleteUser />
+            <button type="submit" className="btn-modify-user">
+              Modificar datos
+            </button>
+          </form>
+        ) : null}
       </section>
     </>
   );
 };
-
-
 
 export default UserForm;
