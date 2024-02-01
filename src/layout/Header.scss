@@ -19,26 +19,13 @@
   display: flex;
   align-items: center;
   gap: 2vw;
+  color: whitesmoke;
 
   .nav-link {
-    color: whitesmoke;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
   }
+  .nav-link:hover {
+    color: chocolate;
+  }
 }
-.nav-link:hover {
-  color: chocolate;
-}
-
-// .logout {
-//   background-color: #4d4d4d;
-//   color: whitesmoke;
-//   cursor: pointer;
-//   padding: 0.7rem;
-//   border: none;
-//   border-radius: 4%;
-//   transition: background 0.3s ease-in-out;
-// }
-// .logout:hover {
-//   background-color: chocolate;
-// }
