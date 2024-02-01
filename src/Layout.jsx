@@ -27,6 +27,7 @@ import Footer from "./layout/Footer";
 import UserForm from "./components/UserForm/UserForm";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
+import UsersListPage from "./pages/UserList/userListPage";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -130,6 +131,10 @@ const routesWithAuth = [
   {
     path: "/rutina",
     element: <TrainingRutinePage />,
+  },
+  {
+    path: "/usuarios",
+    element: <UsersListPage />,
   },
 ];
 

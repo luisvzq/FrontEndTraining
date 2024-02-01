@@ -51,6 +51,9 @@ export const Menu = () => {
             <NavLink to="/favoritos" className="nav-link">
               FAVORITOS
             </NavLink>
+            <NavLink to="/rutina" className="nav-link">
+              RUTINAS
+            </NavLink>
           </>
         )}
       </header>

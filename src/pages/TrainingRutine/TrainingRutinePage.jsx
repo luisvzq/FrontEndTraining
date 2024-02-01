@@ -14,6 +14,7 @@ const TrainingRutinePage = () => {
   const [entrenamientoSeleccionado, setEntrenamientoSeleccionado] =
     useState("");
   const [description, setDescription] = useState("");
+  const [descriptionRutine, setDescriptionRutine] = useState("");
   const [email, setEmail] = useState("");
   const [rutinaLocal, setRutinaLocal] = useState([]);
   const localStorageKey = "Rutina";
@@ -113,6 +114,14 @@ const TrainingRutinePage = () => {
               }}
             >
               {training}
+              <>
+                <textarea
+                  value={descriptionRutine}
+                  onChange={(e) => setDescriptionRutine(e.target.value)}
+                  onClick={(e) => e.stopPropagation()}
+                  placeholder="Añade una descripción..."
+                />
+              </>
             </li>
           ));
         })()}
