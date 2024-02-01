@@ -8,7 +8,8 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 
 import Training from "../../components/Training/Training.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
-
+import Next from "../../assets/Next.svg"
+import Prev from "../../assets/Prev.svg"
 const TrainingListPage = () => {
   const { hookGetFetch } = useFetchHooks();
   const [allTraining, setAllTraining] = useState([]);
@@ -42,15 +43,17 @@ const TrainingListPage = () => {
           <button
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
             disabled={currentPage === 1}
+            className="button"
           >
-            Página anterior
+          <img src={Prev} alt="Anterior"className="prev"/>
           </button>
           <span>Página {currentPage}</span>
           <button
             onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
             disabled={allTraining.length < pageSize}
+            className="button"
           >
-            Siguiente página
+          <img src={Next} alt="Siguiente"className="next"/>
           </button>
         </div>
       )}

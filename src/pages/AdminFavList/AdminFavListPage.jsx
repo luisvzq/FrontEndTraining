@@ -19,7 +19,7 @@ const AdminFavListPage = () => {
 
   return (
     <>
-      <div className="training-list">
+      <div className="training-list-fav">
         <h2>Entranamientos Favoritos</h2>
 
         {isLoading ? <p>Loading.....</p> : null}

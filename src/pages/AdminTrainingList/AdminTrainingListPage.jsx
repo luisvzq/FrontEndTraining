@@ -6,6 +6,7 @@ import useFetchHooks from "../../hooks/useFetchHooks.js";
 import Training from "../../components/Training/Training.jsx";
 
 import "./AdminTrainingListPage.scss";
+import Add from "../../assets/Add.svg"
 
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading/Loading.jsx";
@@ -32,8 +33,8 @@ const AdminTrainingListPage = () => {
           setAllTraining={setAllTraining}
           allTraining={data}
         ></OrderAndSearchInputTraining>
-        <Link to="/admin/crear">
-          <button className="add-training">Añadir entreno</button>
+        <Link to="/admin/crear" className="linkList">
+        <button className="buttonAdd"><img src={Add} alt="Añadir"className="add"/></button>
         </Link>
 
         {isLoading ? <Loading /> : null}

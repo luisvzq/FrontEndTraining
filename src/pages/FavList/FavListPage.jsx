@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Training from "../../components/Training/Training.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
+import './FavListPage.scss'
 
 const FavListPage = () => {
   const { hookGetFetch } = useFetchHooks();
@@ -19,7 +20,7 @@ const FavListPage = () => {
 
   return (
     <>
-      <div className="training-list">
+      <div className="training-list-fav">
         <h2>Entranamientos Favoritos</h2>
 
         {isLoading ? <p>Loading.....</p> : null}

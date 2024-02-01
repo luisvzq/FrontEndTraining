@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 import { Link } from "react-router-dom";
+import ButtonDelete from "../ButtonDelete/ButtonDelete"
+//import Add from "../../assets/Add.svg"
+import Edit from "../../assets/Edit.svg"
 
 const Details = ({ trainingId }) => {
   const [context] = useContext(authContext);
@@ -47,6 +50,16 @@ const Details = ({ trainingId }) => {
 
   return (
     <div className="container-detail">
+      {context.role === "admin" &&<> <div className="container-EMA">
+          <ButtonDelete />
+          <Link to={`/admin/modificar/${trainingId}`} >
+          <button className="button"><img src={Edit} alt="Eliminar"className="edit"/></button>
+          </Link>
+
+          {/* <Link to={`/admin/crear`}>
+            <button className="button"><img src={Add} alt="Añadir"className="add"/></button>
+          </Link> */}
+        </div></>}
       {details.name && (
         <>
           <h1 className="title">{details.name}</h1>

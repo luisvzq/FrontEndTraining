@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { authContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import './ButtonDelete.scss'
+import Delete from "../../assets/Delete.svg"
 
 
 const ButtonDelete = ()=> {
@@ -54,7 +56,8 @@ const ButtonDelete = ()=> {
 
     
     return(
-          <button className="buttons-delete" onClick={handleButton}>Eliminar</button>
+      <>
+          <button className="buttons-delete" onClick={handleButton}> <img src={Delete} alt="Eliminar"className="delete"/></button></>
     )
 }
 

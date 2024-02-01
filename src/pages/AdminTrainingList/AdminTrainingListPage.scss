@@ -1,17 +1,23 @@
-.add-training {
-    place-self: center;
-    padding: 10px;
-    background-color: #3d3d3d;
-    color: whitesmoke;
-    border: none;
-    width: 10rem;
-    height: 2.5rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
+.buttonAdd {
+ 
+  border: none;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  // margin-left: 20px;
+ 
 
-    &:hover {
-      background-color: chocolate;
-    }
+  .add
+  {
+    width: 40px;
+    height: 40px;
+    stroke: none;
+    fill: none;
   }
+}
 
+.linkList{
+  height: 50px;
+  width: 50px;
+  margin-left: 25px;
+}
