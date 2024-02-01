@@ -53,9 +53,9 @@ const AdminTrainingListPage = () => {
     <>
       <div className="training-list">
         <h1>Todos los entrenamientos</h1>
-        {/* <OrderAndSearchInputTraining
-          setAllTraining={setAllTraining}
-        ></OrderAndSearchInputTraining> */}
+        <OrderAndSearchInputTraining
+      useContextaining={setAllTraining}
+        ></OrderAndSearchInputTraining>
         <Link to="/admin/crear" className="linkList">
           <button className="buttonAdd">
             <img src={Add} alt="Añadir" className="add" />

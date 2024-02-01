@@ -58,7 +58,7 @@ const CountLikeChecked = ({ trainingId }) => {
       }
     }
     fetchData();
-  }, [trainingId, context, like]);
+  }, [trainingId,context, like]);
 
   const handleButton = (table, method) => {
     console.log(`Metodo: ${method} para la tabla: ${table}`);

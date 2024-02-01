@@ -46,6 +46,7 @@ li {
   align-items: center;
   margin-left: 1rem;
   margin-right: 1rem;
+  height: 3vh;
 }
 
 
@@ -56,9 +57,6 @@ li {
   }
 }
 
-.likes-container {
-  text-align: center;
-}
 
 .LIKE {
   border: none;
@@ -71,6 +69,7 @@ li {
   content: "\2764";
   font-size: 30px;
   color: rgb(81, 76, 76);
+
 }
 
 .LIKE.red::before {
