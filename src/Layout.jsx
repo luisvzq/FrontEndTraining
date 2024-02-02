@@ -1,5 +1,4 @@
 import {
-  AdminFavListPage,
   AdminTrainingCreate,
   AdminTrainingDetail,
   AdminTrainingListPage,
