@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
 import Training from "../../components/Training/Training.jsx";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./FavListPage.scss";
+import Loading from "../../components/Loading/Loading.jsx";
+import useFetchHooks from "../../hooks/useFetchHooks.js";
+import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const FavListPage = () => {
-  const { hookGetFetch } = useFetchHooks();
   const [allFavs, setAllFavs] = useState([]);
 
-  const { isLoading, data, isError, isSuccess, error } = useQuery(
+  const { hookGetFetch } = useFetchHooks();
+
+  const { isLoading, isError, isSuccess, error, refetch } = useQuery(
     ["favList", "fav"],
     () => hookGetFetch("fav"),
     {
@@ -18,17 +21,25 @@ const FavListPage = () => {
     }
   );
 
+  const renderizar = () => {
+    refetch();
+  };
+
   return (
     <>
       <div className="training-list-fav">
         <h1>Entranamientos Favoritos</h1>
+        {isLoading ? <Loading /> : null}
 
-        {isLoading ? <p>Loading.....</p> : null}
         {isError ? <p>{error}</p> : null}
-        {isSuccess ? <Training data={allFavs} /> : null}
+        {isSuccess ? <Training data={allFavs} renderizar={renderizar} /> : null}
       </div>
     </>
   );
+};
+FavListPage.propTypes = {
+  data: PropTypes.array,
+  renderizar: PropTypes.func,
 };
 
 export default FavListPage;

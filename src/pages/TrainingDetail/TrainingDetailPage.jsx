@@ -10,9 +10,7 @@ const TrainingDetailPage = () => {
   return (
     <>
       <div >
-        <Details trainingId={trainingId} />
-     
-      
+        <Details trainingId={trainingId} />   
       </div>
     </>
   );
