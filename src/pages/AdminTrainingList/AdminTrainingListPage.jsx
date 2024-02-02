@@ -34,21 +34,20 @@ const AdminTrainingListPage = () => {
   };
 
   return (
-    
-      <div className="training-list">
-        <h1>Todos los entrenamientos</h1>
-        <OrderAndSearchInputTraining setAllTraining={setAllTraining} />
-        <Link to="/admin/crear" className="linkList">
-          <button className="buttonAdd">
-            <img src={Add} alt="Añadir" className="add" />
-          </button>
-        </Link>
-        {isLoading ? <Loading /> : null}
-        {isError ? <p>{error}</p> : null}
-        {isSuccess ? (
-          <Training data={allTraining} renderizar={renderizar} />
-        ) : null}
-
+    <div className="training-list">
+      <h1>Todos los entrenamientos</h1>
+      <OrderAndSearchInputTraining setAllTraining={setAllTraining} />
+      <Link to="/admin/crear" className="linkList">
+        <button className="buttonAdd">
+          <img src={Add} alt="Añadir" className="add" />
+        </button>
+      </Link>
+      {isLoading ? <Loading /> : null}
+      {isError ? <p>{error}</p> : null}
+      {isSuccess ? (
+        <Training data={allTraining} renderizar={renderizar} />
+      ) : null}
+      {isSuccess && (
         <div>
           <button
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
@@ -66,8 +65,8 @@ const AdminTrainingListPage = () => {
             <img src={Next} alt="Siguiente" className="next" />
           </button>
         </div>
-      </div>
-    
+      )}
+    </div>
   );
 };
 AdminTrainingListPage.propTypes = {

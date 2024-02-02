@@ -19,7 +19,7 @@ const TrainingListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  const { isLoading, isError, error, isSuccess, refetch } = useQuery(
+  const { isLoading, isError,data,  error, isSuccess, refetch } = useQuery(
     ["trainingInfo", "trainingInfo", currentPage],
     () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
     {
@@ -43,23 +43,25 @@ const TrainingListPage = () => {
       {isSuccess ? (
         <Training data={allTraining} renderizar={renderizar} />
       ) : null}
-      <div>
-        <button
-          onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
-          disabled={currentPage === 1}
-          className="button"
-        >
-          <img src={Prev} alt="Anterior" className="prev" />
-        </button>
-        <span>Página {currentPage}</span>
-        <button
-          onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
-          disabled={allTraining.length < pageSize}
-          className="button"
-        >
-          <img src={Next} alt="Siguiente" className="next" />
-        </button>
-      </div>
+      {isSuccess && data &&(
+        <div>
+          <button
+            onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+            disabled={currentPage === 1}
+            className="button"
+          >
+            <img src={Prev} alt="Anterior" className="prev" />
+          </button>
+          <span>Página {currentPage}</span>
+          <button
+            onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+            disabled={allTraining.length < pageSize}
+            className="button"
+          >
+            <img src={Next} alt="Siguiente" className="next" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
