@@ -1,66 +1,48 @@
-import { useContext, useEffect, useState } from "react";
-import "./TrainingListPage.scss";
+import { useState } from "react";
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
 import PropTypes from "prop-types";
 import Training from "../../components/Training/Training.jsx";
-import Loading from "../../components/Loading/Loading.jsx";
+import "./TrainingListPage.scss";
 import Next from "../../assets/Next.svg";
 import Prev from "../../assets/Prev.svg";
-import { authContext } from "../../context/AuthContext.jsx";
 
+import Loading from "../../components/Loading/Loading.jsx";
+// import { authContext } from "../../context/AuthContext.jsx";
+import { useQuery } from "react-query";
+import useFetchHooks from "../../hooks/useFetchHooks";
 
 const TrainingListPage = () => {
   const [allTraining, setAllTraining] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [context] = useContext(authContext);
-  const [render, setRender] = useState(false);
+
+  const { hookGetFetch } = useFetchHooks();
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/trainingInfo`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
-
-        if (response.ok) {
-          const body = await response.json();
-          setAllTraining(body.data);
-          setIsLoading(false);
-          setRender(false);
-           console.log("Info array:", body.data);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  const { isLoading, isError, error, isSuccess, refetch } = useQuery(
+    ["trainingInfo", "trainingInfo", currentPage],
+    () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
+    {
+      onSuccess: (data) => {
+        setAllTraining(data);
+      },
     }
-    fetchData();
-  }, [context, render]);
+  );
+
+  const renderizar = () => {
+    refetch();
+  };
 
   return (
     <div className="training-list">
       <h1>Todos los entrenamientos</h1>
+      <OrderAndSearchInputTraining setAllTraining={setAllTraining} />
 
-      <OrderAndSearchInputTraining
-        setAllTraining={setAllTraining}/>
-
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <Training data={allTraining} setRender={setRender} />
-      )}
-
+      {isLoading ? <Loading /> : null}
+      {isError ? <p>{error}</p> : null}
+      {isSuccess ? (
+        <Training data={allTraining} renderizar={renderizar} />
+      ) : null}
       <div>
         <button
           onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
@@ -83,7 +65,7 @@ const TrainingListPage = () => {
 };
 TrainingListPage.propTypes = {
   data: PropTypes.array,
-  setRender: PropTypes.func,
+  renderizar: PropTypes.func,
 };
 
 export default TrainingListPage;

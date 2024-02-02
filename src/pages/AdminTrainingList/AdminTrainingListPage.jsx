@@ -11,24 +11,18 @@ import Loading from "../../components/Loading/Loading.jsx";
 // import { authContext } from "../../context/AuthContext.jsx";
 import { useQuery } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks";
-import { ErrorMessage } from "formik";
 
 const AdminTrainingListPage = () => {
   const [allTraining, setAllTraining] = useState([]);
-  const [statusMessage, setStatusMessage]= useState();
   const { hookGetFetch } = useFetchHooks();
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-
-  const { isLoading, isError, isSuccess, refetch } = useQuery(
+  const { isLoading, isError, error, isSuccess, refetch } = useQuery(
     ["trainingInfo", "trainingInfo", currentPage],
     () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
     {
-      onError: (error) => {
-          setStatusMessage(error)
-      },
       onSuccess: (data) => {
         setAllTraining(data);
       },
@@ -50,7 +44,7 @@ const AdminTrainingListPage = () => {
           </button>
         </Link>
         {isLoading ? <Loading /> : null}
-        {isError ? <ErrorMessage message={statusMessage} /> : null}
+        {isError ? <p>{error}</p> : null}
         {isSuccess ? (
           <Training data={allTraining} renderizar={renderizar} />
         ) : null}

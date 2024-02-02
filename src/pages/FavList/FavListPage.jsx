@@ -1,58 +1,45 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import Training from "../../components/Training/Training.jsx";
 import "./FavListPage.scss";
 import Loading from "../../components/Loading/Loading.jsx";
-import { authContext } from "../../context/AuthContext.jsx";
+import useFetchHooks from "../../hooks/useFetchHooks.js";
+import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 
 const FavListPage = () => {
   const [allFavs, setAllFavs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [context] = useContext(authContext);
-  const [render, setRender] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/fav`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
+  const { hookGetFetch } = useFetchHooks();
 
-        if (response.ok) {
-          const body = await response.json();
-          setAllFavs(body.data);
-          setIsLoading(false);
-          setRender(false);
-          console.log("Info array:", body.data);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  const { isLoading, isError, isSuccess, error, refetch } = useQuery(
+    ["favList", "fav"],
+    () => hookGetFetch("fav"),
+    {
+      onSuccess: (data) => {
+        setAllFavs(data);
+      },
     }
-    fetchData();
-  }, [context, render]);
+  );
+
+  const renderizar = () => {
+    refetch();
+  };
 
   return (
     <>
       <div className="training-list-fav">
         <h2>Entranamientos Favoritos</h2>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Training data={allFavs} setRender={setRender} />
-        )}
+        {isLoading ? <Loading /> : null}
+
+        {isError ? <p>{error}</p> : null}
+        {isSuccess ? <Training data={allFavs} renderizar={renderizar} /> : null}
       </div>
     </>
   );
+};
+FavListPage.propTypes = {
+  data: PropTypes.array,
+  renderizar: PropTypes.func,
 };
 
 export default FavListPage;
