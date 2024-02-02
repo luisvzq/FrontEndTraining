@@ -30,11 +30,11 @@ export const Menu = () => {
             </NavLink>
 
             <NavLink to="/admin/entrenos" className="nav-link">
-              ADMIN ENTRENOS
+              ENTRENOS
             </NavLink>
 
             <NavLink to="/admin/favoritos" className="nav-link">
-              ADMIN FAVORITOS
+              FAVORITOS
             </NavLink>
           </>
         )}
