@@ -5,6 +5,7 @@
 
   h1 {
     text-align: center;
+    margin-top: 2vh;
   }
 }
 
@@ -23,8 +24,8 @@
   }
 
   &:disabled {
-    visibility: hidden;  
-    opacity: 0;         
-    pointer-events: none; 
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 }

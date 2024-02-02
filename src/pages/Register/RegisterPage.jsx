@@ -6,7 +6,7 @@ import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import Loading from "../../components/Loading/Loading.jsx";// importo spinner
+import Loading from "../../components/Loading/Loading.jsx"; // importo spinner
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -28,7 +28,6 @@ const RegisterPage = () => {
 
   const handleRegisterButton = (e) => {
     e.preventDefault();
-  
 
     if (password !== passwordRepeat) {
       setStatusMessage("Las contraseñas no coinciden");
@@ -37,7 +36,6 @@ const RegisterPage = () => {
       setTimeout(() => {
         setShakeAnimation(false);
         setStatusMessage("");
-    
       }, 5000);
       return;
     }
@@ -52,7 +50,6 @@ const RegisterPage = () => {
           setTimeout(() => {
             setShakeAnimation(false);
             setStatusMessage("");
-      
           }, 4000);
         },
         onSuccess: () => {
@@ -72,7 +69,6 @@ const RegisterPage = () => {
           setEmail("");
           setPassword("");
           setPasswordRepeat("");
-        
         },
       }
     );
@@ -81,7 +77,7 @@ const RegisterPage = () => {
   return (
     <>
       <section className="register-page">
-        {mutation.isLoading && <Loading />} 
+        {mutation.isLoading && <Loading />}
         <h1>Registro</h1>
 
         <ErrorMessage message={statusMessage} />
@@ -94,7 +90,6 @@ const RegisterPage = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Escriba su nombre"
           />
 
           <label htmlFor="email">Email</label>
@@ -104,7 +99,6 @@ const RegisterPage = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Escriba su correo electrónico"
           />
 
           <label htmlFor="password">Password</label>
@@ -114,7 +108,6 @@ const RegisterPage = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Escriba su contraseña"
           />
 
           <label htmlFor="passwordRepeat">Repetir Password</label>
@@ -124,7 +117,6 @@ const RegisterPage = () => {
             id="passwordRepeat"
             value={passwordRepeat}
             onChange={(e) => setPasswordRepeat(e.target.value)}
-            placeholder="Repita su contraseña"
           />
 
           <input type="submit" className="submit-btn" />

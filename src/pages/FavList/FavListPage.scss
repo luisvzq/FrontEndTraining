@@ -1,11 +1,10 @@
 .training-list-fav {
-    display: flex;
-    flex-direction: column;
-   
-    width: 100%;
-    h2 {
-      text-align: center;
-    }
-    
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  width: 100%;
+  h1 {
+    text-align: center;
+    margin-top: 2vh;
   }
-  
+}

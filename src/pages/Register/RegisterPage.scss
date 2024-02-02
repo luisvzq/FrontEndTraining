@@ -6,7 +6,7 @@
   height: 100%;
   p {
     margin: 1rem;
-    color: #3d3d3d;
+    color: #fff;
     font-size: 1rem;
   }
 }
@@ -24,6 +24,10 @@
   label {
     font-size: 1rem;
     color: #3d3d3d;
+  }
+  input {
+    padding: 0.5rem;
+    font-size: 1rem;
   }
 
   .lolo {
@@ -52,5 +56,4 @@ main {
   display: flex;
   align-items: center;
   margin-bottom: 5vh;
- 
 }

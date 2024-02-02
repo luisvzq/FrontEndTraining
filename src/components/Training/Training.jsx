@@ -20,7 +20,7 @@ const Training = ({ data }) => {
                   : `/entreno/${training.id}`
               }
             >
-              <h2>{training.name}</h2>
+              <h2 className="training-name">{training.name}</h2>
 
               <img
                 src={`${import.meta.env.VITE_HOST_BACK}:${

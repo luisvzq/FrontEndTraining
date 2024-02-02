@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
 import { useMutation } from "react-query";
+import Loading from "../../components/Loading/Loading.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 
 import "./LoginPage.scss";
@@ -13,7 +14,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [context, setContext] = useContext(authContext);
-  const [shakeAnimation, setShakeAnimation] = useState(false);
+  // const [shakeAnimation, setShakeAnimation] = useState(false);
   const navigate = useNavigate();
   const { hookPostPatchFetch } = useFetchHooks();
   const mutation = useMutation(hookPostPatchFetch);
@@ -40,9 +41,7 @@ const LoginPage = () => {
         onError: (error) => {
           setStatusMessage(error);
 
-        
           setTimeout(() => {
-           
             setStatusMessage("");
           }, 5000);
         },
@@ -77,6 +76,7 @@ const LoginPage = () => {
   return (
     <>
       <section className="login-page">
+        {mutation.isLoading && <Loading />}
         <h1>Login</h1>
         <ErrorMessage message={statusMessage} />
 
