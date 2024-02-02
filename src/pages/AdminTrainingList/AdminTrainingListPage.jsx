@@ -55,7 +55,7 @@ const AdminTrainingListPage = () => {
             >
               <img src={Prev} alt="Anterior" className="prev" />
             </button>
-            <span>Página {currentPage}</span>
+            <span className="pages">Página {currentPage}</span>
             <button
               onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
               disabled={allTraining.length < pageSize}

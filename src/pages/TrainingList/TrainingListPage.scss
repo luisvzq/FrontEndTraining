@@ -13,12 +13,13 @@
 
 .button {
   border: none;
-  background-color: white;
+  background-color: transparent;
   height: 50px;
   width: 50px;
 
   .next,
   .prev {
+    background-color: transparent;
     width: 40px;
     height: 40px;
     stroke: none;
@@ -30,4 +31,8 @@
     opacity: 0;
     pointer-events: none;
   }
+}
+
+.pages{
+ color: whitesmoke;
 }
