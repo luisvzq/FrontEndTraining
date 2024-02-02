@@ -39,7 +39,7 @@ const Training = ({ data, setRender }) => {
     fetchButton();
   }; 
 
-  console.log("Ata aqui chega", data);
+  console.log("Resultado de filtrar", data);
   return (
     <ul className="listTraining">
       {data.map((training) => {
