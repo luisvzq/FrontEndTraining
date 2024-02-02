@@ -8,46 +8,65 @@ import Next from "../../assets/Next.svg";
 import Prev from "../../assets/Prev.svg";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading/Loading.jsx";
-import { authContext } from "../../context/AuthContext.jsx";
+// import { authContext } from "../../context/AuthContext.jsx";
+import { useQuery } from "react-query";
+import useFetchHooks from "../../hooks/useFetchHooks";
 
 const AdminTrainingListPage = () => {
   const [allTraining, setAllTraining] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [context] = useContext(authContext);
-  const [render, setRender] = useState(false);
+  const { hookGetFetch } = useFetchHooks();
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [context] = useContext(authContext);
+  // const [render, setRender] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_HOST_BACK}:${
-            import.meta.env.VITE_PORT_BACK
-          }/trainingInfo`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${context.token}`,
-            },
-          }
-        );
 
-        if (response.ok) {
-          const body = await response.json();
-          setAllTraining(body.data);
-          setIsLoading(false);
-          setRender(false);
-           console.log("Info array:", body.data);
-        } else {
-          throw new Error("Error al hacer fetch al entreno ");
-        }
-      } catch (error) {
-        console.error(error);
-      }
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await fetch(
+  //         `${import.meta.env.VITE_HOST_BACK}:${
+  //           import.meta.env.VITE_PORT_BACK
+  //         }/trainingInfo`,          
+  //         {
+  //           method: "GET",
+  //           headers: {          
+  //             Authorization: `Bearer ${context.token}`,
+  //           },
+  //         }
+  //       );
+
+  //       if (response.ok) {
+  //         const body = await response.json();
+  //         setAllTraining(body.data);
+  //         setIsLoading(false);
+  //         setRender(false);
+  //          console.log("Info array:", body.data);
+  //       } else {
+  //         throw new Error("Error al hacer fetch al entreno ");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [context, render]);
+
+
+  const { isLoading, data, isError, isSuccess, error, refetch } = useQuery(
+    ["trainingInfo", "trainingInfo", currentPage],
+    () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
+    {
+      onSuccess: (data) => {
+        setAllTraining(data);
+      },
     }
-    fetchData();
-  }, [context, render]);
+  );
+
+const renderizar = ()=>{
+refetch();
+}
 
   return (
     <>
@@ -64,7 +83,7 @@ const AdminTrainingListPage = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <Training data={allTraining} setRender={setRender} />
+          <Training data={allTraining} renderizar={renderizar}/>
         )}
         <div>
           <button
@@ -89,6 +108,6 @@ const AdminTrainingListPage = () => {
 };
 AdminTrainingListPage.propTypes = {
   data: PropTypes.array,
-  setRender: PropTypes.func,
+  renderizar: PropTypes.func,
 };
 export default AdminTrainingListPage;
