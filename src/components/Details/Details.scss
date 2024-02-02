@@ -8,6 +8,8 @@
 
   h1 {
     margin-top: 2vh;
+    color: #3d3d3d;
+    text-shadow: none;
   }
 }
 
@@ -89,7 +91,6 @@
   background-color: white;
   height: 50px;
   width: 50px;
- 
 
   .add,
   .edit {
@@ -100,7 +101,7 @@
   }
 }
 
-.container-EMA{
+.container-EMA {
   margin: 1vh;
 }
 @media only screen and (max-width: 575px) {
