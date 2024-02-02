@@ -4,7 +4,6 @@ import HomePage from "../pages/Home/HomePage";
 import FavListPage from "./FavList/FavListPage";
 import AdminTrainingListPage from "./AdminTrainingList/AdminTrainingListPage";
 import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
-import AdminFavListPage from "./AdminFavList/AdminFavListPage";
 import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPassword/ResetPasswordPage";
 import AdminTrainingDetail from "./AdminTrainingDetail/AdminTrainingDetail";
@@ -23,7 +22,6 @@ export {
   AdminTrainingListPage,
   AdminTrainingModify,
   AdminTrainingCreate,
-  AdminFavListPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   AdminTrainingDetail,

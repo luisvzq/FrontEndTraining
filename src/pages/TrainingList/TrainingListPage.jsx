@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import "./TrainingListPage.scss";
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
+import PropTypes from "prop-types";
 import Training from "../../components/Training/Training.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import Next from "../../assets/Next.svg";
 import Prev from "../../assets/Prev.svg";
 import { authContext } from "../../context/AuthContext.jsx";
+
+
 const TrainingListPage = () => {
   const [allTraining, setAllTraining] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -77,6 +80,10 @@ const TrainingListPage = () => {
       </div>
     </div>
   );
+};
+TrainingListPage.propTypes = {
+  data: PropTypes.array,
+  setRender: PropTypes.func,
 };
 
 export default TrainingListPage;

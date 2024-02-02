@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
 import PropTypes from "prop-types";
 import Training from "../../components/Training/Training.jsx";
-
 import "./AdminTrainingListPage.scss";
 import Add from "../../assets/Add.svg";
 import Next from "../../assets/Next.svg";

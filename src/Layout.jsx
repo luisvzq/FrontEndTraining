@@ -84,7 +84,7 @@ const routesAdmin = [
   },
   {
     path: "/admin/favoritos",
-    element: <AdminFavListPage />,
+    element: <FavListPage />,
   },
   {
     path: "/admin/modificar/:trainingId",
