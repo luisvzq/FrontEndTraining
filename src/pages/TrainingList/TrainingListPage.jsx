@@ -36,7 +36,7 @@ const TrainingListPage = () => {
           setAllTraining(body.data);
           setIsLoading(false);
           setRender(false)
-          console.log("Info array:", body.data);
+          // console.log("Info array:", body.data);
         } else {
           throw new Error("Error al hacer fetch al entreno ");
         }

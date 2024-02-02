@@ -36,7 +36,7 @@ const AdminTrainingListPage = () => {
           setAllTraining(body.data);
           setIsLoading(false);
           setRender(false)
-          console.log("Info array:", body.data);
+          // console.log("Info array:", body.data);
         } else {
           throw new Error("Error al hacer fetch al entreno ");
         }
@@ -54,7 +54,7 @@ const AdminTrainingListPage = () => {
       <div className="training-list">
         <h1>Todos los entrenamientos</h1>
         <OrderAndSearchInputTraining
-      useContextaining={setAllTraining}
+      setAllTraining={setAllTraining}
         ></OrderAndSearchInputTraining>
         <Link to="/admin/crear" className="linkList">
           <button className="buttonAdd">

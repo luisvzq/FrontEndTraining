@@ -7,11 +7,9 @@ import "./Training.scss";
 
 const Training = ({ data, setRender }) => {
   const [context] = useContext(authContext);
-  // const [like, setLike] = useState();
-  // const [fav, setFav] = useState();
 
   const handleButton = (table, method, entreno) => {
-    console.log(`Metodo: ${method} para la tabla: ${table}`);
+    // console.log(`Metodo: ${method} para la tabla: ${table}`);
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -29,13 +27,7 @@ const Training = ({ data, setRender }) => {
         if (response.ok) {
           const bodyButton = await response.json();
           console.log("response Button", bodyButton);
-          setRender(true);
-          // if (table === "like") {
-          //   setLike(!like);
-          // }
-          // if (table === "fav") {
-          //   setFav(!fav);
-          // }
+          setRender(true);        
         } else {
           const body = await response.json();
           console.error("ERROR fetchButton", body.message);
@@ -45,7 +37,7 @@ const Training = ({ data, setRender }) => {
       }
     }
     fetchButton();
-  }; //final del manejador
+  }; 
 
   console.log("Ata aqui chega", data);
   return (
