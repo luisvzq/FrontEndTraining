@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
 import PropTypes from "prop-types";
 import Training from "../../components/Training/Training.jsx";
@@ -11,80 +11,50 @@ import Loading from "../../components/Loading/Loading.jsx";
 // import { authContext } from "../../context/AuthContext.jsx";
 import { useQuery } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks";
+import { ErrorMessage } from "formik";
 
 const AdminTrainingListPage = () => {
   const [allTraining, setAllTraining] = useState([]);
+  const [statusMessage, setStatusMessage]= useState();
   const { hookGetFetch } = useFetchHooks();
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [context] = useContext(authContext);
-  // const [render, setRender] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await fetch(
-  //         `${import.meta.env.VITE_HOST_BACK}:${
-  //           import.meta.env.VITE_PORT_BACK
-  //         }/trainingInfo`,          
-  //         {
-  //           method: "GET",
-  //           headers: {          
-  //             Authorization: `Bearer ${context.token}`,
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const body = await response.json();
-  //         setAllTraining(body.data);
-  //         setIsLoading(false);
-  //         setRender(false);
-  //          console.log("Info array:", body.data);
-  //       } else {
-  //         throw new Error("Error al hacer fetch al entreno ");
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [context, render]);
-
-
-  const { isLoading, data, isError, isSuccess, error, refetch } = useQuery(
+  const { isLoading, isError, isSuccess, refetch } = useQuery(
     ["trainingInfo", "trainingInfo", currentPage],
     () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
     {
+      onError: (error) => {
+          setStatusMessage(error)
+      },
       onSuccess: (data) => {
         setAllTraining(data);
       },
     }
   );
 
-const renderizar = ()=>{
-refetch();
-}
+  const renderizar = () => {
+    refetch();
+  };
 
   return (
     <>
       <div className="training-list">
         <h1>Todos los entrenamientos</h1>
-        <OrderAndSearchInputTraining
-          setAllTraining={setAllTraining}
-        />
+        <OrderAndSearchInputTraining setAllTraining={setAllTraining} />
         <Link to="/admin/crear" className="linkList">
           <button className="buttonAdd">
             <img src={Add} alt="Añadir" className="add" />
           </button>
         </Link>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Training data={allTraining} renderizar={renderizar}/>
-        )}
+        {isLoading ? <Loading /> : null}
+        {isError ? <ErrorMessage message={statusMessage} /> : null}
+        {isSuccess ? (
+          <Training data={allTraining} renderizar={renderizar} />
+        ) : null}
+
         <div>
           <button
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
