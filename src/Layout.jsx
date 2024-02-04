@@ -25,6 +25,7 @@ import Footer from "./layout/Footer";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
 import FormAddRoutine from "./components/FormAddRoutine/FormAddRoutine";
+import RoutineConfigPage from "./pages/RoutineConfigPage/RoutineConfigPage";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -111,8 +112,12 @@ const routesAdmin = [
     element: <RoutinePage />,
   },
   {
-    path: "/crear-rutinas",
+    path: "/admin/crear-rutinas",
     element: <FormAddRoutine />,
+  },
+  {
+    path: "/admin/configurar-rutina/:id",
+    element: <RoutineConfigPage />,
   },
 ];
 
@@ -140,6 +145,10 @@ const routesWithAuth = [
   {
     path: "/crear-rutinas",
     element: <FormAddRoutine />,
+  },
+  {
+    path: "/configurar-rutina/:id",
+    element: <RoutineConfigPage />,
   },
 ];
 
