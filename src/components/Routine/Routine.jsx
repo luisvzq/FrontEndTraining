@@ -1,27 +1,31 @@
 import PropTypes from "prop-types";
 import "./Routine.scss";
 import { Link } from "react-router-dom";
-import RoutineConfigPage from "../../pages/RoutineConfigPage/RoutineConfigPage";
+
 import { useContext } from "react";
 import { authContext } from "../../context/AuthContext";
 
 const Routine = ({ data }) => {
   const [context] = useContext(authContext);
+
+  let route = "";
+  if (context.role === "admin") {
+    route = "/admin/configurar-rutina/";
+  } else {
+    route = "/configurar-rutina/";
+  }
+
+  console.log("data is", data);
   return (
     <ul className="routine-list">
       {data.map((routine) => {
         return (
           <li key={routine.id}>
-            {context.role === "admin" ? (
-              <Link to={`/admin/configurar-rutina/${routine.id}`}>
-                <RoutineConfigPage data={routine} />
-              </Link>
-            ) : (
-              <Link to={`/configurar-rutina/${routine.id}`}>
-                <RoutineConfigPage data={routine} />
-              </Link>
-            )}
-            <h2 className="routine-name">{routine.name}</h2>
+            <Link to={`${route}${routine.id}`}>
+              <h2>{routine.name}</h2>
+
+              <p>{routine.description}</p>
+            </Link>
           </li>
         );
       })}
