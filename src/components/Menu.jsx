@@ -36,6 +36,10 @@ export const Menu = () => {
             <NavLink to="/admin/favoritos" className="nav-link">
               FAVORITOS
             </NavLink>
+
+            <NavLink to="/admin/rutinas" className="nav-link">
+              RUTINAS
+            </NavLink>
           </>
         )}
         {context?.role === "normal" && (
@@ -50,6 +54,10 @@ export const Menu = () => {
 
             <NavLink to="/favoritos" className="nav-link">
               FAVORITOS
+            </NavLink>
+
+            <NavLink to="/rutinas" className="nav-link">
+              RUTINAS
             </NavLink>
           </>
         )}

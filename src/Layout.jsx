@@ -10,6 +10,7 @@ import {
   LoginPage,
   RegisterPage,
   ResetPasswordPage,
+  RoutinePage,
   SettingsPage,
   TrainingDetailPage,
   TrainingListPage,
@@ -23,7 +24,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
-
+import FormAddRoutine from "./components/FormAddRoutine/FormAddRoutine";
 
 const Layout = () => {
   const [context, setContext] = useContext(authContext);
@@ -105,6 +106,14 @@ const routesAdmin = [
     path: "/admin/ajustes/borrar-usuario",
     element: <FormRemoveUserByEmail />,
   },
+  {
+    path: "/admin/rutinas",
+    element: <RoutinePage />,
+  },
+  {
+    path: "/crear-rutinas",
+    element: <FormAddRoutine />,
+  },
 ];
 
 const routesWithAuth = [
@@ -123,6 +132,14 @@ const routesWithAuth = [
   {
     path: "/ajustes",
     element: <SettingsPage />,
+  },
+  {
+    path: "/rutinas",
+    element: <RoutinePage />,
+  },
+  {
+    path: "/crear-rutinas",
+    element: <FormAddRoutine />,
   },
 ];
 
