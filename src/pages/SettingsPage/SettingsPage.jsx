@@ -6,7 +6,8 @@ const SettingsPage = () => {
     <>
     <div className="user-container">
     <UserForm />
-    <ButtonDeleteUser/>
+    <div  >
+    <ButtonDeleteUser/></div>
     </div>
     </>
   );

@@ -7,7 +7,7 @@ import FormRemoveUserByEmail from "../../components/FormRemoveUserByEmail/FormRe
 const AdminUserSetting = () => {
   return (
     <>
-      <div className="main-conintainer">
+      <div className="main-container">
         <div className="container-modify-user">
           <UserForm />
         </div>

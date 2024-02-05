@@ -3,6 +3,9 @@
     color: whitesmoke;
     cursor: pointer;
     padding: 0.7rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 290px;
     border: none;
     border-radius: 2%;
     transition: background 0.3s ease-in-out;
@@ -11,3 +14,4 @@
       background-color: chocolate;
     }
   }
+
