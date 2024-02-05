@@ -1,24 +1,31 @@
 import { useState } from "react";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
+import { useMutation } from "react-query";
 import "./RoutineConfigPage.scss";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
+import Swal from "sweetalert2";
+import RoutineList from "../../components/RoutineList/RoutineList";
 
 const RoutineConfigPage = () => {
   const { id } = useParams();
 
-  const { hookGetFetch } = useFetchHooks();
-  const [entrenamientos, setEntrenamientos] = useState([]);
+  const { hookGetFetch, hookPostPatchFetch } = useFetchHooks();
+
   const [routines, setRoutines] = useState([]);
-  const [entrenamientoSeleccionado] = useState("");
+  const [selectTraining, setSelectTraining] = useState([]);
+  const [trainingRoutine, setTrainingRoutine] = useState([]);
+
+  const mutation = useMutation(hookPostPatchFetch);
+  // const postBody = { idTraining: parseInt(entrenamientos), reps: 2, series: 8 };
 
   const getTraining = useQuery(
     [`training`, "training"],
     () => hookGetFetch(`training`),
     {
       onSuccess: (data) => {
-        setEntrenamientos(data);
+        setSelectTraining(data);
       },
     }
   );
@@ -32,6 +39,53 @@ const RoutineConfigPage = () => {
       },
     }
   );
+
+  const listRoutine = useQuery(
+    [`getTrainingRoutine/${id}`, `getTrainingRoutine/${id}`],
+    () => hookGetFetch(`getTrainingRoutine/${id}`),
+    {
+      onSuccess: (data) => {
+        setTrainingRoutine(data);
+      },
+    }
+  );
+
+  const handleChangeSelect = async (e) => {
+    const postBody = { idTraining: e.target.value, reps: 2, series: 8 };
+
+    mutation.mutate(
+      {
+        endpoint: `addTrainingToRoutine/${id}`,
+        method: "POST",
+        user: postBody,
+      },
+      {
+        // onError: (error) => {
+        //   setStatusMessage(error);
+
+        //   setShakeAnimation(true);
+        //   setTimeout(() => {
+        //     setShakeAnimation(false);
+        //     setStatusMessage("");
+        //   }, 4000);
+        // },
+        onSuccess: () => {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `exito!`,
+            showConfirmButton: false,
+            timer: 2500,
+            customClass: {
+              popup: "rounded-popup",
+            },
+          });
+          listRoutine.refetch();
+        },
+      }
+    );
+    // listRoutine.refetch();
+  };
 
   return (
     <>
@@ -48,17 +102,20 @@ const RoutineConfigPage = () => {
       {getTraining.isLoading ? <Loading /> : null}
       {getTraining.isError ? <p>{getTraining.error}</p> : null}
       {getTraining.isSuccess && (
-        <select>
+        <select onChange={handleChangeSelect}>
           {/* Opción por defecto */}
           <option defaultValue="">Selecciona un entrenamiento</option>
           {/* Mapear los entrenamientos en opciones del select */}
-          {entrenamientos.map((entrenamiento) => (
-            <option key={entrenamiento.id} value={entrenamiento.name}>
-              {entrenamiento.name}
-            </option>
-          ))}
+          {selectTraining.map((entrenamiento) => {
+            return (
+              <option key={entrenamiento.id} value={entrenamiento.id}>
+                {entrenamiento.name}
+              </option>
+            );
+          })}
         </select>
       )}
+      <RoutineList trainingRoutine={trainingRoutine} />
     </>
   );
 };
