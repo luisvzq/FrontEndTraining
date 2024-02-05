@@ -20,7 +20,7 @@ const ChangeRol = () => {
         className="rol-page
       "
       >
-        <h1>Cambio de Rol de Usario</h1>
+        <h1>Cambio de rol</h1>
 
         <ErrorMessage message={statusMessage} />
 

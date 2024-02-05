@@ -60,7 +60,7 @@ const FormRemoveUserByEmail = () => {
         className="remove-user-page
       "
       >
-        <h1>Eliminacion de Usarios</h1>
+        <h1>Eliminación de usuarios</h1>
         <ErrorMessage message={statusMessage} />
 
         <form className="remove-user-container">

@@ -67,7 +67,7 @@ const ButtonDeleteUser = () => {
   };
 
   return (
-    <button className="btn-delete-user" onClick={confirmation}>
+    <button className={context.role === "admin"? "btn-delete-admin" : "btn-delete-user"} onClick={confirmation}>
       Eliminar cuenta
     </button>
   );
