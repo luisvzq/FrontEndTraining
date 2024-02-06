@@ -40,6 +40,7 @@ const RoutineConfigPage = () => {
     }
   );
 
+
   const listRoutine = useQuery(
     [`getTrainingRoutine/${id}`, `getTrainingRoutine/${id}`],
     () => hookGetFetch(`getTrainingRoutine/${id}`),
@@ -49,6 +50,9 @@ const RoutineConfigPage = () => {
       },
     }
   );
+  const renderizar=()=>{
+    listRoutine.refetch();
+  }
 
   const handleChangeSelect = async (e) => {
     const postBody = { idTraining: e.target.value, reps: 2, series: 8 };
@@ -114,7 +118,7 @@ const RoutineConfigPage = () => {
           })}
         </select>
       )}
-      <RoutineList trainingRoutine={trainingRoutine} />
+      <RoutineList trainingRoutine={trainingRoutine} renderizar={renderizar}/>
     </>
   );
 };

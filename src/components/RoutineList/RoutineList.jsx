@@ -5,7 +5,7 @@ import useFetchHooks from "../../hooks/useFetchHooks";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
 
-const RoutineList = ({ trainingRoutine }) => {
+const RoutineList = ({ trainingRoutine, renderizar }) => {
   const { id } = useParams();
   const [series, setSeries] = useState(0);
   const [reps, setReps] = useState(0);
@@ -28,24 +28,14 @@ const RoutineList = ({ trainingRoutine }) => {
                 <input
                   type="number"
                   id="series"
-                  value={series}
-                  onChange={(e) => {
-                    setSeries(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <label htmlFor="reps">Reps</label>
-                <input
-                  type="number"
-                  id="reps"
-                  value={training.reps}
+                  value={training.series}
                   onChange={(e) => {
                     const postBody = {
                       idTraining: training.id_training,
-                      reps: e.target.value,
-                      series,
+                      reps,
+                      series: e.target.value,
                     };
+                    setSeries(e.target.value);
 
                     mutation.mutate(
                       {
@@ -62,17 +52,64 @@ const RoutineList = ({ trainingRoutine }) => {
                           });
                         },
 
-                        onSuccess: (data) => {
+                        onSuccess: () => {
+                          // Swal.fire({
+                          //   position: "top-center",
+                          //   icon: "success",
+                          //   title: data.message,
+                          //   showConfirmButton: false,
+                          //   timer: 2500,
+                          //   customClass: {
+                          //     popup: "rounded-popup",
+                          //   },
+                          // });
+                          renderizar();
+                        },
+                      }
+                    );
+                  }}
+                />
+              </div>
+              <div>
+                <label htmlFor="reps">Reps</label>
+                <input
+                  type="number"
+                  id="reps"
+                  value={training.reps}
+                  onChange={(e) => {
+                    const postBody = {
+                      idTraining: training.id_training,
+                      reps: e.target.value,
+                      series,
+                    };
+                    setReps(e.target.value);
+                    mutation.mutate(
+                      {
+                        endpoint: `modifyRoutine/${id}`,
+                        method: "PATCH",
+                        user: postBody,
+                      },
+                      {
+                        onError: (error) => {
                           Swal.fire({
-                            position: "top-center",
-                            icon: "success",
-                            title: data.message,
-                            showConfirmButton: false,
-                            timer: 2500,
-                            customClass: {
-                              popup: "rounded-popup",
-                            },
+                            icon: "error",
+                            title: "Error",
+                            text: error,
                           });
+                        },
+
+                        onSuccess: () => {
+                          // Swal.fire({
+                          //   position: "top-center",
+                          //   icon: "success",
+                          //   title: data.message,
+                          //   showConfirmButton: false,
+                          //   timer: 2500,
+                          //   customClass: {
+                          //     popup: "rounded-popup",
+                          //   },
+                          // });
+                          renderizar();
                         },
                       }
                     );
@@ -89,5 +126,6 @@ const RoutineList = ({ trainingRoutine }) => {
 
 RoutineList.propTypes = {
   trainingRoutine: PropTypes.array,
+  renderizar: PropTypes.func,
 };
 export default RoutineList;
