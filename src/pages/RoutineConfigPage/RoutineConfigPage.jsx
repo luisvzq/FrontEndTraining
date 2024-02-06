@@ -60,20 +60,19 @@ const RoutineConfigPage = () => {
         user: postBody,
       },
       {
-        // onError: (error) => {
-        //   setStatusMessage(error);
+        onError: (error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: error,
+          });
+        },
 
-        //   setShakeAnimation(true);
-        //   setTimeout(() => {
-        //     setShakeAnimation(false);
-        //     setStatusMessage("");
-        //   }, 4000);
-        // },
-        onSuccess: () => {
+        onSuccess: (data) => {
           Swal.fire({
             position: "top-center",
             icon: "success",
-            title: `exito!`,
+            title: data.message,
             showConfirmButton: false,
             timer: 2500,
             customClass: {
