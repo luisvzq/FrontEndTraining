@@ -27,6 +27,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
                 <label htmlFor="series">Series</label>
                 <input
                   type="number"
+                  min="0"
                   id="series"
                   value={training.series}
                   onChange={(e) => {
@@ -74,6 +75,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
                 <label htmlFor="reps">Reps</label>
                 <input
                   type="number"
+                  min="0"
                   id="reps"
                   value={training.reps}
                   onChange={(e) => {
