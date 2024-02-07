@@ -20,11 +20,11 @@ const Routine = ({ data }) => {
     <ul className="routine-list">
       {data.map((routine) => {
         return (
-          <li key={routine.id}>
+          <li key={routine.id} className="routine">
             <Link to={`${route}${routine.id}`}>
-              <h2>{routine.name}</h2>
+              <h2 className="routine-name">{routine.name}</h2>
 
-              <p>{routine.description}</p>
+              <p className="routine-description">{routine.description}</p>
             </Link>
           </li>
         );
