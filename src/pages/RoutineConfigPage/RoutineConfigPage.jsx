@@ -7,8 +7,12 @@ import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import Swal from "sweetalert2";
 import RoutineList from "../../components/RoutineList/RoutineList";
-import html2canvas from "html2canvas";
+import RoutineDelete from "../../components/RoutineDelete/RoutineDelete";
+import "./RoutineConfigPage.scss";
+
 import jsPDF from "jspdf";
+
+import html2canvas from "html2canvas";
 
 const RoutineConfigPage = () => {
   const { id } = useParams();
@@ -74,17 +78,17 @@ const RoutineConfigPage = () => {
           });
         },
 
-        onSuccess: (data) => {
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: data.message,
-            showConfirmButton: false,
-            timer: 2500,
-            customClass: {
-              popup: "rounded-popup",
-            },
-          });
+        onSuccess: () => {
+          // Swal.fire({
+          //   position: "top-center",
+          //   icon: "success",
+          //   title: data.message,
+          //   showConfirmButton: false,
+          //   timer: 2500,
+          //   customClass: {
+          //     popup: "rounded-popup",
+          //   },
+          // });
           listRoutine.refetch();
         },
       }
@@ -92,73 +96,76 @@ const RoutineConfigPage = () => {
   };
 
   const generarPDF = () => {
-    if (!pdfRef.current) return;
-
-    html2canvas(pdfRef.current).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, "PNG", 0, 0);
-      pdf.save("rutina.pdf");
-
-      // Generar el Blob del PDF
-      // pdf.output("blob", (pdfBlob) => {
-
-      //   // Crear un objeto FormData
-      //   const formData = new FormData();
-      //   formData.append("pdfFile", pdfBlob, "rutina.pdf");
-      //   formData.append("email", "a.areslago@gmail.com");
-      //   // 'pdfFile' es el nombre que se utilizará para el archivo en el backend
-
-      //   // Enviar el FormData al backend utilizando fetch
-      //   mutation.mutate(
-      //     {
-      //       endpoint: `sendPdf`,
-      //       method: "POST",
-      //       user: formData,
-      //     },
-      //     {
-      //       onError: () => {},
-
-      //       onSuccess: () => {},
-      //     }
-      //   );
-      // });
+      if (!pdfRef.current) return;
+      html2canvas(pdfRef.current).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, "PNG", 0, 0);
+        pdf.save("rutina.pdf");
+        //Generar el Blob del PDF
+        pdf.output("blob", (pdfBlob) => {
+          // Crear un objeto FormData
+          const formData = new FormData();
+          formData.append("pdfFile", pdfBlob, "rutina.pdf");
+          formData.append("email", "a.areslago@gmail.com");
+          // 'pdfFile' es el nombre que se utilizará para el archivo en el backend
+          // Enviar el FormData al backend utilizando fetch
+          mutation.mutate(
+            {
+              endpoint: `sendPdf`,
+              method: "POST",
+              user: formData,
+            },
+            {
+              onError: () => {},
+              onSuccess: () => {},
+            }
+          );
+        });
     });
   };
 
   return (
-    <>
-      {getTraining.isLoading ? <Loading /> : null}
-      {getTraining.isError ? <p>{getTraining.error}</p> : null}
-      {getTraining.isSuccess && (
-        <select onChange={handleChangeSelect}>
-          <option defaultValue="">Selecciona un entrenamiento</option>
-          {selectTraining.map((entrenamiento) => {
-            return (
-              <option key={entrenamiento.id} value={entrenamiento.id}>
-                {entrenamiento.name}
-              </option>
-            );
-          })}
-        </select>
-      )}
-      <div ref={pdfRef}>
+    <div className="container-config">
+      <div className="container-options">
+        {getTraining.isLoading ? <Loading /> : null}
+        {getTraining.isError ? <p>{getTraining.error}</p> : null}
+        {getTraining.isSuccess && (
+          <select onChange={handleChangeSelect}>
+            <option defaultValue="">Selecciona un entrenamiento</option>
+            {selectTraining.map((entrenamiento) => {
+              return (
+                <option key={entrenamiento.id} value={entrenamiento.id}>
+                  {entrenamiento.name}
+                </option>
+              );
+            })}
+          </select>
+        )}
+        <RoutineDelete routineId={id} />
+        <button onClick={generarPDF}>Generar PDF</button>
+      </div>
+
+      <div className="container-print" ref={pdfRef}>
+        <div className="list-name-description">
         {getRoutine.isLoading ? <Loading /> : null}
         {getRoutine.isError ? <p>{getRoutine.error}</p> : null}
         {getRoutine.isSuccess && (
           <>
-            <h1>Rutina: {routines.name}</h1>
-            <h3>Descripcion: {routines.description}</h3>
+            <h1 className="title-routine">{routines.name}</h1>
+            <h3 className="description-routine">{routines.description}</h3>
           </>
         )}
-
-        <RoutineList
-          trainingRoutine={trainingRoutine}
-          renderizar={renderizar}
-        />
-      </div>
-      <button onClick={generarPDF}>Generar PDF</button>
-    </>
+        </div>
+        <div className="list-router-training">
+          <RoutineList
+            trainingRoutine={trainingRoutine}
+            renderizar={renderizar}
+          />
+        </div>
+        </div>
+      
+    </div>
   );
 };
 

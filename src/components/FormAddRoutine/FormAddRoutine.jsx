@@ -16,36 +16,45 @@ const FormAddRoutine = () => {
 
   const navigate = useNavigate();
 
-  const postBody = { name, description };
+
 
   const mutation = useMutation(hookPostPatchFetch);
 
   const handleRoutineButton = (e) => {
     e.preventDefault();
-    mutation.mutate(
-      { endpoint: "addRoutine", method: "POST", user: postBody },
-      {
-        onError: (error) => {
-          setStatusMessage(error);
-          setTimeout(() => {
-            setStatusMessage("");
-          }, 5000);
-        },
-        onSuccess: (data) => {
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: data.message,
-            showConfirmButton: false,
-            timer: 2500,
-            customClass: {
-              popup: "rounded-popup",
-            },
-          });
-          navigate(`${route}`);
-        },
-      }
-    );
+
+    if (name ==="" || description === "") {
+      setStatusMessage("Todos los campos deben estar cubiertos ✌️");
+    }else{
+      const postBody = { name, description };
+      mutation.mutate(
+        { endpoint: "addRoutine", method: "POST", user: postBody },
+        {
+          onError: (error) => {
+            setStatusMessage(error);
+            setTimeout(() => {
+              setStatusMessage("");
+            }, 5000);
+          },
+          onSuccess: (data) => {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: data.message,
+              showConfirmButton: false,
+              timer: 2500,
+              customClass: {
+                popup: "rounded-popup",
+              },
+            });
+            navigate(`${route}`);
+          },
+        }
+      );
+
+    }
+
+
   };
 
   let route = "";
