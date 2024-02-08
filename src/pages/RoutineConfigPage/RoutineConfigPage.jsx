@@ -79,16 +79,6 @@ const RoutineConfigPage = () => {
         },
 
         onSuccess: () => {
-          // Swal.fire({
-          //   position: "top-center",
-          //   icon: "success",
-          //   title: data.message,
-          //   showConfirmButton: false,
-          //   timer: 2500,
-          //   customClass: {
-          //     popup: "rounded-popup",
-          //   },
-          // });
           listRoutine.refetch();
         },
       }
@@ -96,32 +86,32 @@ const RoutineConfigPage = () => {
   };
 
   const generarPDF = () => {
-      if (!pdfRef.current) return;
-      html2canvas(pdfRef.current).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF();
-        pdf.addImage(imgData, "PNG", 0, 0);
-        pdf.save("rutina.pdf");
-        //Generar el Blob del PDF
-        pdf.output("blob", (pdfBlob) => {
-          // Crear un objeto FormData
-          const formData = new FormData();
-          formData.append("pdfFile", pdfBlob, "rutina.pdf");
-          formData.append("email", "a.areslago@gmail.com");
-          // 'pdfFile' es el nombre que se utilizará para el archivo en el backend
-          // Enviar el FormData al backend utilizando fetch
-          mutation.mutate(
-            {
-              endpoint: `sendPdf`,
-              method: "POST",
-              user: formData,
-            },
-            {
-              onError: () => {},
-              onSuccess: () => {},
-            }
-          );
-        });
+    if (!pdfRef.current) return;
+    html2canvas(pdfRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 0, 0);
+      pdf.save("rutina.pdf");
+      //Generar el Blob del PDF
+      pdf.output("blob", (pdfBlob) => {
+        // Crear un objeto FormData
+        const formData = new FormData();
+        formData.append("pdfFile", pdfBlob, "rutina.pdf");
+        formData.append("email", "a.areslago@gmail.com");
+        // 'pdfFile' es el nombre que se utilizará para el archivo en el backend
+        // Enviar el FormData al backend utilizando fetch
+        mutation.mutate(
+          {
+            endpoint: `sendPdf`,
+            method: "POST",
+            user: formData,
+          },
+          {
+            onError: () => {},
+            onSuccess: () => {},
+          }
+        );
+      });
     });
   };
 
@@ -148,14 +138,14 @@ const RoutineConfigPage = () => {
 
       <div className="container-print" ref={pdfRef}>
         <div className="list-name-description">
-        {getRoutine.isLoading ? <Loading /> : null}
-        {getRoutine.isError ? <p>{getRoutine.error}</p> : null}
-        {getRoutine.isSuccess && (
-          <>
-            <h1 className="title-routine">{routines.name}</h1>
-            <h3 className="description-routine">{routines.description}</h3>
-          </>
-        )}
+          {getRoutine.isLoading ? <Loading /> : null}
+          {getRoutine.isError ? <p>{getRoutine.error}</p> : null}
+          {getRoutine.isSuccess && (
+            <>
+              <h1 className="title-routine">{routines.name}</h1>
+              <h3 className="description-routine">{routines.description}</h3>
+            </>
+          )}
         </div>
         <div className="list-router-training">
           <RoutineList
@@ -163,8 +153,7 @@ const RoutineConfigPage = () => {
             renderizar={renderizar}
           />
         </div>
-        </div>
-      
+      </div>
     </div>
   );
 };

@@ -7,7 +7,6 @@ import Next from "../../assets/Next.svg";
 import Prev from "../../assets/Prev.svg";
 
 import Loading from "../../components/Loading/Loading.jsx";
-// import { authContext } from "../../context/AuthContext.jsx";
 import { useQuery } from "react-query";
 import useFetchHooks from "../../hooks/useFetchHooks";
 
@@ -19,7 +18,7 @@ const TrainingListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
-  const { isLoading, isError,data,  error, isSuccess, refetch } = useQuery(
+  const { isLoading, isError, data, error, isSuccess, refetch } = useQuery(
     ["trainingInfo", "trainingInfo", currentPage],
     () => hookGetFetch("trainingInfo", { page: currentPage, pageSize }),
     {
@@ -43,7 +42,7 @@ const TrainingListPage = () => {
       {isSuccess ? (
         <Training data={allTraining} renderizar={renderizar} />
       ) : null}
-      {isSuccess && data &&(
+      {isSuccess && data && (
         <div>
           <button
             onClick={() => setCurrentPage((prevPage) => prevPage - 1)}

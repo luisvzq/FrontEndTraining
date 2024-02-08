@@ -14,7 +14,6 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [context, setContext] = useContext(authContext);
-  // const [shakeAnimation, setShakeAnimation] = useState(false);
   const navigate = useNavigate();
   const { hookPostPatchFetch } = useFetchHooks();
   const mutation = useMutation(hookPostPatchFetch);
@@ -71,22 +70,12 @@ const LoginPage = () => {
     );
   };
 
-  // const userFetchResponse = statusMessage;
-
   return (
     <>
       <section className="login-page">
         {mutation.isLoading && <Loading />}
         <h1>Login</h1>
         <ErrorMessage message={statusMessage} />
-
-        {/* {statusMessage ? (
-          <p className={`status-message ${shakeAnimation ? "shake" : ""}`}>
-            {statusMessage}
-          </p>
-        ) : (
-          <p className="intro-text">Introduce los datos</p>
-        )} */}
 
         <form className="login-container" onSubmit={handleLoginButton}>
           <label htmlFor="email">Email</label>

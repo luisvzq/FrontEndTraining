@@ -1,8 +1,6 @@
 import FlipCard from "../../components/FlipCard/FlipCard";
 import SimpleSlider from "../../components/HomeSlider/HomeSlider";
-// import Fade from "../../components/HomeSlider/HomeSlider";
-// import Slideshow from "../../components/HomeSlider/HomeSlider";
-// import HomeSlider from "../../components/HomeSlider/HomeSlider";
+
 import "./HomePage.scss";
 
 const HomePage = () => {

@@ -6,7 +6,7 @@ import "./RegisterPage.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import Loading from "../../components/Loading/Loading.jsx"; // importo spinner
+import Loading from "../../components/Loading/Loading.jsx";
 import UseValidateUser from "../../hooks/UseValidateUser.js";
 
 const RegisterPage = () => {
