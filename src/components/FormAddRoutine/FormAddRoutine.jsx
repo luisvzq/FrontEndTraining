@@ -6,6 +6,7 @@ import Loading from "../Loading/Loading.jsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useNavigate } from "react-router";
 import { authContext } from "../../context/AuthContext";
+import "./FormAddRoutine.scss";
 
 const FormAddRoutine = () => {
   const [context] = useContext(authContext);
@@ -65,13 +66,12 @@ const FormAddRoutine = () => {
   }
 
   return (
-    <>
+    <div className="routine-create">
+      {mutation.isLoading && <Loading />}
+      <h1>Crear Rutina</h1>
+
+      <ErrorMessage message={statusMessage} />
       <section className="routine-form">
-        {mutation.isLoading && <Loading />}
-        <h1>Crear Rutina</h1>
-
-        <ErrorMessage message={statusMessage} />
-
         <form className="routine-container" onSubmit={handleRoutineButton}>
           <label htmlFor="name">Nombre</label>
           <input
@@ -91,10 +91,10 @@ const FormAddRoutine = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <input type="submit" className="submit-btn" />
+          <input type="submit" className="submit-btn" value="Crear" />
         </form>
       </section>
-    </>
+    </div>
   );
 };
 

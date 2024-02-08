@@ -32,10 +32,12 @@ const RoutinePage = () => {
   return (
     <div className="routines-list-page">
       <h1>Mis Rutinas</h1>
-      <Link to={`${route}`}>Añadir Rutinas</Link>
       {isLoading ? <Loading /> : null}
       {isError ? <p>{error}</p> : null}
       {isSuccess ? <Routine data={allRoutines} /> : null}
+      <Link to={`${route}`} className="add-routine">
+        Nueva Rutina
+      </Link>
     </div>
   );
 };
