@@ -41,10 +41,10 @@ const Training = ({ data, renderizar}) => {
 
   console.log("Resultado de filtrar", data);
   return (
-    <ul className="listTraining">
+    <ul className="all-trainings">
       {data.map((training) => {
         return (
-          <li key={training.id}>
+          <li key={training.id} className="list-training">
             <div className="botones">
               <button
                 className={`FAV ${training.favTrue && "red"}`}

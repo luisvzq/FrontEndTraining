@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loading from "../../components/Loading/Loading.jsx"; // importo spinner
+import UseValidateUser from "../../hooks/UseValidateUser.js";
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -28,50 +29,60 @@ const RegisterPage = () => {
 
   const handleRegisterButton = (e) => {
     e.preventDefault();
+    const validated = UseValidateUser(name, email, setStatusMessage);
+    if (validated) {
+      if (password !== passwordRepeat) {
+        setStatusMessage("Las contraseñas no coinciden");
 
-    if (password !== passwordRepeat) {
-      setStatusMessage("Las contraseñas no coinciden");
-
-      setShakeAnimation(true);
-      setTimeout(() => {
-        setShakeAnimation(false);
-        setStatusMessage("");
-      }, 5000);
-      return;
-    }
-
-    mutation.mutate(
-      { endpoint: "register", method: "POST", user: postBody },
-      {
-        onError: (error) => {
-          setStatusMessage(error);
-
-          setShakeAnimation(true);
-          setTimeout(() => {
-            setShakeAnimation(false);
-            setStatusMessage("");
-          }, 4000);
-        },
-        onSuccess: () => {
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: `Registro completado con éxito!`,
-            showConfirmButton: false,
-            timer: 2500,
-            customClass: {
-              popup: "rounded-popup",
-            },
-          });
-          navigate("/login");
-
-          setName("");
-          setEmail("");
-          setPassword("");
-          setPasswordRepeat("");
-        },
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+          setStatusMessage("");
+        }, 5000);
+        return;
       }
-    );
+      if (password.length < 6) {
+        setStatusMessage("Contraseña debe tener al menos 6 caracteres");
+
+        setShakeAnimation(true);
+        setTimeout(() => {
+          setShakeAnimation(false);
+          setStatusMessage("");
+        }, 5000);
+        return;
+      }
+
+      mutation.mutate(
+        { endpoint: "register", method: "POST", user: postBody },
+        {
+          onError: (error) => {
+            setStatusMessage(error);
+
+            setTimeout(() => {
+              setStatusMessage("");
+            }, 4000);
+          },
+          onSuccess: () => {
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: `Registro completado con éxito!`,
+              showConfirmButton: false,
+              timer: 2500,
+              customClass: {
+                popup: "rounded-popup",
+              },
+            });
+            navigate("/login");
+
+            setName("");
+            setEmail("");
+            setPassword("");
+            setPasswordRepeat("");
+          },
+        }
+      );
+    }
   };
 
   return (

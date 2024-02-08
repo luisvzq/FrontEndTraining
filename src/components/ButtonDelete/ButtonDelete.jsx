@@ -28,6 +28,13 @@ const ButtonDelete = ()=> {
             
         }
       })}
+
+      let route="";
+      if(context.role==="admin"){
+        route="/admin/entrenos";
+      }else{
+        route="/entrenos";
+      }
     
     
 
@@ -60,7 +67,7 @@ const ButtonDelete = ()=> {
               });
               const bodyButtonDel = await response.json();
               console.log("Respuesta a Button Delete", bodyButtonDel);
-                navigate('/admin/entrenos');
+                navigate(route);
             
             } else {
               const body = await response.json();
