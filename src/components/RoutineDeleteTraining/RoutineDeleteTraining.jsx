@@ -10,13 +10,13 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderizar }) => {
   const confirmation = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "Esta seguro?",
-      text: "El entreno se borrara de la rutina !",
+      title: "Está seguro?",
+      text: "El entreno se borrará de la rutina !",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, deseo eliminarlo.",
+      confirmButtonText: "Sí, deseo eliminarlo.",
     }).then((result) => {
       if (result.value) {
         handleButton();

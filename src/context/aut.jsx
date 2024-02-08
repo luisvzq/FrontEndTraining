@@ -3,7 +3,7 @@ import { authContext } from "./AuthContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 export const AuthProvider = ({ children }) => {
   const [context, setContext] = useLocalStorage();
-  // console.log("conttexto:      ",context);
+
   return (
     <authContext.Provider value={[context, setContext]}>
       {children}
@@ -11,6 +11,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 AuthProvider.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
-  
+  children: PropTypes.node.isRequired,
+};

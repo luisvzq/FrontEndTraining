@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 import { Link } from "react-router-dom";
-import ButtonDelete from "../ButtonDelete/ButtonDelete"
-//import Add from "../../assets/Add.svg"
-import Edit from "../../assets/Edit.svg"
+import ButtonDelete from "../ButtonDelete/ButtonDelete";
+import Edit from "../../assets/Edit.svg";
 import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
 import Loading from "../Loading/Loading";
@@ -14,7 +13,7 @@ import { authContext } from "../../context/AuthContext";
 
 const Details = ({ trainingId }) => {
   const [details, setDetails] = useState({});
-  const [context]=useContext(authContext);
+  const [context] = useContext(authContext);
 
   const { hookGetFetch } = useFetchHooks();
   const { isLoading, isSuccess } = useQuery(
@@ -26,26 +25,29 @@ const Details = ({ trainingId }) => {
       },
     }
   );
-  let route="";
-  if(context.role==="admin"){
-    route="/admin/entrenos?";
-  }else{
-    route="/entrenos?";
+  let route = "";
+  if (context.role === "admin") {
+    route = "/admin/entrenos?";
+  } else {
+    route = "/entrenos?";
   }
   return (
     <div className="container-detail">
-      {context.role === "admin" &&<> 
-        <div className="container-EMA">
+      {context.role === "admin" && (
+        <>
+          <div className="container-EMA">
             <ButtonDelete />
-            <Link to={`/admin/modificar/${trainingId}`} >
-            <button className="button"><img src={Edit} alt="Eliminar"className="edit"/></button>
-            </Link> 
-          </div></>}
+            <Link to={`/admin/modificar/${trainingId}`}>
+              <button className="button">
+                <img src={Edit} alt="Eliminar" className="edit" />
+              </button>
+            </Link>
+          </div>
+        </>
+      )}
       {isLoading ? <Loading /> : null}
       {isSuccess
-        ? 
-        
-        details.name && (
+        ? details.name && (
             <>
               <h1 className="title">{details.name}</h1>
               <div className="details">

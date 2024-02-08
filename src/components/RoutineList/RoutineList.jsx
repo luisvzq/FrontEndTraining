@@ -26,8 +26,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
                     Series
                   </label>
                   <input
-                    className="number-imput"
-                    // onKeyDown="return false"
+                    className="number-imput"                  
                     type="number"
                     min="0"
                     id="series"

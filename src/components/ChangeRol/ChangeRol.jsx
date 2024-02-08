@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
 import "./ChangeRol.scss";
-
 import useFetchHooks from "../../hooks/useFetchHooks";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Swal from "sweetalert2";

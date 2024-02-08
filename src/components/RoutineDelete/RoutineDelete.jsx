@@ -3,24 +3,21 @@ import { authContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-// import Delete from "../../assets/Delete.svg";
 import PropTypes from "prop-types";
 
-const RoutineDelete = ({ routineId } ) => {
+const RoutineDelete = ({ routineId }) => {
   const [context] = useContext(authContext);
   const navigate = useNavigate();
 
-
-
   const confirmation = () => {
     Swal.fire({
-      title: "Esta seguro?",
-      text: "La rutina se borrara!",
+      title: "Está seguro?",
+      text: "La rutina se borrará!",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, deseo eliminarlo.",
+      confirmButtonText: "Sí, deseo eliminarlo.",
     }).then((result) => {
       if (result.value) {
         handleButton();
@@ -29,13 +26,12 @@ const RoutineDelete = ({ routineId } ) => {
   };
 
   const handleButton = () => {
-
-  let route="";
-  if(context.role==="admin"){
-    route="/admin/rutinas";
-  }else{
-    route="/rutinas";
-  }
+    let route = "";
+    if (context.role === "admin") {
+      route = "/admin/rutinas";
+    } else {
+      route = "/rutinas";
+    }
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -63,7 +59,7 @@ const RoutineDelete = ({ routineId } ) => {
           });
           const bodyButtonDel = await response.json();
           console.log("Respuesta a Button Delete", bodyButtonDel);
-        
+
           navigate(route);
         } else {
           const body = await response.json();
@@ -74,22 +70,14 @@ const RoutineDelete = ({ routineId } ) => {
       }
     }
     fetchButton();
-   };
+  };
 
   return (
     <>
-      {/* <button className="buttons-delete" onClick={confirmation}>
-        {" "}
-        <img src={Delete} alt="Eliminar rutina" className="delete" />
-      </button> */}
-
-      <button  onClick={confirmation}>Eliminar rutina
-        
-      </button>
+      <button onClick={confirmation}>Eliminar rutina</button>
     </>
   );
 };
-
 
 RoutineDelete.propTypes = {
   routineId: PropTypes.string,

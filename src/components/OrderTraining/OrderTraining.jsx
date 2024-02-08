@@ -19,7 +19,7 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
     const getTrainingFetch = async () => {
       try {
         const queryParams = searchParams.toString();
-        // console.log(queryParams);
+
         const res = await fetch(
           `http://localhost:3001/training?${queryParams}`,
           {
@@ -93,7 +93,6 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
           <option value="likes">Likes</option>
         </select>
       </div>
-      {/* <button type="submit">Buscar</button> */}
     </form>
   );
 };

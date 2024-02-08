@@ -14,13 +14,13 @@ const ButtonDelete = ()=> {
 
     const confirmation= ()=>{
       Swal.fire({
-        title: 'Esta seguro?',
-        text: "El entreno se borrara!",
+        title: 'Está seguro?',
+        text: "El entreno se borrará!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, deseo eliminarlo.'
+        confirmButtonText: 'Sí, deseo eliminarlo.'
       
       }).then((result) => {
         if (result.value) {
@@ -58,7 +58,7 @@ const ButtonDelete = ()=> {
               Swal.fire({
                 position: "top-center",
                 icon: "success",
-                title: `El entreno se ha borrado con exito!`,
+                title: `El entreno se ha borrado con éxito!`,
                 showConfirmButton: false,
                 timer: 2500,
                 customClass: {

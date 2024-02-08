@@ -35,7 +35,6 @@ const UserForm = () => {
 
         if (response.ok) {
           const body = await response.json();
-          console.log("Peticion datos de usuario:", body.data);
           setDataDb(body.data);
           setName(body.data.name);
           setEmail(body.data.email);
@@ -43,7 +42,7 @@ const UserForm = () => {
           setIsLoading(false);
           setIsSuccess(true);
         } else {
-          throw new Error("Error al hacer fetch a los datos de usuario ");
+          throw new Error("Error al hacer fetch a los datos de usuario");
         }
       } catch (error) {
         console.error(error);
@@ -55,7 +54,7 @@ const UserForm = () => {
   const modifyUser = async (e) => {
     e.preventDefault();
     if (dataDb.name === name && dataDb.email === email) {
-      setStatusMessage("Debes cambiar algún dato ✌️");
+      setStatusMessage("Debes cambiar algún dato");
     } else {
       const validated = UseValidateUser(name, email, setStatusMessage);
 
@@ -65,7 +64,6 @@ const UserForm = () => {
           formData.append("name", name);
           formData.append("email", email);
           formData.append("password", newPass);
-          // console.log("Datos a enviar: ", formData);
 
           const res = await fetch(
             `${import.meta.env.VITE_HOST_BACK}:${
@@ -84,7 +82,7 @@ const UserForm = () => {
             Swal.fire({
               position: "top-center",
               icon: "success",
-              title: `La modificacion ha sido completada con exito!`,
+              title: `La modificación ha sido completada con exito!`,
               showConfirmButton: false,
               timer: 2500,
               customClass: {
@@ -102,7 +100,7 @@ const UserForm = () => {
           }
         } catch (error) {
           console.error(error);
-          setStatusMessage("La modificacion ha fallado");
+          setStatusMessage("La modificación ha fallado");
         }
       }
     }

@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { authContext } from "../../context/AuthContext";
-
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Training.scss";
@@ -8,8 +7,7 @@ import "./Training.scss";
 const Training = ({ data, renderizar}) => {
   const [context] = useContext(authContext);
 
-  const handleButton = (table, method, entreno) => {
-    // console.log(`Metodo: ${method} para la tabla: ${table}`);
+  const handleButton = (table, method, entreno) => {  
     async function fetchButton() {
       try {
         const response = await fetch(

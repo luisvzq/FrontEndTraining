@@ -10,13 +10,13 @@ const ButtonDeleteUser = () => {
 
   const confirmation= ()=>{
     Swal.fire({
-      title: 'Esta seguro?',
-      text: "El usuario se borrara!",
+      title: 'Está seguro?',
+      text: "El usuario se borrará!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, deseo eliminar mi cuenta.'
+      confirmButtonText: 'Sí, deseo eliminar mi cuenta.'
     
     }).then((result) => {
       if (result.value) {
