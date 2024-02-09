@@ -20,7 +20,8 @@ color: white;
 .list-format{
     display: flex;
     align-items:flex-start;
-    justify-content: baseline;
+    margin: 1vh;
+    // justify-content: baseline;
     
 
 }
@@ -29,7 +30,7 @@ color: white;
     display: flex;
     flex-direction: column;  
     min-width: 15vw;
-    min-height: 8vh;
+    // min-height: 8vh;
     margin-right: 5vw;
     
 

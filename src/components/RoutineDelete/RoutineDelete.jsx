@@ -74,7 +74,7 @@ const RoutineDelete = ({ routineId }) => {
 
   return (
     <>
-      <button onClick={confirmation}>Eliminar rutina</button>
+      <button onClick={confirmation} className="routine-delete">Eliminar rutina</button>
     </>
   );
 };

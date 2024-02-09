@@ -17,7 +17,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
           return (
             <li className="list-format" key={training.id_training}>
               <div className="routine-training-name">
-                <h2 className="routine-h2">{training.name}</h2>
+                <h3 className="routine-h2">{training.name}</h3>
               </div>
 
               <div className="series-reps">
