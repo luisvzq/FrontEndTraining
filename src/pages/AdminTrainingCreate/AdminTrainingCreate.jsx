@@ -132,7 +132,12 @@ const AdminTrainingCreate = () => {
           />
 
           <label htmlFor="photo">Subir imagen</label>
-          <input type="file" name="photo" id="photo" />
+          <input
+            type="file"
+            accept=".jpg, .jpeg, .png, .gif"
+            name="photo"
+            id="photo"
+          />
 
           <button type="submit" className="btn-crear-user">
             Enviar

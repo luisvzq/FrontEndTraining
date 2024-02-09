@@ -11,7 +11,6 @@ const FavChecked = ({ trainingId }) => {
   const [fav, setFav] = useState();
   const { hookGetFetch } = useFetchHooks();
 
-  
   const { isLoading, isSuccess } = useQuery(
     [`favChecked/${trainingId}`, `favChecked/${trainingId}`],
     () => hookGetFetch(`favChecked/${trainingId}`),

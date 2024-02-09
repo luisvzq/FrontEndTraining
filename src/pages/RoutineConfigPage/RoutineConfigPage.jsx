@@ -93,24 +93,24 @@ const RoutineConfigPage = () => {
       pdf.addImage(imgData, "PNG", 0, 0);
       pdf.save("rutina.pdf");
       //Generar el Blob del PDF
-      pdf.output("blob", (pdfBlob) => {
-        // Crear un objeto FormData
-        const formData = new FormData();
-        formData.append("pdfFile", pdfBlob, "rutina.pdf");
-        formData.append("email", "a.areslago@gmail.com");
-     
-        mutation.mutate(
-          {
-            endpoint: `sendPdf`,
-            method: "POST",
-            user: formData,
-          },
-          {
-            onError: () => {},
-            onSuccess: () => {},
-          }
-        );
-      });
+      // pdf.output("blob", (pdfBlob) => {
+      //   // Crear un objeto FormData
+      //   const formData = new FormData();
+      //   formData.append("pdfFile", pdfBlob, "rutina.pdf");
+      //   formData.append("email", "a.areslago@gmail.com");
+
+      //   mutation.mutate(
+      //     {
+      //       endpoint: `sendPdf`,
+      //       method: "POST",
+      //       user: formData,
+      //     },
+      //     {
+      //       onError: () => {},
+      //       onSuccess: () => {},
+      //     }
+      //   );
+      // });
     });
   };
 
@@ -132,7 +132,9 @@ const RoutineConfigPage = () => {
           </select>
         )}
         {/* <RoutineDelete routineId={id} /> */}
-        <button onClick={generarPDF} className="pdf-button">Generar PDF</button>
+        <button onClick={generarPDF} className="pdf-button">
+          Generar PDF
+        </button>
       </div>
 
       <div className="container-print" ref={pdfRef}>
@@ -159,4 +161,3 @@ const RoutineConfigPage = () => {
 };
 
 export default RoutineConfigPage;
-

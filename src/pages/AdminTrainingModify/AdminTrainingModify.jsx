@@ -15,15 +15,13 @@ const AdminTrainingModify = () => {
   const [dataDb, setDataDb] = useState({});
   const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-  const [isLoading, setIsLoading] =useState( true);
-  const [isSuccess, setIsSuccess] =useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [context] = useContext(authContext);
   const { trainingId } = useParams();
   const navigate = useNavigate();
 
-
-
-    useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
@@ -47,9 +45,8 @@ const AdminTrainingModify = () => {
           setDescription(body.data.description);
           setTypology(body.data.typology);
           setMuscular(body.data.muscle_group);
-          setIsLoading(false)
-          setIsSuccess(true)
-
+          setIsLoading(false);
+          setIsSuccess(true);
         } else {
           throw new Error("Error al hacer fetch al entreno ");
         }
@@ -60,8 +57,6 @@ const AdminTrainingModify = () => {
     fetchData();
   }, [trainingId, context]);
 
-  
-
   const modifyTraining = async (e) => {
     e.preventDefault();
     if (
@@ -70,15 +65,14 @@ const AdminTrainingModify = () => {
       dataDb.muscle_group === muscular &&
       dataDb.typology === typology
     ) {
-      setStatusMessage("Debes cambiar algún dato ✌️");
-    
+      setStatusMessage("Debes cambiar algún dato");
     } else {
       const validated = UseValidate(
-        name,        
+        name,
         typology,
         description,
         muscular,
-        setStatusMessage      
+        setStatusMessage
       );
 
       if (validated) {
@@ -188,7 +182,12 @@ const AdminTrainingModify = () => {
             />
 
             <label htmlFor="photo">Subir imagen</label>
-            <input type="file" name="photo" id="photo" />
+            <input
+              type="file"
+              accept=".jpg, .jpeg, .png, .gif"
+              name="photo"
+              id="photo"
+            />
 
             <button type="submit" className="btn-modificar-user">
               Enviar
