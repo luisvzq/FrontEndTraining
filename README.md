@@ -6,7 +6,7 @@ Pulse Fit App es una aplicación web desarrollada con React para la gestión int
 
 _Instrucciones:_
 
-Abrir proyecto Back End , a continuación dispones del enlace de este proyecto y en él encontrarás de manera detallada las instrucciones de uso , imprescindible configurar .env -> ejecutar npm i -> npm ResetDb -> npm populateDb -> npm run start. Enlace al proyecto : 
+Abrir proyecto Back End , a continuación dispones del enlace de este proyecto , imprescindible configurar .env -> ejecutar npm i -> npm ResetDb -> npm populateDb -> npm run start. Enlace al proyecto : 
 
       https://github.com/AngelAresL/ApiTraining
 
