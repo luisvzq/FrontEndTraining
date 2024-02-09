@@ -67,8 +67,15 @@ _Páginas_
           Nombre entrenamiento: ejemplo
           Tipologia: ejemplo
           Grupo muscular: ejemplo
-          Descripcion : ejemplo
+          Descripción : ejemplo
           Subir imagen : seleccionar archivo
+
+- _RoutinePage_ Funcionalidad añadida , para que un entrenador pueda crear rutinas para sus clientes, configurándolas , dándole una descripción y añadiendo sus correspondientes entrenos con las repeticiones y series asignadas.Una vez creada la rutina el entrenador puede darle a generar mediante PDF bien para imprimirsela al clinete o enviársela por email desde su pc.
+
+        Aquí te muestro un ejemplo:
+
+          Nombre rutina: ejemplo         
+          Descripción : ejemplo
 
 El header y el footer es común para cualquier página independientemente del rol , como ya comentamos se renderizarán unas paginas u otras en función de los permisos del usuario. Desde cualquier punto de la app, tiene acceso a la parte de ajustes y de cerrar sesión que se encuentran en un desplegable en la parte superior derecha del header.
 
