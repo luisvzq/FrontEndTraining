@@ -2,7 +2,6 @@ import RegisterPage from "./Register/RegisterPage";
 import TrainingListPage from "./TrainingList/TrainingListPage";
 import HomePage from "../pages/Home/HomePage";
 import FavListPage from "./FavList/FavListPage";
-import AdminTrainingListPage from "./AdminTrainingList/AdminTrainingListPage";
 import TrainingDetailPage from "./TrainingDetail/TrainingDetailPage";
 import ForgotPasswordPage from "./ForgotPassword/ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPassword/ResetPasswordPage";
@@ -20,7 +19,6 @@ export {
   RegisterPage,
   TrainingListPage,
   FavListPage,
-  AdminTrainingListPage,
   AdminTrainingModify,
   AdminTrainingCreate,
   ForgotPasswordPage,
