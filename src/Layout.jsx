@@ -1,6 +1,5 @@
 import {
   AdminTrainingCreate,
-  AdminTrainingDetail,  
   AdminTrainingModify,
   AdminUserSetting,
   FavListPage,
@@ -80,7 +79,7 @@ const routesAdmin = [
   },
   {
     path: "/admin/entreno/:trainingId",
-    element: <AdminTrainingDetail />,
+    element: <TrainingDetailPage />,
   },
   {
     path: "/admin/favoritos",
