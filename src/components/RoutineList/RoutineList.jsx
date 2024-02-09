@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import RoutineDeleteTraining from "../RoutineDeleteTraining/RoutineDeleteTraining";
 import "./RoutineList.scss";
-const RoutineList = ({ trainingRoutine, renderizar }) => {
+const RoutineList = ({ trainingRoutine, renderElement }) => {
   const { id } = useParams();
   const { hookPostPatchFetch } = useFetchHooks();
   const mutation = useMutation(hookPostPatchFetch);
@@ -54,7 +54,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
                           },
 
                           onSuccess: () => {
-                            renderizar();
+                            renderElement();
                           },
                         }
                       );
@@ -93,7 +93,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
                           },
 
                           onSuccess: () => {
-                            renderizar();
+                            renderElement();
                           },
                         }
                       );
@@ -103,7 +103,7 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
               </div>
               <RoutineDeleteTraining
                 trainingRoutineId={training.id}
-                renderizar={renderizar}
+                renderElement={renderElement}
               />
             </li>
           );
@@ -115,6 +115,6 @@ const RoutineList = ({ trainingRoutine, renderizar }) => {
 
 RoutineList.propTypes = {
   trainingRoutine: PropTypes.array,
-  renderizar: PropTypes.func,
+  renderElement: PropTypes.func,
 };
 export default RoutineList;

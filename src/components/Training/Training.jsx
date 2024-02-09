@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Training.scss";
 
-const Training = ({ data, setRender}) => {
+const Training = ({ data, setRender }) => {
   const [context] = useContext(authContext);
 
-  const handleButton = (table, method, entreno) => {  
+  const handleButton = (table, method, entreno) => {
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -23,10 +23,7 @@ const Training = ({ data, setRender}) => {
         );
 
         if (response.ok) {
-          // const bodyButton = await response.json();
-          //  console.log("response Button", bodyButton);
-
-        setRender(true);
+          setRender(true);
         } else {
           const body = await response.json();
           console.error("ERROR fetchButton", body.message);
@@ -36,9 +33,8 @@ const Training = ({ data, setRender}) => {
       }
     }
     fetchButton();
-  }; 
+  };
 
-  //  console.log("Resultado de filtrar", data);
   return (
     <ul className="all-trainings">
       {data.map((training) => {
@@ -99,6 +95,3 @@ Training.propTypes = {
 };
 
 export default Training;
-
-
-

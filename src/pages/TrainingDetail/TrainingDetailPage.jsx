@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Details from "../../components/Details/Details";
 
 const TrainingDetailPage = () => {
-  let { trainingId } = useParams();
+  const { trainingId } = useParams();
 
   return (
     <>

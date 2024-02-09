@@ -49,7 +49,7 @@ const FavListPage = () => {
 };
 FavListPage.propTypes = {
   data: PropTypes.array,
-  renderizar: PropTypes.func,
+  renderElement: PropTypes.func,
 };
 
 export default FavListPage;

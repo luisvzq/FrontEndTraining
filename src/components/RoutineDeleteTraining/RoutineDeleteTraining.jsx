@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import Delete from "../../assets/Delete.svg";
 import PropTypes from "prop-types";
 
-const RoutineDeleteTraining = ({ trainingRoutineId, renderizar }) => {
+const RoutineDeleteTraining = ({ trainingRoutineId, renderElement }) => {
   const [context] = useContext(authContext);
 
   const confirmation = (e) => {
@@ -44,7 +44,7 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderizar }) => {
     
           const bodyButtonDel = await response.json();
           console.log("Respuesta a Button Delete", bodyButtonDel);
-          renderizar();
+          renderElement();
         } else {
           const body = await response.json();
           console.error("ERROR fetchButton", body.message);
@@ -68,7 +68,7 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderizar }) => {
 
 RoutineDeleteTraining.propTypes = {
   trainingRoutineId: PropTypes.number,
-  renderizar: PropTypes.func,
+  renderElement: PropTypes.func,
 };
 
 export default RoutineDeleteTraining;
