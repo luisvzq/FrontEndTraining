@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Training.scss";
 
-const Training = ({ data, renderizar}) => {
+const Training = ({ data, setRender}) => {
   const [context] = useContext(authContext);
 
   const handleButton = (table, method, entreno) => {  
@@ -24,8 +24,9 @@ const Training = ({ data, renderizar}) => {
 
         if (response.ok) {
           const bodyButton = await response.json();
-          console.log("response Button", bodyButton);
-        renderizar();     
+           console.log("response Button", bodyButton);
+
+        setRender(true);
         } else {
           const body = await response.json();
           console.error("ERROR fetchButton", body.message);
@@ -37,7 +38,7 @@ const Training = ({ data, renderizar}) => {
     fetchButton();
   }; 
 
-  console.log("Resultado de filtrar", data);
+   console.log("Resultado de filtrar", data);
   return (
     <ul className="all-trainings">
       {data.map((training) => {
@@ -94,7 +95,7 @@ const Training = ({ data, renderizar}) => {
 
 Training.propTypes = {
   data: PropTypes.array,
-  renderizar: PropTypes.func,
+  setRender: PropTypes.func,
 };
 
 export default Training;
