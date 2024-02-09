@@ -6,7 +6,7 @@ Pulse Fit App es una aplicación web desarrollada con React para la gestión int
 
 _Instrucciones:_
 
-Abrir proyecto Back End , a continuación dispones del enlace de este proyecto y en él encontrarás de manera detallada las instrucciones de uso , imprescindible configurar .env, ejecutar npm i , npm ResetDb y npm populateDb,  enlace al proyecto : 
+Abrir proyecto Back End , a continuación dispones del enlace de este proyecto y en él encontrarás de manera detallada las instrucciones de uso , imprescindible configurar .env -> ejecutar npm i -> npm ResetDb -> npm populateDb -> npm run start. Enlace al proyecto : 
 
       https://github.com/AngelAresL/ApiTraining
 
@@ -70,7 +70,7 @@ _Páginas_
           Descripción : ejemplo
           Subir imagen : seleccionar archivo
 
-- _RoutinePage_ Funcionalidad añadida , para que un entrenador pueda crear rutinas para sus clientes, configurándolas , dándole una descripción y añadiendo sus correspondientes entrenos con las repeticiones y series asignadas.Una vez creada la rutina el entrenador puede darle a generar mediante PDF bien para imprimirsela al clinete o enviársela por email desde su pc.
+- _RoutinePage_ Funcionalidad añadida , para que un entrenador pueda crear rutinas para sus clientes, configurándolas , dándole una descripción y añadiendo sus correspondientes entrenos con las repeticiones y series asignadas. Una vez creada la rutina, el entrenador puede darle a generar mediante PDF bien para imprimirsela al cliente o enviársela por email desde su pc.
 
         Aquí te muestro un ejemplo:
 
