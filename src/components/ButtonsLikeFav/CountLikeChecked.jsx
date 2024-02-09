@@ -25,13 +25,13 @@ const CountLikeChecked = ({ trainingId }) => {
 
         if (response.ok) {
           const body = await response.json();
-          // console.log("respuesta like marcado:", body.data.likeCheck);
           setLike(body.data.likeCheck);
         } else {
           throw new Error("Error al hacer fetch al like del entreno ");
         }
 
-        //----------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------
+
         const responseCount = await fetch(
           `${import.meta.env.VITE_HOST_BACK}:${
             import.meta.env.VITE_PORT_BACK
@@ -46,7 +46,6 @@ const CountLikeChecked = ({ trainingId }) => {
 
         if (responseCount.ok) {
           const bodyCount = await responseCount.json();
-          // console.log("Cuenta de likes", bodyCount.data);
           setCountLikes(bodyCount.data);
         } else {
           throw new Error(
@@ -58,10 +57,9 @@ const CountLikeChecked = ({ trainingId }) => {
       }
     }
     fetchData();
-  }, [trainingId,context, like]);
+  }, [trainingId, context, like]);
 
   const handleButton = (table, method) => {
-    // console.log(`Metodo: ${method} para la tabla: ${table}`);
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -77,8 +75,6 @@ const CountLikeChecked = ({ trainingId }) => {
         );
 
         if (response.ok) {
-          // const bodyButton = await response.json();
-          // console.log("response Button Like", bodyButton);
           setLike(!like);
         } else {
           const body = await response.json();
