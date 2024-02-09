@@ -96,7 +96,7 @@ _Styles:_
 - Angel Ares https://www.linkedin.com/in/ángel-a-b05205286/
 - David Barreira https://www.linkedin.com/in/david-barreira-suarez/
 - Luis Diaz https://www.linkedin.com/in/luisdiazvazquez/
-- Patricia Lojo www.linkedin.com/in/patricia-lojo-zubeldia
+- Patricia Lojo https://www.linkedin.com/in/patricia-lojo-zubeldia
 
 ## Enlace directo al repositorio
 
