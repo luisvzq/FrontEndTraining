@@ -23,8 +23,8 @@ const Training = ({ data, setRender}) => {
         );
 
         if (response.ok) {
-          const bodyButton = await response.json();
-           console.log("response Button", bodyButton);
+          // const bodyButton = await response.json();
+          //  console.log("response Button", bodyButton);
 
         setRender(true);
         } else {
@@ -38,7 +38,7 @@ const Training = ({ data, setRender}) => {
     fetchButton();
   }; 
 
-   console.log("Resultado de filtrar", data);
+  //  console.log("Resultado de filtrar", data);
   return (
     <ul className="all-trainings">
       {data.map((training) => {
