@@ -1,13 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { authContext } from "../../context/AuthContext";
 
 import "./OrderTraining.scss";
 import { useSearchParams } from "react-router-dom";
+import Training from "../Training/Training";
 
-const OrderAndSearchInputTraining = ({ setAllTraining }) => {
+const OrderAndSearchInputTraining = () => {
   const [context] = useContext(authContext);
-
+const [filter, setFilter]=useState([]);
+const [render, setRender]= useState();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleChange = (field, value) => {
@@ -34,20 +36,25 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         }
 
         const body = await res.json();
-        setAllTraining(body.data);
+        setFilter(body.data);
+        setRender(false);
       } catch (error) {
         console.error("Error:", error.message);
       }
     };
+  
 
     const timerId = setTimeout(getTrainingFetch, 600);
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [searchParams, context.token, setAllTraining]);
+  }, [searchParams, context.token, render]);
+
 
   return (
+    <>
+
     <form className="order-training-form">
       <div className="search-group">
         <label htmlFor="name">Nombre</label>
@@ -94,11 +101,13 @@ const OrderAndSearchInputTraining = ({ setAllTraining }) => {
         </select>
       </div>
     </form>
+      <Training data={filter} setRender={setRender} />
+      </>
   );
 };
 
 OrderAndSearchInputTraining.propTypes = {
-  setAllTraining: PropTypes.func,
+  allTraining: PropTypes.array,
 };
 
 export default OrderAndSearchInputTraining;

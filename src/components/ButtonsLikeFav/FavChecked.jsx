@@ -10,6 +10,8 @@ const FavChecked = ({ trainingId }) => {
   const [context] = useContext(authContext);
   const [fav, setFav] = useState();
   const { hookGetFetch } = useFetchHooks();
+
+  
   const { isLoading, isSuccess } = useQuery(
     [`favChecked/${trainingId}`, `favChecked/${trainingId}`],
     () => hookGetFetch(`favChecked/${trainingId}`),
@@ -21,7 +23,7 @@ const FavChecked = ({ trainingId }) => {
   );
 
   const handleButton = (table, method) => {
-    console.log(`Metodo: ${method} para la tabla: ${table}`);
+    // console.log(`Metodo: ${method} para la tabla: ${table}`);
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -37,8 +39,8 @@ const FavChecked = ({ trainingId }) => {
         );
 
         if (response.ok) {
-          const bodyButtonFav = await response.json();
-          console.log("Respuesta a Button Favorite", bodyButtonFav);
+          // const bodyButtonFav = await response.json();
+          // console.log("Respuesta a Button Favorite", bodyButtonFav);
           setFav(!fav);
         } else {
           const body = await response.json();

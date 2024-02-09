@@ -1,38 +1,48 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Training from "../../components/Training/Training.jsx";
 import "./FavListPage.scss";
-import Loading from "../../components/Loading/Loading.jsx";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
+import { authContext } from "../../context/AuthContext.jsx";
 import PropTypes from "prop-types";
-import { useQuery } from "react-query";
 
 const FavListPage = () => {
   const [allFavs, setAllFavs] = useState([]);
+  const [render, setRender] = useState(false);
+  const [context] = useContext(authContext);
 
-  const { hookGetFetch } = useFetchHooks();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_HOST_BACK}:${
+            import.meta.env.VITE_PORT_BACK
+          }/fav`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${context.token}`,
+            },
+          }
+        );
 
-  const { isLoading, isError, isSuccess, error, refetch } = useQuery(
-    ["favList", "fav"],
-    () => hookGetFetch("fav"),
-    {
-      onSuccess: (data) => {
-        setAllFavs(data);
-      },
+        if (response.ok) {
+          const body = await response.json();
+          setAllFavs(body.data);
+          setRender(false);
+        } else {
+          throw new Error("Error al hacer fetch al like del entreno ");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
-  );
-
-  const renderizar = () => {
-    refetch();
-  };
+    fetchData();
+  }, [allFavs, context, render]);
 
   return (
     <>
       <div className="training-list-fav">
-        <h1>Entranamientos Favoritos</h1>
-        {isLoading ? <Loading /> : null}
-
-        {isError ? <p>{error}</p> : null}
-        {isSuccess ? <Training data={allFavs} renderizar={renderizar} /> : null}
+        <h1>Entranamientos favoritos</h1>
+        <Training data={allFavs} setRender={setRender} />
       </div>
     </>
   );
