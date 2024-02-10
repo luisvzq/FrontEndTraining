@@ -11,10 +11,8 @@
     transition: background 0.3s ease-in-out;
     cursor: pointer;
     background-color: #3d3d3d;
-    color: whitesmoke;   
-   
+    color: whitesmoke;
   }
-
 
   .routine-delete {
     padding: 0.5rem;
@@ -43,12 +41,6 @@
     }
   }
 }
-
-// .option-training{
-//   &:hover {
-//     background-color: chocolate;
-//   }
-// }
 
 .container-print {
   display: flex;

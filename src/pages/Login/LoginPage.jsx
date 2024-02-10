@@ -4,10 +4,8 @@ import { authContext } from "../../context/AuthContext";
 import { useMutation } from "react-query";
 import Loading from "../../components/Loading/Loading.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
-
 import "./LoginPage.scss";
 import "sweetalert2/dist/sweetalert2.min.css";
-
 import Swal from "sweetalert2";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 

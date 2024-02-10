@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 import { useContext } from "react";
 import { authContext } from "../../context/AuthContext";
-import Swal from "sweetalert2";
-import Delete from "../../assets/Delete.svg";
-import PropTypes from "prop-types";
+import deleteSvg from "../../assets/Delete.svg";
 
 const RoutineDeleteTraining = ({ trainingRoutineId, renderElement }) => {
   const [context] = useContext(authContext);
@@ -24,8 +24,7 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderElement }) => {
     });
   };
 
-  const handleButton = () => { 
-
+  const handleButton = () => {
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -41,7 +40,6 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderElement }) => {
         );
 
         if (response.ok) {
-    
           const bodyButtonDel = await response.json();
           console.log("Respuesta a Button Delete", bodyButtonDel);
           renderElement();
@@ -60,7 +58,11 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderElement }) => {
     <>
       <button className="buttons-delete" onClick={confirmation}>
         {" "}
-        <img src={Delete} alt="Eliminar entreno de rutina" className="delete" />
+        <img
+          src={deleteSvg}
+          alt="Eliminar entreno de rutina"
+          className="delete"
+        />
       </button>
     </>
   );

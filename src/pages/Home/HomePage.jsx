@@ -1,6 +1,5 @@
 import FlipCard from "../../components/FlipCard/FlipCard";
 import SimpleSlider from "../../components/HomeSlider/HomeSlider";
-
 import "./HomePage.scss";
 
 const HomePage = () => {

@@ -2,9 +2,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/aut";
-import Layout from "./Layout";
 import { QueryClient, QueryClientProvider } from "react-query";
-
+import Layout from "./Layout";
 import "./main.scss";
 
 const queryClient = new QueryClient();

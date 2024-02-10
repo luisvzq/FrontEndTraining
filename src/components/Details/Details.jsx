@@ -1,15 +1,15 @@
-import "./Details.scss";
+import { authContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import useFetchHooks from "../../hooks/useFetchHooks";
 import FavChecked from "../ButtonsLikeFav/FavChecked";
 import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
-import { Link } from "react-router-dom";
 import ButtonDelete from "../ButtonDelete/ButtonDelete";
-import Edit from "../../assets/Edit.svg";
-import useFetchHooks from "../../hooks/useFetchHooks";
-import { useQuery } from "react-query";
 import Loading from "../Loading/Loading";
-import { authContext } from "../../context/AuthContext";
+import editSvg from "../../assets/Edit.svg";
+import "./Details.scss";
 
 const Details = ({ trainingId }) => {
   const [details, setDetails] = useState({});
@@ -39,7 +39,7 @@ const Details = ({ trainingId }) => {
             <ButtonDelete />
             <Link to={`/admin/modificar/${trainingId}`}>
               <button className="button">
-                <img src={Edit} alt="Eliminar" className="edit" />
+                <img src={editSvg} alt="Eliminar" className="edit" />
               </button>
             </Link>
           </div>

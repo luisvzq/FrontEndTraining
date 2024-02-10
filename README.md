@@ -2,11 +2,11 @@
 
 _Descripción:_
 
-Pulse Fit App es una aplicación web desarrollada con React para la gestión interna de los distintos tipos de rutinas que pueden definir los entrenadores que forman parte de la plantilla para sus clientes.
+Pulse Fit App es una aplicación web desarrollada con React y Vite (https://es.vitejs.dev) para la gestión interna de los distintos tipos de rutinas que pueden definir los entrenadores que forman parte de la plantilla para sus clientes.
 
 _Instrucciones:_
 
-Abrir proyecto Back End , a continuación dispones del enlace de este proyecto , imprescindible configurar .env -> ejecutar npm i -> npm ResetDb -> npm run start. Ya dispones de un usuario admin cuya contraseña es 12345, lo cual le servirá para hacer pruebas de las funciones de dicho rol. Enlace al proyecto : 
+Abrir proyecto Back End , a continuación dispones del enlace de este proyecto , imprescindible configurar .env -> ejecutar npm i -> npm ResetDb -> npm run start. Ya dispones de un usuario admin (admin@admin.com contraseña 123456), lo cual le servirá para hacer pruebas de las funciones de dicho rol, ya que cualquier usuario creado desde la app tendrá rol normal, será un admin quien a posteiror podrá agregarle un nuevo rol. Enlace al proyecto : 
 
       https://github.com/AngelAresL/ApiTraining
 
@@ -14,17 +14,25 @@ Ejecutar proyecto Front End : cumplimentar .env -> npm i -> npm run start
 
 _Dependencias._
 
-    "bootstrap": "^5.3.2",  
+   "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.0.2",
-    "react-slideshow-image": "^4.3.0",   
-    "sass": "^1.69.7",
-    "sweetalert2": "^11.10.3",
     "sweetalert2-react-content": "^5.0.7"
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "bootstrap": "^5.3.2",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "react-bootstrap": "^2.10.0",
+    "sass": "^1.70.0",
+    "vite": "^5.0.8"
 
 _Archivos principales:_
 
@@ -78,6 +86,15 @@ _Páginas_
           Descripción : ejemplo
 
 El header y el footer es común para cualquier página independientemente del rol , como ya comentamos se renderizarán unas paginas u otras en función de los permisos del usuario. Desde cualquier punto de la app, tiene acceso a la parte de ajustes y de cerrar sesión que se encuentran en un desplegable en la parte superior derecha del header.
+
+_Documentación:_ A continucación dispone de la documentación relacionada con las dependencias utlizadas.
+  - https://www.npmjs.com/package/html2canvas
+  - https://www.npmjs.com/package/react-dom
+  - https://www.npmjs.com/package/react-query
+  - https://www.npmjs.com/package/react-router-dom
+  - https://sweetalert2.github.io/recipe-gallery/sweetalert2-react.html
+  - https://getbootstrap.com/
+  - https://www.npmjs.com/package/react-bootstrap
 
 _Styles:_
 

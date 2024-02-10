@@ -1,17 +1,14 @@
 import { useRef, useState } from "react";
-import useFetchHooks from "../../hooks/useFetchHooks";
 import { useQuery } from "react-query";
-import { useMutation } from "react-query";
-import "./RoutineConfigPage.scss";
 import { useParams } from "react-router-dom";
-import Loading from "../../components/Loading/Loading";
+import { useMutation } from "react-query";
 import Swal from "sweetalert2";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import Loading from "../../components/Loading/Loading";
 import RoutineList from "../../components/RoutineList/RoutineList";
 import RoutineDelete from "../../components/RoutineDelete/RoutineDelete";
 import "./RoutineConfigPage.scss";
-
 import jsPDF from "jspdf";
-
 import html2canvas from "html2canvas";
 
 const RoutineConfigPage = () => {
