@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { useMutation } from "react-query";
-import "./ChangeRol.scss";
-import useFetchHooks from "../../hooks/useFetchHooks";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Swal from "sweetalert2";
+import { useMutation } from "react-query";
+import { useState } from "react";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import "./ChangeRol.scss";
 
 const ChangeRol = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
 

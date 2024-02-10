@@ -1,8 +1,8 @@
-import "./AdminUserSetting.scss";
-import ChangeRol from "../../components/ChangeRol/ChangeRol";
-import UserForm from "../../components/UserForm/UserForm";
 import ButtonDeleteUser from "../../components/ButtonDeleteUser/ButtonDeleteUser";
+import ChangeRol from "../../components/ChangeRol/ChangeRol";
 import FormRemoveUserByEmail from "../../components/FormRemoveUserByEmail/FormRemoveUserByEmail";
+import UserForm from "../../components/UserForm/UserForm";
+import "./AdminUserSetting.scss";
 
 const AdminUserSetting = () => {
   return (
@@ -16,7 +16,6 @@ const AdminUserSetting = () => {
           <FormRemoveUserByEmail />
         </div>
         <ButtonDeleteUser />
-
       </div>
     </>
   );

@@ -14,15 +14,15 @@ import {
   TrainingListPage,
 } from "./pages";
 
-import { Routes, Route } from "react-router-dom";
 import { useContext, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { authContext } from "./context/AuthContext";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
 import ChangeRol from "./components/ChangeRol/ChangeRol";
+import Footer from "./layout/Footer";
 import FormRemoveUserByEmail from "./components/FormRemoveUserByEmail/FormRemoveUserByEmail";
 import FormAddRoutine from "./components/FormAddRoutine/FormAddRoutine";
+import Header from "./layout/Header";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import RoutineConfigPage from "./pages/RoutineConfigPage/RoutineConfigPage";
 
 const Layout = () => {

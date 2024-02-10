@@ -1,26 +1,22 @@
-import { useRef, useState } from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import { useMutation } from "react-query";
 import Swal from "sweetalert2";
-import useFetchHooks from "../../hooks/useFetchHooks";
-import Loading from "../../components/Loading/Loading";
-import RoutineList from "../../components/RoutineList/RoutineList";
-import RoutineDelete from "../../components/RoutineDelete/RoutineDelete";
-import "./RoutineConfigPage.scss";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useQuery, useMutation } from "react-query";
+import { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
+import RoutineDelete from "../../components/RoutineDelete/RoutineDelete";
+import RoutineList from "../../components/RoutineList/RoutineList";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import "./RoutineConfigPage.scss";
 
 const RoutineConfigPage = () => {
   const { id } = useParams();
-
   const { hookGetFetch, hookPostPatchFetch } = useFetchHooks();
   const mutation = useMutation(hookPostPatchFetch);
-
   const [routines, setRoutines] = useState([]);
   const [selectTraining, setSelectTraining] = useState([]);
   const [trainingRoutine, setTrainingRoutine] = useState([]);
-
   const pdfRef = useRef(null);
 
   const getTraining = useQuery(

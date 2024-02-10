@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
 import Swal from "sweetalert2";
 import { useMutation } from "react-query";
-import Loading from "../Loading/Loading.jsx";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { authContext } from "../../context/AuthContext";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Loading from "../Loading/Loading.jsx";
+import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./FormAddRoutine.scss";
 
 const FormAddRoutine = () => {
@@ -14,19 +14,15 @@ const FormAddRoutine = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
   const navigate = useNavigate();
-
-
-
   const mutation = useMutation(hookPostPatchFetch);
 
   const handleRoutineButton = (e) => {
     e.preventDefault();
 
-    if (name ==="" || description === "") {
+    if (name === "" || description === "") {
       setStatusMessage("Todos los campos deben estar cubiertos ✌️");
-    }else{
+    } else {
       const postBody = { name, description };
       mutation.mutate(
         { endpoint: "addRoutine", method: "POST", user: postBody },
@@ -52,10 +48,7 @@ const FormAddRoutine = () => {
           },
         }
       );
-
     }
-
-
   };
 
   let route = "";

@@ -1,8 +1,8 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./context/aut";
 import { QueryClient, QueryClientProvider } from "react-query";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import { AuthProvider } from "./context/aut";
 import Layout from "./Layout";
 import "./main.scss";
 

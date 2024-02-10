@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import addSvg from "../../assets/Add.svg";
 import { authContext } from "../../context/AuthContext.jsx";
 import OrderAndSearchInputTraining from "../../components/OrderTraining/OrderTraining.jsx";
-import addSvg from "../../assets/Add.svg";
 import "./TrainingListPage.scss";
 
 const TrainingListPage = () => {

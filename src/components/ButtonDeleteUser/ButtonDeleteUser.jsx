@@ -1,29 +1,28 @@
-import { useContext } from "react";
-import { authContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { authContext } from "../../context/AuthContext";
 import "./ButtonDeleteUser.scss";
 
 const ButtonDeleteUser = () => {
   const [context, setContext] = useContext(authContext);
   const navigate = useNavigate();
 
-  const confirmation= ()=>{
+  const confirmation = () => {
     Swal.fire({
-      title: 'Está seguro?',
+      title: "Está seguro?",
       text: "El usuario se borrará!",
-      type: 'warning',
+      type: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, deseo eliminar mi cuenta.'
-    
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, deseo eliminar mi cuenta.",
     }).then((result) => {
       if (result.value) {
-        handleButton();          
+        handleButton();
       }
-    })}
-  
+    });
+  };
 
   const handleButton = () => {
     async function fetchButton() {
@@ -67,7 +66,12 @@ const ButtonDeleteUser = () => {
   };
 
   return (
-    <button className={context.role === "admin"? "btn-delete-admin" : "btn-delete-user"} onClick={confirmation}>
+    <button
+      className={
+        context.role === "admin" ? "btn-delete-admin" : "btn-delete-user"
+      }
+      onClick={confirmation}
+    >
       Eliminar cuenta
     </button>
   );

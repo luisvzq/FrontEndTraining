@@ -1,11 +1,11 @@
+import Swal from "sweetalert2";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
-import UseValidate from "../../hooks/UseValidate";
-import Swal from "sweetalert2";
-import "./AdminTrainingModify.scss";
-import Loading from "../../components/Loading/Loading";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import Loading from "../../components/Loading/Loading";
+import UseValidate from "../../hooks/UseValidate";
+import "./AdminTrainingModify.scss";
 
 const AdminTrainingModify = () => {
   const [name, setName] = useState("");

@@ -30,8 +30,6 @@ const CountLikeChecked = ({ trainingId }) => {
           throw new Error("Error al hacer fetch al like del entreno ");
         }
 
-        //--------------------------------------------------------------
-
         const responseCount = await fetch(
           `${import.meta.env.VITE_HOST_BACK}:${
             import.meta.env.VITE_PORT_BACK

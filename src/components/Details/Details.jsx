@@ -1,14 +1,14 @@
-import { authContext } from "../../context/AuthContext";
-import { useContext, useState } from "react";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import useFetchHooks from "../../hooks/useFetchHooks";
-import FavChecked from "../ButtonsLikeFav/FavChecked";
-import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
+import { useQuery } from "react-query";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { authContext } from "../../context/AuthContext";
 import ButtonDelete from "../ButtonDelete/ButtonDelete";
-import Loading from "../Loading/Loading";
+import CountLikeChecked from "../ButtonsLikeFav/CountLikeChecked";
 import editSvg from "../../assets/Edit.svg";
+import FavChecked from "../ButtonsLikeFav/FavChecked";
+import Loading from "../Loading/Loading";
+import useFetchHooks from "../../hooks/useFetchHooks";
 import "./Details.scss";
 
 const Details = ({ trainingId }) => {

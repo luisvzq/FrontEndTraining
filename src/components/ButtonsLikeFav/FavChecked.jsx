@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
 import { useContext, useState } from "react";
 import { authContext } from "../../context/AuthContext";
-import useFetchHooks from "../../hooks/useFetchHooks";
 import Loading from "../../components/Loading/Loading";
+import useFetchHooks from "../../hooks/useFetchHooks";
 import "./ButtonsLikeFav.scss";
-import { useQuery } from "react-query";
 
 const FavChecked = ({ trainingId }) => {
   const [context] = useContext(authContext);
@@ -22,7 +22,6 @@ const FavChecked = ({ trainingId }) => {
   );
 
   const handleButton = (table, method) => {
-    // console.log(`Metodo: ${method} para la tabla: ${table}`);
     async function fetchButton() {
       try {
         const response = await fetch(
@@ -38,8 +37,6 @@ const FavChecked = ({ trainingId }) => {
         );
 
         if (response.ok) {
-          // const bodyButtonFav = await response.json();
-          // console.log("Respuesta a Button Favorite", bodyButtonFav);
           setFav(!fav);
         } else {
           const body = await response.json();

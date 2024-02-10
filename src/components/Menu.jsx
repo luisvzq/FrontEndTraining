@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { authContext } from "../context/AuthContext";
 
 export const Menu = () => {

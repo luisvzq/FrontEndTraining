@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { authContext } from "../../context/AuthContext";
-
-import "./OrderTraining.scss";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { authContext } from "../../context/AuthContext";
 import Training from "../Training/Training";
+import "./OrderTraining.scss";
 
 const OrderAndSearchInputTraining = () => {
   const [context] = useContext(authContext);

@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
-import "./Routine.scss";
-import { Link } from "react-router-dom";
-
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
+import "./Routine.scss";
 
 const Routine = ({ data }) => {
   const [context] = useContext(authContext);

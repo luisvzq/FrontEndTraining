@@ -1,13 +1,12 @@
-// RegisterPage.jsx
-import { useState } from "react";
-import { useMutation } from "react-query";
-import useFetchHooks from "../../hooks/useFetchHooks.js";
-import "./RegisterPage.scss";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useMutation } from "react-query";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loading from "../../components/Loading/Loading.jsx";
+import useFetchHooks from "../../hooks/useFetchHooks.js";
 import UseValidateUser from "../../hooks/UseValidateUser.js";
+import "./RegisterPage.scss";
 
 const RegisterPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -17,15 +16,14 @@ const RegisterPage = () => {
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [, setShakeAnimation] = useState(false);
-
   const navigate = useNavigate();
+  const mutation = useMutation(hookPostPatchFetch);
 
   const postBody = {
     name,
     email,
     password: passwordRepeat,
   };
-  const mutation = useMutation(hookPostPatchFetch);
 
   const handleRegisterButton = (e) => {
     e.preventDefault();

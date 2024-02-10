@@ -1,11 +1,10 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import Swal from "sweetalert2";
 import { useMutation } from "react-query";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ResetPasswordPage.scss";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const ResetPasswordPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
@@ -13,11 +12,10 @@ const ResetPasswordPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [pass, setPass] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
-
   const navigate = useNavigate();
+  const mutation = useMutation(hookPostPatchFetch);
 
   const postBody = { password: pass };
-  const mutation = useMutation(hookPostPatchFetch);
 
   const handleResetButton = (e) => {
     e.preventDefault();

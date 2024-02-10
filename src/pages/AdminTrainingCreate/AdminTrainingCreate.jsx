@@ -1,21 +1,18 @@
+import Swal from "sweetalert2";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
-import Swal from "sweetalert2";
-import "./AdminTrainingCreate.scss";
-
-import UseValidate from "../../hooks/UseValidate";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import UseValidate from "../../hooks/UseValidate";
+import "./AdminTrainingCreate.scss";
 
 const AdminTrainingCreate = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [typology, setTypology] = useState("");
   const [muscular, setMuscular] = useState("");
-
   const [setShakeAnimation] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-
   const [context] = useContext(authContext);
   const navigate = useNavigate();
 

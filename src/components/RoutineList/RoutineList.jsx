@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import { useMutation } from "react-query";
-import useFetchHooks from "../../hooks/useFetchHooks";
-import { useParams } from "react-router";
 import Swal from "sweetalert2";
+import { useMutation } from "react-query";
+import { useParams } from "react-router";
 import RoutineDeleteTraining from "../RoutineDeleteTraining/RoutineDeleteTraining";
+import useFetchHooks from "../../hooks/useFetchHooks";
 import "./RoutineList.scss";
+
 const RoutineList = ({ trainingRoutine, renderElement }) => {
   const { id } = useParams();
   const { hookPostPatchFetch } = useFetchHooks();
@@ -26,7 +27,7 @@ const RoutineList = ({ trainingRoutine, renderElement }) => {
                     Series
                   </label>
                   <input
-                    className="number-imput"                  
+                    className="number-imput"
                     type="number"
                     min="0"
                     id="series"

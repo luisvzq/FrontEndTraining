@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
+import { authContext } from "../../context/AuthContext.jsx";
 import Training from "../../components/Training/Training.jsx";
 import "./FavListPage.scss";
-import { authContext } from "../../context/AuthContext.jsx";
-import PropTypes from "prop-types";
 
 const FavListPage = () => {
   const [allFavs, setAllFavs] = useState([]);
@@ -42,7 +42,11 @@ const FavListPage = () => {
     <>
       <div className="training-list-fav">
         <h1>Entranamientos favoritos</h1>
-        <Training data={allFavs} setRender={setRender} />
+        {allFavs.length > 0 ? (
+          <Training data={allFavs} setRender={setRender} />
+        ) : (
+          <p>No tienes entrenamientos favoritos por el momento.</p>
+        )}
       </div>
     </>
   );

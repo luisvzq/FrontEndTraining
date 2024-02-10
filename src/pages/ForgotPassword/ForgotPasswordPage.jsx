@@ -1,19 +1,19 @@
-import { useState } from "react";
+import Swal from "sweetalert2";
 import { useMutation } from "react-query";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./ForgotPasswordPage.scss";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const ForgotPasswordPage = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
   const navigate = useNavigate();
-
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
+
   const handleForgotButton = (e) => {
     e.preventDefault();
     if (!mail) {

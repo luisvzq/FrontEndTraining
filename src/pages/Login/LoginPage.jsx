@@ -1,20 +1,20 @@
+import "sweetalert2/dist/sweetalert2.min.css";
+import Swal from "sweetalert2";
+import { useMutation } from "react-query";
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
-import { useMutation } from "react-query";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import useFetchHooks from "../../hooks/useFetchHooks.js";
 import "./LoginPage.scss";
-import "sweetalert2/dist/sweetalert2.min.css";
-import Swal from "sweetalert2";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage.jsx";
 
 const LoginPage = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [context, setContext] = useContext(authContext);
-  const navigate = useNavigate();
   const { hookPostPatchFetch } = useFetchHooks();
   const mutation = useMutation(hookPostPatchFetch);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleLogin = async () => {

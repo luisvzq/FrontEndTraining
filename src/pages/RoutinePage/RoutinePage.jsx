@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
-import useFetchHooks from "../../hooks/useFetchHooks";
-import { useState } from "react";
-import Routine from "../../components/Routine/Routine";
-import Loading from "../../components/Loading/Loading";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { authContext } from "../../context/AuthContext";
+import Loading from "../../components/Loading/Loading";
+import Routine from "../../components/Routine/Routine";
+import useFetchHooks from "../../hooks/useFetchHooks";
 import "./RoutinePage.scss";
 
 const RoutinePage = () => {

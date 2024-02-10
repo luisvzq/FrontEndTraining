@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { authContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { authContext } from "../../context/AuthContext";
 
 const RoutineDelete = ({ routineId }) => {
   const [context] = useContext(authContext);
@@ -74,7 +73,9 @@ const RoutineDelete = ({ routineId }) => {
 
   return (
     <>
-      <button onClick={confirmation} className="routine-delete">Eliminar rutina</button>
+      <button onClick={confirmation} className="routine-delete">
+        Eliminar rutina
+      </button>
     </>
   );
 };

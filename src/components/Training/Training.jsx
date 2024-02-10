@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { authContext } from "../../context/AuthContext";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../../context/AuthContext";
 import "./Training.scss";
 
 const Training = ({ data, setRender }) => {

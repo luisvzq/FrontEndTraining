@@ -1,18 +1,17 @@
-import { useState } from "react";
-import { useMutation } from "react-query";
-
-import useFetchHooks from "../../hooks/useFetchHooks";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import "./FormRemoveUserByEmail.scss";
 import Swal from "sweetalert2";
+import { useMutation } from "react-query";
+import { useState } from "react";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import useFetchHooks from "../../hooks/useFetchHooks";
+import "./FormRemoveUserByEmail.scss";
 
 const FormRemoveUserByEmail = () => {
   const { hookPostPatchFetch } = useFetchHooks();
   const [statusMessage, setStatusMessage] = useState("");
   const [mail, setMail] = useState("");
-
   const postBody = { email: mail };
   const mutation = useMutation(hookPostPatchFetch);
+
   const handleAdminDeleteUserButton = (e) => {
     e.preventDefault();
     if (!mail) {
