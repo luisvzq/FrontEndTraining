@@ -38,6 +38,7 @@ const Training = ({ data, setRender }) => {
   return (
     <ul className="all-trainings">
       {data.map((training) => {
+
         return (
           <li key={training.id} className="list-training">
             <div className="botones">

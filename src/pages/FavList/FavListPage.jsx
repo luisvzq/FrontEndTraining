@@ -29,14 +29,14 @@ const FavListPage = () => {
           setAllFavs(body.data);
           setRender(false);
         } else {
-          throw new Error("Error al hacer fetch al like del entreno ");
+          throw new Error("Error al hacer fetch al listado de favoritos");
         }
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [allFavs, context, render]);
+  }, [context, render]);
 
   return (
     <>
