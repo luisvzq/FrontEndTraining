@@ -21,8 +21,10 @@ const OrderAndSearchInputTraining = () => {
       try {
         const queryParams = searchParams.toString();
 
-        const res = await fetch(
-          `http://localhost:3001/training?${queryParams}`,
+        const res = await fetch(`
+        ${import.meta.env.VITE_HOST_BACK}:${
+              import.meta.env.VITE_PORT_BACK
+            }?${queryParams}`,
           {
             headers: {
               Authorization: `Bearer ${context.token}`,
