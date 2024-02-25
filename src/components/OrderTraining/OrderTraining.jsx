@@ -24,7 +24,7 @@ const OrderAndSearchInputTraining = () => {
         const res = await fetch(`
         ${import.meta.env.VITE_HOST_BACK}:${
               import.meta.env.VITE_PORT_BACK
-            }?${queryParams}`,
+            }/training?${queryParams}`,
           {
             headers: {
               Authorization: `Bearer ${context.token}`,

@@ -30,7 +30,9 @@ const Layout = () => {
   useEffect(() => {
     const getRole = async () => {
       try {
-        const req = await fetch("http://localhost:3001/verify", {
+        const req = await fetch(`
+        ${import.meta.env.VITE_HOST_BACK}:${import.meta.env.VITE_PORT_BACK}/verify`, 
+        {
           headers: { Authorization: `Bearer ${context?.token}` },
         });
         const body = await req.json();

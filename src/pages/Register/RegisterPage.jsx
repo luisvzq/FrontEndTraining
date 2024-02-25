@@ -15,7 +15,6 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
-  const [, setShakeAnimation] = useState(false);
   const navigate = useNavigate();
   const mutation = useMutation(hookPostPatchFetch);
 
@@ -32,21 +31,12 @@ const RegisterPage = () => {
       if (password !== passwordRepeat) {
         setStatusMessage("Las contraseñas no coinciden");
 
-        setShakeAnimation(true);
-        setTimeout(() => {
-          setShakeAnimation(false);
-          setStatusMessage("");
-        }, 5000);
         return;
       }
       if (password.length < 6) {
         setStatusMessage("Contraseña debe tener al menos 6 caracteres");
 
-        setShakeAnimation(true);
-        setTimeout(() => {
-          setShakeAnimation(false);
-          setStatusMessage("");
-        }, 5000);
+  
         return;
       }
 
