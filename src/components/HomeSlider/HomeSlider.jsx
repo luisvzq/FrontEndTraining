@@ -33,10 +33,9 @@ const HomeSlider = () => {
 
   return (
     <div className="slide-container">
-      <div className="slider">
+      <div >
         {imageSlide.map((image, index) => (
-          <img
-            className="slider-item"
+          <img          
             key={index}
             src={image.url}
             alt={image.caption}

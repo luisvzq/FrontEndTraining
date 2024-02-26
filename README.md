@@ -42,7 +42,7 @@ _Archivos principales:_
 
 _Páginas_
 
-- _HomePage.jsx_ Página principial de la app, a la cual tiene acceso cualquier usuario aunque no esté registrado. Lo que la app renderiza depende de dicho registro y login , teniendo acceso al contenido de app sólo los usuarios previamente identificados. Un usuario sin identificar solo disfruta de la página home dónde podrá darse de alta y acceder así al conetnido.
+- _HomePage.jsx_ Página principial de la app, a la cual tiene acceso cualquier usuario aunque no esté registrado. Lo que la app renderiza depende de dicho registro y login , teniendo acceso al contenido de app sólo los usuarios previamente identificados. Un usuario sin identificar solo disfruta de la página home dónde podrá darse de alta y acceder así al contenido.
 
 - _RegisterPage.jsx_ Página con formulario para que los nuevos usuarios se registren en la página, por defecto todos los usuarios se registar con rol "normal", será un usuario "admin" el que a posterior le podría cambiar el rol.
 
@@ -53,7 +53,7 @@ _Páginas_
           contraseña: ******
           repite contraseña : ******
 
-- _LoginPage_ Una vez registrado el usuario debe logearse , de ahí sacaremos su contexto y su rol, para que así la app renderice las páginas que el usuario puede ver según sus permisos. en esta página el suaurio dispone de la opción "olvide mi contraseña" desde la cual recibirá un mail para el reseteo de la misma .
+- _LoginPage_ Una vez registrado el usuario debe logearse , de ahí sacaremos su contexto y su rol, para que así la app renderice las páginas que el usuario puede ver según sus permisos. en esta página el usuario dispone de la opción "olvide mi contraseña" desde la cual recibirá un mail para el reseteo de la misma .
 
          Aquí te muestro un ejemplo:
 
@@ -62,7 +62,7 @@ _Páginas_
           
 - _TrainingListPage_ Página que muestra todos los entrenamientos disponibles, cualquier usuario independientemente de su rol, podrá ver todos los entrenamientos, ordenador en función de una serie de filtros , darle like o añadir a su pagina de favoritos cualquier entrenamiento que desee. Cuando el rol del usuario es admin, ademas de lo anteriormente mencionado tendrá una opción para añadir un nuevo entrenamiento.
 
-- _DetailPage_ Desde la pagina de listado de entrenamientos el cliente puede seleccionar un entrenamiento en concreto y pinchando encima esta acción lo lleva a la pagina de detalle de este entrenamiento. Si además tiene rol "admin" podrá, modificar algun dat de ese entrenamiento o incluso borrarlo si lo considera.
+- _DetailPage_ Desde la pagina de listado de entrenamientos el cliente puede seleccionar un entrenamiento en concreto y pinchando encima esta acción lo lleva a la pagina de detalle de este entrenamiento. Si además tiene rol "admin" podrá, modificar algun dato de ese entrenamiento o incluso borrarlo si lo considera.
 
 - _FavPage_ Aqui cualquier usuario verá un listado de los entrenamientos que ha añadido a favoritos previamente. 
 
@@ -78,7 +78,7 @@ _Páginas_
           Descripción : ejemplo
           Subir imagen : seleccionar archivo
 
-- _RoutinePage_ Funcionalidad añadida , para que un entrenador pueda crear rutinas para sus clientes, configurándolas , dándole una descripción y añadiendo sus correspondientes entrenos con las repeticiones y series asignadas. Una vez creada la rutina, el entrenador puede darle a generar mediante PDF bien para imprimirsela al cliente o enviársela por email desde su pc.
+- _RoutinePage_ Funcionalidad añadida, para que un entrenador pueda crear rutinas para sus clientes, configurándolas, dándole una descripción y añadiendo sus correspondientes entrenos con las repeticiones y series asignadas. Una vez creada la rutina, el entrenador puede darle a generar mediante PDF bien para imprimirsela al cliente o enviársela por email desde su pc.
 
         Aquí te muestro un ejemplo:
 
