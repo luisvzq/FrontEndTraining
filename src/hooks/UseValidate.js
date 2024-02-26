@@ -7,6 +7,7 @@ const UseValidate = (
 ) => {
   if (name === "" || description === "" || muscular === "" || typology === "") {
     setStatusMessage("Debes cubir todos los campos");
+    
 
     return false;
   } else {

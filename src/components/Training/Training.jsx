@@ -62,7 +62,7 @@ const Training = ({ data, setRender }) => {
                     );
                   }}
                 ></button>
-                <p>{training.allLikes}</p>
+                <p className="numb-likes">{training.allLikes}</p>
               </div>
             </div>
 
