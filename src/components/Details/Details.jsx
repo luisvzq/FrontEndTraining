@@ -23,7 +23,7 @@ const Details = ({ trainingId }) => {
       onSuccess: (data) => {
         setDetails(data);
       },
-    }
+    },
   );
   let route = "";
   if (context.role === "admin") {

@@ -19,7 +19,7 @@ const Training = ({ data, setRender }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {
@@ -38,7 +38,6 @@ const Training = ({ data, setRender }) => {
   return (
     <ul className="all-trainings">
       {data.map((training) => {
-
         return (
           <li key={training.id} className="list-training">
             <div className="botones">
@@ -48,7 +47,7 @@ const Training = ({ data, setRender }) => {
                   handleButton(
                     "fav",
                     training.favTrue ? "DELETE" : "POST",
-                    training.id
+                    training.id,
                   );
                 }}
               ></button>
@@ -59,7 +58,7 @@ const Training = ({ data, setRender }) => {
                     handleButton(
                       "like",
                       training.likeTrue ? "DELETE" : "POST",
-                      training.id
+                      training.id,
                     );
                   }}
                 ></button>

@@ -5,7 +5,7 @@ export const useLocalStorage = () => {
   const [contextState, setContextState] = useState(
     localStorageValue
       ? JSON.parse(localStorageValue)
-      : { name: "", token: "", role: "" }
+      : { name: "", token: "", role: "" },
   );
   const changeState = (newData) => {
     const newContext = { ...contextState };

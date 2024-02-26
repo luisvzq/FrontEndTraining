@@ -36,7 +36,7 @@ const ButtonDeleteUser = () => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

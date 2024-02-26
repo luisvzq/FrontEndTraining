@@ -57,7 +57,7 @@ const RoutineList = ({ trainingRoutine, renderElement }) => {
                           onSuccess: () => {
                             renderElement();
                           },
-                        }
+                        },
                       );
                     }}
                   />
@@ -96,7 +96,7 @@ const RoutineList = ({ trainingRoutine, renderElement }) => {
                           onSuccess: () => {
                             renderElement();
                           },
-                        }
+                        },
                       );
                     }}
                   />

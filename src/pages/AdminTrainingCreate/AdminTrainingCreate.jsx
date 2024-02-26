@@ -23,7 +23,7 @@ const AdminTrainingCreate = () => {
       description,
       typology,
       muscular,
-      setStatusMessage
+      setStatusMessage,
     );
 
     if (validated) {
@@ -45,7 +45,7 @@ const AdminTrainingCreate = () => {
               Authorization: `Bearer ${context.token}`,
             },
             body: formData,
-          }
+          },
         );
 
         if (res.ok) {

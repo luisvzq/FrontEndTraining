@@ -18,7 +18,7 @@ const FavChecked = ({ trainingId }) => {
       onSuccess: (data) => {
         setFav(data.FavCheck);
       },
-    }
+    },
   );
 
   const handleButton = (table, method) => {
@@ -33,7 +33,7 @@ const FavChecked = ({ trainingId }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

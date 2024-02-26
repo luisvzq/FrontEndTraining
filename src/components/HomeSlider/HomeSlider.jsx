@@ -33,9 +33,9 @@ const HomeSlider = () => {
 
   return (
     <div className="slide-container">
-      <div >
+      <div>
         {imageSlide.map((image, index) => (
-          <img          
+          <img
             key={index}
             src={image.url}
             alt={image.caption}

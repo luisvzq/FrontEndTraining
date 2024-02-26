@@ -10,7 +10,7 @@ const useFetchHooks = () => {
       const url = new URL(
         `${import.meta.env.VITE_HOST_BACK}:${
           import.meta.env.VITE_PORT_BACK
-        }/${endpoint}`
+        }/${endpoint}`,
       );
 
       if (page) url.searchParams.append("page", page);
@@ -48,7 +48,7 @@ const useFetchHooks = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${context.token}`,
           },
-        }
+        },
       );
       const body = await res.json();
 

@@ -42,7 +42,7 @@ const RoutineDelete = ({ routineId }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

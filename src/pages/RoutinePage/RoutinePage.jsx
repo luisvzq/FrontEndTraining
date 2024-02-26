@@ -19,7 +19,7 @@ const RoutinePage = () => {
       onSuccess: (data) => {
         setAllRoutines(data);
       },
-    }
+    },
   );
 
   let route = "";

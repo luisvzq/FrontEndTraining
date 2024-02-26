@@ -30,7 +30,7 @@ const UserForm = () => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {
@@ -75,7 +75,7 @@ const UserForm = () => {
                 Authorization: `Bearer ${context.token}`,
               },
               body: formData,
-            }
+            },
           );
 
           if (res.ok) {

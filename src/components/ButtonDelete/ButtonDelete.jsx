@@ -46,7 +46,7 @@ const ButtonDelete = () => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

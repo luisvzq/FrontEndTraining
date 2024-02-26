@@ -3,9 +3,9 @@ const UseValidate = (
   typology,
   description,
   muscular,
-  setStatusMessage  
+  setStatusMessage,
 ) => {
-  if (name === "" || description==="" || muscular === "" || typology === "") {
+  if (name === "" || description === "" || muscular === "" || typology === "") {
     setStatusMessage("Debes cubir todos los campos");
 
     return false;
@@ -22,7 +22,7 @@ const UseValidate = (
     }
     if (muscular.length > 50) {
       setStatusMessage(
-        "El campo grupo muscular tiene un máximo de 50 caracteres"
+        "El campo grupo muscular tiene un máximo de 50 caracteres",
       );
 
       return false;

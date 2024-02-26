@@ -46,7 +46,7 @@ const ForgotPasswordPage = () => {
             navigate("/login");
             setMail("");
           },
-        }
+        },
       );
     }
   };

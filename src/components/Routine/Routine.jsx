@@ -14,7 +14,6 @@ const Routine = ({ data }) => {
     route = "/configurar-rutina/";
   }
 
-
   return (
     <ul className="routine-list">
       {data.map((routine) => {

@@ -36,7 +36,7 @@ const RoutineDeleteTraining = ({ trainingRoutineId, renderElement }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

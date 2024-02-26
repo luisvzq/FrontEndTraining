@@ -48,7 +48,7 @@ const FormRemoveUserByEmail = () => {
             });
             setMail("");
           },
-        }
+        },
       );
     }
   };

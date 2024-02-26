@@ -20,7 +20,7 @@ const CountLikeChecked = ({ trainingId }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {
@@ -39,7 +39,7 @@ const CountLikeChecked = ({ trainingId }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (responseCount.ok) {
@@ -47,7 +47,7 @@ const CountLikeChecked = ({ trainingId }) => {
           setCountLikes(bodyCount.data);
         } else {
           throw new Error(
-            "Error al hacer fetch al recuento de likes del entreno"
+            "Error al hacer fetch al recuento de likes del entreno",
           );
         }
       } catch (error) {
@@ -69,7 +69,7 @@ const CountLikeChecked = ({ trainingId }) => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

@@ -26,7 +26,7 @@ const RoutineConfigPage = () => {
       onSuccess: (data) => {
         setSelectTraining(data);
       },
-    }
+    },
   );
 
   const getRoutine = useQuery(
@@ -36,7 +36,7 @@ const RoutineConfigPage = () => {
       onSuccess: (data) => {
         setRoutines(data);
       },
-    }
+    },
   );
 
   const listRoutine = useQuery(
@@ -46,7 +46,7 @@ const RoutineConfigPage = () => {
       onSuccess: (data) => {
         setTrainingRoutine(data);
       },
-    }
+    },
   );
 
   const renderElement = () => {
@@ -74,7 +74,7 @@ const RoutineConfigPage = () => {
         onSuccess: () => {
           listRoutine.refetch();
         },
-      }
+      },
     );
   };
 

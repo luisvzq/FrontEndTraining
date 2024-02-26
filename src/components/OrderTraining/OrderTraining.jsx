@@ -21,15 +21,16 @@ const OrderAndSearchInputTraining = () => {
       try {
         const queryParams = searchParams.toString();
 
-        const res = await fetch(`
+        const res = await fetch(
+          `
         ${import.meta.env.VITE_HOST_BACK}:${
-              import.meta.env.VITE_PORT_BACK
-            }/training?${queryParams}`,
+          import.meta.env.VITE_PORT_BACK
+        }/training?${queryParams}`,
           {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (!res.ok) {

@@ -60,7 +60,7 @@ const ChangeRol = () => {
                     });
                     setMail("");
                   },
-                }
+                },
               );
             }}
           >
@@ -94,7 +94,7 @@ const ChangeRol = () => {
                     });
                     setMail("");
                   },
-                }
+                },
               );
             }}
           >

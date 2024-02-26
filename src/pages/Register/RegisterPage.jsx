@@ -36,7 +36,6 @@ const RegisterPage = () => {
       if (password.length < 6) {
         setStatusMessage("Contraseña debe tener al menos 6 caracteres");
 
-  
         return;
       }
 
@@ -68,7 +67,7 @@ const RegisterPage = () => {
             setPassword("");
             setPasswordRepeat("");
           },
-        }
+        },
       );
     }
   };

@@ -19,5 +19,5 @@ root.render(
         </QueryClientProvider>
       </AuthProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

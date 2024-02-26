@@ -21,7 +21,7 @@ const FavListPage = () => {
             headers: {
               Authorization: `Bearer ${context.token}`,
             },
-          }
+          },
         );
 
         if (response.ok) {

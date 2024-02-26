@@ -47,7 +47,7 @@ const ResetPasswordPage = () => {
             });
             navigate("/login");
           },
-        }
+        },
       );
     }
   };
