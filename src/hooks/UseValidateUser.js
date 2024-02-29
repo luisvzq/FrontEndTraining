@@ -1,6 +1,6 @@
 const UseValidateUser = (name, email, setStatusMessage) => {
   if (name === "" || email === "") {
-    setStatusMessage("Debes cubir todos los campos");
+    setStatusMessage("Debes cubrir todos los campos");
     setTimeout(() => {
       setStatusMessage("");
     }, 4000);

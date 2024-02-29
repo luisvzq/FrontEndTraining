@@ -15,7 +15,7 @@ const UserForm = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [context] = useContext(authContext);
+  const [context, setContext] = useContext(authContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,6 +63,7 @@ const UserForm = () => {
 
       if (validated) {
         try {
+          setContext({ ...context, name });
           const formData = new FormData();
           formData.append("name", name);
           formData.append("email", email);
