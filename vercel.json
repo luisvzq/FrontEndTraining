@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "routes": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html",
+        "status": 200
+      }
+    ]
+  }
+  
